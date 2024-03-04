@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# VOICEVOX Installer Script
+# AivisSpeech Installer Script
 
 # set -x # Debug mode: output verbose log
 set -euo pipefail
@@ -17,7 +17,7 @@ _readarray(){
 
 cat << 'BANNER'
 +-+-+-+-+-+-+-+-+
-|V|O|I|C|E|V|O|X|
+|A|i|v|i|s|S|p|e|e|c|h|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+
         |I|n|s|t|a|l|l|e|r|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -27,10 +27,10 @@ BANNER
 
 NAME=$(basename "${NAME:-linux-nvidia-appimage}")
 VERSION=$(basename "${VERSION:-}")
-REPO_URL=${REPO_URL:-https://github.com/VOICEVOX/voicevox}
+REPO_URL=${REPO_URL:-https://github.com/Aivis-Project/AivisSpeech}
 
 # Install directory
-APP_DIR=${APP_DIR:-$HOME/.voicevox}
+APP_DIR=${APP_DIR:-$HOME/.aivisspeech}
 # force install if [ ${FORCE_INSTALL} = 1 ]
 FORCE_INSTALL=${FORCE_INSTALL:-}
 # keep archive if [ ${KEEP_ARCHIVE} = 1 ]
@@ -43,8 +43,8 @@ DESKTOP_ENTRY_INSTALL_DIR=${DESKTOP_ENTRY_INSTALL_DIR:-$HOME/.local/share/applic
 ICON_INSTALL_DIR=${ICON_INSTALL_DIR:-$HOME/.local/share/icons}
 MIME_INSTALL_DIR=${MIME_INSTALL_DIR:-$HOME/.local/share/mime}
 
-if [ "$FORCE_INSTALL" != "1" ] && [ -f "${APP_DIR}/VOICEVOX.AppImage" ]; then
-    echo "[*] VOICEVOX already installed in '${APP_DIR}/VOICEVOX.AppImage'."
+if [ "$FORCE_INSTALL" != "1" ] && [ -f "${APP_DIR}/AivisSpeech.AppImage" ]; then
+    echo "[*] AivisSpeech already installed in '${APP_DIR}/AivisSpeech.AppImage'."
     while true; do
         read -r -p "[*] Replace?(y/n): " yn
         case "$yn" in
@@ -67,7 +67,7 @@ if ! command -v curl &> /dev/null; then
     cat << EOS && exit 1
 [!] Command 'curl' not found
 
-Required to download VOICEVOX
+Required to download AivisSpeech
 
 Ubuntu/Debian:
     sudo apt install curl
@@ -162,7 +162,7 @@ EOS
         cat << 'EOS'
 [!] libsndfile: not found
 
-Required to run VOICEVOX ENGINE
+Required to run AivisSpeech Engine
 
 Ubuntu/Debian:
     sudo apt install libsndfile1
@@ -331,7 +331,7 @@ IFS=\$'\n\t'
 
 cat << 'BANNER'
 +-+-+-+-+-+-+-+-+
-|V|O|I|C|E|V|O|X|
+|A|i|v|i|s|S|p|e|e|c|h|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
         |U|n|i|n|s|t|a|l|l|e|r|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -339,19 +339,19 @@ cat << 'BANNER'
 +-+-+-+-+-+-+-+-+-+
 BANNER
 
-VOICEVOX_INSTALLED_FILES=(
-    "${DESKTOP_ENTRY_INSTALL_DIR}/voicevox.desktop"
-    "${ICON_INSTALL_DIR}/voicevox.png"
-    "${ICON_INSTALL_DIR}/hicolor/0x0/apps/voicevox.png"
-    "${MIME_INSTALL_DIR}/packages/voicevox.xml"
+AIVISSPEECH_INSTALLED_FILES=(
+    "${DESKTOP_ENTRY_INSTALL_DIR}/aivisspeech.desktop"
+    "${ICON_INSTALL_DIR}/aivisspeech.png"
+    "${ICON_INSTALL_DIR}/hicolor/0x0/apps/aivisspeech.png"
+    "${MIME_INSTALL_DIR}/packages/aivisspeech.xml"
 )
 
-VOICEVOX_INSTALLED_DIR=(
+AIVISSPEECH_INSTALLED_DIR=(
     "${APP_DIR}"
 )
 
-echo "[+] Uninstalling VOICEVOX..."
-for i in "\${VOICEVOX_INSTALLED_FILES[@]}"; do
+echo "[+] Uninstalling AivisSpeech..."
+for i in "\${AIVISSPEECH_INSTALLED_FILES[@]}"; do
     [ -e "\$i" ] || continue
     echo "[+] Removing '\${i}'..."
     if [ -f "\$i" ]; then
@@ -362,7 +362,7 @@ for i in "\${VOICEVOX_INSTALLED_FILES[@]}"; do
     fi
 done
 
-for i in "\${VOICEVOX_INSTALLED_DIR[@]}"; do
+for i in "\${AIVISSPEECH_INSTALLED_DIR[@]}"; do
     [ -e "\$i" ] || continue
     echo "[+] Removing '\${i}'..."
     if [ -d "\$i" ]; then
@@ -373,7 +373,7 @@ for i in "\${VOICEVOX_INSTALLED_DIR[@]}"; do
     fi
 done
 
-echo "[+] Done! VOICEVOX has been uninstalled."
+echo "[+] Done! AivisSpeech has been uninstalled."
 
 EOS
 
@@ -422,29 +422,29 @@ cp squashfs-root/*.png "${ICON_INSTALL_DIR}"
 echo "[+] Registering file association..."
 
 mkdir -p "${MIME_INSTALL_DIR}/packages"
-cat << EOS > "${MIME_INSTALL_DIR}/packages/voicevox.xml"
+cat << EOS > "${MIME_INSTALL_DIR}/packages/aivisspeech.xml"
 <?xml version="1.0" encoding="utf-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-    <mime-type type="application/x-voicevox">
-        <comment>VOICEVOX Project file</comment>
-        <comment xml:lang="ja">VOICEVOX プロジェクトファイル</comment>
+    <mime-type type="application/x-aivisspeech">
+        <comment>AivisSpeech Project file</comment>
+        <comment xml:lang="ja">AivisSpeech プロジェクトファイル</comment>
         <sub-class-of type="application/json" />
         <glob pattern="*.vvproj" />
-        <icon name="voicevox" />
+        <icon name="aivisspeech" />
     </mime-type>
     <mime-type type="application/x-voicevox-plugin-package">
         <comment>VOICEVOX Plugin package</comment>
         <comment xml:lang="ja">VOICEVOX プラグインパッケージ</comment>
         <sub-class-of type="application/zip" />
         <glob pattern="*.vvpp" />
-        <icon name="voicevox" />
+        <icon name="aivisspeech" />
     </mime-type>
     <mime-type type="application/x-voicevox-plugin-package-part">
         <comment>VOICEVOX Plugin package (part)</comment>
         <comment xml:lang="ja">VOICEVOX プラグインパッケージ（分割）</comment>
         <sub-class-of type="application/zip" />
         <glob pattern="*.vvppp" />
-        <icon name="voicevox" />
+        <icon name="aivisspeech" />
     </mime-type>
 </mime-info>
 EOS
@@ -469,4 +469,4 @@ fi
 echo "[+] Removing temporal directory..."
 rm -rf squashfs-root
 
-echo "[+] All done! VOICEVOX ${VERSION} has been installed under '${APP_DIR}'."
+echo "[+] All done! AivisSpeech ${VERSION} has been installed under '${APP_DIR}'."

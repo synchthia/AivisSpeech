@@ -6,8 +6,8 @@ const dotenv = require("dotenv");
 const dotenvPath = path.join(process.cwd(), ".env.production");
 dotenv.config({ path: dotenvPath });
 
-const VOICEVOX_ENGINE_DIR =
-  process.env.VOICEVOX_ENGINE_DIR ?? "../voicevox_engine/dist/run/";
+const AIVISSPEECH_ENGINE_DIR =
+  process.env.AIVISSPEECH_ENGINE_DIR ?? "../AivisSpeech-Engine/dist/run/";
 
 // ${productName} Web Setup ${version}.${ext}
 const NSIS_WEB_ARTIFACT_NAME = process.env.NSIS_WEB_ARTIFACT_NAME;
@@ -29,9 +29,9 @@ const WIN_SIGNING_HASH_ALGORITHMS = process.env.WIN_SIGNING_HASH_ALGORITHMS
 
 const isMac = process.platform === "darwin";
 
-// electron-builderのextraFilesは、ファイルのコピー先としてVOICEVOX.app/Contents/を使用する。
-// しかし、実行ファイルはVOICEVOX.app/Contents/MacOS/にあるため、extraFilesをVOICEVOX.app/Contents/ディレクトリにコピーするのは正しくない。
-// VOICEVOX.app/Contents/MacOS/ディレクトリにコピーされるように修正する。
+// electron-builderのextraFilesは、ファイルのコピー先としてAivisSpeech.app/Contents/を使用する。
+// しかし、実行ファイルはAivisSpeech.app/Contents/MacOS/にあるため、extraFilesをAivisSpeech.app/Contents/ディレクトリにコピーするのは正しくない。
+// AivisSpeech.app/Contents/MacOS/ディレクトリにコピーされるように修正する。
 // cf: https://k-hyoda.hatenablog.com/entry/2021/10/23/000349#%E8%BF%BD%E5%8A%A0%E5%B1%95%E9%96%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%85%88%E3%81%AE%E8%A8%AD%E5%AE%9A
 const extraFilePrefix = isMac ? "MacOS/" : "";
 
@@ -63,8 +63,8 @@ const builderOptions = {
   fileAssociations: [
     {
       ext: "vvproj",
-      name: "VOICEVOX Project file",
-      description: "VOICEVOX Project file",
+      name: "AivisSpeech Project file",
+      description: "AivisSpeech Project file",
       role: "Editor",
       icon: "icons/vvproj." + (isMac ? "icns" : "ico"),
     },
@@ -89,8 +89,8 @@ const builderOptions = {
       to: extraFilePrefix + "README.txt",
     },
     {
-      from: VOICEVOX_ENGINE_DIR,
-      to: path.join(extraFilePrefix, "vv-engine"),
+      from: AIVISSPEECH_ENGINE_DIR,
+      to: path.join(extraFilePrefix, "AivisSpeech-Engine"),
     },
     {
       from: path.resolve(__dirname, "build", "vendored", "7z", sevenZipFile),
@@ -98,9 +98,9 @@ const builderOptions = {
     },
   ],
   // electron-builder installer
-  productName: "VOICEVOX",
-  appId: "jp.hiroshiba.voicevox",
-  copyright: "Hiroshiba Kazuyuki",
+  productName: "AivisSpeech",
+  appId: "com.aivis-project.aivisspeech",
+  copyright: "tsukumi",
   afterAllArtifactBuild: path.resolve(
     __dirname,
     "build",
@@ -130,7 +130,7 @@ const builderOptions = {
   },
   publish: {
     provider: "github",
-    repo: "voicevox",
+    repo: "AivisSpeech",
     vPrefixedTagName: false,
   },
   linux: {
@@ -139,7 +139,7 @@ const builderOptions = {
       LINUX_EXECUTABLE_NAME !== "" ? LINUX_EXECUTABLE_NAME : undefined,
     icon: "public/icon.png",
     category: "AudioVideo",
-    mimeTypes: ["application/x-voicevox"],
+    mimeTypes: ["application/x-aivisspeech"],
     target: [
       {
         target: "AppImage",

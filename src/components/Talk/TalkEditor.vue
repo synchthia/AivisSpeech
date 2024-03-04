@@ -519,7 +519,7 @@ const loadDraggedFile = (event: { dataTransfer: DataTransfer | null }) => {
       store.dispatch("SHOW_ALERT_DIALOG", {
         title: "対応していないファイルです",
         message:
-          "テキストファイル (.txt) とVOICEVOXプロジェクトファイル (.vvproj) に対応しています。",
+          "テキストファイル (.txt) とAivisSpeechプロジェクトファイル (.vvproj) に対応しています。",
       });
   }
 };

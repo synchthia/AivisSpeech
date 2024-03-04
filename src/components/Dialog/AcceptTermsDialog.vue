@@ -42,7 +42,7 @@
       <QPageContainer>
         <QPage>
           <p class="text-body1 q-mb-lg">
-            多くの人が安心して VOICEVOX
+            多くの人が安心して AivisSpeech
             を使えるよう、利用規約への同意をお願いします。
           </p>
           <QCard flat bordered>

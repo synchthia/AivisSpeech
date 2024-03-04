@@ -235,7 +235,7 @@ export class EngineManager {
       return;
     }
 
-    // { hostname (localhost), port (50021) } <- url (http://localhost:50021)
+    // { hostname (localhost), port (10101) } <- url (http://localhost:10101)
     const engineHostInfo = url2HostInfo(new URL(engineInfo.host));
 
     log.info(

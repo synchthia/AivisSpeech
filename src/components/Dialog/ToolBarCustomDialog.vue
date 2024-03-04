@@ -140,7 +140,7 @@ watch(
   () => store.state.toolbarSetting,
   (newData) => {
     // このwatchはToolbar Setting更新時にも機能するが、
-    // 以下の処理はVOICEVOX起動時のみ機能してほしいので、toolbarButtonsのlengthが0の時だけ機能させる
+    // 以下の処理はAivisSpeech起動時のみ機能してほしいので、toolbarButtonsのlengthが0の時だけ機能させる
     if (!toolbarButtons.value.length) {
       toolbarButtons.value = [...newData];
       selectedButton.value = newData[0];

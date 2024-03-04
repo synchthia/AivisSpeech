@@ -1,5 +1,5 @@
-!ifndef VOICEVOX_FUNCS_INCLUDED
-!define VOICEVOX_FUNCS_INCLUDED
+!ifndef AIVISSPEECH_FUNCS_INCLUDED
+!define AIVISSPEECH_FUNCS_INCLUDED
 
 ; このファイルには独自に定義した定数や変数には依存しない処理だけをまとめておく
 

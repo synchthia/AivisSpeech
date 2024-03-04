@@ -985,7 +985,7 @@
               <QCardActions class="q-px-md bg-surface">
                 <div>ソフトウェア利用状況のデータ収集を許可</div>
                 <div
-                  aria-label="ONの場合、各UIの利用率などのデータが送信され、VOICEVOXの改善に役立てられます。テキストデータや音声データは送信されません。"
+                  aria-label="ONの場合、各UIの利用率などのデータが送信され、AivisSpeechの改善に役立てられます。テキストデータや音声データは送信されません。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -995,7 +995,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、各UIの利用率などのデータが送信され、VOICEVOXの改善に役立てられます。テキストデータ・音声データは送信されません。
+                      ONの場合、各UIの利用率などのデータが送信され、AivisSpeechの改善に役立てられます。テキストデータ・音声データは送信されません。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -1178,7 +1178,7 @@ const acceptRetrieveTelemetryComputed = computed({
     store.dispatch("SHOW_ALERT_DIALOG", {
       title: "ソフトウェア利用状況のデータ収集の無効化",
       message:
-        "ソフトウェア利用状況のデータ収集を完全に無効にするには、VOICEVOXを再起動する必要があります",
+        "ソフトウェア利用状況のデータ収集を完全に無効にするには、AivisSpeechを再起動する必要があります",
       ok: "OK",
     });
   },

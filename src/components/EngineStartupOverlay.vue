@@ -99,7 +99,7 @@ const reloadAppWithMultiEngineOffMode = () => {
 };
 
 const openQa = () => {
-  window.open("https://voicevox.hiroshiba.jp/qa/", "_blank");
+  window.open("https://github.com/Aivis-Project/AivisSpeech", "_blank");
 };
 </script>
 

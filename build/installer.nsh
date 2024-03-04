@@ -2,7 +2,7 @@
 !include "FileFunc.nsh"
 !include "funcs.nsh"
 
-; voicevox-X.X.X-x64.nsis.7z.ini などが配置されている場所
+; AivisSpeech-X.X.X-x64.nsis.7z.ini などが配置されている場所
 ; 開発中はここを一時的に差し替えて、out フォルダ内で npx http-server などとするとテストしやすい
 ; !define DOWNLOAD_BASE_URL "http://127.0.0.1:8080"
 !define DOWNLOAD_BASE_URL "${APP_PACKAGE_URL}"
@@ -33,7 +33,7 @@
   ;   "Concatenate"            - ファイルの結合のみを行う
   Var additionalProcess
 
-  ; voicevox-X.X.X-x64.nsis.7z のようなファイル名
+  ; AivisSpeech-X.X.X-x64.nsis.7z のようなファイル名
   Var archiveName
   ; SHA2-512 でのハッシュ値
   Var archiveHash
@@ -784,7 +784,7 @@ FunctionEnd
 !macroend
 
 !macro customHeader
-  ; インストール成功後に%LOCALAPPDATA%\voicevox-updater\を削除する
+  ; インストール成功後に%LOCALAPPDATA%\AivisSpeech-updater\を削除する
   Function .onInstSuccess
     ; https://github.com/electron-userland/electron-builder/blob/f717e0ea67cec7c5c298889efee7df724838491a/packages/app-builder-lib/templates/nsis/include/installer.nsh#L77
     ${if} $installMode == "all"

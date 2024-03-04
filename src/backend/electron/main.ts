@@ -82,7 +82,7 @@ try {
   }
 }
 
-// appnameをvoicevoxとしてsetする
+// appnameをAivisSpeechとしてsetする
 app.setName(appName);
 
 // Electronの設定ファイルの保存場所を変更
@@ -548,7 +548,7 @@ function cleanupEngines(): Promise<void> | "alreadyCompleted" {
 
 const menuTemplateForMac: Electron.MenuItemConstructorOptions[] = [
   {
-    label: "VOICEVOX",
+    label: "AivisSpeech",
     submenu: [{ role: "quit" }],
   },
   {
@@ -759,7 +759,7 @@ ipcMainHandle("SHOW_PROJECT_SAVE_DIALOG", async (_, { title, defaultPath }) => {
     dialog.showSaveDialog(win, {
       title,
       defaultPath,
-      filters: [{ name: "VOICEVOX Project file", extensions: ["vvproj"] }],
+      filters: [{ name: "AivisSpeech Project file", extensions: ["vvproj"] }],
       properties: ["showOverwriteConfirmation"],
     })
   );
@@ -772,7 +772,7 @@ ipcMainHandle("SHOW_PROJECT_SAVE_DIALOG", async (_, { title, defaultPath }) => {
 ipcMainHandle("SHOW_PROJECT_LOAD_DIALOG", async (_, { title }) => {
   const result = await dialog.showOpenDialog(win, {
     title,
-    filters: [{ name: "VOICEVOX Project file", extensions: ["vvproj"] }],
+    filters: [{ name: "AivisSpeech Project file", extensions: ["vvproj"] }],
     properties: ["openFile", "createDirectory", "treatPackageAsDirectory"],
   });
   if (result.canceled) {
@@ -1178,7 +1178,7 @@ app.on("ready", async () => {
       filePath,
     } as SingleInstanceLockData)
   ) {
-    log.info("VOICEVOX already running. Cancelling launch.");
+    log.info("AivisSpeech already running. Cancelling launch.");
     log.info(`File path sent: ${filePath}`);
     appState.willQuit = true;
     app.quit();

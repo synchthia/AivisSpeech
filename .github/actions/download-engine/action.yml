@@ -1,17 +1,17 @@
-name: "Download VOICEVOX ENGINE"
+name: "Download AivisSpeech Engine"
 description: |
-  VOICEVOX ENGINEをダウンロードし、指定したディレクトリに展開する。
+  AivisSpeech Engineをダウンロードし、指定したディレクトリに展開する。
 inputs:
   repo:
-    description: "リポジトリ名。デフォルトはVOICEVOX/voicevox_engine。"
+    description: "リポジトリ名。デフォルトは Aivis-Project/AivisSpeech-Engine 。"
     required: false
-    default: "VOICEVOX/voicevox_engine"
+    default: "Aivis-Project/AivisSpeech-Engine"
   version:
-    description: "VOICEVOX ENGINEのバージョン。latest（デフォルト）、prerelease-latest、バージョン番号（例：0.14.4）で指定できる。"
+    description: "AivisSpeech Engineのバージョン。latest（デフォルト）、prerelease-latest、バージョン番号（例：1.0.0）で指定できる。"
     required: false
     default: "latest"
   dest:
-    description: "VOICEVOX ENGINEを展開するディレクトリ。"
+    description: "AivisSpeech Engineを展開するディレクトリ。"
     required: true
   target:
     description: "ダウンロードする対象。デフォルトは各OSのCPU版。"
@@ -23,7 +23,7 @@ outputs:
     description: "run.exe、またはrunのパス。"
     value: ${{ steps.result.outputs.run_path }}
   version:
-    description: "VOICEVOX ENGINEのバージョン。"
+    description: "AivisSpeech Engineのバージョン。"
     value: ${{ steps.result.outputs.version }}
 runs:
   using: "composite"

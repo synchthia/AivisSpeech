@@ -203,7 +203,7 @@ export const projectStore = createPartialStore<ProjectStoreTypes>({
           filePath = ret[0];
         }
 
-        const projectFileErrorMsg = `VOICEVOX Project file "${filePath}" is a invalid file.`;
+        const projectFileErrorMsg = `AivisSpeech Project file "${filePath}" is a invalid file.`;
 
         let buf: ArrayBuffer;
         try {

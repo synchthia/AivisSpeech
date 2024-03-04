@@ -30,7 +30,7 @@ export function url2HostInfo(url: URL): HostInfo {
  * ``` cmd
  * TCP  127.0.0.1:5173   127.0.0.1:50170  TIME_WAIT  0
  * TCP  127.0.0.1:6463   0.0.0.0:0        LISTENING  18692
- * TCP  127.0.0.1:50021  0.0.0.0:0        LISTENING  17320
+ * TCP  127.0.0.1:10101  0.0.0.0:0        LISTENING  17320
  * ```
  * -> `17320`
  *

@@ -16,4 +16,4 @@
 
 ダミー謝辞
 
-[ダミーリンク](https://voicevox.hiroshiba.jp/)
+[ダミーリンク](https://github.com/Aivis-Project/AivisSpeech)
