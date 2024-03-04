@@ -62,11 +62,11 @@ const builderOptions = {
   files: ["dist/**/*", "package.json"],
   fileAssociations: [
     {
-      ext: "vvproj",
+      ext: "aisp",
       name: "AivisSpeech Project file",
       description: "AivisSpeech Project file",
       role: "Editor",
-      icon: "icons/vvproj." + (isMac ? "icns" : "ico"),
+      icon: "icons/aisp." + (isMac ? "icns" : "ico"),
     },
     {
       ext: "vvpp",

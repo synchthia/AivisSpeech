@@ -395,7 +395,7 @@ async function createWindow() {
   let projectFilePath = "";
   if (isMac) {
     if (filePathOnMac) {
-      if (filePathOnMac.endsWith(".vvproj")) {
+      if (filePathOnMac.endsWith(".aisp")) {
         projectFilePath = encodeURI(filePathOnMac);
       }
       filePathOnMac = undefined;
@@ -406,7 +406,7 @@ async function createWindow() {
       if (
         fs.existsSync(filePath) &&
         fs.statSync(filePath).isFile() &&
-        filePath.endsWith(".vvproj")
+        filePath.endsWith(".aisp")
       ) {
         projectFilePath = encodeURI(filePath);
       }
@@ -759,7 +759,7 @@ ipcMainHandle("SHOW_PROJECT_SAVE_DIALOG", async (_, { title, defaultPath }) => {
     dialog.showSaveDialog(win, {
       title,
       defaultPath,
-      filters: [{ name: "AivisSpeech Project file", extensions: ["vvproj"] }],
+      filters: [{ name: "AivisSpeech Project file", extensions: ["aisp"] }],
       properties: ["showOverwriteConfirmation"],
     })
   );
@@ -772,7 +772,7 @@ ipcMainHandle("SHOW_PROJECT_SAVE_DIALOG", async (_, { title, defaultPath }) => {
 ipcMainHandle("SHOW_PROJECT_LOAD_DIALOG", async (_, { title }) => {
   const result = await dialog.showOpenDialog(win, {
     title,
-    filters: [{ name: "AivisSpeech Project file", extensions: ["vvproj"] }],
+    filters: [{ name: "AivisSpeech Project file", extensions: ["aisp"] }],
     properties: ["openFile", "createDirectory", "treatPackageAsDirectory"],
   });
   if (result.canceled) {
@@ -1213,8 +1213,8 @@ app.on("second-instance", async (event, argv, workDir, rawData) => {
         reloadNeeded: true,
       });
     }
-  } else if (data.filePath.endsWith(".vvproj")) {
-    log.info("Second instance launched with vvproj file");
+  } else if (data.filePath.endsWith(".aisp")) {
+    log.info("Second instance launched with aisp file");
     ipcMainSend(win, "LOAD_PROJECT_FILE", {
       filePath: data.filePath,
       confirm: true,

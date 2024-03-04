@@ -512,14 +512,14 @@ const loadDraggedFile = (event: { dataTransfer: DataTransfer | null }) => {
     case ".txt":
       store.dispatch("COMMAND_IMPORT_FROM_FILE", { filePath: file.path });
       break;
-    case ".vvproj":
+    case ".aisp":
       store.dispatch("LOAD_PROJECT_FILE", { filePath: file.path });
       break;
     default:
       store.dispatch("SHOW_ALERT_DIALOG", {
         title: "対応していないファイルです",
         message:
-          "テキストファイル (.txt) とAivisSpeechプロジェクトファイル (.vvproj) に対応しています。",
+          "テキストファイル (.txt) とAivisSpeechプロジェクトファイル (.aisp) に対応しています。",
       });
   }
 };

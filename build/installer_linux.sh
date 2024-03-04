@@ -429,7 +429,7 @@ cat << EOS > "${MIME_INSTALL_DIR}/packages/aivisspeech.xml"
         <comment>AivisSpeech Project file</comment>
         <comment xml:lang="ja">AivisSpeech プロジェクトファイル</comment>
         <sub-class-of type="application/json" />
-        <glob pattern="*.vvproj" />
+        <glob pattern="*.aisp" />
         <icon name="aivisspeech" />
     </mime-type>
     <mime-type type="application/x-voicevox-plugin-package">
