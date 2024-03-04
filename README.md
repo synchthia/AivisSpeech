@@ -1,3 +1,30 @@
+
+# AivisSpeech
+
+💠 **AivisSpeech:** **AI** **V**oice **I**mitation **S**ystem - Text to **Speech** Software
+
+AivisSpeech は、[VOICEVOX](https://github.com/VOICEVOX/voicevox) のエディター UI をベースにした、日本語音声合成ソフトウェアです。  
+日本語音声合成エンジンの [AivisSpeech Engine](https://github.com/Aivis-Project/AivisSpeech-Engine) を組み込んでおり、簡単にとても抑揚豊かな音声を生成できます。
+
+## 開発方針
+
+[VOICEVOX](https://github.com/VOICEVOX) は非常に巨大なソフトウェアであり、現在も活発に開発が続けられています。  
+そのため、AivisSpeech では VOICEVOX の最新版をベースに、以下の方針で開発を行っています。
+
+- VOICEVOX 最新版への追従を容易にするため、できるだけ改変を必要最小限に留める
+  - VOICEVOX から AivisSpeech へのリブランディングは必要な箇所のみ行う
+- リファクタリングを行わない
+  - VOICEVOX とのコンフリクトが発生することが容易に予想される上、コード全体に精通しているわけではないため
+- AivisSpeech で利用しない機能 (歌声合成機能など) であっても、コードの削除は行わない
+  - これもコンフリクトを回避するため
+  - 利用しないコードの無効化は削除ではなく、コメントアウトで行う
+- 保守や追従が困難なため、ドキュメントの更新は行わない
+  - このため各ドキュメントは一切更新されておらず、AivisSpeech での変更を反映していない
+
+以下はオリジナルの VOICEVOX の README です。
+
+-----
+
 # VOICEVOX
 
 [![releases](https://img.shields.io/github/v/release/VOICEVOX/voicevox?label=Release)](https://github.com/VOICEVOX/voicevox/releases)
