@@ -85,11 +85,11 @@ export const defaultHotkeySettings: HotkeySettingType[] = [
     combination: HotkeyCombination("Shift Space"),
   },
   {
-    action: "ｱｸｾﾝﾄ欄を表示",
+    action: "アクセント欄を表示",
     combination: HotkeyCombination("1"),
   },
   {
-    action: "ｲﾝﾄﾈｰｼｮﾝ欄を表示",
+    action: "イントネーション欄を表示",
     combination: HotkeyCombination("2"),
   },
   {
@@ -416,8 +416,8 @@ export const hotkeyActionNameSchema = z.enum([
   "音声を繋げて書き出し",
   "再生/停止",
   "連続再生/停止",
-  "ｱｸｾﾝﾄ欄を表示",
-  "ｲﾝﾄﾈｰｼｮﾝ欄を表示",
+  "アクセント欄を表示",
+  "イントネーション欄を表示",
   "長さ欄を表示",
   "テキスト欄を追加",
   "テキスト欄を複製",

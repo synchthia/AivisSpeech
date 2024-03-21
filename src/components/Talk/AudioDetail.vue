@@ -4,10 +4,10 @@
       <div class="side">
         <div class="detail-selector">
           <QTabs v-model="selectedDetail" dense vertical class="text-display">
-            <QTab name="accent" label="ｱｸｾﾝﾄ" />
-            <QTab
+            <QTab name="accent" label="アクセント" />
+            <!-- <QTab
               name="pitch"
-              label="ｲﾝﾄﾈｰｼｮﾝ"
+              label="イントネーション"
               :disable="
                 !(supportedFeatures && supportedFeatures.adjustMoraPitch)
               "
@@ -18,7 +18,7 @@
               :disable="
                 !(supportedFeatures && supportedFeatures.adjustPhonemeLength)
               "
-            />
+            /> -->
           </QTabs>
         </div>
         <div class="play-button-wrapper">
@@ -123,14 +123,14 @@ registerHotkeyWithCleanup({
 });
 registerHotkeyWithCleanup({
   editor: "talk",
-  name: "ｱｸｾﾝﾄ欄を表示",
+  name: "アクセント欄を表示",
   callback: () => {
     selectedDetail.value = "accent";
   },
 });
 registerHotkeyWithCleanup({
   editor: "talk",
-  name: "ｲﾝﾄﾈｰｼｮﾝ欄を表示",
+  name: "イントネーション欄を表示",
   callback: () => {
     if (supportedFeatures.value?.adjustMoraPitch) {
       selectedDetail.value = "pitch";

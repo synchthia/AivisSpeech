@@ -7,7 +7,7 @@
   >
     <ContextMenu :menudata="contextMenudata" />
     <!-- スライダーここから -->
-    <!-- ｱｸｾﾝﾄ項目のスライダー -->
+    <!-- アクセント項目のスライダー -->
     <template v-if="selectedDetail === 'accent'">
       <AudioAccent
         :accent-phrase-index="index"
@@ -17,7 +17,7 @@
         :on-change-accent="changeAccent"
       />
     </template>
-    <!-- ｲﾝﾄﾈｰｼｮﾝ項目のスライダー -->
+    <!-- イントネーション項目のスライダー -->
     <template v-if="selectedDetail === 'pitch'">
       <div
         v-for="(mora, moraIndex) in accentPhrase.moras"
