@@ -2,7 +2,7 @@
   <div v-if="query" class="root full-height q-py-md" data-testid="AudioInfo">
     <div v-if="enablePreset" class="q-px-md">
       <div class="row items-center no-wrap q-mb-xs">
-        <div class="text-body1">プリセット</div>
+        <div class="text-body1" style="margin-right: auto">プリセット</div>
         <QBtn dense flat icon="more_vert" :disable="uiLocked">
           <QMenu transition-duration="100">
             <QList>
@@ -76,8 +76,9 @@
           dense
           outline
           class="col-auto q-ml-xs"
-          size="sm"
+          size="md"
           text-color="display"
+          style="font-size: 12.5px; padding: 0 6px"
           :label="isRegisteredPreset ? '再登録' : '登録'"
           @click="registerPreset({ overwrite: isRegisteredPreset })"
         />
@@ -163,7 +164,7 @@
       <QSeparator class="q-mt-md" />
     </div>
 
-    <div class="parameters q-px-md">
+    <div class="parameters q-px-md q-mt-sm">
       <div v-for="parameter in parameters" :key="parameter.label">
         <QInput
           dense

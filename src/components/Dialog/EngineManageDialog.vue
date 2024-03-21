@@ -41,11 +41,11 @@
             <div v-if="isAddingEngine" class="engine-list-disable-overlay" />
             <div class="engine-list-header text-no-wrap">
               <div class="row engine-list-title text-h5">エンジン一覧</div>
-              <div class="row no-wrap">
+              <div class="row no-wrap q-mt-lg">
                 <QBtn
                   outline
                   text-color="display"
-                  class="text-no-wrap text-bold col-sm q-ma-sm"
+                  class="text-no-wrap text-bold col-sm"
                   :disable="uiLocked"
                   @click="toAddEngineState"
                   >追加</QBtn

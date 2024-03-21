@@ -262,7 +262,7 @@ const closeDialog = () => {
   > :deep(.scroll) {
     overflow-y: scroll;
     .q-tab-panel {
-      padding: 5px 16px;
+      padding: 16px 16px;
     }
   }
 
@@ -275,8 +275,8 @@ const closeDialog = () => {
       display: grid;
       grid-template-columns: repeat(auto-fit, $style-item-size);
       grid-auto-rows: $style-item-size;
-      column-gap: 10px;
-      row-gap: 10px;
+      column-gap: 16px;
+      row-gap: 16px;
       align-content: center;
       justify-content: center;
       .style-item {

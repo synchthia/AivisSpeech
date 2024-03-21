@@ -79,12 +79,14 @@
                 </template>
               </Draggable>
               <div class="preview-toolbar-drag-hint">
-                ドラッグでボタンの並びを変更できます。
+                上のボタンをドラッグして、ボタンの順序を並び替えできます。
               </div>
             </QToolbar>
 
             <QCardActions>
-              <div class="text-h5">表示するボタンの選択</div>
+              <div class="text-h5 q-pl-sm q-mt-sm q-mb-sm">
+                表示するボタンの選択
+              </div>
             </QCardActions>
             <QCardActions class="no-padding">
               <QList class="usable-button-list bg-surface">
@@ -260,7 +262,7 @@ const finishOrNotDialog = async () => {
 }
 
 .preview-toolbar {
-  height: calc(#{vars.$toolbar-height} + 8px);
+  height: calc(#{vars.$toolbar-height} + 16px);
   display: block;
 }
 
@@ -271,8 +273,8 @@ const finishOrNotDialog = async () => {
 }
 
 .preview-toolbar-drag-hint {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .preview-card {

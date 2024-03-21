@@ -40,6 +40,7 @@
             @click="stop"
           ></QBtn>
         </div>
+        <div></div>
       </div>
 
       <div ref="audioDetail" class="overflow-hidden-y accent-phrase-table">
@@ -371,6 +372,7 @@ const isAltKeyDown = useAltKey();
 
   .side {
     height: 100%;
+    background: var(--color-toolbar) !important;
 
     display: flex;
     flex-direction: column;
@@ -382,7 +384,7 @@ const isAltKeyDown = useAltKey();
       }
     }
     .play-button-wrapper {
-      align-self: flex-end;
+      align-self: center;
       display: flex;
       align-items: flex-end;
       flex-wrap: nowrap;

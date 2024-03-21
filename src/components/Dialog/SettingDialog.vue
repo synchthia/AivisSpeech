@@ -1343,6 +1343,7 @@ const renderEngineNameLabel = (engineId: EngineId) => {
 
 .text-h5 {
   margin: 0;
+  margin-bottom: 8px;
 }
 
 .setting-dialog {

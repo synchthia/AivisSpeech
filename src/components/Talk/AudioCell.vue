@@ -62,7 +62,7 @@
     -->
     <QInput
       ref="textField"
-      filled
+      outlined
       dense
       hide-bottom-space
       class="full-width"
@@ -91,6 +91,7 @@
           icon="delete_outline"
           size="0.8rem"
           :disable="uiLocked"
+          style="margin-left: 6px"
           :aria-label="`${textLineNumberIndex}行目を削除`"
           @click="removeCell"
         />
@@ -646,9 +647,10 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
 
 .audio-cell {
   display: flex;
+  align-items: center;
   position: relative;
   padding: 0.4rem 0.5rem;
-  margin: 0.2rem 0.5rem;
+  margin: 0rem 0.5rem;
   &:focus {
     // divはフォーカスするとデフォルトで青い枠が出るので消す
     outline: none;
@@ -669,13 +671,13 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
 
   .active-arrow {
     left: -1rem;
-    height: 2rem;
+    height: 40px;
   }
 
   .line-number {
-    height: 2rem;
+    height: 40px;
     width: v-bind(textLineNumberWidth);
-    line-height: 2rem;
+    line-height: 40px;
     margin-left: -0.1rem;
     margin-right: -0.4rem;
     opacity: 0.6;
@@ -689,7 +691,7 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
   }
 
   .q-input {
-    :deep(.q-field__control) {
+    /* :deep(.q-field__control) {
       height: 2rem;
       background: none;
       border-bottom: 1px solid colors.$primary;
@@ -697,11 +699,11 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
       &::before {
         border-bottom: none;
       }
-    }
+    } */
 
     :deep(.q-field__after) {
-      height: 2rem;
-      padding-left: 5px;
+      /* height: 2rem; */
+      padding-left: 0px;
     }
 
     &.q-field--filled.q-field--highlighted :deep(.q-field__control)::before {

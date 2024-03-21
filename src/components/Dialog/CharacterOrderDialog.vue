@@ -298,7 +298,7 @@ const updatePortrait = (portraitPath: string) => {
 
 .character-items-container {
   height: 100%;
-  padding: 5px 16px;
+  padding: 0px 16px;
 
   flex-grow: 1;
 
@@ -310,8 +310,8 @@ const updatePortrait = (portraitPath: string) => {
     display: grid;
     grid-template-columns: repeat(auto-fit, vars.$character-item-size);
     grid-auto-rows: vars.$character-item-size;
-    column-gap: 10px;
-    row-gap: 10px;
+    column-gap: 16px;
+    row-gap: 16px;
     align-content: center;
     justify-content: center;
   }

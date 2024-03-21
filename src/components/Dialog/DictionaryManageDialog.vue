@@ -47,11 +47,11 @@
             />
             <div class="word-list-header text-no-wrap">
               <div class="row word-list-title text-h5">単語一覧</div>
-              <div class="row no-wrap">
+              <div class="row no-wrap q-mt-lg">
                 <QBtn
                   outline
                   text-color="warning"
-                  class="text-no-wrap text-bold col-sm q-ma-sm"
+                  class="text-no-wrap text-bold col-sm"
                   :disable="uiLocked || !isDeletable"
                   @click="deleteWord"
                   >削除</QBtn
@@ -59,7 +59,7 @@
                 <QBtn
                   outline
                   text-color="display"
-                  class="text-no-wrap text-bold col-sm q-ma-sm"
+                  class="text-no-wrap text-bold col-sm"
                   :disable="uiLocked || !selectedId"
                   @click="editWord"
                   >編集</QBtn
@@ -67,7 +67,7 @@
                 <QBtn
                   outline
                   text-color="display"
-                  class="text-no-wrap text-bold col-sm q-ma-sm"
+                  class="text-no-wrap text-bold col-sm"
                   :disable="uiLocked"
                   @click="newWord"
                   >追加</QBtn
@@ -101,25 +101,27 @@
             v-if="wordEditing"
             class="col-8 no-wrap text-no-wrap word-editor"
           >
-            <div class="row q-pl-md q-mt-md">
-              <div class="text-h6">単語</div>
+            <div class="row q-pl-md q-pr-md q-mt-lg">
               <QInput
                 ref="surfaceInput"
                 v-model="surface"
                 class="word-input"
-                dense
+                outlined
+                label="単語"
+                placeholder="単語を入力"
                 :disable="uiLocked"
                 @blur="setSurface(surface)"
                 @keydown.enter="yomiFocus"
               />
             </div>
-            <div class="row q-pl-md q-pt-sm">
-              <div class="text-h6">読み</div>
+            <div class="row q-pl-md q-pr-md q-pt-md">
               <QInput
                 ref="yomiInput"
                 v-model="yomi"
                 class="word-input q-pb-none"
-                dense
+                outlined
+                label="読み"
+                placeholder="読みを入力"
                 :error="!isOnlyHiraOrKana"
                 :disable="uiLocked"
                 @blur="setYomi(yomi)"
@@ -131,7 +133,7 @@
               </QInput>
             </div>
             <div class="row q-pl-md q-mt-lg text-h6">アクセント調整</div>
-            <div class="row q-pl-md desc-row">
+            <div class="row q-pl-md q-mt-sm q-mb-lg desc-row">
               語尾のアクセントを考慮するため、「が」が自動で挿入されます。
             </div>
             <div class="row q-px-md" style="height: 130px">
@@ -188,8 +190,8 @@
                 </div>
               </div>
             </div>
-            <div class="row q-pl-md q-pt-lg text-h6">単語優先度</div>
-            <div class="row q-pl-md desc-row">
+            <div class="row q-pl-md q-mt-lg text-h6">単語優先度</div>
+            <div class="row q-pl-md q-mt-sm q-mb-lg desc-row">
               単語を登録しても反映されない場合は優先度を高くしてください。
             </div>
             <div
@@ -728,21 +730,7 @@ const toDialogClosedState = () => {
 }
 
 .word-input {
-  padding-left: 10px;
-  width: calc(66vw - 80px);
-
-  :deep(.q-field__control) {
-    height: 2rem;
-  }
-
-  :deep(.q-placeholder) {
-    padding: 0;
-    font-size: 20px;
-  }
-
-  :deep(.q-field__after) {
-    height: 2rem;
-  }
+  width: 100%;
 }
 
 .desc-row {

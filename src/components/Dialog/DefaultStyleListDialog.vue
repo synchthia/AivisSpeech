@@ -242,7 +242,7 @@ const openStyleSelectDialog = (characterInfo: CharacterInfo) => {
 
 .character-items-container {
   height: 100%;
-  padding: 5px 16px;
+  padding: 16px 16px;
 
   flex-grow: 1;
 
@@ -255,8 +255,8 @@ const openStyleSelectDialog = (characterInfo: CharacterInfo) => {
     display: grid;
     grid-template-columns: repeat(auto-fit, $character-item-size);
     grid-auto-rows: 200px;
-    column-gap: 10px;
-    row-gap: 10px;
+    column-gap: 16px;
+    row-gap: 16px;
     align-content: center;
     justify-content: center;
     .character-item {

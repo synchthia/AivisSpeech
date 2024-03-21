@@ -350,8 +350,8 @@ const updateMenuHeight = () => {
   background: colors.$background;
 
   .icon-container {
-    height: 2rem;
-    width: 2rem;
+    width: 38px;
+    height: 38px;
 
     img {
       max-height: 100%;
