@@ -20,7 +20,7 @@
     "test:browser-e2e": "cross-env VITE_TARGET=browser playwright test",
     "test-watch:browser-e2e": "cross-env PWTEST_WATCH=1 VITE_TARGET=browser playwright test",
     "lint": "eslint --ext .js,.vue,.ts *.config.* src tests build",
-    "fmt": "eslint --ext .js,.vue,.ts *.config.* src tests build --fix",
+    "format": "eslint --ext .js,.vue,.ts *.config.* src tests build --fix",
     "markdownlint": "markdownlint --ignore node_modules/ --ignore dist/ --ignore dist_electron/ ./",
     "typecheck": "vue-tsc --noEmit",
     "electron:build": "cross-env VITE_TARGET=electron vite build && electron-builder --config electron-builder.config.js",
@@ -34,7 +34,7 @@
     "postuninstall": "electron-builder install-app-deps",
     "license:generate": "node build/generateLicenses.js",
     "license:merge": "node build/mergeLicenses.js",
-    "update-openapi": "rm -rf src/openapi/ && curl http://127.0.0.1:10101/openapi.json > openapi.json && openapi-generator-cli generate -i openapi.json -g typescript-fetch -o src/openapi/ --additional-properties \"modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true\""
+    "openapi:generate": "rm -rf src/openapi/ && curl http://127.0.0.1:10101/openapi.json > openapi.json && openapi-generator-cli generate -i openapi.json -g typescript-fetch -o src/openapi/ --additional-properties \"modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true\""
   },
   "dependencies": {
     "@gtm-support/vue-gtm": "1.2.3",

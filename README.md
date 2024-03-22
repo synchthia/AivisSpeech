@@ -21,7 +21,54 @@ AivisSpeech は、[VOICEVOX](https://github.com/VOICEVOX/voicevox) のエディ�
 - 保守や追従が困難なため、ドキュメントの更新は行わない
   - このため各ドキュメントは一切更新されておらず、AivisSpeech での変更を反映していない
 
+## 開発環境の構築
+
+手順は一部オリジナルの VOICEVOX と異なります。  
+事前に Node.js 18.13.0 がインストールされている必要があります。
+
+```bash
+# 依存関係をすべてインストール
+npm ci
+
+# .env.development を .env にコピー
+## コピーした .env を編集する必要はない
+cp .env.development .env
+
+# 事前に AivisSpeech Engine を起動しておく
+## AivisSpeech Engine の開発環境は別で構築する必要がある
+cd ../AivisSpeech-Engine
+poetry run task serve
+```
+
+## 開発
+
+```bash
+# 開発環境で Electron 版 AivisSpeech を起動
+npm run electron:serve
+
+# 開発環境でブラウザ版 AivisSpeech を起動
+npm run browser:serve
+
+# Electron 版 AivisSpeech をビルド
+npm run electron:build
+
+# ブラウザ版 AivisSpeech をビルド
+npm run browser:build
+
+# コードフォーマットを自動修正
+npm run format
+
+# コードフォーマットをチェック
+npm run lint
+
+# OpenAPI Generator による自動生成コードを更新
+npm run openapi:generate
+```
+
+-----
+
 以下はオリジナルの VOICEVOX の README です。
+<br>
 
 -----
 
