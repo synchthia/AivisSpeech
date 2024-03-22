@@ -154,7 +154,7 @@ registerHotkeyWithCleanup({
 });
 registerHotkeyWithCleanup({
   editor: "talk",
-  name: "テキスト読み込む",
+  name: "テキストを読み込む",
   callback: () => {
     importTextFile();
   },
