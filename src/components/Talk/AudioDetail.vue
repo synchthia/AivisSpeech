@@ -122,61 +122,61 @@ registerHotkeyWithCleanup({
     }
   },
 });
-registerHotkeyWithCleanup({
-  editor: "talk",
-  name: "アクセント欄を表示",
-  callback: () => {
-    selectedDetail.value = "accent";
-  },
-});
-registerHotkeyWithCleanup({
-  editor: "talk",
-  name: "イントネーション欄を表示",
-  callback: () => {
-    if (supportedFeatures.value?.adjustMoraPitch) {
-      selectedDetail.value = "pitch";
-    }
-  },
-});
-registerHotkeyWithCleanup({
-  editor: "talk",
-  name: "長さ欄を表示",
-  callback: () => {
-    if (supportedFeatures.value?.adjustPhonemeLength) {
-      selectedDetail.value = "length";
-    }
-  },
-});
-registerHotkeyWithCleanup({
-  editor: "talk",
-  name: "全体のイントネーションをリセット",
-  callback: () => {
-    if (!uiLocked.value && store.getters.ACTIVE_AUDIO_KEY) {
-      const audioKeys = store.state.experimentalSetting.enableMultiSelect
-        ? store.getters.SELECTED_AUDIO_KEYS
-        : [store.getters.ACTIVE_AUDIO_KEY];
-      store.dispatch("COMMAND_MULTI_RESET_MORA_PITCH_AND_LENGTH", {
-        audioKeys,
-      });
-    }
-  },
-});
-registerHotkeyWithCleanup({
-  editor: "talk",
-  name: "選択中のアクセント句のイントネーションをリセット",
-  callback: () => {
-    if (
-      !uiLocked.value &&
-      store.getters.ACTIVE_AUDIO_KEY &&
-      store.getters.AUDIO_PLAY_START_POINT != undefined
-    ) {
-      store.dispatch("COMMAND_RESET_SELECTED_MORA_PITCH_AND_LENGTH", {
-        audioKey: store.getters.ACTIVE_AUDIO_KEY,
-        accentPhraseIndex: store.getters.AUDIO_PLAY_START_POINT,
-      });
-    }
-  },
-});
+// registerHotkeyWithCleanup({
+//   editor: "talk",
+//   name: "アクセント欄を表示",
+//   callback: () => {
+//     selectedDetail.value = "accent";
+//   },
+// });
+// registerHotkeyWithCleanup({
+//   editor: "talk",
+//   name: "イントネーション欄を表示",
+//   callback: () => {
+//     if (supportedFeatures.value?.adjustMoraPitch) {
+//       selectedDetail.value = "pitch";
+//     }
+//   },
+// });
+// registerHotkeyWithCleanup({
+//   editor: "talk",
+//   name: "長さ欄を表示",
+//   callback: () => {
+//     if (supportedFeatures.value?.adjustPhonemeLength) {
+//       selectedDetail.value = "length";
+//     }
+//   },
+// });
+// registerHotkeyWithCleanup({
+//   editor: "talk",
+//   name: "全体のイントネーションをリセット",
+//   callback: () => {
+//     if (!uiLocked.value && store.getters.ACTIVE_AUDIO_KEY) {
+//       const audioKeys = store.state.experimentalSetting.enableMultiSelect
+//         ? store.getters.SELECTED_AUDIO_KEYS
+//         : [store.getters.ACTIVE_AUDIO_KEY];
+//       store.dispatch("COMMAND_MULTI_RESET_MORA_PITCH_AND_LENGTH", {
+//         audioKeys,
+//       });
+//     }
+//   },
+// });
+// registerHotkeyWithCleanup({
+//   editor: "talk",
+//   name: "選択中のアクセント句のイントネーションをリセット",
+//   callback: () => {
+//     if (
+//       !uiLocked.value &&
+//       store.getters.ACTIVE_AUDIO_KEY &&
+//       store.getters.AUDIO_PLAY_START_POINT != undefined
+//     ) {
+//       store.dispatch("COMMAND_RESET_SELECTED_MORA_PITCH_AND_LENGTH", {
+//         audioKey: store.getters.ACTIVE_AUDIO_KEY,
+//         accentPhraseIndex: store.getters.AUDIO_PLAY_START_POINT,
+//       });
+//     }
+//   },
+// });
 
 // detail selector
 type DetailTypes = "accent" | "pitch" | "length";

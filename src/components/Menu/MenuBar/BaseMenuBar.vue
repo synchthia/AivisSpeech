@@ -491,6 +491,7 @@ registerHotkeyWithCleanup({
 .window-title {
   height: vars.$menubar-height;
   margin-right: 10%;
+  font-size: 14.5px;
   text-overflow: ellipsis;
   overflow: hidden;
 }

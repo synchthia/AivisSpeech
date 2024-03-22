@@ -84,18 +84,18 @@ export const defaultHotkeySettings: HotkeySettingType[] = [
     action: "連続再生/停止",
     combination: HotkeyCombination("Shift Space"),
   },
-  {
-    action: "アクセント欄を表示",
-    combination: HotkeyCombination("1"),
-  },
-  {
-    action: "イントネーション欄を表示",
-    combination: HotkeyCombination("2"),
-  },
-  {
-    action: "長さ欄を表示",
-    combination: HotkeyCombination("3"),
-  },
+  // {
+  //   action: "アクセント欄を表示",
+  //   combination: HotkeyCombination("1"),
+  // },
+  // {
+  //   action: "イントネーション欄を表示",
+  //   combination: HotkeyCombination("2"),
+  // },
+  // {
+  //   action: "長さ欄を表示",
+  //   combination: HotkeyCombination("3"),
+  // },
   {
     action: "テキスト欄を追加",
     combination: HotkeyCombination("Shift Enter"),
@@ -144,14 +144,14 @@ export const defaultHotkeySettings: HotkeySettingType[] = [
     action: "テキストを読み込む",
     combination: HotkeyCombination(""),
   },
-  {
-    action: "全体のイントネーションをリセット",
-    combination: HotkeyCombination(!isMac ? "Ctrl G" : "Meta G"),
-  },
-  {
-    action: "選択中のアクセント句のイントネーションをリセット",
-    combination: HotkeyCombination("R"),
-  },
+  // {
+  //   action: "全体のイントネーションをリセット",
+  //   combination: HotkeyCombination(!isMac ? "Ctrl G" : "Meta G"),
+  // },
+  // {
+  //   action: "選択中のアクセント句のイントネーションをリセット",
+  //   combination: HotkeyCombination("R"),
+  // },
 ];
 
 export const defaultToolbarButtonSetting: ToolbarSettingType = [
@@ -416,9 +416,9 @@ export const hotkeyActionNameSchema = z.enum([
   "音声を繋げて書き出し",
   "再生/停止",
   "連続再生/停止",
-  "アクセント欄を表示",
-  "イントネーション欄を表示",
-  "長さ欄を表示",
+  // "アクセント欄を表示",
+  // "イントネーション欄を表示",
+  // "長さ欄を表示",
   "テキスト欄を追加",
   "テキスト欄を複製",
   "テキスト欄を削除",
@@ -431,8 +431,8 @@ export const hotkeyActionNameSchema = z.enum([
   "プロジェクトを上書き保存",
   "プロジェクト読み込み",
   "テキストを読み込む",
-  "全体のイントネーションをリセット",
-  "選択中のアクセント句のイントネーションをリセット",
+  // "全体のイントネーションをリセット",
+  // "選択中のアクセント句のイントネーションをリセット",
 ]);
 
 export type HotkeyActionNameType = z.infer<typeof hotkeyActionNameSchema>;
