@@ -36,7 +36,7 @@ export interface SpeakerStyle {
      * @type {string}
      * @memberof SpeakerStyle
      */
-    type?: SpeakerStyleTypeEnum;
+    type?: SpeakerStyleTypeEnum | null;
 }
 
 

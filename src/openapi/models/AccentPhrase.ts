@@ -43,7 +43,7 @@ export interface AccentPhrase {
      * @type {Mora}
      * @memberof AccentPhrase
      */
-    pauseMora?: Mora;
+    pauseMora?: Mora | null;
     /**
      * 
      * @type {boolean}

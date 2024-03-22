@@ -85,7 +85,7 @@ export interface AudioQuery {
      * @type {string}
      * @memberof AudioQuery
      */
-    kana?: string;
+    kana?: string | null;
 }
 
 /**

@@ -72,13 +72,13 @@ export interface SupportedFeatures {
      * @type {boolean}
      * @memberof SupportedFeatures
      */
-    sing?: boolean;
+    sing?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof SupportedFeatures
      */
-    manageLibrary?: boolean;
+    manageLibrary?: boolean | null;
 }
 
 /**

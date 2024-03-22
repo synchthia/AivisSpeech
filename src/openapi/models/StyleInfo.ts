@@ -36,7 +36,7 @@ export interface StyleInfo {
      * @type {string}
      * @memberof StyleInfo
      */
-    portrait?: string;
+    portrait?: string | null;
     /**
      * 
      * @type {Array<string>}

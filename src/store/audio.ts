@@ -323,11 +323,12 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
             styles[i] = {
               styleName: style.name,
               styleId: StyleId(style.id),
-              styleType: style.type,
+              styleType: style.type ?? undefined,
               engineId,
               iconPath: base64ImageToUri(styleInfo.icon),
-              portraitPath:
-                styleInfo.portrait && base64ImageToUri(styleInfo.portrait),
+              portraitPath: styleInfo.portrait
+                ? base64ImageToUri(styleInfo.portrait)
+                : undefined,
               voiceSamplePaths: voiceSamples,
             };
           });

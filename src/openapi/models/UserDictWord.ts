@@ -102,7 +102,7 @@ export interface UserDictWord {
      * @type {number}
      * @memberof UserDictWord
      */
-    moraCount?: number;
+    moraCount?: number | null;
     /**
      * 
      * @type {string}

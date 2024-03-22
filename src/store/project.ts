@@ -564,6 +564,8 @@ export const projectStore = createPartialStore<ProjectStoreTypes>({
             appVersion: appInfos.version,
             talk: {
               audioKeys,
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               audioItems,
             },
             song: {

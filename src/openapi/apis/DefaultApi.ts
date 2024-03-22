@@ -74,7 +74,7 @@ export interface AccentPhrasesAccentPhrasesPostRequest {
     text: string;
     speaker: number;
     isKana?: boolean;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface AddPresetAddPresetPostRequest {
@@ -85,26 +85,26 @@ export interface AddUserDictWordUserDictWordPostRequest {
     surface: string;
     pronunciation: string;
     accentType: number;
-    wordType?: WordTypes;
-    priority?: number;
+    wordType?: WordTypes | null;
+    priority?: number | null;
 }
 
 export interface AudioQueryAudioQueryPostRequest {
     text: string;
     speaker: number;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface AudioQueryFromPresetAudioQueryFromPresetPostRequest {
     text: string;
     presetId: number;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface CancellableSynthesisCancellableSynthesisPostRequest {
     speaker: number;
     audioQuery: AudioQuery;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface ConnectWavesConnectWavesPostRequest {
@@ -122,7 +122,7 @@ export interface DeleteUserDictWordUserDictWordWordUuidDeleteRequest {
 export interface FrameSynthesisFrameSynthesisPostRequest {
     speaker: number;
     frameAudioQuery: FrameAudioQuery;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface ImportUserDictWordsImportUserDictPostRequest {
@@ -133,7 +133,7 @@ export interface ImportUserDictWordsImportUserDictPostRequest {
 export interface InitializeSpeakerInitializeSpeakerPostRequest {
     speaker: number;
     skipReinit?: boolean;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface InstallLibraryInstallLibraryLibraryUuidPostRequest {
@@ -142,36 +142,36 @@ export interface InstallLibraryInstallLibraryLibraryUuidPostRequest {
 
 export interface IsInitializedSpeakerIsInitializedSpeakerGetRequest {
     speaker: number;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface MoraDataMoraDataPostRequest {
     speaker: number;
     accentPhrase: Array<AccentPhrase>;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface MoraLengthMoraLengthPostRequest {
     speaker: number;
     accentPhrase: Array<AccentPhrase>;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface MoraPitchMoraPitchPostRequest {
     speaker: number;
     accentPhrase: Array<AccentPhrase>;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface MorphableTargetsMorphableTargetsPostRequest {
     requestBody: Array<number>;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface MultiSynthesisMultiSynthesisPostRequest {
     speaker: number;
     audioQuery: Array<AudioQuery>;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface RewriteUserDictWordUserDictWordWordUuidPutRequest {
@@ -179,41 +179,41 @@ export interface RewriteUserDictWordUserDictWordWordUuidPutRequest {
     surface: string;
     pronunciation: string;
     accentType: number;
-    wordType?: WordTypes;
-    priority?: number;
+    wordType?: WordTypes | null;
+    priority?: number | null;
 }
 
 export interface SettingPostSettingPostRequest {
     corsPolicyMode: CorsPolicyMode;
-    allowOrigin?: string;
+    allowOrigin?: string | null;
 }
 
 export interface SingFrameAudioQuerySingFrameAudioQueryPostRequest {
     speaker: number;
     score: Score;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface SingerInfoSingerInfoGetRequest {
     speakerUuid: string;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface SingersSingersGetRequest {
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface SpeakerInfoSpeakerInfoGetRequest {
     speakerUuid: string;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface SpeakersSpeakersGetRequest {
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface SupportedDevicesSupportedDevicesGetRequest {
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface SynthesisMorphingSynthesisMorphingPostRequest {
@@ -221,14 +221,14 @@ export interface SynthesisMorphingSynthesisMorphingPostRequest {
     targetSpeaker: number;
     morphRate: number;
     audioQuery: AudioQuery;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface SynthesisSynthesisPostRequest {
     speaker: number;
     audioQuery: AudioQuery;
     enableInterrogativeUpspeak?: boolean;
-    coreVersion?: string;
+    coreVersion?: string | null;
 }
 
 export interface UninstallLibraryUninstallLibraryLibraryUuidPostRequest {
@@ -343,7 +343,7 @@ export interface DefaultApiInterface {
 
     /**
      * 
-     * @summary 音声合成する（キャンセル可能）
+     * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {number} speaker 
      * @param {AudioQuery} audioQuery 
      * @param {string} [coreVersion] 
@@ -354,7 +354,7 @@ export interface DefaultApiInterface {
     cancellableSynthesisCancellableSynthesisPostRaw(requestParameters: CancellableSynthesisCancellableSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
 
     /**
-     * 音声合成する（キャンセル可能）
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     cancellableSynthesisCancellableSynthesisPost(requestParameters: CancellableSynthesisCancellableSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
@@ -450,8 +450,8 @@ export interface DefaultApiInterface {
     engineManifestEngineManifestGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EngineManifest>;
 
     /**
-     * 歌唱音声合成を行います。
-     * @summary Frame Synthesis
+     * 
+     * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {number} speaker 
      * @param {FrameAudioQuery} frameAudioQuery 
      * @param {string} [coreVersion] 
@@ -462,8 +462,7 @@ export interface DefaultApiInterface {
     frameSynthesisFrameSynthesisPostRaw(requestParameters: FrameSynthesisFrameSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
 
     /**
-     * 歌唱音声合成を行います。
-     * Frame Synthesis
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     frameSynthesisFrameSynthesisPost(requestParameters: FrameSynthesisFrameSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
@@ -632,7 +631,7 @@ export interface DefaultApiInterface {
     moraPitchMoraPitchPost(requestParameters: MoraPitchMoraPitchPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AccentPhrase>>;
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値の話者はstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
      * @summary 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      * @param {Array<number>} requestBody 
      * @param {string} [coreVersion] 
@@ -643,7 +642,7 @@ export interface DefaultApiInterface {
     morphableTargetsMorphableTargetsPostRaw(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: MorphableTargetInfo; }>>>;
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値の話者はstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
      * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      */
     morphableTargetsMorphableTargetsPost(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<{ [key: string]: MorphableTargetInfo; }>>;
@@ -719,8 +718,8 @@ export interface DefaultApiInterface {
     settingPostSettingPost(requestParameters: SettingPostSettingPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
-     * 歌唱音声合成用のクエリの初期値を得ます。ここで得られたクエリはそのまま歌唱音声合成に利用できます。各値の意味は`Schemas`を参照してください。
-     * @summary 歌唱音声合成用のクエリを作成する
+     * 
+     * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {number} speaker 
      * @param {Score} score 
      * @param {string} [coreVersion] 
@@ -731,14 +730,13 @@ export interface DefaultApiInterface {
     singFrameAudioQuerySingFrameAudioQueryPostRaw(requestParameters: SingFrameAudioQuerySingFrameAudioQueryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FrameAudioQuery>>;
 
     /**
-     * 歌唱音声合成用のクエリの初期値を得ます。ここで得られたクエリはそのまま歌唱音声合成に利用できます。各値の意味は`Schemas`を参照してください。
-     * 歌唱音声合成用のクエリを作成する
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     singFrameAudioQuerySingFrameAudioQueryPost(requestParameters: SingFrameAudioQuerySingFrameAudioQueryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FrameAudioQuery>;
 
     /**
-     * 指定されたspeaker_uuidに関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
-     * @summary Singer Info
+     * 
+     * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {string} speakerUuid 
      * @param {string} [coreVersion] 
      * @param {*} [options] Override http request option.
@@ -748,14 +746,13 @@ export interface DefaultApiInterface {
     singerInfoSingerInfoGetRaw(requestParameters: SingerInfoSingerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpeakerInfo>>;
 
     /**
-     * 指定されたspeaker_uuidに関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
-     * Singer Info
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     singerInfoSingerInfoGet(requestParameters: SingerInfoSingerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SpeakerInfo>;
 
     /**
      * 
-     * @summary Singers
+     * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {string} [coreVersion] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -764,7 +761,7 @@ export interface DefaultApiInterface {
     singersSingersGetRaw(requestParameters: SingersSingersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Speaker>>>;
 
     /**
-     * Singers
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     singersSingersGet(requestParameters: SingersSingersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Speaker>>;
 
@@ -1174,7 +1171,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声合成する（キャンセル可能）
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async cancellableSynthesisCancellableSynthesisPostRaw(requestParameters: CancellableSynthesisCancellableSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.speaker === null || requestParameters.speaker === undefined) {
@@ -1211,7 +1208,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声合成する（キャンセル可能）
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async cancellableSynthesisCancellableSynthesisPost(requestParameters: CancellableSynthesisCancellableSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
         const response = await this.cancellableSynthesisCancellableSynthesisPostRaw(requestParameters, initOverrides);
@@ -1400,8 +1397,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 歌唱音声合成を行います。
-     * Frame Synthesis
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async frameSynthesisFrameSynthesisPostRaw(requestParameters: FrameSynthesisFrameSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters.speaker === null || requestParameters.speaker === undefined) {
@@ -1438,8 +1434,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 歌唱音声合成を行います。
-     * Frame Synthesis
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async frameSynthesisFrameSynthesisPost(requestParameters: FrameSynthesisFrameSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
         const response = await this.frameSynthesisFrameSynthesisPostRaw(requestParameters, initOverrides);
@@ -1826,7 +1821,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値の話者はstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
      * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      */
     async morphableTargetsMorphableTargetsPostRaw(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: MorphableTargetInfo; }>>> {
@@ -1856,7 +1851,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値の話者はstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
      * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      */
     async morphableTargetsMorphableTargetsPost(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<{ [key: string]: MorphableTargetInfo; }>> {
@@ -2054,8 +2049,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 歌唱音声合成用のクエリの初期値を得ます。ここで得られたクエリはそのまま歌唱音声合成に利用できます。各値の意味は`Schemas`を参照してください。
-     * 歌唱音声合成用のクエリを作成する
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async singFrameAudioQuerySingFrameAudioQueryPostRaw(requestParameters: SingFrameAudioQuerySingFrameAudioQueryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FrameAudioQuery>> {
         if (requestParameters.speaker === null || requestParameters.speaker === undefined) {
@@ -2092,8 +2086,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 歌唱音声合成用のクエリの初期値を得ます。ここで得られたクエリはそのまま歌唱音声合成に利用できます。各値の意味は`Schemas`を参照してください。
-     * 歌唱音声合成用のクエリを作成する
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async singFrameAudioQuerySingFrameAudioQueryPost(requestParameters: SingFrameAudioQuerySingFrameAudioQueryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FrameAudioQuery> {
         const response = await this.singFrameAudioQuerySingFrameAudioQueryPostRaw(requestParameters, initOverrides);
@@ -2101,8 +2094,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたspeaker_uuidに関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
-     * Singer Info
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async singerInfoSingerInfoGetRaw(requestParameters: SingerInfoSingerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpeakerInfo>> {
         if (requestParameters.speakerUuid === null || requestParameters.speakerUuid === undefined) {
@@ -2132,8 +2124,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたspeaker_uuidに関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
-     * Singer Info
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async singerInfoSingerInfoGet(requestParameters: SingerInfoSingerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SpeakerInfo> {
         const response = await this.singerInfoSingerInfoGetRaw(requestParameters, initOverrides);
@@ -2141,7 +2132,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * Singers
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async singersSingersGetRaw(requestParameters: SingersSingersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Speaker>>> {
         const queryParameters: any = {};
@@ -2163,7 +2154,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * Singers
+     * AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      */
     async singersSingersGet(requestParameters: SingersSingersGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Speaker>> {
         const response = await this.singersSingersGetRaw(requestParameters, initOverrides);

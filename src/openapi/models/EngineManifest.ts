@@ -109,7 +109,7 @@ export interface EngineManifest {
      * @type {string}
      * @memberof EngineManifest
      */
-    supportedVvlibManifestVersion?: string;
+    supportedVvlibManifestVersion?: string | null;
     /**
      * 
      * @type {SupportedFeatures}

@@ -30,13 +30,13 @@ export interface Mora {
      * @type {string}
      * @memberof Mora
      */
-    consonant?: string;
+    consonant?: string | null;
     /**
      * 
      * @type {number}
      * @memberof Mora
      */
-    consonantLength?: number;
+    consonantLength?: number | null;
     /**
      * 
      * @type {string}

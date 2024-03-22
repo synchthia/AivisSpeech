@@ -30,13 +30,13 @@ export interface LicenseInfo {
      * @type {string}
      * @memberof LicenseInfo
      */
-    version?: string;
+    version?: string | null;
     /**
      * 
      * @type {string}
      * @memberof LicenseInfo
      */
-    license?: string;
+    license?: string | null;
     /**
      * 
      * @type {string}

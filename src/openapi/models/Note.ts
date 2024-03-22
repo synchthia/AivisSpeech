@@ -24,7 +24,7 @@ export interface Note {
      * @type {number}
      * @memberof Note
      */
-    key?: number;
+    key?: number | null;
     /**
      * 
      * @type {number}
