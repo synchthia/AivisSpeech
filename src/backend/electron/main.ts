@@ -60,9 +60,9 @@ if (isDevelopment) {
 
 let suffix = "";
 if (isTest) {
-  suffix = "-test";
+  suffix = "-Test";
 } else if (isDevelopment) {
-  suffix = "-dev";
+  suffix = "-Dev";
 }
 const appName = import.meta.env.VITE_APP_NAME + suffix;
 console.log(`Environment: ${import.meta.env.MODE}, appData: ${appName}`);
