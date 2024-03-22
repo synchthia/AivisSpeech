@@ -55,7 +55,7 @@ const migrations: [string, (store: Record<string, unknown>) => unknown][] = [
       engineSettings[engineId] = {
         useGpu: config.useGpu as boolean,
         outputSamplingRate:
-          outputSamplingRate === 24000 ? "engineDefault" : outputSamplingRate,
+          outputSamplingRate === 44100 ? "engineDefault" : outputSamplingRate,
       };
       config.engineSettings = engineSettings;
 

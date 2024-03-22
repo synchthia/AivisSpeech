@@ -31,7 +31,7 @@ import {
   DEFAULT_TPQN,
 } from "@/sing/storeHelper";
 
-const DEFAULT_SAMPLING_RATE = 24000;
+const DEFAULT_SAMPLING_RATE = 44100;
 
 export const projectStoreState: ProjectStoreState = {
   savedLastCommandUnixMillisec: null,

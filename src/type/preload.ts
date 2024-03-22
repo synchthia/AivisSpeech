@@ -331,7 +331,7 @@ export type SavingSetting = {
 export type EngineSettings = Record<EngineId, EngineSettingType>;
 
 export const engineSettingSchema = z.object({
-  useGpu: z.boolean().default(false),
+  useGpu: z.boolean().default(true),
   outputSamplingRate: z
     .union([z.number(), z.literal("engineDefault")])
     .default("engineDefault"),

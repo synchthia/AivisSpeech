@@ -37,11 +37,11 @@
 			"combination": "Shift Space"
 		},
 		{
-			"action": "アクセント欄を表示",
+			"action": "ｱｸｾﾝﾄ欄を表示",
 			"combination": "1"
 		},
 		{
-			"action": "イントネーション欄を表示",
+			"action": "ｲﾝﾄﾈｰｼｮﾝ欄を表示",
 			"combination": "2"
 		},
 		{
@@ -89,7 +89,7 @@
 			"combination": "Ctrl O"
 		},
 		{
-			"action": "テキストを読み込む",
+			"action": "テキスト読み込む",
 			"combination": ""
 		},
 		{
