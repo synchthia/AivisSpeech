@@ -288,7 +288,7 @@ const finishOrNotDialog = async () => {
   // 52(preview part buttons) * 2 + 46(select part title) + 22(preview part hint)
   height: calc(
     100vh - #{vars.$menubar-height + (vars.$toolbar-height) +
-      vars.$window-border-width + 52px + 46px + 22px}
+      vars.$window-border-width + 52px + 46px + 46px}
   );
   width: 100%;
   overflow-y: scroll;

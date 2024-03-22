@@ -48,7 +48,7 @@
         <QPage class="main">
           <div class="character-items-container">
             <span class="text-h6 q-py-md">サンプルボイス一覧</span>
-            <div>
+            <div class="q-pb-lg">
               <CharacterTryListenCard
                 v-for="characterInfo of characterInfos"
                 :key="characterInfo.metas.speakerUuid"

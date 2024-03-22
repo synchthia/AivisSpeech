@@ -7,7 +7,7 @@
     <QCard class="q-pa-md dialog-card">
       <QCardSection>
         <div class="text-h5">書き出しファイル名パターン</div>
-        <div class="text-body2 text-grey-8">
+        <div class="text-body2 text-grey-8 q-mt-sm">
           「$キャラ$」のようなタグを使って書き出すファイル名をカスタマイズできます
         </div>
       </QCardSection>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="text-body2 text-ellipsis">
-          出力例）{{ previewFileName }}
+          出力例: {{ previewFileName }}
         </div>
         <div class="row full-width q-my-md">
           <QBtn
@@ -52,7 +52,7 @@
             @click="insertTagToCurrentPosition(`$${tagString}$`)"
           />
         </div>
-        <div class="row full-width justify-end">
+        <div class="row full-width justify-end q-mt-sm">
           <QBtn
             label="キャンセル"
             outline
@@ -196,7 +196,7 @@ const submit = async () => {
 .setting-card {
   width: 100%;
   min-width: 475px;
-  background: colors.$surface;
+  /* background: colors.$surface; */
 }
 
 .text-ellipsis {
