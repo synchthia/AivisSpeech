@@ -33,7 +33,8 @@
     "postinstall": "electron-builder install-app-deps && node build/download7z.js",
     "postuninstall": "electron-builder install-app-deps",
     "license:generate": "node build/generateLicenses.js",
-    "license:merge": "node build/mergeLicenses.js"
+    "license:merge": "node build/mergeLicenses.js",
+    "update-openapi": "rm -rf src/openapi/ && curl http://127.0.0.1:10101/openapi.json > openapi.json && openapi-generator-cli generate -i openapi.json -g typescript-fetch -o src/openapi/ --additional-properties \"modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true\""
   },
   "dependencies": {
     "@gtm-support/vue-gtm": "1.2.3",

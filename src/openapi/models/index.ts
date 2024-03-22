@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AccentPhrase';
+export * from './AivmManifest';
 export * from './AudioQuery';
 export * from './BaseLibraryInfo';
 export * from './CorsPolicyMode';
@@ -30,5 +31,4 @@ export * from './UpdateInfo';
 export * from './UserDictWord';
 export * from './ValidationError';
 export * from './ValidationErrorLocInner';
-export * from './VvlibManifest';
 export * from './WordTypes';

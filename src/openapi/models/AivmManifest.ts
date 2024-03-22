@@ -14,59 +14,59 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * vvlib(VOICEVOX Library)に関する情報
+ * AIVM (Aivis Voice Model) ライブラリに関する情報
  * @export
- * @interface VvlibManifest
+ * @interface AivmManifest
  */
-export interface VvlibManifest {
+export interface AivmManifest {
     /**
      * 
      * @type {string}
-     * @memberof VvlibManifest
+     * @memberof AivmManifest
      */
     manifestVersion: string;
     /**
      * 
      * @type {string}
-     * @memberof VvlibManifest
+     * @memberof AivmManifest
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof VvlibManifest
+     * @memberof AivmManifest
      */
     version: string;
     /**
      * 
      * @type {string}
-     * @memberof VvlibManifest
+     * @memberof AivmManifest
      */
     uuid: string;
     /**
      * 
      * @type {string}
-     * @memberof VvlibManifest
+     * @memberof AivmManifest
      */
     brandName: string;
     /**
      * 
      * @type {string}
-     * @memberof VvlibManifest
+     * @memberof AivmManifest
      */
     engineName: string;
     /**
      * 
      * @type {string}
-     * @memberof VvlibManifest
+     * @memberof AivmManifest
      */
     engineUuid: string;
 }
 
 /**
- * Check if a given object implements the VvlibManifest interface.
+ * Check if a given object implements the AivmManifest interface.
  */
-export function instanceOfVvlibManifest(value: object): boolean {
+export function instanceOfAivmManifest(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "manifestVersion" in value;
     isInstance = isInstance && "name" in value;
@@ -79,11 +79,11 @@ export function instanceOfVvlibManifest(value: object): boolean {
     return isInstance;
 }
 
-export function VvlibManifestFromJSON(json: any): VvlibManifest {
-    return VvlibManifestFromJSONTyped(json, false);
+export function AivmManifestFromJSON(json: any): AivmManifest {
+    return AivmManifestFromJSONTyped(json, false);
 }
 
-export function VvlibManifestFromJSONTyped(json: any, ignoreDiscriminator: boolean): VvlibManifest {
+export function AivmManifestFromJSONTyped(json: any, ignoreDiscriminator: boolean): AivmManifest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -99,7 +99,7 @@ export function VvlibManifestFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function VvlibManifestToJSON(value?: VvlibManifest | null): any {
+export function AivmManifestToJSON(value?: AivmManifest | null): any {
     if (value === undefined) {
         return undefined;
     }

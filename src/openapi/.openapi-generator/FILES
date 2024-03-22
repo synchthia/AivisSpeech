@@ -1,7 +1,9 @@
+.openapi-generator-ignore
 apis/DefaultApi.ts
 apis/index.ts
 index.ts
 models/AccentPhrase.ts
+models/AivmManifest.ts
 models/AudioQuery.ts
 models/BaseLibraryInfo.ts
 models/CorsPolicyMode.ts
@@ -31,7 +33,6 @@ models/UpdateInfo.ts
 models/UserDictWord.ts
 models/ValidationError.ts
 models/ValidationErrorLocInner.ts
-models/VvlibManifest.ts
 models/WordTypes.ts
 models/index.ts
 runtime.ts

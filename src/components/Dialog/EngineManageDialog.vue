@@ -278,11 +278,7 @@
                     : null"
                   :key="feature"
                 >
-                  <!-- TODO: vvlib機能がリリースされたらmanageLibraryも表示するようにする -->
-                  <li
-                    v-if="feature != 'manageLibrary'"
-                    :class="value ? '' : 'text-warning'"
-                  >
+                  <li :class="value ? '' : 'text-warning'">
                     {{ getFeatureName(feature) }}：{{
                       value ? "対応" : "非対応"
                     }}
