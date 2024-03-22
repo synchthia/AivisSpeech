@@ -504,11 +504,11 @@ export type ThemeSetting = {
 };
 
 export const experimentalSettingSchema = z.object({
-  enablePreset: z.boolean().default(false),
+  enablePreset: z.boolean().default(true),
   shouldApplyDefaultPresetOnVoiceChanged: z.boolean().default(false),
   enableInterrogativeUpspeak: z.boolean().default(false),
-  enableMorphing: z.boolean().default(false),
-  enableMultiSelect: z.boolean().default(false),
+  enableMorphing: z.boolean().default(true),
+  enableMultiSelect: z.boolean().default(true),
   shouldKeepTuningOnTextChange: z.boolean().default(false),
   showPitchInSongEditor: z.boolean().default(false),
 });
@@ -537,9 +537,9 @@ export const rootMiscSettingSchema = z.object({
     .enum(["PERIOD_AND_NEW_LINE", "NEW_LINE", "OFF"])
     .default("PERIOD_AND_NEW_LINE"),
   splitterPosition: splitterPositionSchema.default({}),
-  enableMultiEngine: z.boolean().default(false),
-  enableMemoNotation: z.boolean().default(false), // メモ記法を有効にするか
-  enableRubyNotation: z.boolean().default(false), // ルビ記法を有効にするか
+  enableMultiEngine: z.boolean().default(true),
+  enableMemoNotation: z.boolean().default(true), // メモ記法を有効にするか
+  enableRubyNotation: z.boolean().default(true), // ルビ記法を有効にするか
   skipUpdateVersion: z.string().optional(), // アップデートをスキップしたバージョン
 });
 export type RootMiscSettingType = z.infer<typeof rootMiscSettingSchema>;

@@ -256,9 +256,10 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
         anyNewCharacters: result.some((r) => r.anyNewCharacters),
       };
       if (mergedResult.anyNewCharacters) {
-        dispatch("SET_DIALOG_OPEN", {
-          isCharacterOrderDialogOpen: true,
-        });
+        // AivisSpeech では追加キャラクター表示を行わないためコメントアウト
+        // dispatch("SET_DIALOG_OPEN", {
+        //   isCharacterOrderDialogOpen: true,
+        // });
       }
 
       return mergedResult;

@@ -1,7 +1,7 @@
 <template>
   <div v-if="query" class="root full-height q-py-md" data-testid="AudioInfo">
     <div v-if="enablePreset" class="q-px-md">
-      <div class="row items-center no-wrap q-mb-xs">
+      <div class="row items-center no-wrap q-mb-sm">
         <div class="text-body1" style="margin-right: auto">プリセット</div>
         <QBtn dense flat icon="more_vert" :disable="uiLocked">
           <QMenu transition-duration="100">
@@ -215,7 +215,7 @@
     >
       <QSeparator class="q-my-md" />
       <span class="text-body1 q-mb-xs">モーフィング</span>
-      <div class="row no-wrap items-center">
+      <div class="row no-wrap items-center q-mt-sm">
         <CharacterButton
           v-model:selected-voice="morphingTargetVoice"
           class="q-my-xs"
@@ -224,7 +224,7 @@
           :emptiable="true"
           :ui-locked="uiLocked"
         />
-        <div class="q-pl-xs row overflow-hidden">
+        <div class="q-pl-sm row overflow-hidden">
           <div class="text-body2 ellipsis overflow-hidden">
             {{
               morphingTargetCharacterInfo
@@ -262,7 +262,10 @@
       >
         無効な設定です
       </div>
-      <div :class="{ disabled: morphingTargetStyleInfo == undefined }">
+      <div
+        class="q-mt-sm"
+        :class="{ disabled: morphingTargetStyleInfo == undefined }"
+      >
         <span class="text-body1 q-mb-xs"
           >割合
           {{

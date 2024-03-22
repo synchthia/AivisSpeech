@@ -84,7 +84,7 @@
                   </QTooltip>
                 </QBtnToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface">
                 <div>音声のサンプリングレート</div>
                 <div
                   aria-label="再生と保存時の音声のサンプリングレートを変更できます（サンプリングレートを上げても音声の品質は上がりません）。"
@@ -111,7 +111,7 @@
                   :option-label="renderSamplingRateLabel"
                 >
                 </QSelect>
-              </QCardActions>
+              </QCardActions> -->
             </QCard>
             <!-- Preservation Setting -->
             <QCard flat class="setting-card">
@@ -642,7 +642,7 @@
               <QCardActions>
                 <h5 class="text-h5">外観</h5>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface">
                 <div>テーマ</div>
                 <div aria-label="エディタの色を選べます。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
@@ -700,7 +700,7 @@
                   ]"
                   @update:model-value="changeEditorFont($event)"
                 />
-              </QCardActions>
+              </QCardActions> -->
               <QCardActions class="q-px-md bg-surface">
                 <div>行番号の表示</div>
                 <div
@@ -845,7 +845,7 @@
                 <div class="text-h5">実験的機能</div>
               </QCardActions>
               <!-- 今後実験的機能を追加する場合はここに追加 -->
-              <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface">
                 <div>疑問文を自動調整</div>
                 <div
                   aria-label="ONの場合、疑問文の語尾の音高が自動的に上げられます。"
@@ -873,7 +873,7 @@
                   "
                 >
                 </QToggle>
-              </QCardActions>
+              </QCardActions> -->
               <QCardActions class="q-px-md bg-surface">
                 <div>モーフィング機能</div>
                 <div

@@ -42,11 +42,11 @@ export const settingStoreState: SettingStoreState = {
   acceptTerms: "Unconfirmed",
   acceptRetrieveTelemetry: "Unconfirmed",
   experimentalSetting: {
-    enablePreset: false,
+    enablePreset: true,
     shouldApplyDefaultPresetOnVoiceChanged: false,
     enableInterrogativeUpspeak: false,
-    enableMorphing: false,
-    enableMultiSelect: false,
+    enableMorphing: true,
+    enableMultiSelect: true,
     shouldKeepTuningOnTextChange: false,
     showPitchInSongEditor: false,
   },
@@ -62,9 +62,9 @@ export const settingStoreState: SettingStoreState = {
     notifyOnGenerate: false,
   },
   engineSettings: {},
-  enableMultiEngine: false,
-  enableMemoNotation: false,
-  enableRubyNotation: false,
+  enableMultiEngine: true,
+  enableMemoNotation: true,
+  enableRubyNotation: true,
 };
 
 export const settingStore = createPartialStore<SettingStoreTypes>({
