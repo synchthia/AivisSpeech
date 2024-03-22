@@ -312,7 +312,7 @@ const showWriteSuccessNotify = ({
     text: "テキスト",
   };
   dispatch("SHOW_NOTIFY_AND_NOT_SHOW_AGAIN_BUTTON", {
-    message: `${mediaTypeNames[mediaType]}を書き出しました`,
+    message: `${mediaTypeNames[mediaType]}を書き出しました。`,
     tipName: "notifyOnGenerate",
   });
 };

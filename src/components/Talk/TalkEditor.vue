@@ -497,7 +497,7 @@ watch(
       if (!altPort) return;
 
       store.dispatch("SHOW_NOTIFY_AND_NOT_SHOW_AGAIN_BUTTON", {
-        message: `${altPort.from}番ポートが使用中であるため ${engineName} は、${altPort.to}番ポートで起動しました`,
+        message: `${altPort.from}番ポートが使用中であるため ${engineName} は、${altPort.to}番ポートで起動しました。`,
         icon: "compare_arrows",
         tipName: "engineStartedOnAltPort",
       });
