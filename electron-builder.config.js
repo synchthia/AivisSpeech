@@ -100,7 +100,7 @@ const builderOptions = {
   // electron-builder installer
   productName: "AivisSpeech",
   appId: "com.aivis-project.aivisspeech",
-  copyright: "tsukumi",
+  copyright: "Aivis Project",
   afterAllArtifactBuild: path.resolve(
     __dirname,
     "build",
