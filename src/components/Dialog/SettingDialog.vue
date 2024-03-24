@@ -877,7 +877,7 @@
               <QCardActions class="q-px-md bg-surface">
                 <div>モーフィング機能</div>
                 <div
-                  aria-label="モーフィング機能を有効にします。2つの音声混ぜられるようになります。"
+                  aria-label="モーフィング機能を有効にします。2つの音声を混ぜられるようになります。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -887,7 +887,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      モーフィング機能を有効にします。2つの音声混ぜられるようになります。
+                      モーフィング機能を有効にします。2つの音声を混ぜられるようになります。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -954,7 +954,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface">
                 <div>ソング：ピッチを表示</div>
                 <div
                   aria-label="ONの場合、ソングエディターでピッチ（音の高さ）が表示されます。"
@@ -978,7 +978,7 @@
                   "
                 >
                 </QToggle>
-              </QCardActions>
+              </QCardActions> -->
             </QCard>
             <QCard flat class="setting-card">
               <QCardActions>

@@ -86,7 +86,7 @@ const titleText = computed(
     (isEdited.value ? "*" : "") +
     (projectName.value != undefined ? projectName.value + " - " : "") +
     "AivisSpeech" +
-    (currentVersion.value ? " - Version " + currentVersion.value : "") +
+    (currentVersion.value ? " " + currentVersion.value : "") +
     (isMultiEngineOffMode.value ? " - マルチエンジンオフ" : "") +
     (defaultEngineAltPortTo.value != null
       ? ` - Port: ${defaultEngineAltPortTo.value}`
