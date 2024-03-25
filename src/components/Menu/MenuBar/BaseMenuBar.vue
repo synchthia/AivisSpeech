@@ -1,5 +1,5 @@
 <template>
-  <QBar class="bg-background q-pa-none relative-position">
+  <QBar class="bg-primary q-pa-none relative-position">
     <div
       v-if="$q.platform.is.mac && !isFullscreen"
       class="mac-traffic-light-space"
