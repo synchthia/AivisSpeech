@@ -10,28 +10,6 @@
       <QPageContainer class="root">
         <QHeader class="q-py-sm">
           <QToolbar>
-            <QToolbarTitle class="text-display"
-              >ツールバーのカスタマイズ</QToolbarTitle
-            >
-            <QSpace />
-            <QBtn
-              unelevated
-              color="toolbar-button"
-              text-color="toolbar-button-display"
-              class="text-no-wrap text-bold q-mr-sm"
-              :disable="isDefault"
-              @click="applyDefaultSetting"
-              >デフォルトに戻す</QBtn
-            >
-            <QBtn
-              unelevated
-              color="toolbar-button"
-              text-color="toolbar-button-display"
-              class="text-no-wrap text-bold q-mr-sm"
-              :disable="!isChanged"
-              @click="saveCustomToolbar"
-              >保存</QBtn
-            >
             <!-- close button -->
             <QBtn
               round
@@ -40,6 +18,30 @@
               color="display"
               @click="finishOrNotDialog"
             />
+            <QToolbarTitle class="text-display">
+              ツールバーのカスタマイズ
+            </QToolbarTitle>
+            <QSpace />
+            <QBtn
+              unelevated
+              color="toolbar-button"
+              text-color="toolbar-button-display"
+              class="text-no-wrap text-bold q-mr-sm"
+              :disable="isDefault"
+              @click="applyDefaultSetting"
+            >
+              デフォルトに戻す
+            </QBtn>
+            <QBtn
+              unelevated
+              color="toolbar-button"
+              text-color="toolbar-button-display"
+              class="text-no-wrap text-bold q-mr-sm"
+              :disable="!isChanged"
+              @click="saveCustomToolbar"
+            >
+              保存
+            </QBtn>
           </QToolbar>
         </QHeader>
         <QPage>
@@ -164,7 +166,7 @@ const usableButtonsDesc: Record<ToolbarButtonTagType, string> = {
   EXPORT_AUDIO_ALL:
     "入力されているすべてのテキストの読み上げを音声ファイルに書き出します。",
   EXPORT_AUDIO_CONNECT_ALL:
-    "入力されているすべてのテキストの読み上げを一つの音声ファイルに繋げて書き出します。",
+    "入力されているすべてのテキストの読み上げを一つの音声ファイルにつなげて書き出します。",
   SAVE_PROJECT: "プロジェクトを上書き保存します。",
   UNDO: "操作を一つ戻します。",
   REDO: "元に戻した操作をやり直します。",

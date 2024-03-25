@@ -110,7 +110,7 @@ const fileSubMenuData = computed<MenuItemData[]>(() => [
   },
   {
     type: "button",
-    label: "音声を繋げて書き出し",
+    label: "音声をつなげて書き出し",
     onClick: () => {
       generateAndConnectAndSaveAllAudio();
     },
@@ -119,7 +119,7 @@ const fileSubMenuData = computed<MenuItemData[]>(() => [
   { type: "separator" },
   {
     type: "button",
-    label: "テキストを繋げて書き出し",
+    label: "テキストをつなげて書き出し",
     onClick: () => {
       connectAndExportText();
     },
@@ -151,7 +151,7 @@ registerHotkeyWithCleanup({
 });
 registerHotkeyWithCleanup({
   editor: "talk",
-  name: "音声を繋げて書き出し",
+  name: "音声をつなげて書き出し",
   callback: () => {
     generateAndConnectAndSaveAllAudio();
   },

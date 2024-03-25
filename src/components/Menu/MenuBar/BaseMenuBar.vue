@@ -254,7 +254,7 @@ const engineSubMenuData = computed<MenuItemData[]>(() => {
   if (enableMultiEngine.value) {
     subMenu.push({
       type: "button",
-      label: "エンジンの管理",
+      label: "音声合成エンジンの管理",
       onClick: () => {
         store.dispatch("SET_DIALOG_OPEN", {
           isEngineManageDialogOpen: true,
@@ -366,7 +366,7 @@ const menudata = computed<MenuItemData[]>(() => [
   },
   {
     type: "root",
-    label: "エンジン",
+    label: "音声合成エンジン",
     onClick: () => {
       closeAllDialog();
     },
@@ -383,27 +383,7 @@ const menudata = computed<MenuItemData[]>(() => [
     subMenu: [
       {
         type: "button",
-        label: "キー割り当て",
-        onClick() {
-          store.dispatch("SET_DIALOG_OPEN", {
-            isHotkeySettingDialogOpen: true,
-          });
-        },
-        disableWhenUiLocked: false,
-      },
-      {
-        type: "button",
-        label: "ツールバーのカスタマイズ",
-        onClick() {
-          store.dispatch("SET_DIALOG_OPEN", {
-            isToolbarSettingDialogOpen: true,
-          });
-        },
-        disableWhenUiLocked: false,
-      },
-      {
-        type: "button",
-        label: "キャラクター並び替え・試聴",
+        label: "音声合成モデルの管理",
         onClick() {
           store.dispatch("SET_DIALOG_OPEN", {
             isCharacterOrderDialogOpen: true,
@@ -430,6 +410,26 @@ const menudata = computed<MenuItemData[]>(() => [
           });
         },
         disableWhenUiLocked: true,
+      },
+      {
+        type: "button",
+        label: "ツールバーのカスタマイズ",
+        onClick() {
+          store.dispatch("SET_DIALOG_OPEN", {
+            isToolbarSettingDialogOpen: true,
+          });
+        },
+        disableWhenUiLocked: false,
+      },
+      {
+        type: "button",
+        label: "キー割り当て",
+        onClick() {
+          store.dispatch("SET_DIALOG_OPEN", {
+            isHotkeySettingDialogOpen: true,
+          });
+        },
+        disableWhenUiLocked: false,
       },
       { type: "separator" },
       {
@@ -527,7 +527,7 @@ registerHotkeyWithCleanup({
 }
 
 .window-title {
-  margin-right: 10%;
+  margin-right: 13%;
   font-size: 14.5px;
   text-overflow: ellipsis;
   overflow: hidden;

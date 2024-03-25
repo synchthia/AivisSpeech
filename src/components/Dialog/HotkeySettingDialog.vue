@@ -9,6 +9,13 @@
     <QLayout container view="hHh Lpr lff" class="bg-background">
       <QHeader class="q-py-sm">
         <QToolbar>
+          <QBtn
+            round
+            flat
+            icon="close"
+            color="display"
+            @click="hotkeySettingDialogOpenComputed = false"
+          />
           <QToolbarTitle class="text-display">キー割り当て</QToolbarTitle>
           <QInput
             v-model="hotkeyFilter"
@@ -31,13 +38,6 @@
               <QIcon v-else />
             </template>
           </QInput>
-          <QBtn
-            round
-            flat
-            icon="close"
-            color="display"
-            @click="hotkeySettingDialogOpenComputed = false"
-          />
         </QToolbar>
       </QHeader>
 

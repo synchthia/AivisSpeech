@@ -47,8 +47,17 @@
               class="q-pa-none"
             >
               <div v-if="page.type === 'item'" class="root">
-                <QHeader class="q-pa-sm">
+                <QHeader class="q-py-sm">
                   <QToolbar>
+                    <!-- close button -->
+                    <QBtn
+                      round
+                      flat
+                      icon="close"
+                      color="display"
+                      aria-label="ヘルプを閉じる"
+                      @click="modelValueComputed = false"
+                    />
                     <QToolbarTitle class="text-display"> ヘルプ </QToolbarTitle>
                     <QBtn
                       v-if="page.component === ContactInfo"
@@ -60,15 +69,6 @@
                     >
                       ログフォルダを開く
                     </QBtn>
-                    <!-- close button -->
-                    <QBtn
-                      round
-                      flat
-                      icon="close"
-                      color="display"
-                      aria-label="ヘルプを閉じる"
-                      @click="modelValueComputed = false"
-                    />
                   </QToolbar>
                 </QHeader>
                 <Component :is="page.component" v-bind="page.props" />

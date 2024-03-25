@@ -10,11 +10,9 @@
       <QHeader class="q-py-sm">
         <QToolbar>
           <div class="column">
-            <QToolbarTitle class="text-display">{{
-              hasNewCharacter
-                ? "追加キャラクターの紹介"
-                : "キャラクター並び替え・試聴"
-            }}</QToolbarTitle>
+            <QToolbarTitle class="text-display">
+              音声合成モデルの管理
+            </QToolbarTitle>
           </div>
 
           <QSpace />

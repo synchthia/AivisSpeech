@@ -8,10 +8,8 @@
   >
     <QLayout container view="hHh Lpr fFf" class="bg-background">
       <QPageContainer>
-        <QHeader class="q-pa-sm">
+        <QHeader class="q-py-sm">
           <QToolbar>
-            <QToolbarTitle class="text-display">エンジンの管理</QToolbarTitle>
-            <QSpace />
             <!-- close button -->
             <QBtn
               round
@@ -21,6 +19,10 @@
               :disabled="isAddingEngine || uiLocked"
               @click="toDialogClosedState"
             />
+            <QToolbarTitle class="text-display">
+              音声合成エンジンの管理
+            </QToolbarTitle>
+            <QSpace />
           </QToolbar>
         </QHeader>
         <QPage class="row">
@@ -40,7 +42,6 @@
           <div class="col-4 engine-list-col">
             <div v-if="isAddingEngine" class="engine-list-disable-overlay" />
             <div class="engine-list-header text-no-wrap">
-              <div class="row engine-list-title text-h5">エンジン一覧</div>
               <div class="row no-wrap q-mt-lg">
                 <QBtn
                   outline
@@ -104,7 +105,7 @@
             <div class="q-pl-md q-mt-md">
               <div class="text-h5 q-ma-sm">エンジンの追加</div>
 
-              <div class="q-ma-sm">
+              <div class="q-ma-sm q-mt-lg">
                 <QBtnToggle
                   v-model="engineLoaderType"
                   :options="[
@@ -120,17 +121,17 @@
               </div>
             </div>
 
-            <div v-if="engineLoaderType === 'vvpp'" class="no-wrap q-pl-md">
+            <div v-if="engineLoaderType === 'vvpp'" class="no-wrap q-px-md">
               <div class="q-ma-sm">
-                VVPPファイルでエンジンをインストールします。
+                VVPP ファイルでエンジンをインストールします。
               </div>
-              <div class="q-ma-sm">
+              <div class="q-ma-sm q-mt-md">
                 <QInput
                   ref="vvppFilePathInput"
                   v-model="vvppFilePath"
                   dense
                   readonly
-                  placeholder="VVPPファイルの場所"
+                  placeholder="VVPP ファイルの場所"
                   @click="selectVvppFile"
                 >
                   <template #append>
@@ -159,9 +160,9 @@
                 </QInput>
               </div>
             </div>
-            <div v-if="engineLoaderType === 'dir'" class="no-wrap q-pl-md">
-              <div class="q-ma-sm">PC内にあるエンジンを追加します。</div>
-              <div class="q-ma-sm">
+            <div v-if="engineLoaderType === 'dir'" class="no-wrap q-px-md">
+              <div class="q-ma-sm">PC 内にあるエンジンを追加します。</div>
+              <div class="q-ma-sm q-mt-md">
                 <QInput
                   ref="newEngineDirInput"
                   v-model="newEngineDir"

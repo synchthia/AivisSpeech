@@ -422,7 +422,7 @@ export const getToolbarButtonName = (tag: ToolbarButtonTagType): string => {
     STOP: "停止",
     EXPORT_AUDIO_SELECTED: "選択音声を書き出し",
     EXPORT_AUDIO_ALL: "全部書き出し",
-    EXPORT_AUDIO_CONNECT_ALL: "音声を繋げて書き出し",
+    EXPORT_AUDIO_CONNECT_ALL: "音声をつなげて書き出し",
     SAVE_PROJECT: "プロジェクト保存",
     UNDO: "元に戻す",
     REDO: "やり直す",

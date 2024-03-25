@@ -10,7 +10,7 @@ test("「設定」→「キャラクター並び替え・視聴」で「キャ�
   await navigateToMain(page);
   await page.getByText("設定").click();
   await page.waitForTimeout(100);
-  await page.getByText("キャラクター並び替え・試聴").click();
+  await page.getByText("音声合成モデルの管理").click();
   await page.waitForTimeout(100);
-  await expect(page.getByText("キャラクター並び替え・試聴")).toBeVisible();
+  await expect(page.getByText("音声合成モデルの管理")).toBeVisible();
 });

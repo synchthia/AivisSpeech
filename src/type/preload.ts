@@ -73,7 +73,7 @@ export const defaultHotkeySettings: HotkeySettingType[] = [
     combination: HotkeyCombination("E"),
   },
   {
-    action: "音声を繋げて書き出し",
+    action: "音声をつなげて書き出し",
     combination: HotkeyCombination(""),
   },
   {
@@ -433,7 +433,7 @@ export type MorphableTargetInfoTable = {
 export const hotkeyActionNameSchema = z.enum([
   "音声書き出し",
   "選択音声を書き出し",
-  "音声を繋げて書き出し",
+  "音声をつなげて書き出し",
   "再生/停止",
   "連続再生/停止",
   // "アクセント欄を表示",

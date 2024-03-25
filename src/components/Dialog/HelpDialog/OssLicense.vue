@@ -9,12 +9,14 @@
           v-for="(license, index) in props.licenses"
           :key="index"
           clickable
-          dense
           @click="selectLicenseIndex(index)"
         >
-          <QItemSection>{{
-            license.name + (license.version ? " | " + license.version : "")
-          }}</QItemSection>
+          <QItemSection class="">
+            <div>
+              <b>{{ license.name }}</b>
+              {{ license.version ? " | " + license.version : "" }}
+            </div>
+          </QItemSection>
         </QItem>
       </QList>
       <div v-else>

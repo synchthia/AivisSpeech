@@ -1442,7 +1442,7 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
           );
         } else {
           filePath ??= await window.backend.showAudioSaveDialog({
-            title: "音声を全て繋げて保存",
+            title: "音声を全てつなげて保存",
             defaultPath: defaultFileName,
           });
         }
@@ -1578,7 +1578,7 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
           );
         } else {
           filePath ??= await window.backend.showTextSaveDialog({
-            title: "文章を全て繋げてテキストファイルに保存",
+            title: "文章を全てつなげてテキストファイルに保存",
             defaultPath: defaultFileName,
           });
         }

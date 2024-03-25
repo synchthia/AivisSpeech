@@ -8,12 +8,8 @@
   >
     <QLayout container view="hHh Lpr fFf" class="bg-background">
       <QPageContainer>
-        <QHeader class="q-pa-sm">
+        <QHeader class="q-py-sm">
           <QToolbar>
-            <QToolbarTitle class="text-display"
-              >読み方＆アクセント辞書</QToolbarTitle
-            >
-            <QSpace />
             <!-- close button -->
             <QBtn
               round
@@ -23,6 +19,10 @@
               :disable="wordEditing"
               @click="discardOrNotDialog(closeDialog)"
             />
+            <QToolbarTitle class="text-display">
+              読み方＆アクセント辞書
+            </QToolbarTitle>
+            <QSpace />
           </QToolbar>
         </QHeader>
         <QPage class="row">
@@ -46,7 +46,6 @@
               @click="discardOrNotDialog(cancel)"
             />
             <div class="word-list-header text-no-wrap">
-              <div class="row word-list-title text-h5">単語一覧</div>
               <div class="row no-wrap q-mt-lg">
                 <QBtn
                   outline

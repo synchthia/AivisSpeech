@@ -8,10 +8,8 @@
   >
     <QLayout container view="hHh Lpr fFf" class="bg-background">
       <QPageContainer class="root">
-        <QHeader class="q-pa-sm">
+        <QHeader class="q-py-sm">
           <QToolbar>
-            <QToolbarTitle class="text-display">オプション</QToolbarTitle>
-            <QSpace />
             <!-- close button -->
             <QBtn
               round
@@ -21,6 +19,8 @@
               aria-label="設定を閉じる"
               @click="settingDialogOpenedComputed = false"
             />
+            <QToolbarTitle class="text-display">オプション</QToolbarTitle>
+            <QSpace />
           </QToolbar>
         </QHeader>
         <QPage ref="scroller" class="scroller">
