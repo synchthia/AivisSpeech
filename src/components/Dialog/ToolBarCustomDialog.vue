@@ -23,25 +23,23 @@
             </QToolbarTitle>
             <QSpace />
             <QBtn
-              unelevated
-              color="toolbar-button"
-              text-color="toolbar-button-display"
+              outline
+              icon="settings_backup_restore"
+              label="デフォルトに戻す"
+              text-color="warning"
               class="text-no-wrap text-bold q-mr-sm"
               :disable="isDefault"
               @click="applyDefaultSetting"
-            >
-              デフォルトに戻す
-            </QBtn>
+            />
             <QBtn
-              unelevated
-              color="toolbar-button"
-              text-color="toolbar-button-display"
+              outline
+              icon="save"
+              label="保存"
+              text-color="display"
               class="text-no-wrap text-bold q-mr-sm"
               :disable="!isChanged"
               @click="saveCustomToolbar"
-            >
-              保存
-            </QBtn>
+            />
           </QToolbar>
         </QHeader>
         <QPage>

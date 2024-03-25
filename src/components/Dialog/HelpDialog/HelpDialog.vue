@@ -61,14 +61,13 @@
                     <QToolbarTitle class="text-display"> ヘルプ </QToolbarTitle>
                     <QBtn
                       v-if="page.component === ContactInfo"
-                      unelevated
-                      color="toolbar-button"
-                      text-color="toolbar-button-display"
+                      outline
+                      icon="description"
+                      label="ログフォルダを開く"
+                      text-color="display"
                       class="text-no-wrap text-bold q-mr-sm"
                       @click="openLogDirectory"
-                    >
-                      ログフォルダを開く
-                    </QBtn>
+                    />
                   </QToolbar>
                 </QHeader>
                 <Component :is="page.component" v-bind="page.props" />
