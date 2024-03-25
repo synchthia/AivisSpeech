@@ -84,11 +84,7 @@
                     getDefaultStyle(characterInfo.metas.speakerUuid).iconPath
                   "
                 />
-                <QAvatar
-                  v-if="showEngineInfo && characterInfo.metas.styles.length < 2"
-                  class="engine-icon"
-                  rounded
-                >
+                <QAvatar v-if="showEngineInfo" class="engine-icon" rounded>
                   <img
                     :src="
                       engineIcons[
