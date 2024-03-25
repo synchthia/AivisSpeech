@@ -117,6 +117,11 @@ img {
   background: colors.$toolbar !important;
 }
 
+// ボタンにアイコンを設定した際の margin-right を調整
+.q-icon.on-left {
+  margin-right: 6px !important;
+}
+
 // Markdown
 .markdown-body {
   min-height: max-content;

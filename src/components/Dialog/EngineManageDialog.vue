@@ -23,6 +23,15 @@
               音声合成エンジンの管理
             </QToolbarTitle>
             <QSpace />
+            <QBtn
+              outline
+              icon="add"
+              label="追加"
+              text-color="display"
+              class="text-bold"
+              :disable="uiLocked"
+              @click="toAddEngineState"
+            />
           </QToolbar>
         </QHeader>
         <QPage class="row">
@@ -41,18 +50,6 @@
           </div>
           <div class="col-4 engine-list-col">
             <div v-if="isAddingEngine" class="engine-list-disable-overlay" />
-            <div class="engine-list-header text-no-wrap">
-              <div class="row no-wrap q-mt-lg">
-                <QBtn
-                  outline
-                  text-color="display"
-                  class="text-no-wrap text-bold col-sm"
-                  :disable="uiLocked"
-                  @click="toAddEngineState"
-                  >追加</QBtn
-                >
-              </div>
-            </div>
             <QList class="engine-list">
               <template
                 v-for="([type, engineIds], i) in Object.entries(
@@ -206,19 +203,21 @@
 
               <QBtn
                 outline
+                icon="close"
+                label="キャンセル"
                 text-color="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 @click="toInitialState"
-                >キャンセル</QBtn
-              >
+              />
               <QBtn
                 outline
+                icon="add"
+                label="追加"
                 text-color="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disabled="!canAddEngine"
                 @click="addEngine"
-                >追加</QBtn
-              >
+              />
             </div>
           </div>
           <div
@@ -312,6 +311,8 @@
 
               <QBtn
                 outline
+                icon="delete"
+                label="削除"
                 text-color="warning"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="
@@ -319,24 +320,25 @@
                   !['path', 'vvpp'].includes(engineInfos[selectedId].type)
                 "
                 @click="deleteEngine"
-                >削除</QBtn
-              >
+              />
               <QBtn
                 outline
+                icon="folder_open"
+                label="フォルダを開く"
                 text-color="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="uiLocked || !engineInfos[selectedId].path"
                 @click="openSelectedEngineDirectory"
-                >フォルダを開く</QBtn
-              >
+              />
               <QBtn
                 outline
+                icon="restart_alt"
+                label="再起動"
                 text-color="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="uiLocked || engineStates[selectedId] === 'STARTING'"
                 @click="restartSelectedEngine"
-                >再起動</QBtn
-              >
+              />
             </div>
           </div>
         </QPage>
