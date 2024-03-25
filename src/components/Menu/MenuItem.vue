@@ -146,8 +146,8 @@ if (props.menudata.type === "root") {
 
 <style lang="scss" scoped>
 .engine-icon {
-  width: 24px;
-  height: 24px;
+  width: 35px;
+  height: 35px;
   border-radius: 2px;
 }
 </style>

@@ -523,10 +523,10 @@ registerHotkeyWithCleanup({
 
 .window-logo {
   height: vars.$menubar-height;
+  margin-right: 8px;
 }
 
 .window-title {
-  height: vars.$menubar-height;
   margin-right: 10%;
   font-size: 14.5px;
   text-overflow: ellipsis;

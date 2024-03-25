@@ -379,7 +379,7 @@ async function createWindow() {
     height: mainWindowState.height,
     frame: false,
     titleBarStyle: "hidden",
-    trafficLightPosition: { x: 6, y: 4 },
+    trafficLightPosition: { x: 10, y: 10 },
     minWidth: 320,
     show: false,
     backgroundColor,
