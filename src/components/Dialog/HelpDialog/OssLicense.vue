@@ -30,7 +30,7 @@
           />
         </div>
         <h3>{{ licenses[detailIndex].name }}</h3>
-        <pre>{{ licenses[detailIndex].text }}</pre>
+        <pre class="q-mt-lg">{{ licenses[detailIndex].text }}</pre>
       </div>
     </div>
   </QPage>

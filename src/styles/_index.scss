@@ -177,6 +177,9 @@ img {
     margin-top: 12px;
     margin-bottom: 8px;
   }
+  ul, ol {
+    padding-inline-start: 25px;
+  }
 }
 
 // Quasar用のカラー設定
@@ -268,4 +271,8 @@ img {
 }
 .text-toast-button-display-warning {
   color: colors.$toast-button-display-warning;
+}
+
+.bg-surface-darken {
+  background: rgba(colors.$surface-rgb, 0.45);
 }

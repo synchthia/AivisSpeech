@@ -91,7 +91,7 @@
               </div>
             </QCardActions>
             <QCardActions class="no-padding">
-              <QList class="usable-button-list bg-surface">
+              <QList class="usable-button-list bg-surface-darken">
                 <QItem
                   v-for="(desc, key) in usableButtonsDesc"
                   :key="key"

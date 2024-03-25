@@ -25,13 +25,14 @@
         エンジン起動に時間がかかっています。<br />
         <QBtn
           v-if="isMultipleEngine"
+          class="q-mt-sm"
           outline
           :disable="reloadingLocked"
           @click="reloadAppWithMultiEngineOffMode"
         >
           マルチエンジンをオフにして再読み込みする</QBtn
         >
-        <QBtn v-else outline @click="openQa">Q&Aを見る</QBtn>
+        <QBtn v-else class="q-mt-sm" outline @click="openQa">Q&Aを見る</QBtn>
       </template>
     </div>
   </div>

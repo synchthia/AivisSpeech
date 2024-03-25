@@ -13,7 +13,7 @@
     toggle-color="primary"
     :options="[
       { label: 'トーク', value: 'talk' },
-      // { label: 'ソング', value: 'song' },
+      { label: 'ソング', value: 'song' },
     ]"
     @update:model-value="switchEditor"
   />

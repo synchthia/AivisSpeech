@@ -21,7 +21,7 @@
       {{ titleText }}
     </div>
     <QSpace />
-    <TitleBarEditorSwitcher />
+    <!-- <TitleBarEditorSwitcher /> -->
     <TitleBarButtons />
   </QBar>
 </template>
@@ -195,7 +195,7 @@ const engineSubMenuData = computed<MenuItemData[]>(() => {
     subMenu = [
       {
         type: "button",
-        label: "再起動",
+        label: "音声合成エンジンを再起動",
         onClick: () => {
           store.dispatch("RESTART_ENGINES", {
             engineIds: [engineInfo.uuid],
@@ -516,6 +516,7 @@ registerHotkeyWithCleanup({
   min-height: vars.$menubar-height;
   -webkit-app-region: drag; // Electronのドラッグ領域
   :deep(.q-btn) {
+    flex-shrink: 0;
     margin-left: 0;
     -webkit-app-region: no-drag; // Electronのドラッグ領域対象から外す
   }
@@ -527,7 +528,8 @@ registerHotkeyWithCleanup({
 }
 
 .window-title {
-  margin-right: 13%;
+  flex-shrink: 0;
+  margin-right: 15%;
   font-size: 14.5px;
   text-overflow: ellipsis;
   overflow: hidden;

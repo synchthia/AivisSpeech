@@ -41,7 +41,7 @@
                   />
                 </template>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>エンジンモード</div>
                 <div aria-label="GPU モードの利用には GPU が必要です。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
@@ -78,7 +78,7 @@
                   </QTooltip>
                 </QBtnToggle>
               </QCardActions>
-              <!-- <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface-darken">
                 <div>音声のサンプリングレート</div>
                 <div
                   aria-label="再生と保存時の音声のサンプリングレートを変更できます（サンプリングレートを上げても音声の品質は上がりません）。"
@@ -112,7 +112,7 @@
               <QCardActions>
                 <h5 class="text-h5">操作</h5>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>プリセット機能</div>
                 <div
                   aria-label="プリセット機能を有効にします。パラメータを登録したり適用したりできます。"
@@ -140,7 +140,11 @@
                 <!-- q-slide-transitionはheightだけをアニメーションするのでdivで囲う -->
                 <div v-show="experimentalSetting.enablePreset">
                   <QCardActions
-                    class="q-px-md bg-surface in-slide-transition-workaround"
+                    class="
+                      q-px-md
+                      bg-surface-darken
+                      in-slide-transition-workaround
+                    "
                   >
                     <div>スタイル変更時にデフォルトプリセットを適用</div>
                     <div
@@ -178,7 +182,7 @@
                   </QCardActions>
                 </div>
               </QSlideTransition>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>パラメータの引き継ぎ</div>
                 <div
                   aria-label="ONの場合、テキスト欄追加の際に、現在の話速等のパラメータが引き継がれます。"
@@ -202,7 +206,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>再生位置を追従</div>
                 <div
                   aria-label="音声再生中の、詳細調整欄の自動スクロールのモードを選べます。"
@@ -263,7 +267,7 @@
                   </template>
                 </QBtnToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>テキスト自動分割</div>
                 <div
                   aria-label="テキスト貼り付けの際のテキストの分割箇所を選べます。"
@@ -320,7 +324,7 @@
                   </template>
                 </QBtnToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>メモ機能</div>
                 <div
                   aria-label="ONの場合、テキストを [] で囲むことで、テキスト中にメモを書けます。"
@@ -345,7 +349,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>ルビ機能</div>
                 <div
                   aria-label="ONの場合、テキストに {ルビ対象|よみかた} と書くことで、テキストの読み方を変えられます。"
@@ -370,7 +374,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>非表示にしたヒントを全て再表示</div>
                 <div
                   aria-label="過去に非表示にしたヒントを全て再表示できます。"
@@ -419,7 +423,7 @@
               <QCardActions>
                 <h5 class="text-h5">保存</h5>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>書き出し先を固定</div>
                 <div
                   aria-label="ONの場合、書き出す際のフォルダをあらかじめ指定できます。"
@@ -485,7 +489,7 @@
                 v-model:open-dialog="showsFilePatternEditDialog"
               />
 
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>書き出しファイル名パターン</div>
                 <div
                   aria-label="書き出す際のファイル名のパターンをカスタマイズできます。"
@@ -516,7 +520,7 @@
                 />
               </QCardActions>
 
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>上書き防止</div>
                 <div
                   aria-label="ONの場合、書き出す際に同名ファイルが既にあったとき、ファイル名に連番を付けて別名で保存されます。"
@@ -542,7 +546,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>文字コード</div>
                 <div
                   aria-label="テキストファイルを書き出す際の文字コードを選べます。"
@@ -577,7 +581,7 @@
                   "
                 />
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>txtファイルを書き出し</div>
                 <div
                   aria-label="ONの場合、音声書き出しの際にテキストがtxtファイルとして書き出されます。"
@@ -604,7 +608,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>labファイルを書き出し</div>
                 <div
                   aria-label="ONの場合、音声書き出しの際にリップシンク用のlabファイルが書き出されます。"
@@ -636,7 +640,7 @@
               <QCardActions>
                 <h5 class="text-h5">外観</h5>
               </QCardActions>
-              <!-- <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface-darken">
                 <div>テーマ</div>
                 <div aria-label="エディタの色を選べます。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
@@ -664,7 +668,7 @@
                 />
               </QCardActions>
 
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>フォント</div>
                 <div aria-label="エディタのフォントを選べます。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
@@ -695,7 +699,7 @@
                   @update:model-value="changeEditorFont($event)"
                 />
               </QCardActions> -->
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>行番号の表示</div>
                 <div
                   aria-label="ONの場合、テキスト欄の左側に行番号が表示されます。"
@@ -719,7 +723,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>テキスト追加ボタンの表示</div>
                 <div
                   aria-label="OFFの場合、右下にテキスト追加ボタンが表示されません。（テキスト欄は Shift + Enter で追加できます）"
@@ -751,7 +755,7 @@
               <QCardActions>
                 <h5 class="text-h5">高度な設定</h5>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>マルチエンジン機能</div>
                 <div>
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
@@ -773,7 +777,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>音声をステレオ化</div>
                 <div
                   aria-label="ONの場合、音声データがモノラルからステレオに変換されてから再生・保存が行われます。"
@@ -800,7 +804,7 @@
                 </QToggle>
               </QCardActions>
               <QCardActions
-                class="q-px-md bg-surface"
+                class="q-px-md bg-surface-darken"
                 :class="{ disabled: !canSetAudioOutputDevice }"
               >
                 <div>再生デバイス</div>
@@ -839,7 +843,7 @@
                 <div class="text-h5">実験的機能</div>
               </QCardActions>
               <!-- 今後実験的機能を追加する場合はここに追加 -->
-              <!-- <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface-darken">
                 <div>疑問文を自動調整</div>
                 <div
                   aria-label="ONの場合、疑問文の語尾の音高が自動的に上げられます。"
@@ -868,7 +872,7 @@
                 >
                 </QToggle>
               </QCardActions> -->
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>モーフィング機能</div>
                 <div
                   aria-label="モーフィング機能を有効にします。2つの音声を混ぜられるようになります。"
@@ -894,7 +898,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>複数選択</div>
                 <div aria-label="複数のテキスト欄を選択できるようにします。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
@@ -918,7 +922,10 @@
                 >
                 </QToggle>
               </QCardActions>
-              <QCardActions v-if="!isProduction" class="q-px-md bg-surface">
+              <QCardActions
+                v-if="!isProduction"
+                class="q-px-md bg-surface-darken"
+              >
                 <div>[開発時のみ機能] 調整結果の保持</div>
                 <div
                   aria-label="テキスト変更時、同じ読みのアクセント区間内の調整結果を保持します。"
@@ -948,7 +955,7 @@
                 >
                 </QToggle>
               </QCardActions>
-              <!-- <QCardActions class="q-px-md bg-surface">
+              <!-- <QCardActions class="q-px-md bg-surface-darken">
                 <div>ソング：ピッチを表示</div>
                 <div
                   aria-label="ONの場合、ソングエディターでピッチ（音の高さ）が表示されます。"
@@ -978,7 +985,7 @@
               <QCardActions>
                 <h5 class="text-h5">データ収集</h5>
               </QCardActions>
-              <QCardActions class="q-px-md bg-surface">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>ソフトウェア利用状況のデータ収集を許可</div>
                 <div
                   aria-label="ONの場合、各UIの利用率などのデータが送信され、AivisSpeechの改善に役立てられます。テキストデータや音声データは送信されません。"
