@@ -10,9 +10,7 @@
       <QHeader class="q-py-sm">
         <QToolbar>
           <div class="column">
-            <QToolbarTitle class="text-display"
-              >利用規約に関するお知らせ</QToolbarTitle
-            >
+            <QToolbarTitle class="text-display">ライセンス情報</QToolbarTitle>
           </div>
 
           <QSpace />
@@ -41,19 +39,9 @@
 
       <QPageContainer>
         <QPage>
-          <p class="text-body1 q-mb-lg">
-            多くの人が安心して AivisSpeech
-            を使えるよう、利用規約への同意をお願いします。
-          </p>
           <QCard flat bordered>
-            <QCardSection>
-              <div class="text-h5">利用規約</div>
-            </QCardSection>
-
-            <QCardSection>
-              <!-- eslint-disable-next-line vue/no-v-html -->
-              <div class="q-pa-md markdown markdown-body" v-html="terms" />
-            </QCardSection>
+            <!-- eslint-disable-next-line vue/no-v-html -->
+            <div class="q-pa-md markdown markdown-body" v-html="terms"></div>
           </QCard>
         </QPage>
       </QPageContainer>

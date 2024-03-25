@@ -49,14 +49,8 @@
             （入力されたテキストデータや音声データの情報は収集しておりませんのでご安心ください。）
           </p>
           <QCard flat bordered>
-            <QCardSection>
-              <div class="text-h5">プライバシーポリシー</div>
-            </QCardSection>
-
-            <QCardSection class="text-body1">
-              <!-- eslint-disable-next-line vue/no-v-html -->
-              <div v-html="privacyPolicy"></div>
-            </QCardSection>
+            <!-- eslint-disable-next-line vue/no-v-html -->
+            <div class="markdown markdown-body" v-html="privacyPolicy"></div>
           </QCard>
         </QPage>
       </QPageContainer>

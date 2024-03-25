@@ -28,7 +28,7 @@
             <!-- Engine Mode Card -->
             <QCard flat class="setting-card">
               <QCardActions>
-                <h5 class="text-h5">エンジン</h5>
+                <h5 class="text-h5">音声合成エンジン</h5>
                 <template v-if="engineIds.length > 1">
                   <QSpace />
                   <QSelect

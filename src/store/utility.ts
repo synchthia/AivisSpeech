@@ -130,7 +130,7 @@ export const DEFAULT_AUDIO_FILE_BASE_NAME_TEMPLATE =
 export const DEFAULT_AUDIO_FILE_NAME_TEMPLATE = `${DEFAULT_AUDIO_FILE_BASE_NAME_TEMPLATE}.wav`;
 const DEFAULT_AUDIO_FILE_NAME_VARIABLES = {
   index: 0,
-  characterName: "四国めたん",
+  characterName: "女性1",
   text: "テキストテキストテキスト",
   styleName: DEFAULT_STYLE_NAME,
   date: currentDateString(),

@@ -166,29 +166,24 @@ const pagedata = computed(() => {
             }),
       },
     },
-    // {
-    //   type: "item",
-    //   name: "音声ライブラリの利用規約",
-    //   component: LibraryPolicy,
-    // },
     {
       type: "item",
       name: "使い方",
       component: HowToUse,
     },
-    // {
-    //   type: "item",
-    //   name: "開発コミュニティ",
-    //   component: OssCommunityInfo,
-    // },
     {
       type: "item",
-      name: "よくある質問",
+      name: "よくある質問 / Q&A",
       component: QAndA,
     },
     {
       type: "item",
-      name: "利用規約",
+      name: "音声合成モデルの利用規約",
+      component: LibraryPolicy,
+    },
+    {
+      type: "item",
+      name: "ライセンス情報",
       component: HelpPolicy,
       props: {
         policy: policy.value,
@@ -196,7 +191,7 @@ const pagedata = computed(() => {
     },
     {
       type: "item",
-      name: "ライセンス情報",
+      name: "オープンソースライセンス",
       component: OssLicense,
       props: {
         licenses: licenses.value,
