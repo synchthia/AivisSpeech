@@ -45,10 +45,7 @@
               </QCardActions>
               <QCardActions class="q-px-md bg-surface">
                 <div>エンジンモード</div>
-                <div
-                  aria-label=" GPU モードの利用には GPU が必要です。Linux は
-                      NVIDIA&trade; 製 GPU のみ対応しています。また、エンジンが対応していない場合、切り替えられません。"
-                >
+                <div aria-label="GPU モードの利用には GPU が必要です。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
@@ -57,8 +54,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      GPU モードの利用には GPU が必要です。Linux は
-                      NVIDIA&trade; 製 GPU のみ対応しています。
+                      GPU モードの利用には対応 GPU が必要です。
                     </QTooltip>
                   </QIcon>
                 </div>

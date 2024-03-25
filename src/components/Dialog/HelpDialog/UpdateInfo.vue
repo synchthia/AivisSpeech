@@ -1,15 +1,15 @@
 <template>
   <QPage
     ref="scroller"
-    class="relative-absolute-wrapper scroller markdown-body"
+    class="relative-absolute-wrapper scroller bg-background"
   >
-    <div class="q-pa-md">
+    <div class="q-pa-md markdown markdown-body">
       <template v-if="props.isUpdateAvailable">
         <h3>最新バージョン {{ props.latestVersion }} が見つかりました</h3>
         <a :href="props.downloadLink" target="_blank">ダウンロードページ</a>
         <hr />
       </template>
-      <h3>アップデート履歴</h3>
+      <h1>アップデート履歴</h1>
       <template v-for="(info, infoIndex) of props.updateInfos" :key="infoIndex">
         <h3>バージョン {{ info.version }}</h3>
         <ul>
@@ -54,7 +54,7 @@ const props =
   .scroller {
     width: 100%;
     overflow: auto;
-    :deep() {
+    /* :deep() {
       h3 {
         font-size: 1.3rem;
         font-weight: bold;
@@ -65,7 +65,7 @@ const props =
         font-weight: bold;
         margin: 0;
       }
-    }
+    } */
   }
 }
 </style>

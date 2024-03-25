@@ -3,7 +3,7 @@
     ref="scroller"
     class="relative-absolute-wrapper scroller bg-background"
   >
-    <div class="q-pa-md markdown-body">
+    <div class="q-pa-md markdown markdown-body">
       <QList v-if="detailIndex === undefined">
         <QItem
           v-for="(license, index) in props.licenses"
@@ -27,7 +27,7 @@
             @click="selectLicenseIndex(undefined)"
           />
         </div>
-        <div class="text-subtitle">{{ licenses[detailIndex].name }}</div>
+        <h3>{{ licenses[detailIndex].name }}</h3>
         <pre>{{ licenses[detailIndex].text }}</pre>
       </div>
     </div>

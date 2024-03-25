@@ -1,7 +1,10 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
-  <QPage class="relative-absolute-wrapper scroller markdown-body">
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div class="q-pa-md markdown" v-html="ossCommunityInfos"></div>
+  <QPage class="relative-absolute-wrapper scroller bg-background">
+    <div
+      class="q-pa-md markdown markdown-body"
+      v-html="ossCommunityInfos"
+    ></div>
   </QPage>
 </template>
 

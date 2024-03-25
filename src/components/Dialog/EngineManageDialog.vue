@@ -278,7 +278,10 @@
                     : null"
                   :key="feature"
                 >
-                  <li :class="value ? '' : 'text-warning'">
+                  <li
+                    v-if="feature != 'manageLibrary'"
+                    :class="value ? '' : 'text-warning'"
+                  >
                     {{ getFeatureName(feature) }}：{{
                       value ? "対応" : "非対応"
                     }}

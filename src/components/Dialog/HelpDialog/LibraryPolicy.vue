@@ -3,7 +3,7 @@
     ref="scroller"
     class="relative-absolute-wrapper scroller bg-background"
   >
-    <div class="q-pa-md markdown-body">
+    <div class="q-pa-md markdown markdown-body">
       <QList v-if="selectedInfo === undefined">
         <template
           v-for="(engineId, engineIndex) in sortedEngineInfos.map(
@@ -49,7 +49,7 @@
             @click="selectCharacterInfo(undefined)"
           />
         </div>
-        <div class="text-subtitle">
+        <h3>
           {{
             mapNullablePipe(
               engineInfos.get(selectedInfo.engine),
@@ -58,7 +58,7 @@
               (v) => v.metas.speakerName
             )
           }}
-        </div>
+        </h3>
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-if="policy" class="markdown" v-html="policy"></div>
       </div>

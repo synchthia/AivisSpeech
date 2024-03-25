@@ -49,10 +49,7 @@
               <div v-if="page.type === 'item'" class="root">
                 <QHeader class="q-pa-sm">
                   <QToolbar>
-                    <QToolbarTitle class="text-display">
-                      ヘルプ / {{ page.parent ? page.parent + " / " : ""
-                      }}{{ page.name }}
-                    </QToolbarTitle>
+                    <QToolbarTitle class="text-display"> ヘルプ </QToolbarTitle>
                     <QBtn
                       v-if="page.component === ContactInfo"
                       unelevated
@@ -153,37 +150,6 @@ const pagedata = computed(() => {
   const data: PageData[] = [
     {
       type: "item",
-      name: "ソフトウェアの利用規約",
-      component: HelpPolicy,
-      props: {
-        policy: policy.value,
-      },
-    },
-    {
-      type: "item",
-      name: "音声ライブラリの利用規約",
-      component: LibraryPolicy,
-    },
-    {
-      type: "item",
-      name: "使い方",
-      component: HowToUse,
-    },
-    {
-      type: "item",
-      name: "開発コミュニティ",
-      component: OssCommunityInfo,
-    },
-    {
-      type: "item",
-      name: "ライセンス情報",
-      component: OssLicense,
-      props: {
-        licenses: licenses.value,
-      },
-    },
-    {
-      type: "item",
       name: "アップデート情報",
       component: UpdateInfo,
       props: {
@@ -200,10 +166,41 @@ const pagedata = computed(() => {
             }),
       },
     },
+    // {
+    //   type: "item",
+    //   name: "音声ライブラリの利用規約",
+    //   component: LibraryPolicy,
+    // },
     {
       type: "item",
-      name: "よくあるご質問",
+      name: "使い方",
+      component: HowToUse,
+    },
+    // {
+    //   type: "item",
+    //   name: "開発コミュニティ",
+    //   component: OssCommunityInfo,
+    // },
+    {
+      type: "item",
+      name: "よくある質問",
       component: QAndA,
+    },
+    {
+      type: "item",
+      name: "利用規約",
+      component: HelpPolicy,
+      props: {
+        policy: policy.value,
+      },
+    },
+    {
+      type: "item",
+      name: "ライセンス情報",
+      component: OssLicense,
+      props: {
+        licenses: licenses.value,
+      },
     },
     {
       type: "item",

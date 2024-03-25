@@ -1,5 +1,5 @@
 <template>
-  <QPage class="relative-absolute-wrapper scroller bg-background">
+  <QPage class="relative-absolute-wrapper scroller bg-background markdown-body">
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div class="q-pa-md markdown markdown-body" v-html="contact"></div>
   </QPage>
