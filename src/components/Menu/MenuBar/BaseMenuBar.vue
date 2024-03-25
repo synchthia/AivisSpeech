@@ -243,7 +243,7 @@ const engineSubMenuData = computed<MenuItemData[]>(() => {
       },
       {
         type: "button",
-        label: "全てのエンジンを再起動",
+        label: "すべての音声合成エンジンを再起動",
         onClick: () => {
           store.dispatch("RESTART_ENGINES", { engineIds: engineIds.value });
         },

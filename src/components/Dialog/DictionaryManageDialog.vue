@@ -16,13 +16,21 @@
               flat
               icon="close"
               color="display"
-              :disable="wordEditing"
               @click="discardOrNotDialog(closeDialog)"
             />
             <QToolbarTitle class="text-display">
               読み方＆アクセント辞書
             </QToolbarTitle>
             <QSpace />
+            <QBtn
+              outline
+              icon="add"
+              label="追加"
+              text-color="display"
+              class="text-bold"
+              :disable="uiLocked"
+              @click="newWord"
+            />
           </QToolbar>
         </QHeader>
         <QPage class="row">
@@ -41,38 +49,10 @@
           </div>
           <div class="col-4 word-list-col">
             <div
-              v-if="wordEditing"
+              v-if="wordEditing && isNewWordEditing"
               class="word-list-disable-overlay"
               @click="discardOrNotDialog(cancel)"
-            />
-            <div class="word-list-header text-no-wrap">
-              <div class="row no-wrap q-mt-lg">
-                <QBtn
-                  outline
-                  text-color="warning"
-                  class="text-no-wrap text-bold col-sm"
-                  :disable="uiLocked || !isDeletable"
-                  @click="deleteWord"
-                  >削除</QBtn
-                >
-                <QBtn
-                  outline
-                  text-color="display"
-                  class="text-no-wrap text-bold col-sm"
-                  :disable="uiLocked || !selectedId"
-                  @click="editWord"
-                  >編集</QBtn
-                >
-                <QBtn
-                  outline
-                  text-color="display"
-                  class="text-no-wrap text-bold col-sm"
-                  :disable="uiLocked"
-                  @click="newWord"
-                  >追加</QBtn
-                >
-              </div>
-            </div>
+            ></div>
             <QList class="word-list">
               <QItem
                 v-for="(value, key) in userDict"
@@ -82,8 +62,10 @@
                 clickable
                 :active="selectedId === key"
                 active-class="active-word"
-                @click="selectWord(key)"
-                @dblclick="editWord"
+                @click="
+                  selectWord(key);
+                  editWord();
+                "
               >
                 <QItemSection>
                   <QItemLabel class="text-display">{{
@@ -214,33 +196,47 @@
                 }"
               />
             </div>
-            <div class="row q-px-md save-delete-reset-buttons">
+            <div class="row q-px-md q-mt-sm save-delete-reset-buttons">
               <QSpace />
               <QBtn
                 v-show="!!selectedId"
                 outline
-                text-color="display"
+                icon="delete"
+                label="削除"
+                text-color="warning"
+                class="text-no-wrap text-bold q-mr-sm"
+                :disable="uiLocked || !isDeletable"
+                @click="deleteWord"
+              />
+              <QBtn
+                v-show="!!selectedId"
+                outline
+                icon="settings_backup_restore"
+                label="リセット"
+                text-color="warning"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="uiLocked || !isWordChanged"
                 @click="resetWord"
-                >リセット</QBtn
-              >
+              />
               <QBtn
+                v-show="isNewWordEditing"
                 outline
+                icon="close"
+                label="キャンセル"
                 text-color="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="uiLocked"
                 @click="discardOrNotDialog(cancel)"
-                >キャンセル</QBtn
-              >
+              />
               <QBtn
                 outline
+                icon="save"
+                label="保存"
                 text-color="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="uiLocked || !isWordChanged"
                 @click="saveWord"
-                >保存</QBtn
-              >
+              />
             </div>
           </div>
         </QPage>
@@ -519,6 +515,7 @@ const isWordChanged = computed(() => {
   );
 });
 const saveWord = async () => {
+  isNewWordEditing.value = false;
   if (!accentPhrase.value) throw new Error(`accentPhrase === undefined`);
   const accent = computeRegisteredAccent();
   if (selectedId.value) {
@@ -537,6 +534,9 @@ const saveWord = async () => {
       });
       return;
     }
+    await loadingDictProcess();
+    selectWord(selectedId.value);
+    editWord();
   } else {
     try {
       await createUILockAction(
@@ -554,9 +554,9 @@ const saveWord = async () => {
       });
       return;
     }
+    await loadingDictProcess();
+    toInitialState();
   }
-  await loadingDictProcess();
-  toInitialState();
 };
 const isDeletable = computed(() => !!selectedId.value);
 const deleteWord = async () => {
@@ -590,7 +590,8 @@ const resetWord = async () => {
     actionName: "リセット",
   });
   if (result === "OK") {
-    toWordEditingState();
+    selectWord(selectedId.value);
+    editWord();
   }
 };
 const discardOrNotDialog = async (okCallback: () => void) => {
@@ -608,7 +609,9 @@ const discardOrNotDialog = async (okCallback: () => void) => {
     okCallback();
   }
 };
+const isNewWordEditing = ref(false);
 const newWord = () => {
+  isNewWordEditing.value = true;
   selectedId.value = "";
   surface.value = "";
   setYomi("");
@@ -635,11 +638,19 @@ const closeDialog = () => {
 // ステートの移動
 // 初期状態
 const toInitialState = () => {
+  isNewWordEditing.value = false;
   wordEditing.value = false;
   selectedId.value = "";
   surface.value = "";
   setYomi("");
   wordPriority.value = defaultDictPriority;
+
+  // 辞書の最初の項目を選択する
+  if (Object.keys(userDict.value).length > 0) {
+    const firstKey = Object.keys(userDict.value)[0];
+    selectWord(firstKey);
+    editWord();
+  }
 };
 // 単語が選択されているだけの状態
 const toWordSelectedState = () => {
