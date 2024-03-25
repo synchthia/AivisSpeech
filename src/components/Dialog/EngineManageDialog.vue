@@ -49,7 +49,11 @@
             </div>
           </div>
           <div class="col-4 engine-list-col">
-            <div v-if="isAddingEngine" class="engine-list-disable-overlay" />
+            <div
+              v-if="isAddingEngine"
+              class="engine-list-disable-overlay"
+              @click="toInitialState"
+            ></div>
             <QList class="engine-list">
               <template
                 v-for="([type, engineIds], i) in Object.entries(
@@ -645,6 +649,11 @@ const canAddEngine = computed(() => {
 const toInitialState = () => {
   selectedId.value = undefined;
   isAddingEngine.value = false;
+
+  const defaultEngineId = findDefaultEngineId();
+  if (defaultEngineId) {
+    selectedId.value = defaultEngineId;
+  }
 };
 // エンジン追加状態
 const toAddEngineState = () => {
@@ -659,6 +668,22 @@ const toDialogClosedState = () => {
   engineManageDialogOpenedComputed.value = false;
   isAddingEngine.value = false;
 };
+
+watch(engineManageDialogOpenedComputed, (newVal) => {
+  if (newVal) {
+    toInitialState();
+  }
+});
+
+function findDefaultEngineId() {
+  // 'default'タイプのエンジンIDを検索
+  for (const [type, engineIds] of Object.entries(categorizedEngineIds.value)) {
+    if (type === "default" && engineIds.length > 0) {
+      return engineIds[0]; // デフォルトエンジンのIDを返す
+    }
+  }
+  return undefined; // デフォルトエンジンが見つからない場合はundefinedを返す
+}
 </script>
 
 <style lang="scss" scoped>
