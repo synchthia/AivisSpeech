@@ -22,9 +22,9 @@
       <QHeader class="q-py-sm">
         <QToolbar>
           <div class="column">
-            <QToolbarTitle class="text-display"
-              >設定 / デフォルトスタイル・試聴</QToolbarTitle
-            >
+            <QToolbarTitle class="text-display">
+              デフォルトスタイル・試聴
+            </QToolbarTitle>
           </div>
 
           <QSpace />

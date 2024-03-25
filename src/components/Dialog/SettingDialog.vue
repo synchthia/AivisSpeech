@@ -10,9 +10,7 @@
       <QPageContainer class="root">
         <QHeader class="q-pa-sm">
           <QToolbar>
-            <QToolbarTitle class="text-display"
-              >設定 / オプション</QToolbarTitle
-            >
+            <QToolbarTitle class="text-display">オプション</QToolbarTitle>
             <QSpace />
             <!-- close button -->
             <QBtn

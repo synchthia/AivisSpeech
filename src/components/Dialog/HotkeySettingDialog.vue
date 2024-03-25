@@ -9,9 +9,7 @@
     <QLayout container view="hHh Lpr lff" class="bg-background">
       <QHeader class="q-py-sm">
         <QToolbar>
-          <QToolbarTitle class="text-display"
-            >設定 / キー割り当て</QToolbarTitle
-          >
+          <QToolbarTitle class="text-display">キー割り当て</QToolbarTitle>
           <QInput
             v-model="hotkeyFilter"
             hide-bottom-space

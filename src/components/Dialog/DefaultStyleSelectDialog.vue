@@ -11,10 +11,10 @@
       <QHeader class="q-py-sm">
         <QToolbar>
           <div class="column">
-            <QToolbarTitle class="text-display"
-              >設定 / デフォルトスタイル・試聴 /
-              {{ characterInfo.metas.speakerName }}</QToolbarTitle
-            >
+            <QToolbarTitle class="text-display">
+              デフォルトスタイル・試聴 -
+              {{ characterInfo.metas.speakerName }}
+            </QToolbarTitle>
           </div>
 
           <QSpace />

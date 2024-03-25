@@ -13,7 +13,7 @@
             <QToolbarTitle class="text-display">{{
               hasNewCharacter
                 ? "追加キャラクターの紹介"
-                : "設定 / キャラクター並び替え・試聴"
+                : "キャラクター並び替え・試聴"
             }}</QToolbarTitle>
           </div>
 
