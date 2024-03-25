@@ -9,24 +9,11 @@
     <QLayout container view="hHh Lpr lff" class="bg-background">
       <QHeader class="q-py-sm">
         <QToolbar>
-          <div class="column">
-            <QToolbarTitle class="text-display">
-              音声合成モデルの管理
-            </QToolbarTitle>
-          </div>
-
+          <QBtn round flat icon="close" color="display" @click="closeDialog" />
+          <QToolbarTitle class="text-display">
+            音声合成モデルの管理
+          </QToolbarTitle>
           <QSpace />
-
-          <div class="row items-center no-wrap">
-            <QBtn
-              unelevated
-              label="完了"
-              color="toolbar-button"
-              text-color="toolbar-button-display"
-              class="text-no-wrap"
-              @click="closeDialog"
-            />
-          </div>
         </QToolbar>
       </QHeader>
 

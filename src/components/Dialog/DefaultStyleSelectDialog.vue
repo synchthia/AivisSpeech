@@ -10,25 +10,18 @@
     <QLayout container view="hHh Lpr lff" class="bg-background">
       <QHeader class="q-py-sm">
         <QToolbar>
-          <div class="column">
-            <QToolbarTitle class="text-display">
-              デフォルトスタイル・試聴 -
-              {{ characterInfo.metas.speakerName }}
-            </QToolbarTitle>
-          </div>
-
+          <QBtn
+            round
+            flat
+            color="display"
+            :icon="isModified ? 'save' : 'arrow_back'"
+            @click="closeDialog"
+          />
+          <QToolbarTitle class="text-display">
+            デフォルトスタイル・試聴 -
+            {{ characterInfo.metas.speakerName }}
+          </QToolbarTitle>
           <QSpace />
-
-          <div class="row items-center no-wrap">
-            <QBtn
-              unelevated
-              :label="isModified ? '保存' : '戻る'"
-              color="toolbar-button"
-              text-color="toolbar-button-display"
-              class="text-no-wrap"
-              @click="closeDialog"
-            />
-          </div>
         </QToolbar>
       </QHeader>
 
