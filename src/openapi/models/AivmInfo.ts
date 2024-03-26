@@ -13,69 +13,62 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { AivmManifestSpeaker } from './AivmManifestSpeaker';
+import type { AivmInfoSpeaker } from './AivmInfoSpeaker';
 import {
-    AivmManifestSpeakerFromJSON,
-    AivmManifestSpeakerFromJSONTyped,
-    AivmManifestSpeakerToJSON,
-} from './AivmManifestSpeaker';
+    AivmInfoSpeakerFromJSON,
+    AivmInfoSpeakerFromJSONTyped,
+    AivmInfoSpeakerToJSON,
+} from './AivmInfoSpeaker';
 
 /**
- * AIVM (Aivis Voice Model) マニフェストの定義
+ * 音声合成モデルの情報
  * @export
- * @interface AivmManifest
+ * @interface AivmInfo
  */
-export interface AivmManifest {
+export interface AivmInfo {
     /**
      * 
      * @type {string}
-     * @memberof AivmManifest
-     */
-    manifestVersion: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AivmManifest
+     * @memberof AivmInfo
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof AivmManifest
+     * @memberof AivmInfo
      */
     description: string;
     /**
      * 
      * @type {string}
-     * @memberof AivmManifest
+     * @memberof AivmInfo
      */
     modelArchitecture: string;
     /**
      * 
      * @type {string}
-     * @memberof AivmManifest
+     * @memberof AivmInfo
      */
     uuid: string;
     /**
      * 
      * @type {string}
-     * @memberof AivmManifest
+     * @memberof AivmInfo
      */
     version: string;
     /**
      * 
-     * @type {Array<AivmManifestSpeaker>}
-     * @memberof AivmManifest
+     * @type {Array<AivmInfoSpeaker>}
+     * @memberof AivmInfo
      */
-    speakers: Array<AivmManifestSpeaker>;
+    speakers: Array<AivmInfoSpeaker>;
 }
 
 /**
- * Check if a given object implements the AivmManifest interface.
+ * Check if a given object implements the AivmInfo interface.
  */
-export function instanceOfAivmManifest(value: object): boolean {
+export function instanceOfAivmInfo(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "manifestVersion" in value;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "description" in value;
     isInstance = isInstance && "modelArchitecture" in value;
@@ -86,27 +79,26 @@ export function instanceOfAivmManifest(value: object): boolean {
     return isInstance;
 }
 
-export function AivmManifestFromJSON(json: any): AivmManifest {
-    return AivmManifestFromJSONTyped(json, false);
+export function AivmInfoFromJSON(json: any): AivmInfo {
+    return AivmInfoFromJSONTyped(json, false);
 }
 
-export function AivmManifestFromJSONTyped(json: any, ignoreDiscriminator: boolean): AivmManifest {
+export function AivmInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): AivmInfo {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'manifestVersion': json['manifest_version'],
         'name': json['name'],
         'description': json['description'],
         'modelArchitecture': json['model_architecture'],
         'uuid': json['uuid'],
         'version': json['version'],
-        'speakers': ((json['speakers'] as Array<any>).map(AivmManifestSpeakerFromJSON)),
+        'speakers': ((json['speakers'] as Array<any>).map(AivmInfoSpeakerFromJSON)),
     };
 }
 
-export function AivmManifestToJSON(value?: AivmManifest | null): any {
+export function AivmInfoToJSON(value?: AivmInfo | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -115,13 +107,12 @@ export function AivmManifestToJSON(value?: AivmManifest | null): any {
     }
     return {
         
-        'manifest_version': value.manifestVersion,
         'name': value.name,
         'description': value.description,
         'model_architecture': value.modelArchitecture,
         'uuid': value.uuid,
         'version': value.version,
-        'speakers': ((value.speakers as Array<any>).map(AivmManifestSpeakerToJSON)),
+        'speakers': ((value.speakers as Array<any>).map(AivmInfoSpeakerToJSON)),
     };
 }
 

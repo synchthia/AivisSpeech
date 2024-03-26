@@ -27,29 +27,29 @@ import {
 } from './SpeakerInfo';
 
 /**
- * 音声ライブラリに含まれる話者の情報
+ * 音声合成モデルに含まれる話者の情報
  * @export
- * @interface LibrarySpeaker
+ * @interface AivmInfoSpeaker
  */
-export interface LibrarySpeaker {
+export interface AivmInfoSpeaker {
     /**
      * 
      * @type {Speaker}
-     * @memberof LibrarySpeaker
+     * @memberof AivmInfoSpeaker
      */
     speaker: Speaker;
     /**
      * 
      * @type {SpeakerInfo}
-     * @memberof LibrarySpeaker
+     * @memberof AivmInfoSpeaker
      */
     speakerInfo: SpeakerInfo;
 }
 
 /**
- * Check if a given object implements the LibrarySpeaker interface.
+ * Check if a given object implements the AivmInfoSpeaker interface.
  */
-export function instanceOfLibrarySpeaker(value: object): boolean {
+export function instanceOfAivmInfoSpeaker(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "speaker" in value;
     isInstance = isInstance && "speakerInfo" in value;
@@ -57,11 +57,11 @@ export function instanceOfLibrarySpeaker(value: object): boolean {
     return isInstance;
 }
 
-export function LibrarySpeakerFromJSON(json: any): LibrarySpeaker {
-    return LibrarySpeakerFromJSONTyped(json, false);
+export function AivmInfoSpeakerFromJSON(json: any): AivmInfoSpeaker {
+    return AivmInfoSpeakerFromJSONTyped(json, false);
 }
 
-export function LibrarySpeakerFromJSONTyped(json: any, ignoreDiscriminator: boolean): LibrarySpeaker {
+export function AivmInfoSpeakerFromJSONTyped(json: any, ignoreDiscriminator: boolean): AivmInfoSpeaker {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -72,7 +72,7 @@ export function LibrarySpeakerFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function LibrarySpeakerToJSON(value?: LibrarySpeaker | null): any {
+export function AivmInfoSpeakerToJSON(value?: AivmInfoSpeaker | null): any {
     if (value === undefined) {
         return undefined;
     }

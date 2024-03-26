@@ -16,13 +16,13 @@
 import * as runtime from '../runtime';
 import type {
   AccentPhrase,
+  AivmInfo,
+  AivmManifest,
   AudioQuery,
   CorsPolicyMode,
-  DownloadableLibraryInfo,
   EngineManifest,
   FrameAudioQuery,
   HTTPValidationError,
-  InstalledLibraryInfo,
   MorphableTargetInfo,
   ParseKanaBadRequest,
   Preset,
@@ -36,20 +36,20 @@ import type {
 import {
     AccentPhraseFromJSON,
     AccentPhraseToJSON,
+    AivmInfoFromJSON,
+    AivmInfoToJSON,
+    AivmManifestFromJSON,
+    AivmManifestToJSON,
     AudioQueryFromJSON,
     AudioQueryToJSON,
     CorsPolicyModeFromJSON,
     CorsPolicyModeToJSON,
-    DownloadableLibraryInfoFromJSON,
-    DownloadableLibraryInfoToJSON,
     EngineManifestFromJSON,
     EngineManifestToJSON,
     FrameAudioQueryFromJSON,
     FrameAudioQueryToJSON,
     HTTPValidationErrorFromJSON,
     HTTPValidationErrorToJSON,
-    InstalledLibraryInfoFromJSON,
-    InstalledLibraryInfoToJSON,
     MorphableTargetInfoFromJSON,
     MorphableTargetInfoToJSON,
     ParseKanaBadRequestFromJSON,
@@ -125,6 +125,10 @@ export interface FrameSynthesisFrameSynthesisPostRequest {
     coreVersion?: string | null;
 }
 
+export interface GetAivmManifestAivmModelsAivmUuidManifestGetRequest {
+    aivmUuid: string;
+}
+
 export interface ImportUserDictWordsImportUserDictPostRequest {
     override: boolean;
     requestBody: { [key: string]: UserDictWord; } | null;
@@ -136,8 +140,8 @@ export interface InitializeSpeakerInitializeSpeakerPostRequest {
     coreVersion?: string | null;
 }
 
-export interface InstallLibraryInstallLibraryLibraryUuidPostRequest {
-    libraryUuid: string;
+export interface InstallAivmAivmModelsAivmUuidPostRequest {
+    aivmUuid: string;
 }
 
 export interface IsInitializedSpeakerIsInitializedSpeakerGetRequest {
@@ -231,8 +235,8 @@ export interface SynthesisSynthesisPostRequest {
     coreVersion?: string | null;
 }
 
-export interface UninstallLibraryUninstallLibraryLibraryUuidPostRequest {
-    libraryUuid: string;
+export interface UninstallAivmAivmModelsAivmUuidDeleteRequest {
+    aivmUuid: string;
 }
 
 export interface UpdatePresetUpdatePresetPostRequest {
@@ -270,7 +274,7 @@ export interface DefaultApiInterface {
     accentPhrasesAccentPhrasesPost(requestParameters: AccentPhrasesAccentPhrasesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AccentPhrase>>;
 
     /**
-     * 新しいプリセットを追加します  Parameters ------- preset: Preset     新しいプリセット。     プリセットIDが既存のものと重複している場合は、新規のプリセットIDが採番されます。  Returns ------- id: int     追加したプリセットのプリセットID
+     * 新しいプリセットを追加します
      * @summary Add Preset
      * @param {Preset} preset 
      * @param {*} [options] Override http request option.
@@ -280,19 +284,19 @@ export interface DefaultApiInterface {
     addPresetAddPresetPostRaw(requestParameters: AddPresetAddPresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<number>>;
 
     /**
-     * 新しいプリセットを追加します  Parameters ------- preset: Preset     新しいプリセット。     プリセットIDが既存のものと重複している場合は、新規のプリセットIDが採番されます。  Returns ------- id: int     追加したプリセットのプリセットID
+     * 新しいプリセットを追加します
      * Add Preset
      */
     addPresetAddPresetPost(requestParameters: AddPresetAddPresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<number>;
 
     /**
-     * ユーザー辞書に言葉を追加します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に言葉を追加します。
      * @summary Add User Dict Word
-     * @param {string} surface 
-     * @param {string} pronunciation 
-     * @param {number} accentType 
-     * @param {WordTypes} [wordType] 
-     * @param {number} [priority] 
+     * @param {string} surface 言葉の表層形
+     * @param {string} pronunciation 言葉の発音（カタカナ）
+     * @param {number} accentType アクセント型（音が下がる場所を指す）
+     * @param {WordTypes} [wordType] PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか
+     * @param {number} [priority] 単語の優先度（0から10までの整数）。数字が大きいほど優先度が高くなる。1から9までの値を指定することを推奨
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -300,7 +304,7 @@ export interface DefaultApiInterface {
     addUserDictWordUserDictWordPostRaw(requestParameters: AddUserDictWordUserDictWordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>>;
 
     /**
-     * ユーザー辞書に言葉を追加します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に言葉を追加します。
      * Add User Dict Word
      */
     addUserDictWordUserDictWordPost(requestParameters: AddUserDictWordUserDictWordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string>;
@@ -389,9 +393,9 @@ export interface DefaultApiInterface {
     coreVersionsCoreVersionsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>>;
 
     /**
-     * 既存のプリセットを削除します  Parameters ------- id: int     削除するプリセットのプリセットID
+     * 既存のプリセットを削除します
      * @summary Delete Preset
-     * @param {number} id 
+     * @param {number} id 削除するプリセットのプリセットID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -399,15 +403,15 @@ export interface DefaultApiInterface {
     deletePresetDeletePresetPostRaw(requestParameters: DeletePresetDeletePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * 既存のプリセットを削除します  Parameters ------- id: int     削除するプリセットのプリセットID
+     * 既存のプリセットを削除します
      * Delete Preset
      */
     deletePresetDeletePresetPost(requestParameters: DeletePresetDeletePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
-     * ユーザー辞書に登録されている言葉を削除します。  Parameters ---------- word_uuid: str     削除する言葉のUUID
+     * ユーザー辞書に登録されている言葉を削除します。
      * @summary Delete User Dict Word
-     * @param {string} wordUuid 
+     * @param {string} wordUuid 削除する言葉のUUID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -415,25 +419,10 @@ export interface DefaultApiInterface {
     deleteUserDictWordUserDictWordWordUuidDeleteRaw(requestParameters: DeleteUserDictWordUserDictWordWordUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * ユーザー辞書に登録されている言葉を削除します。  Parameters ---------- word_uuid: str     削除する言葉のUUID
+     * ユーザー辞書に登録されている言葉を削除します。
      * Delete User Dict Word
      */
     deleteUserDictWordUserDictWordWordUuidDelete(requestParameters: DeleteUserDictWordUserDictWordWordUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
-
-    /**
-     * ダウンロード可能な音声ライブラリの情報を返します。  Returns ------- ret_data: list[DownloadableLibrary]
-     * @summary Downloadable Libraries
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApiInterface
-     */
-    downloadableLibrariesDownloadableLibrariesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DownloadableLibraryInfo>>>;
-
-    /**
-     * ダウンロード可能な音声ライブラリの情報を返します。  Returns ------- ret_data: list[DownloadableLibrary]
-     * Downloadable Libraries
-     */
-    downloadableLibrariesDownloadableLibrariesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DownloadableLibraryInfo>>;
 
     /**
      * 
@@ -467,7 +456,38 @@ export interface DefaultApiInterface {
     frameSynthesisFrameSynthesisPost(requestParameters: FrameSynthesisFrameSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
     /**
-     * エンジンが保持しているプリセットの設定を返します  Returns ------- presets: list[Preset]     プリセットのリスト
+     * 音声合成モデルの AIVM マニフェストを返します。
+     * @summary Get Aivm Manifest
+     * @param {string} aivmUuid 音声合成モデルの UUID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getAivmManifestAivmModelsAivmUuidManifestGetRaw(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AivmManifest>>;
+
+    /**
+     * 音声合成モデルの AIVM マニフェストを返します。
+     * Get Aivm Manifest
+     */
+    getAivmManifestAivmModelsAivmUuidManifestGet(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AivmManifest>;
+
+    /**
+     * インストールした音声合成モデルの情報を返します。
+     * @summary Get Installed Aivm Infos
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getInstalledAivmInfosAivmModelsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: AivmInfo; }>>;
+
+    /**
+     * インストールした音声合成モデルの情報を返します。
+     * Get Installed Aivm Infos
+     */
+    getInstalledAivmInfosAivmModelsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: AivmInfo; }>;
+
+    /**
+     * エンジンが保持しているプリセットの設定を返します
      * @summary Get Presets
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -476,13 +496,13 @@ export interface DefaultApiInterface {
     getPresetsPresetsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Preset>>>;
 
     /**
-     * エンジンが保持しているプリセットの設定を返します  Returns ------- presets: list[Preset]     プリセットのリスト
+     * エンジンが保持しているプリセットの設定を返します
      * Get Presets
      */
     getPresetsPresetsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Preset>>;
 
     /**
-     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。  Returns ------- dict[str, UserDictWord]     単語のUUIDとその詳細
+     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。
      * @summary Get User Dict Words
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -491,15 +511,15 @@ export interface DefaultApiInterface {
     getUserDictWordsUserDictGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: UserDictWord; }>>;
 
     /**
-     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。  Returns ------- dict[str, UserDictWord]     単語のUUIDとその詳細
+     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。
      * Get User Dict Words
      */
     getUserDictWordsUserDictGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: UserDictWord; }>;
 
     /**
-     * 他のユーザー辞書をインポートします。  Parameters ---------- import_dict_data: dict[str, UserDictWord]     インポートするユーザー辞書のデータ override: bool     重複したエントリがあった場合、上書きするかどうか
+     * 他のユーザー辞書をインポートします。
      * @summary Import User Dict Words
-     * @param {boolean} override 
+     * @param {boolean} override 重複したエントリがあった場合、上書きするかどうか
      * @param {{ [key: string]: UserDictWord; }} requestBody 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -508,7 +528,7 @@ export interface DefaultApiInterface {
     importUserDictWordsImportUserDictPostRaw(requestParameters: ImportUserDictWordsImportUserDictPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * 他のユーザー辞書をインポートします。  Parameters ---------- import_dict_data: dict[str, UserDictWord]     インポートするユーザー辞書のデータ override: bool     重複したエントリがあった場合、上書きするかどうか
+     * 他のユーザー辞書をインポートします。
      * Import User Dict Words
      */
     importUserDictWordsImportUserDictPost(requestParameters: ImportUserDictWordsImportUserDictPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
@@ -532,35 +552,20 @@ export interface DefaultApiInterface {
     initializeSpeakerInitializeSpeakerPost(requestParameters: InitializeSpeakerInitializeSpeakerPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
-     * 音声ライブラリをインストールします。 音声ライブラリのZIPファイルをリクエストボディとして送信してください。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * @summary Install Library
-     * @param {string} libraryUuid 
+     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * @summary Install Aivm
+     * @param {string} aivmUuid 音声合成モデルの UUID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
      */
-    installLibraryInstallLibraryLibraryUuidPostRaw(requestParameters: InstallLibraryInstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
+    installAivmAivmModelsAivmUuidPostRaw(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * 音声ライブラリをインストールします。 音声ライブラリのZIPファイルをリクエストボディとして送信してください。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * Install Library
+     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * Install Aivm
      */
-    installLibraryInstallLibraryLibraryUuidPost(requestParameters: InstallLibraryInstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
-
-    /**
-     * インストールした音声ライブラリの情報を返します。  Returns ------- ret_data: dict[str, InstalledLibrary]
-     * @summary Installed Libraries
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApiInterface
-     */
-    installedLibrariesInstalledLibrariesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: InstalledLibraryInfo; }>>;
-
-    /**
-     * インストールした音声ライブラリの情報を返します。  Returns ------- ret_data: dict[str, InstalledLibrary]
-     * Installed Libraries
-     */
-    installedLibrariesInstalledLibrariesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: InstalledLibraryInfo; }>;
+    installAivmAivmModelsAivmUuidPost(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
      * 指定されたスタイルが初期化されているかどうかを返します。
@@ -665,14 +670,14 @@ export interface DefaultApiInterface {
     multiSynthesisMultiSynthesisPost(requestParameters: MultiSynthesisMultiSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
     /**
-     * ユーザー辞書に登録されている言葉を更新します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_uuid: str     更新する言葉のUUID word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に登録されている言葉を更新します。
      * @summary Rewrite User Dict Word
-     * @param {string} wordUuid 
-     * @param {string} surface 
-     * @param {string} pronunciation 
-     * @param {number} accentType 
-     * @param {WordTypes} [wordType] 
-     * @param {number} [priority] 
+     * @param {string} wordUuid 更新する言葉のUUID
+     * @param {string} surface 言葉の表層形
+     * @param {string} pronunciation 言葉の発音（カタカナ）
+     * @param {number} accentType アクセント型（音が下がる場所を指す）
+     * @param {WordTypes} [wordType] PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか
+     * @param {number} [priority] 単語の優先度（0から10までの整数）。数字が大きいほど優先度が高くなる。1から9までの値を指定することを推奨。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -680,7 +685,7 @@ export interface DefaultApiInterface {
     rewriteUserDictWordUserDictWordWordUuidPutRaw(requestParameters: RewriteUserDictWordUserDictWordWordUuidPutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * ユーザー辞書に登録されている言葉を更新します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_uuid: str     更新する言葉のUUID word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に登録されている言葉を更新します。
      * Rewrite User Dict Word
      */
     rewriteUserDictWordUserDictWordWordUuidPut(requestParameters: RewriteUserDictWordUserDictWordWordUuidPutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
@@ -768,8 +773,8 @@ export interface DefaultApiInterface {
     /**
      * 指定されたspeaker_uuidに関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
      * @summary Speaker Info
-     * @param {string} speakerUuid 
-     * @param {string} [coreVersion] 
+     * @param {string} speakerUuid 話者の UUID 。
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -785,7 +790,7 @@ export interface DefaultApiInterface {
     /**
      * 
      * @summary Speakers
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -851,23 +856,23 @@ export interface DefaultApiInterface {
     synthesisSynthesisPost(requestParameters: SynthesisSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
     /**
-     * 音声ライブラリをアンインストールします。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * @summary Uninstall Library
-     * @param {string} libraryUuid 
+     * 音声合成モデルをアンインストールします。
+     * @summary Uninstall Aivm
+     * @param {string} aivmUuid 音声合成モデルの UUID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
      */
-    uninstallLibraryUninstallLibraryLibraryUuidPostRaw(requestParameters: UninstallLibraryUninstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
+    uninstallAivmAivmModelsAivmUuidDeleteRaw(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * 音声ライブラリをアンインストールします。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * Uninstall Library
+     * 音声合成モデルをアンインストールします。
+     * Uninstall Aivm
      */
-    uninstallLibraryUninstallLibraryLibraryUuidPost(requestParameters: UninstallLibraryUninstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
+    uninstallAivmAivmModelsAivmUuidDelete(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
-     * 既存のプリセットを更新します  Parameters ------- preset: Preset     更新するプリセット。     プリセットIDが更新対象と一致している必要があります。  Returns ------- id: int     更新したプリセットのプリセットID
+     * 既存のプリセットを更新します
      * @summary Update Preset
      * @param {Preset} preset 
      * @param {*} [options] Override http request option.
@@ -877,15 +882,15 @@ export interface DefaultApiInterface {
     updatePresetUpdatePresetPostRaw(requestParameters: UpdatePresetUpdatePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<number>>;
 
     /**
-     * 既存のプリセットを更新します  Parameters ------- preset: Preset     更新するプリセット。     プリセットIDが更新対象と一致している必要があります。  Returns ------- id: int     更新したプリセットのプリセットID
+     * 既存のプリセットを更新します
      * Update Preset
      */
     updatePresetUpdatePresetPost(requestParameters: UpdatePresetUpdatePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<number>;
 
     /**
-     * テキストがAquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。  Parameters ---------- text: str     判定する対象の文字列
-     * @summary テキストがAquesTalk 風記法に従っているか判定する
-     * @param {string} text 
+     * テキストが AquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。
+     * @summary テキストが AquesTalk 風記法に従っているか判定する
+     * @param {string} text 判定する対象の文字列
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -893,8 +898,8 @@ export interface DefaultApiInterface {
     validateKanaValidateKanaPostRaw(requestParameters: ValidateKanaValidateKanaPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<boolean>>;
 
     /**
-     * テキストがAquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。  Parameters ---------- text: str     判定する対象の文字列
-     * テキストがAquesTalk 風記法に従っているか判定する
+     * テキストが AquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。
+     * テキストが AquesTalk 風記法に従っているか判定する
      */
     validateKanaValidateKanaPost(requestParameters: ValidateKanaValidateKanaPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<boolean>;
 
@@ -972,7 +977,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 新しいプリセットを追加します  Parameters ------- preset: Preset     新しいプリセット。     プリセットIDが既存のものと重複している場合は、新規のプリセットIDが採番されます。  Returns ------- id: int     追加したプリセットのプリセットID
+     * 新しいプリセットを追加します
      * Add Preset
      */
     async addPresetAddPresetPostRaw(requestParameters: AddPresetAddPresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<number>> {
@@ -1002,7 +1007,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 新しいプリセットを追加します  Parameters ------- preset: Preset     新しいプリセット。     プリセットIDが既存のものと重複している場合は、新規のプリセットIDが採番されます。  Returns ------- id: int     追加したプリセットのプリセットID
+     * 新しいプリセットを追加します
      * Add Preset
      */
     async addPresetAddPresetPost(requestParameters: AddPresetAddPresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<number> {
@@ -1011,7 +1016,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に言葉を追加します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に言葉を追加します。
      * Add User Dict Word
      */
     async addUserDictWordUserDictWordPostRaw(requestParameters: AddUserDictWordUserDictWordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
@@ -1066,7 +1071,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に言葉を追加します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に言葉を追加します。
      * Add User Dict Word
      */
     async addUserDictWordUserDictWordPost(requestParameters: AddUserDictWordUserDictWordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
@@ -1277,7 +1282,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 既存のプリセットを削除します  Parameters ------- id: int     削除するプリセットのプリセットID
+     * 既存のプリセットを削除します
      * Delete Preset
      */
     async deletePresetDeletePresetPostRaw(requestParameters: DeletePresetDeletePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -1304,7 +1309,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 既存のプリセットを削除します  Parameters ------- id: int     削除するプリセットのプリセットID
+     * 既存のプリセットを削除します
      * Delete Preset
      */
     async deletePresetDeletePresetPost(requestParameters: DeletePresetDeletePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
@@ -1312,7 +1317,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に登録されている言葉を削除します。  Parameters ---------- word_uuid: str     削除する言葉のUUID
+     * ユーザー辞書に登録されている言葉を削除します。
      * Delete User Dict Word
      */
     async deleteUserDictWordUserDictWordWordUuidDeleteRaw(requestParameters: DeleteUserDictWordUserDictWordWordUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -1335,39 +1340,11 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に登録されている言葉を削除します。  Parameters ---------- word_uuid: str     削除する言葉のUUID
+     * ユーザー辞書に登録されている言葉を削除します。
      * Delete User Dict Word
      */
     async deleteUserDictWordUserDictWordWordUuidDelete(requestParameters: DeleteUserDictWordUserDictWordWordUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.deleteUserDictWordUserDictWordWordUuidDeleteRaw(requestParameters, initOverrides);
-    }
-
-    /**
-     * ダウンロード可能な音声ライブラリの情報を返します。  Returns ------- ret_data: list[DownloadableLibrary]
-     * Downloadable Libraries
-     */
-    async downloadableLibrariesDownloadableLibrariesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<DownloadableLibraryInfo>>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/downloadable_libraries`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DownloadableLibraryInfoFromJSON));
-    }
-
-    /**
-     * ダウンロード可能な音声ライブラリの情報を返します。  Returns ------- ret_data: list[DownloadableLibrary]
-     * Downloadable Libraries
-     */
-    async downloadableLibrariesDownloadableLibrariesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<DownloadableLibraryInfo>> {
-        const response = await this.downloadableLibrariesDownloadableLibrariesGetRaw(initOverrides);
-        return await response.value();
     }
 
     /**
@@ -1442,7 +1419,67 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * エンジンが保持しているプリセットの設定を返します  Returns ------- presets: list[Preset]     プリセットのリスト
+     * 音声合成モデルの AIVM マニフェストを返します。
+     * Get Aivm Manifest
+     */
+    async getAivmManifestAivmModelsAivmUuidManifestGetRaw(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AivmManifest>> {
+        if (requestParameters.aivmUuid === null || requestParameters.aivmUuid === undefined) {
+            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling getAivmManifestAivmModelsAivmUuidManifestGet.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/aivm_models/{aivm_uuid}/manifest`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AivmManifestFromJSON(jsonValue));
+    }
+
+    /**
+     * 音声合成モデルの AIVM マニフェストを返します。
+     * Get Aivm Manifest
+     */
+    async getAivmManifestAivmModelsAivmUuidManifestGet(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AivmManifest> {
+        const response = await this.getAivmManifestAivmModelsAivmUuidManifestGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * インストールした音声合成モデルの情報を返します。
+     * Get Installed Aivm Infos
+     */
+    async getInstalledAivmInfosAivmModelsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: AivmInfo; }>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/aivm_models`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => runtime.mapValues(jsonValue, AivmInfoFromJSON));
+    }
+
+    /**
+     * インストールした音声合成モデルの情報を返します。
+     * Get Installed Aivm Infos
+     */
+    async getInstalledAivmInfosAivmModelsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: AivmInfo; }> {
+        const response = await this.getInstalledAivmInfosAivmModelsGetRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * エンジンが保持しているプリセットの設定を返します
      * Get Presets
      */
     async getPresetsPresetsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Preset>>> {
@@ -1461,7 +1498,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * エンジンが保持しているプリセットの設定を返します  Returns ------- presets: list[Preset]     プリセットのリスト
+     * エンジンが保持しているプリセットの設定を返します
      * Get Presets
      */
     async getPresetsPresetsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Preset>> {
@@ -1470,7 +1507,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。  Returns ------- dict[str, UserDictWord]     単語のUUIDとその詳細
+     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。
      * Get User Dict Words
      */
     async getUserDictWordsUserDictGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: UserDictWord; }>> {
@@ -1489,7 +1526,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。  Returns ------- dict[str, UserDictWord]     単語のUUIDとその詳細
+     * ユーザー辞書に登録されている単語の一覧を返します。 単語の表層形(surface)は正規化済みの物を返します。
      * Get User Dict Words
      */
     async getUserDictWordsUserDictGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: UserDictWord; }> {
@@ -1498,7 +1535,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 他のユーザー辞書をインポートします。  Parameters ---------- import_dict_data: dict[str, UserDictWord]     インポートするユーザー辞書のデータ override: bool     重複したエントリがあった場合、上書きするかどうか
+     * 他のユーザー辞書をインポートします。
      * Import User Dict Words
      */
     async importUserDictWordsImportUserDictPostRaw(requestParameters: ImportUserDictWordsImportUserDictPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -1532,7 +1569,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 他のユーザー辞書をインポートします。  Parameters ---------- import_dict_data: dict[str, UserDictWord]     インポートするユーザー辞書のデータ override: bool     重複したエントリがあった場合、上書きするかどうか
+     * 他のユーザー辞書をインポートします。
      * Import User Dict Words
      */
     async importUserDictWordsImportUserDictPost(requestParameters: ImportUserDictWordsImportUserDictPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
@@ -1583,12 +1620,12 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声ライブラリをインストールします。 音声ライブラリのZIPファイルをリクエストボディとして送信してください。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * Install Library
+     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * Install Aivm
      */
-    async installLibraryInstallLibraryLibraryUuidPostRaw(requestParameters: InstallLibraryInstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.libraryUuid === null || requestParameters.libraryUuid === undefined) {
-            throw new runtime.RequiredError('libraryUuid','Required parameter requestParameters.libraryUuid was null or undefined when calling installLibraryInstallLibraryLibraryUuidPost.');
+    async installAivmAivmModelsAivmUuidPostRaw(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.aivmUuid === null || requestParameters.aivmUuid === undefined) {
+            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling installAivmAivmModelsAivmUuidPost.');
         }
 
         const queryParameters: any = {};
@@ -1596,7 +1633,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/install_library/{library_uuid}`.replace(`{${"library_uuid"}}`, encodeURIComponent(String(requestParameters.libraryUuid))),
+            path: `/aivm_models/{aivm_uuid}`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -1606,39 +1643,11 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声ライブラリをインストールします。 音声ライブラリのZIPファイルをリクエストボディとして送信してください。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * Install Library
+     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * Install Aivm
      */
-    async installLibraryInstallLibraryLibraryUuidPost(requestParameters: InstallLibraryInstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.installLibraryInstallLibraryLibraryUuidPostRaw(requestParameters, initOverrides);
-    }
-
-    /**
-     * インストールした音声ライブラリの情報を返します。  Returns ------- ret_data: dict[str, InstalledLibrary]
-     * Installed Libraries
-     */
-    async installedLibrariesInstalledLibrariesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: InstalledLibraryInfo; }>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/installed_libraries`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => runtime.mapValues(jsonValue, InstalledLibraryInfoFromJSON));
-    }
-
-    /**
-     * インストールした音声ライブラリの情報を返します。  Returns ------- ret_data: dict[str, InstalledLibrary]
-     * Installed Libraries
-     */
-    async installedLibrariesInstalledLibrariesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: InstalledLibraryInfo; }> {
-        const response = await this.installedLibrariesInstalledLibrariesGetRaw(initOverrides);
-        return await response.value();
+    async installAivmAivmModelsAivmUuidPost(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.installAivmAivmModelsAivmUuidPostRaw(requestParameters, initOverrides);
     }
 
     /**
@@ -1905,7 +1914,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に登録されている言葉を更新します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_uuid: str     更新する言葉のUUID word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に登録されている言葉を更新します。
      * Rewrite User Dict Word
      */
     async rewriteUserDictWordUserDictWordWordUuidPutRaw(requestParameters: RewriteUserDictWordUserDictWordWordUuidPutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -1960,7 +1969,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * ユーザー辞書に登録されている言葉を更新します。  Parameters ---------- surface : str     言葉の表層形 pronunciation: str     言葉の発音（カタカナ） accent_type: int     アクセント型（音が下がる場所を指す） word_uuid: str     更新する言葉のUUID word_type: WordTypes, optional     PROPER_NOUN（固有名詞）、COMMON_NOUN（普通名詞）、VERB（動詞）、ADJECTIVE（形容詞）、SUFFIX（語尾）のいずれか priority: int, optional     単語の優先度（0から10までの整数）     数字が大きいほど優先度が高くなる     1から9までの値を指定することを推奨
+     * ユーザー辞書に登録されている言葉を更新します。
      * Rewrite User Dict Word
      */
     async rewriteUserDictWordUserDictWordWordUuidPut(requestParameters: RewriteUserDictWordUserDictWordWordUuidPutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
@@ -2374,12 +2383,12 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声ライブラリをアンインストールします。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * Uninstall Library
+     * 音声合成モデルをアンインストールします。
+     * Uninstall Aivm
      */
-    async uninstallLibraryUninstallLibraryLibraryUuidPostRaw(requestParameters: UninstallLibraryUninstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.libraryUuid === null || requestParameters.libraryUuid === undefined) {
-            throw new runtime.RequiredError('libraryUuid','Required parameter requestParameters.libraryUuid was null or undefined when calling uninstallLibraryUninstallLibraryLibraryUuidPost.');
+    async uninstallAivmAivmModelsAivmUuidDeleteRaw(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.aivmUuid === null || requestParameters.aivmUuid === undefined) {
+            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling uninstallAivmAivmModelsAivmUuidDelete.');
         }
 
         const queryParameters: any = {};
@@ -2387,8 +2396,8 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/uninstall_library/{library_uuid}`.replace(`{${"library_uuid"}}`, encodeURIComponent(String(requestParameters.libraryUuid))),
-            method: 'POST',
+            path: `/aivm_models/{aivm_uuid}`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
@@ -2397,15 +2406,15 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声ライブラリをアンインストールします。  Parameters ---------- library_uuid: str     音声ライブラリのID
-     * Uninstall Library
+     * 音声合成モデルをアンインストールします。
+     * Uninstall Aivm
      */
-    async uninstallLibraryUninstallLibraryLibraryUuidPost(requestParameters: UninstallLibraryUninstallLibraryLibraryUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.uninstallLibraryUninstallLibraryLibraryUuidPostRaw(requestParameters, initOverrides);
+    async uninstallAivmAivmModelsAivmUuidDelete(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.uninstallAivmAivmModelsAivmUuidDeleteRaw(requestParameters, initOverrides);
     }
 
     /**
-     * 既存のプリセットを更新します  Parameters ------- preset: Preset     更新するプリセット。     プリセットIDが更新対象と一致している必要があります。  Returns ------- id: int     更新したプリセットのプリセットID
+     * 既存のプリセットを更新します
      * Update Preset
      */
     async updatePresetUpdatePresetPostRaw(requestParameters: UpdatePresetUpdatePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<number>> {
@@ -2435,7 +2444,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 既存のプリセットを更新します  Parameters ------- preset: Preset     更新するプリセット。     プリセットIDが更新対象と一致している必要があります。  Returns ------- id: int     更新したプリセットのプリセットID
+     * 既存のプリセットを更新します
      * Update Preset
      */
     async updatePresetUpdatePresetPost(requestParameters: UpdatePresetUpdatePresetPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<number> {
@@ -2444,8 +2453,8 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * テキストがAquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。  Parameters ---------- text: str     判定する対象の文字列
-     * テキストがAquesTalk 風記法に従っているか判定する
+     * テキストが AquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。
+     * テキストが AquesTalk 風記法に従っているか判定する
      */
     async validateKanaValidateKanaPostRaw(requestParameters: ValidateKanaValidateKanaPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<boolean>> {
         if (requestParameters.text === null || requestParameters.text === undefined) {
@@ -2475,8 +2484,8 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * テキストがAquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。  Parameters ---------- text: str     判定する対象の文字列
-     * テキストがAquesTalk 風記法に従っているか判定する
+     * テキストが AquesTalk 風記法に従っているかどうかを判定します。 従っていない場合はエラーが返ります。
+     * テキストが AquesTalk 風記法に従っているか判定する
      */
     async validateKanaValidateKanaPost(requestParameters: ValidateKanaValidateKanaPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<boolean> {
         const response = await this.validateKanaValidateKanaPostRaw(requestParameters, initOverrides);

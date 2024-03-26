@@ -1,17 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AccentPhrase';
+export * from './AivmInfo';
+export * from './AivmInfoSpeaker';
 export * from './AivmManifest';
+export * from './AivmManifestSpeaker';
+export * from './AivmManifestSpeakerStyle';
 export * from './AudioQuery';
-export * from './BaseLibraryInfo';
 export * from './CorsPolicyMode';
-export * from './DownloadableLibraryInfo';
 export * from './EngineManifest';
 export * from './FrameAudioQuery';
 export * from './FramePhoneme';
 export * from './HTTPValidationError';
-export * from './InstalledLibraryInfo';
-export * from './LibrarySpeaker';
 export * from './LicenseInfo';
 export * from './Mora';
 export * from './MorphableTargetInfo';
