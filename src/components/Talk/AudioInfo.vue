@@ -2,7 +2,9 @@
   <div v-if="query" class="root full-height q-py-md" data-testid="AudioInfo">
     <div v-if="enablePreset" class="q-px-md">
       <div class="row items-center no-wrap q-mb-sm">
-        <div class="text-body1" style="margin-right: auto">プリセット</div>
+        <div class="text-body1" style="margin-right: auto">
+          <b>プリセット</b>
+        </div>
         <QBtn dense flat icon="more_vert" :disable="uiLocked">
           <QMenu transition-duration="100">
             <QList>
@@ -166,27 +168,27 @@
 
     <div class="parameters q-px-md q-mt-sm">
       <div v-for="parameter in parameters" :key="parameter.label">
-        <QInput
-          dense
-          borderless
-          maxlength="5"
-          :class="{
-            disabled: parameter.slider.qSliderProps.disable.value,
-          }"
-          :disable="parameter.slider.qSliderProps.disable.value"
-          :model-value="
-            parameter.slider.state.currentValue.value != undefined
-              ? parameter.slider.state.currentValue.value.toFixed(2)
-              : parameter.slider.qSliderProps.min.value.toFixed(2)
-          "
-          @change="handleParameterChange(parameter, $event)"
-        >
-          <template #before
-            ><span class="text-body1 text-display">{{
-              parameter.label
-            }}</span></template
-          >
-        </QInput>
+        <div class="row items-center">
+          <span class="text-body1 text-display">{{ parameter.label }}</span>
+          <QInput
+            dense
+            maxlength="5"
+            type="number"
+            step="0.1"
+            style="width: 60px; margin-left: auto"
+            class="audio-info-input"
+            :class="{
+              disabled: parameter.slider.qSliderProps.disable.value,
+            }"
+            :disable="parameter.slider.qSliderProps.disable.value"
+            :model-value="
+              parameter.slider.state.currentValue.value != undefined
+                ? parameter.slider.state.currentValue.value.toFixed(2)
+                : parameter.slider.qSliderProps.min.value.toFixed(2)
+            "
+            @change="handleParameterChange(parameter, $event)"
+          />
+        </div>
         <QSlider
           dense
           snap
@@ -214,7 +216,7 @@
       }"
     >
       <QSeparator class="q-my-md" />
-      <span class="text-body1 q-mb-xs">モーフィング</span>
+      <span class="text-body1 q-mb-xs"><b>モーフィング</b></span>
       <div class="row no-wrap items-center q-mt-sm">
         <CharacterButton
           v-model:selected-voice="morphingTargetVoice"
@@ -986,5 +988,14 @@ const convertFullWidthNumbers = (inputStr: string) => {
   overflow: hidden;
   text-overflow: ellipsis;
   width: fit-content;
+}
+
+.audio-info-input {
+  :deep() {
+    input {
+      padding-left: 15px;
+      text-align: center;
+    }
+  }
 }
 </style>

@@ -2,6 +2,10 @@
 @use './colors' as colors;
 @import "./fonts";
 
+:root {
+  color-scheme: dark;
+}
+
 // 優先度を強引に上げる
 body:not(#dummy) {
   user-select: none;
