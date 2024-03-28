@@ -15,7 +15,8 @@ export const DEFAULT_STYLE_NAME = "ノーマル";
 export const formatCharacterStyleName = (
   characterName: string,
   styleName = DEFAULT_STYLE_NAME
-) => `${characterName}（${styleName}）`;
+  // eslint-disable-next-line no-irregular-whitespace
+) => `${characterName}​（${styleName}）`;
 
 export function sanitizeFileName(fileName: string): string {
   // \x00 - \x1f: ASCII 制御文字

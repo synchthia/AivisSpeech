@@ -117,17 +117,21 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
     margin: 0px 12px;
     font-size: 16px;
     font-weight: bold;
+    // ref: https://qiita.com/debiru/items/0a349bee3669b776d8e2
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
   .character-engine-name {
     margin: 0px 12px;
     margin-top: 3px;
+    margin-bottom: 20px;
     font-size: 13.5px;
     color: rgba(var(--color-display-rgb), 0.8);
   }
   .character-portrait {
     width: calc(100% - (20px * 2));
     margin: 20px;
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
     background-position: center top;
     background-size: contain;
     // iOS アプリアイコンライクな Squircle な角丸
