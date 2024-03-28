@@ -122,6 +122,11 @@ img {
   margin-right: 6px !important;
 }
 
+// line-height を調整
+.text-body1, .text-body2 {
+  line-height: 1.65 !important;
+}
+
 // Markdown
 .markdown-body {
   min-height: max-content;

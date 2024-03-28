@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <template>
   <QDialog
     v-model="modelValueComputed"
@@ -19,8 +20,9 @@
 
           <div class="row items-center no-wrap">
             <QBtn
-              unelevated
+              outline
               label="拒否"
+              icon="close"
               color="toolbar-button"
               text-color="toolbar-button-display"
               class="text-no-wrap q-mr-md text-bold"
@@ -28,8 +30,9 @@
             />
 
             <QBtn
-              unelevated
+              outline
               label="許可"
+              icon="done"
               color="toolbar-button"
               text-color="toolbar-button-display"
               class="text-no-wrap text-bold"
@@ -41,16 +44,19 @@
 
       <QPageContainer>
         <QPage>
-          <p class="text-body1 q-mb-lg">
-            AivisSpeechはより使いやすいソフトウェアを目指して開発されています。<br /><br />
+          <p class="text-body1 q-mb-sm">
+            AivisSpeech は、より使いやすいソフトウェアを目指して開発されています。<br />
+          </p>
+          <p class="text-body1 q-mb-sm">
             ボタンの配置換えなどの方針を決める際は、各UIの利用率などの情報が重要になります。<br />
-            もしよろしければ、ソフトウェアの利用状況のデータ収集にご協力お願いします。<br />
-            <br />
-            （入力されたテキストデータや音声データの情報は収集しておりませんのでご安心ください。）
+            もしよろしければ、ソフトウェアの利用状況のデータ収集にご協力をお願いします。<br />
+          </p>
+          <p class="text-body1 q-mb-xl">
+            入力されたテキストデータや音声データの情報は収集しておりませんので、ご安心ください。<br />
           </p>
           <QCard flat bordered>
             <!-- eslint-disable-next-line vue/no-v-html -->
-            <div class="markdown markdown-body" v-html="privacyPolicy"></div>
+            <div class="markdown markdown-body q-pa-lg" v-html="privacyPolicy"></div>
           </QCard>
         </QPage>
       </QPageContainer>
