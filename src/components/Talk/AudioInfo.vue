@@ -209,7 +209,7 @@
       </div>
     </div>
     <div
-      v-if="shouldShowMorphing"
+      v-if="shouldShowMorphing && isSupportedMorphing"
       class="q-px-md"
       :class="{
         disabled: uiLocked,
