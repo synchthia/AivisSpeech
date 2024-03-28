@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <QPage
     ref="scroller"
@@ -26,6 +27,7 @@
             :key="characterIndex"
           >
             <QItem
+              style="border-bottom: 2px solid var(--color-splitter)"
               clickable
               @click="
                 selectCharacterInfo({
@@ -34,7 +36,9 @@
                 })
               "
             >
-              <QItemSection>{{ characterInfo.metas.speakerName }}</QItemSection>
+              <QItemSection>
+                <b>{{ characterInfo.metas.speakerName }}</b>
+              </QItemSection>
             </QItem>
           </template>
         </template>
@@ -49,7 +53,7 @@
             @click="selectCharacterInfo(undefined)"
           />
         </div>
-        <h3>
+        <h3 style="margin-top: 24px !important">
           {{
             mapNullablePipe(
               engineInfos.get(selectedInfo.engine),
@@ -59,8 +63,13 @@
             )
           }}
         </h3>
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-if="policy" class="markdown" v-html="policy"></div>
+        <QCard flat bordered class="q-mt-lg">
+          <div
+            v-if="policy"
+            class="markdown markdown-body q-pa-lg"
+            v-html="policy"
+          ></div>
+        </QCard>
       </div>
     </div>
   </QPage>

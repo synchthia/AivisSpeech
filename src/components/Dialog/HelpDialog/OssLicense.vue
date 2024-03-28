@@ -8,10 +8,11 @@
         <QItem
           v-for="(license, index) in props.licenses"
           :key="index"
+          style="border-bottom: 2px solid var(--color-splitter)"
           clickable
           @click="selectLicenseIndex(index)"
         >
-          <QItemSection class="">
+          <QItemSection>
             <div>
               <b>{{ license.name }}</b>
               {{ license.version ? " | " + license.version : "" }}
@@ -23,14 +24,18 @@
         <div class="q-mb-md">
           <QBtn
             outline
-            color="primary"
             icon="keyboard_arrow_left"
             label="戻る"
             @click="selectLicenseIndex(undefined)"
           />
         </div>
-        <h3>{{ licenses[detailIndex].name }}</h3>
-        <pre class="q-mt-lg">{{ licenses[detailIndex].text }}</pre>
+        <h3 style="margin-top: 24px !important">
+          {{ licenses[detailIndex].name }}
+        </h3>
+        <QCard flat bordered class="q-mt-lg">
+          <!-- eslint-disable-next-line prettier/prettier -->
+          <pre class="markdown markdown-body q-pa-lg" style="margin: 0px; border: 0px">{{ licenses[detailIndex].text }}</pre>
+        </QCard>
       </div>
     </div>
   </QPage>

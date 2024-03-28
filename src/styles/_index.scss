@@ -132,6 +132,9 @@ img {
 }
 
 // Markdown
+.q-card .markdown-body {
+  border-radius: 4px;
+}
 .markdown-body {
   min-height: max-content;
   color: colors.$display;
@@ -193,6 +196,11 @@ img {
   }
   ul, ol {
     padding-inline-start: 25px;
+  }
+  pre {
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 4px;
   }
 }
 

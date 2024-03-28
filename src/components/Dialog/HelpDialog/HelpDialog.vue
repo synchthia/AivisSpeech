@@ -271,7 +271,7 @@ const openLogDirectory = window.backend.openLogDirectory;
 }
 
 .selected-item {
-  background-color: rgba(colors.$primary-rgb, 0.4);
+  background-color: rgba(var(--color-toolbar-rgb), 0.75);
   color: colors.$display;
 }
 
