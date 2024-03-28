@@ -1,11 +1,11 @@
 import si from "systeminformation";
 
 /**
- * GPUモードがサポートされているかどうか。
- * windowsの場合は全GPUに対応。
- * linuxの場合はNVIDIAのみ対応。
+ * GPU モードがサポートされているかどうか。
+ * AivisSpeech Engine では常に true を返す。
  */
 export function hasSupportedGpu(platform: string): Promise<boolean> {
+  /*
   return si
     .graphics()
     .then((data) =>
@@ -17,4 +17,6 @@ export function hasSupportedGpu(platform: string): Promise<boolean> {
       )
     )
     .catch(() => false);
+  */
+  return Promise.resolve(true);
 }
