@@ -397,7 +397,7 @@ const parameters = computed<Parameter[]>(() => [
     key: "pitchScale",
   },
   {
-    label: "抑揚",
+    label: "テンポの緩急",
     slider: previewSliderHelper({
       modelValue: () => query.value?.intonationScale ?? null,
       disable: () =>
