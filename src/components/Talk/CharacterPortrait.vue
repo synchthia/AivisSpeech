@@ -1,9 +1,11 @@
 <template>
   <div class="character-portrait-wrapper">
-    <div
-      class="character-portrait"
-      :style="{ backgroundImage: `url(${portraitPath})` }"
-    ></div>
+    <div class="character-portrait">
+      <div
+        class="character-portrait-image"
+        :style="{ backgroundImage: `url(${portraitPath})` }"
+      ></div>
+    </div>
     <div class="character-name">{{ characterName }}</div>
     <div class="character-engine-name">Engine: {{ engineName }}</div>
     <div v-if="isInitializingSpeaker" class="loading">
@@ -129,8 +131,13 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
     color: rgba(var(--color-display-rgb), 0.8);
   }
   .character-portrait {
-    width: calc(100% - (20px * 2));
-    margin: 20px;
+    width: 100%;
+    min-height: 0;
+    padding: 24px;
+  }
+  .character-portrait-image {
+    max-height: 100%;
+    margin: 0 auto;
     aspect-ratio: 1 / 1;
     background-position: center top;
     background-size: contain;
