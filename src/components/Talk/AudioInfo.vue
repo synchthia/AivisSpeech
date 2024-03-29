@@ -360,6 +360,27 @@ const selectedAudioKeys = computed(() =>
 );
 const parameters = computed<Parameter[]>(() => [
   {
+    label: "テンポの緩急",
+    slider: previewSliderHelper({
+      modelValue: () => query.value?.intonationScale ?? null,
+      disable: () =>
+        uiLocked.value ||
+        supportedFeatures.value?.adjustIntonationScale === false,
+      max: SLIDER_PARAMETERS.INTONATION.max,
+      min: SLIDER_PARAMETERS.INTONATION.min,
+      step: SLIDER_PARAMETERS.INTONATION.step,
+      scrollStep: SLIDER_PARAMETERS.INTONATION.scrollStep,
+      scrollMinStep: SLIDER_PARAMETERS.INTONATION.scrollMinStep,
+      onChange: (intonationScale: number) =>
+        store.dispatch("COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE", {
+          audioKeys: selectedAudioKeys.value,
+          intonationScale,
+        }),
+    }),
+    action: "COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE",
+    key: "intonationScale",
+  },
+  {
     label: "話速",
     slider: previewSliderHelper({
       modelValue: () => query.value?.speedScale ?? null,
@@ -397,27 +418,6 @@ const parameters = computed<Parameter[]>(() => [
     }),
     action: "COMMAND_MULTI_SET_AUDIO_PITCH_SCALE",
     key: "pitchScale",
-  },
-  {
-    label: "テンポの緩急",
-    slider: previewSliderHelper({
-      modelValue: () => query.value?.intonationScale ?? null,
-      disable: () =>
-        uiLocked.value ||
-        supportedFeatures.value?.adjustIntonationScale === false,
-      max: SLIDER_PARAMETERS.INTONATION.max,
-      min: SLIDER_PARAMETERS.INTONATION.min,
-      step: SLIDER_PARAMETERS.INTONATION.step,
-      scrollStep: SLIDER_PARAMETERS.INTONATION.scrollStep,
-      scrollMinStep: SLIDER_PARAMETERS.INTONATION.scrollMinStep,
-      onChange: (intonationScale: number) =>
-        store.dispatch("COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE", {
-          audioKeys: selectedAudioKeys.value,
-          intonationScale,
-        }),
-    }),
-    action: "COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE",
-    key: "intonationScale",
   },
   {
     label: "音量",
