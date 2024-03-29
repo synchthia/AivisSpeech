@@ -124,6 +124,8 @@ async function generateUniqueIdAndQuery(
     audioQuery.outputSamplingRate =
       state.engineSettings[audioItem.voice.engineId].outputSamplingRate;
     audioQuery.outputStereo = state.savingSetting.outputStereo;
+    // AivisSpeech では音声合成時に AudioQuery.kana に読み上げテキストを指定する必要がある
+    audioQuery.kana = audioItem.text;
   }
 
   const id = await generateTempUniqueId([
