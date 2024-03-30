@@ -173,9 +173,8 @@
           <QInput
             dense
             maxlength="5"
-            type="number"
             step="0.1"
-            style="width: 60px; margin-left: auto"
+            style="width: 38px; margin-left: auto"
             class="audio-info-input"
             :class="{
               disabled: parameter.slider.qSliderProps.disable.value,
@@ -1011,8 +1010,7 @@ const convertFullWidthNumbers = (inputStr: string) => {
 .audio-info-input {
   :deep() {
     input {
-      padding-left: 15px;
-      text-align: center;
+      text-align: right;
     }
   }
 }
