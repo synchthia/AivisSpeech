@@ -255,7 +255,7 @@ export interface ValidateKanaValidateKanaPostRequest {
  */
 export interface DefaultApiInterface {
     /**
-     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次のAquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
+     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次の AquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
      * @summary テキストからアクセント句を得る
      * @param {string} text 
      * @param {number} speaker 
@@ -268,7 +268,7 @@ export interface DefaultApiInterface {
     accentPhrasesAccentPhrasesPostRaw(requestParameters: AccentPhrasesAccentPhrasesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<AccentPhrase>>>;
 
     /**
-     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次のAquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
+     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次の AquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
      * テキストからアクセント句を得る
      */
     accentPhrasesAccentPhrasesPost(requestParameters: AccentPhrasesAccentPhrasesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AccentPhrase>>;
@@ -925,7 +925,7 @@ export interface DefaultApiInterface {
 export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
 
     /**
-     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次のAquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
+     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次の AquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
      * テキストからアクセント句を得る
      */
     async accentPhrasesAccentPhrasesPostRaw(requestParameters: AccentPhrasesAccentPhrasesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<AccentPhrase>>> {
@@ -968,7 +968,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次のAquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
+     * テキストからアクセント句を得ます。 is_kanaが`true`のとき、テキストは次の AquesTalk 風記法で解釈されます。デフォルトは`false`です。 * 全てのカナはカタカナで記述される * アクセント句は`/`または`、`で区切る。`、`で区切った場合に限り無音区間が挿入される。 * カナの手前に`_`を入れるとそのカナは無声化される * アクセント位置を`\'`で指定する。全てのアクセント句にはアクセント位置を1つ指定する必要がある。 * アクセント句末に`？`(全角)を入れることにより疑問文の発音ができる。
      * テキストからアクセント句を得る
      */
     async accentPhrasesAccentPhrasesPost(requestParameters: AccentPhrasesAccentPhrasesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AccentPhrase>> {

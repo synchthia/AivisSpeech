@@ -33,6 +33,21 @@ export interface AudioQuery {
      */
     accentPhrases: Array<AccentPhrase>;
     /**
+     * 指定された話者のスタイルをどの程度全体に反映するかを指定する。
+     * 例えばスタイルが Happy ならば、この値を大きくするほど全体の話し方が明るくなる。
+     * 一方値を大きくしすぎると発声がおかしくなりがちなので、適宜調整が必要。
+     * VOICEVOX ENGINE との互換性のため、未指定時はデフォルト値が適用される。
+     * @type {number}
+     * @memberof AudioQuery
+     */
+    styleStrengthScale?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AudioQuery
+     */
+    intonationScale: number;
+    /**
      * 
      * @type {number}
      * @memberof AudioQuery
@@ -44,12 +59,6 @@ export interface AudioQuery {
      * @memberof AudioQuery
      */
     pitchScale: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AudioQuery
-     */
-    intonationScale: number;
     /**
      * 
      * @type {number}
@@ -94,9 +103,9 @@ export interface AudioQuery {
 export function instanceOfAudioQuery(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "accentPhrases" in value;
+    isInstance = isInstance && "intonationScale" in value;
     isInstance = isInstance && "speedScale" in value;
     isInstance = isInstance && "pitchScale" in value;
-    isInstance = isInstance && "intonationScale" in value;
     isInstance = isInstance && "volumeScale" in value;
     isInstance = isInstance && "prePhonemeLength" in value;
     isInstance = isInstance && "postPhonemeLength" in value;
@@ -117,9 +126,10 @@ export function AudioQueryFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'accentPhrases': ((json['accent_phrases'] as Array<any>).map(AccentPhraseFromJSON)),
+        'styleStrengthScale': !exists(json, 'styleStrengthScale') ? undefined : json['styleStrengthScale'],
+        'intonationScale': json['intonationScale'],
         'speedScale': json['speedScale'],
         'pitchScale': json['pitchScale'],
-        'intonationScale': json['intonationScale'],
         'volumeScale': json['volumeScale'],
         'prePhonemeLength': json['prePhonemeLength'],
         'postPhonemeLength': json['postPhonemeLength'],
@@ -139,9 +149,10 @@ export function AudioQueryToJSON(value?: AudioQuery | null): any {
     return {
         
         'accent_phrases': ((value.accentPhrases as Array<any>).map(AccentPhraseToJSON)),
+        'styleStrengthScale': value.styleStrengthScale,
+        'intonationScale': value.intonationScale,
         'speedScale': value.speedScale,
         'pitchScale': value.pitchScale,
-        'intonationScale': value.intonationScale,
         'volumeScale': value.volumeScale,
         'prePhonemeLength': value.prePhonemeLength,
         'postPhonemeLength': value.postPhonemeLength,

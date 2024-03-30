@@ -44,6 +44,21 @@ export interface Preset {
      */
     styleId: number;
     /**
+     * 指定された話者のスタイルをどの程度全体に反映するかを指定する。
+     * 例えばスタイルが Happy ならば、この値を大きくするほど全体の話し方が明るくなる。
+     * 一方値を大きくしすぎると発声がおかしくなりがちなので、適宜調整が必要。
+     * VOICEVOX ENGINE との互換性のため、未指定時はデフォルト値が適用される。
+     * @type {number}
+     * @memberof Preset
+     */
+    styleStrengthScale?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Preset
+     */
+    intonationScale: number;
+    /**
      * 
      * @type {number}
      * @memberof Preset
@@ -55,12 +70,6 @@ export interface Preset {
      * @memberof Preset
      */
     pitchScale: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Preset
-     */
-    intonationScale: number;
     /**
      * 
      * @type {number}
@@ -90,9 +99,9 @@ export function instanceOfPreset(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "speakerUuid" in value;
     isInstance = isInstance && "styleId" in value;
+    isInstance = isInstance && "intonationScale" in value;
     isInstance = isInstance && "speedScale" in value;
     isInstance = isInstance && "pitchScale" in value;
-    isInstance = isInstance && "intonationScale" in value;
     isInstance = isInstance && "volumeScale" in value;
     isInstance = isInstance && "prePhonemeLength" in value;
     isInstance = isInstance && "postPhonemeLength" in value;
@@ -114,9 +123,10 @@ export function PresetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pr
         'name': json['name'],
         'speakerUuid': json['speaker_uuid'],
         'styleId': json['style_id'],
+        'styleStrengthScale': !exists(json, 'styleStrengthScale') ? undefined : json['styleStrengthScale'],
+        'intonationScale': json['intonationScale'],
         'speedScale': json['speedScale'],
         'pitchScale': json['pitchScale'],
-        'intonationScale': json['intonationScale'],
         'volumeScale': json['volumeScale'],
         'prePhonemeLength': json['prePhonemeLength'],
         'postPhonemeLength': json['postPhonemeLength'],
@@ -136,9 +146,10 @@ export function PresetToJSON(value?: Preset | null): any {
         'name': value.name,
         'speaker_uuid': value.speakerUuid,
         'style_id': value.styleId,
+        'styleStrengthScale': value.styleStrengthScale,
+        'intonationScale': value.intonationScale,
         'speedScale': value.speedScale,
         'pitchScale': value.pitchScale,
-        'intonationScale': value.intonationScale,
         'volumeScale': value.volumeScale,
         'prePhonemeLength': value.prePhonemeLength,
         'postPhonemeLength': value.postPhonemeLength,
