@@ -258,16 +258,20 @@ export type AudioStoreTypes = {
     mutation: { audioKey: AudioKey; text: string };
   };
 
+  SET_AUDIO_STYLE_STRENGTH_SCALE: {
+    mutation: { audioKey: AudioKey; styleStrengthScale: number };
+  };
+
+  SET_AUDIO_INTONATION_SCALE: {
+    mutation: { audioKey: AudioKey; intonationScale: number };
+  };
+
   SET_AUDIO_SPEED_SCALE: {
     mutation: { audioKey: AudioKey; speedScale: number };
   };
 
   SET_AUDIO_PITCH_SCALE: {
     mutation: { audioKey: AudioKey; pitchScale: number };
-  };
-
-  SET_AUDIO_INTONATION_SCALE: {
-    mutation: { audioKey: AudioKey; intonationScale: number };
   };
 
   SET_AUDIO_VOLUME_SCALE: {
@@ -591,6 +595,19 @@ export type AudioCommandStoreTypes = {
     }): void;
   };
 
+  COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE: {
+    mutation: { audioKeys: AudioKey[]; styleStrengthScale: number };
+    action(payload: {
+      audioKeys: AudioKey[];
+      styleStrengthScale: number;
+    }): void;
+  };
+
+  COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE: {
+    mutation: { audioKeys: AudioKey[]; intonationScale: number };
+    action(payload: { audioKeys: AudioKey[]; intonationScale: number }): void;
+  };
+
   COMMAND_MULTI_SET_AUDIO_SPEED_SCALE: {
     mutation: { audioKeys: AudioKey[]; speedScale: number };
     action(payload: { audioKeys: AudioKey[]; speedScale: number }): void;
@@ -599,11 +616,6 @@ export type AudioCommandStoreTypes = {
   COMMAND_MULTI_SET_AUDIO_PITCH_SCALE: {
     mutation: { audioKeys: AudioKey[]; pitchScale: number };
     action(payload: { audioKeys: AudioKey[]; pitchScale: number }): void;
-  };
-
-  COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE: {
-    mutation: { audioKeys: AudioKey[]; intonationScale: number };
-    action(payload: { audioKeys: AudioKey[]; intonationScale: number }): void;
   };
 
   COMMAND_MULTI_SET_AUDIO_VOLUME_SCALE: {

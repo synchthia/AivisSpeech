@@ -360,6 +360,24 @@ const selectedAudioKeys = computed(() =>
 );
 const parameters = computed<Parameter[]>(() => [
   {
+    label: "スタイルの強さ",
+    slider: previewSliderHelper({
+      modelValue: () => query.value?.styleStrengthScale ?? null,
+      disable: () => uiLocked.value,
+      max: SLIDER_PARAMETERS.STYLE_STRENGTH.max,
+      min: SLIDER_PARAMETERS.STYLE_STRENGTH.min,
+      step: SLIDER_PARAMETERS.STYLE_STRENGTH.step,
+      scrollStep: SLIDER_PARAMETERS.STYLE_STRENGTH.scrollStep,
+      onChange: (styleStrengthScale: number) =>
+        store.dispatch("COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE", {
+          audioKeys: selectedAudioKeys.value,
+          styleStrengthScale,
+        }),
+    }),
+    action: "COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE",
+    key: "styleStrengthScale",
+  },
+  {
     label: "テンポの緩急",
     slider: previewSliderHelper({
       modelValue: () => query.value?.intonationScale ?? null,

@@ -45,6 +45,26 @@ export function sanitizeFileName(fileName: string): string {
  */
 export const SLIDER_PARAMETERS = {
   /**
+   * スタイルの強さパラメータの定義
+   */
+  STYLE_STRENGTH: {
+    max: () => 10,
+    min: () => 0,
+    step: () => 0.01,
+    scrollStep: () => 0.1,
+    scrollMinStep: () => 0.01,
+  },
+  /**
+   * テンポの緩急パラメータの定義
+   */
+  INTONATION: {
+    max: () => 2,
+    min: () => 0,
+    step: () => 0.01,
+    scrollStep: () => 0.1,
+    scrollMinStep: () => 0.01,
+  },
+  /**
    * 話速パラメータの定義
    */
   SPEED: {
@@ -62,16 +82,6 @@ export const SLIDER_PARAMETERS = {
     min: () => -0.15,
     step: () => 0.01,
     scrollStep: () => 0.01,
-  },
-  /**
-   *  抑揚パラメータの定義
-   */
-  INTONATION: {
-    max: () => 2,
-    min: () => 0,
-    step: () => 0.01,
-    scrollStep: () => 0.1,
-    scrollMinStep: () => 0.01,
   },
   /**
    *  音量パラメータの定義

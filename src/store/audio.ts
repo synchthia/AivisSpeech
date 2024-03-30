@@ -795,6 +795,34 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
     },
   },
 
+  SET_AUDIO_STYLE_STRENGTH_SCALE: {
+    mutation(
+      state,
+      {
+        audioKey,
+        styleStrengthScale,
+      }: { audioKey: AudioKey; styleStrengthScale: number }
+    ) {
+      const query = state.audioItems[audioKey].query;
+      if (query == undefined) throw new Error("query == undefined");
+      query.styleStrengthScale = styleStrengthScale;
+    },
+  },
+
+  SET_AUDIO_INTONATION_SCALE: {
+    mutation(
+      state,
+      {
+        audioKey,
+        intonationScale,
+      }: { audioKey: AudioKey; intonationScale: number }
+    ) {
+      const query = state.audioItems[audioKey].query;
+      if (query == undefined) throw new Error("query == undefined");
+      query.intonationScale = intonationScale;
+    },
+  },
+
   SET_AUDIO_SPEED_SCALE: {
     mutation(
       state,
@@ -814,20 +842,6 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
       const query = state.audioItems[audioKey].query;
       if (query == undefined) throw new Error("query == undefined");
       query.pitchScale = pitchScale;
-    },
-  },
-
-  SET_AUDIO_INTONATION_SCALE: {
-    mutation(
-      state,
-      {
-        audioKey,
-        intonationScale,
-      }: { audioKey: AudioKey; intonationScale: number }
-    ) {
-      const query = state.audioItems[audioKey].query;
-      if (query == undefined) throw new Error("query == undefined");
-      query.intonationScale = intonationScale;
     },
   },
 
@@ -2571,6 +2585,46 @@ export const audioCommandStore = transformCommandStore(
       },
     },
 
+    COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE: {
+      mutation(
+        draft,
+        payload: { audioKeys: AudioKey[]; styleStrengthScale: number }
+      ) {
+        for (const audioKey of payload.audioKeys) {
+          audioStore.mutations.SET_AUDIO_STYLE_STRENGTH_SCALE(draft, {
+            audioKey,
+            styleStrengthScale: payload.styleStrengthScale,
+          });
+        }
+      },
+      action(
+        { commit },
+        payload: { audioKeys: AudioKey[]; styleStrengthScale: number }
+      ) {
+        commit("COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE", payload);
+      },
+    },
+
+    COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE: {
+      mutation(
+        draft,
+        payload: { audioKeys: AudioKey[]; intonationScale: number }
+      ) {
+        for (const audioKey of payload.audioKeys) {
+          audioStore.mutations.SET_AUDIO_INTONATION_SCALE(draft, {
+            audioKey,
+            intonationScale: payload.intonationScale,
+          });
+        }
+      },
+      action(
+        { commit },
+        payload: { audioKeys: AudioKey[]; intonationScale: number }
+      ) {
+        commit("COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE", payload);
+      },
+    },
+
     COMMAND_MULTI_SET_AUDIO_SPEED_SCALE: {
       mutation(draft, payload: { audioKeys: AudioKey[]; speedScale: number }) {
         for (const audioKey of payload.audioKeys) {
@@ -2602,26 +2656,6 @@ export const audioCommandStore = transformCommandStore(
         payload: { audioKeys: AudioKey[]; pitchScale: number }
       ) {
         commit("COMMAND_MULTI_SET_AUDIO_PITCH_SCALE", payload);
-      },
-    },
-
-    COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE: {
-      mutation(
-        draft,
-        payload: { audioKeys: AudioKey[]; intonationScale: number }
-      ) {
-        for (const audioKey of payload.audioKeys) {
-          audioStore.mutations.SET_AUDIO_INTONATION_SCALE(draft, {
-            audioKey,
-            intonationScale: payload.intonationScale,
-          });
-        }
-      },
-      action(
-        { commit },
-        payload: { audioKeys: AudioKey[]; intonationScale: number }
-      ) {
-        commit("COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE", payload);
       },
     },
 

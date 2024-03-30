@@ -677,9 +677,10 @@ const accentPhraseSchema = z.object({
 
 const audioQuerySchema = z.object({
   accentPhrases: z.array(accentPhraseSchema),
+  styleStrengthScale: z.number().optional(), // AiviSpeech 固有のフィールド
+  intonationScale: z.number(),
   speedScale: z.number(),
   pitchScale: z.number(),
-  intonationScale: z.number(),
   volumeScale: z.number(),
   prePhonemeLength: z.number(),
   postPhonemeLength: z.number(),

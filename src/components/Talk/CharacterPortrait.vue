@@ -76,7 +76,8 @@ const engineName = computed(() => {
   const engineId = audioItem?.voice.engineId ?? store.state.engineIds[0];
   const engineManifest = store.state.engineManifests[engineId];
   const engineInfo = store.state.engineInfos[engineId];
-  return engineManifest ? engineManifest.brandName : engineInfo.name;
+  // eslint-disable-next-line prettier/prettier
+  return engineManifest ? engineManifest.brandName : (engineInfo ? engineInfo.name : "取得中...");
 });
 
 const portraitPath = computed(

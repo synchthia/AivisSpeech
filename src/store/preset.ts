@@ -214,9 +214,10 @@ export const presetStore = createPartialStore<PresetStoreTypes>({
 
         const presetData: Preset = {
           name: `デフォルト：${characterName}`,
+          styleStrengthScale: 5.0, // AiviSpeech 固有のフィールド
+          intonationScale: 1.0,
           speedScale: 1.0,
           pitchScale: 0.0,
-          intonationScale: 1.0,
           volumeScale: 1.0,
           prePhonemeLength: 0.1,
           postPhonemeLength: 0.1,
