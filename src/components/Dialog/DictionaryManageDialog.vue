@@ -114,7 +114,7 @@
               </QInput>
             </div>
             <div class="row q-pl-md q-mt-lg text-h6">アクセント調整</div>
-            <div class="row q-pl-md q-mt-sm q-mb-lg desc-row">
+            <div class="row q-pl-md q-mt-sm q-mb-md desc-row">
               語尾のアクセントを考慮するため、「が」が自動で挿入されます。
             </div>
             <div class="row q-px-md" style="height: 130px">
