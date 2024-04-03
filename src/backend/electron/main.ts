@@ -214,8 +214,8 @@ async function installVvppEngineWithWarning({
 }) {
   const result = dialog.showMessageBoxSync(win, {
     type: "warning",
-    title: "エンジン追加の確認",
-    message: `この操作はコンピュータに損害を与える可能性があります。エンジンの配布元が信頼できない場合は追加しないでください。`,
+    title: "音声合成エンジン追加の確認",
+    message: `この操作はコンピュータに損害を与える可能性があります。音声合成エンジンの配布元が信頼できない場合は追加しないでください。`,
     buttons: ["追加", "キャンセル"],
     noLink: true,
     cancelId: 1,
@@ -257,7 +257,7 @@ function checkMultiEngineEnabled(): boolean {
     dialog.showMessageBoxSync(win, {
       type: "info",
       title: "マルチエンジン機能が無効です",
-      message: `マルチエンジン機能が無効です。vvppファイルを使用するには設定からマルチエンジン機能を有効にしてください。`,
+      message: `マルチエンジン機能が無効です。vvpp ファイルを使用するには設定からマルチエンジン機能を有効にしてください。`,
       buttons: ["OK"],
       noLink: true,
     });

@@ -104,13 +104,13 @@
             class="col-8 no-wrap text-no-wrap engine-detail"
           >
             <div class="q-pl-md q-mt-md">
-              <div class="text-h5 q-ma-sm">エンジンの追加</div>
+              <div class="text-h5 q-ma-sm">音声合成エンジンの追加</div>
 
               <div class="q-ma-sm q-mt-lg">
                 <QBtnToggle
                   v-model="engineLoaderType"
                   :options="[
-                    { value: 'vvpp', label: 'VVPPファイル' },
+                    { value: 'vvpp', label: 'VVPP ファイル' },
                     { value: 'dir', label: '既存エンジン' },
                   ]"
                   color="surface"
@@ -124,7 +124,7 @@
 
             <div v-if="engineLoaderType === 'vvpp'" class="no-wrap q-px-md">
               <div class="q-ma-sm">
-                VVPP ファイルでエンジンをインストールします。
+                VVPP ファイルで音声合成エンジンをインストールします。
               </div>
               <div class="q-ma-sm q-mt-md">
                 <QInput
@@ -162,7 +162,9 @@
               </div>
             </div>
             <div v-if="engineLoaderType === 'dir'" class="no-wrap q-px-md">
-              <div class="q-ma-sm">PC 内にあるエンジンを追加します。</div>
+              <div class="q-ma-sm">
+                PC 内にある音声合成エンジンを追加します。
+              </div>
               <div class="q-ma-sm q-mt-md">
                 <QInput
                   ref="newEngineDirInput"
@@ -173,7 +175,7 @@
                     newEngineDirValidationState != undefined &&
                     newEngineDirValidationState !== 'ok'
                   "
-                  placeholder="エンジンフォルダの場所"
+                  placeholder="音声合成エンジンフォルダの場所"
                   @click="selectEngineDir"
                 >
                   <template #append>
@@ -483,9 +485,9 @@ const getEngineDirValidationMessage = (result: EngineDirValidationResult) => {
   } = {
     directoryNotFound: "フォルダが見つかりませんでした。",
     notADirectory: "フォルダではありません。",
-    manifestNotFound: "engine_manifest.jsonが見つかりませんでした。",
-    invalidManifest: "engine_manifest.jsonの内容が不正です。",
-    alreadyExists: "同じIDのエンジンが既に登録されています。",
+    manifestNotFound: "engine_manifest.json が見つかりませんでした。",
+    invalidManifest: "engine_manifest.json の内容が不正です。",
+    alreadyExists: "同じ ID の音声合成エンジンが既に登録されています。",
     ok: undefined,
   };
   return messageMap[result];
@@ -493,9 +495,9 @@ const getEngineDirValidationMessage = (result: EngineDirValidationResult) => {
 
 const addEngine = async () => {
   const result = await store.dispatch("SHOW_WARNING_DIALOG", {
-    title: "エンジン追加の確認",
+    title: "音声合成エンジン追加の確認",
     message:
-      "この操作はコンピュータに損害を与える可能性があります。エンジンの配布元が信頼できない場合は追加しないでください。",
+      "この操作はコンピュータに損害を与える可能性があります。音声合成エンジンの配布元が信頼できない場合は追加しないでください。",
     actionName: "追加",
   });
   if (result === "OK") {
@@ -508,7 +510,7 @@ const addEngine = async () => {
       );
 
       requireReload(
-        "エンジンを追加しました。反映には再読み込みが必要です。今すぐ再読み込みしますか？"
+        "音声合成エンジンを追加しました。反映には再読み込みが必要です。今すぐ再読み込みしますか？"
       );
     } else {
       const success = await lockUi(
@@ -525,8 +527,8 @@ const addEngine = async () => {
 };
 const deleteEngine = async () => {
   const result = await store.dispatch("SHOW_CONFIRM_DIALOG", {
-    title: "エンジン削除の確認",
-    message: "選択中のエンジンを削除します。よろしいですか？",
+    title: "音声合成エンジン削除の確認",
+    message: "選択中の音声合成エンジンを削除します。よろしいですか？",
     actionName: "削除",
   });
   if (result === "OK") {
@@ -544,7 +546,7 @@ const deleteEngine = async () => {
           })
         );
         requireReload(
-          "エンジンを削除しました。反映には再読み込みが必要です。今すぐ再読み込みしますか？"
+          "音声合成エンジンを削除しました。反映には再読み込みが必要です。今すぐ再読み込みしますか？"
         );
         break;
       }
@@ -555,7 +557,7 @@ const deleteEngine = async () => {
         );
         if (success) {
           requireReload(
-            "エンジンの削除には再読み込みが必要です。今すぐ再読み込みしますか？"
+            "音声合成エンジンの削除には再読み込みが必要です。今すぐ再読み込みしますか？"
           );
         }
         break;
@@ -603,7 +605,7 @@ const newEngineDir = ref("");
 const newEngineDirValidationState = ref<EngineDirValidationResult | null>(null);
 const selectEngineDir = async () => {
   const path = await window.backend.showOpenDirectoryDialog({
-    title: "エンジンのフォルダを選択",
+    title: "音声合成エンジンのフォルダを選択",
   });
   if (path) {
     newEngineDir.value = path;

@@ -99,7 +99,7 @@ const playContinuously = async () => {
     const msg = handlePossiblyNotMorphableError(e);
     store.dispatch("SHOW_ALERT_DIALOG", {
       title: "再生に失敗しました",
-      message: msg ?? "エンジンの再起動をお試しください。",
+      message: msg ?? "音声合成エンジンの再起動をお試しください。",
     });
   }
 };

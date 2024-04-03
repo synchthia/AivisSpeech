@@ -301,7 +301,7 @@ const loadingDictProcess = async () => {
   } catch {
     const result = await store.dispatch("SHOW_ALERT_DIALOG", {
       title: "辞書の取得に失敗しました",
-      message: "エンジンの再起動をお試しください。",
+      message: "音声合成エンジンの再起動をお試しください。",
     });
     if (result === "OK") {
       dictionaryManageDialogOpenedComputed.value = false;
@@ -313,7 +313,7 @@ const loadingDictProcess = async () => {
   } catch {
     await store.dispatch("SHOW_ALERT_DIALOG", {
       title: "辞書の同期に失敗しました",
-      message: "エンジンの再起動をお試しください。",
+      message: "音声合成エンジンの再起動をお試しください。",
     });
   }
   loadingDictState.value = null;
@@ -456,7 +456,7 @@ const play = async () => {
     nowGenerating.value = false;
     store.dispatch("SHOW_ALERT_DIALOG", {
       title: "生成に失敗しました",
-      message: "エンジンの再起動をお試しください。",
+      message: "音声合成エンジンの再起動をお試しください。",
     });
     return;
   }
@@ -530,7 +530,7 @@ const saveWord = async () => {
     } catch {
       store.dispatch("SHOW_ALERT_DIALOG", {
         title: "単語の更新に失敗しました",
-        message: "エンジンの再起動をお試しください。",
+        message: "音声合成エンジンの再起動をお試しください。",
       });
       return;
     }
@@ -550,7 +550,7 @@ const saveWord = async () => {
     } catch {
       store.dispatch("SHOW_ALERT_DIALOG", {
         title: "単語の登録に失敗しました",
-        message: "エンジンの再起動をお試しください。",
+        message: "音声合成エンジンの再起動をお試しください。",
       });
       return;
     }
@@ -575,7 +575,7 @@ const deleteWord = async () => {
     } catch {
       store.dispatch("SHOW_ALERT_DIALOG", {
         title: "単語の削除に失敗しました",
-        message: "エンジンの再起動をお試しください。",
+        message: "音声合成エンジンの再起動をお試しください。",
       });
       return;
     }

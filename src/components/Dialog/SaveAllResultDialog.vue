@@ -20,7 +20,7 @@
           </QExpansionItem>
           <QExpansionItem
             v-if="props.engineErrorArray.length > 0"
-            :label="`${props.engineErrorArray.length}件のエンジンエラーによる失敗`"
+            :label="`${props.engineErrorArray.length}件の音声合成エンジンエラーによる失敗`"
             bordered
             header-class="text-warning text-bold"
             icon="warning"

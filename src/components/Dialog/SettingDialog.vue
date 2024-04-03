@@ -766,7 +766,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      複数のVOICEVOX準拠エンジンを利用可能にする
+                      複数の VOICEVOX 準拠音声合成エンジンを利用可能にする
                     </QTooltip>
                   </QIcon>
                 </div>

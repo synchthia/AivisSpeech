@@ -141,8 +141,8 @@ export class EngineManager {
         // 動かないエンジンは追加できないので削除
         // FIXME: エンジン管理UIで削除可能にする
         dialog.showErrorBox(
-          "エンジンの読み込みに失敗しました。",
-          `${engineDir}を読み込めませんでした。このエンジンは削除されます。`
+          "音声合成エンジンの読み込みに失敗しました。",
+          `${engineDir}を読み込めませんでした。この音声合成エンジンは削除されます。`
         );
         this.configManager.set(
           "registeredEngineDirs",
@@ -354,8 +354,8 @@ export class EngineManager {
       if (!engineProcessContainer.willQuitEngine) {
         const errorMessage =
           engineInfos.length === 1
-            ? "音声合成エンジンが異常終了しました。エンジンを再起動してください。"
-            : `${engineInfo.name}が異常終了しました。エンジンを再起動してください。`;
+            ? "音声合成エンジンが異常終了しました。音声合成エンジンを再起動してください。"
+            : `${engineInfo.name}が異常終了しました。音声合成エンジンを再起動してください。`;
         if (!errorNotified) {
           errorNotified = true;
           this.onEngineProcessError(engineInfo, new Error(errorMessage));

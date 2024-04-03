@@ -254,7 +254,7 @@
         class="text-warning"
         style="font-size: 0.7rem"
       >
-        非対応エンジンです
+        非対応音声合成エンジンです
       </div>
       <div
         v-else-if="morphingTargetVoice && !isValidMorphingInfo"

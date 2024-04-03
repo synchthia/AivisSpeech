@@ -388,10 +388,10 @@ export const settingStore = createPartialStore<SettingStoreTypes>({
         if (useGpu && !isAvailableGPUMode) {
           const result = await window.backend.showQuestionDialog({
             type: "warning",
-            title: "対応するGPUデバイスが見つかりません",
+            title: "対応する GPU デバイスが見つかりません",
             message:
-              "GPUモードの利用には対応するGPUデバイスが必要です。\n" +
-              "このままGPUモードに変更するとエンジンエラーが発生する可能性があります。本当に変更しますか？",
+              "GPU モードの利用には対応する GPU デバイスが必要です。\n" +
+              "このままGPUモードに変更すると音声合成エンジンエラーが発生する可能性があります。本当に変更しますか？",
             buttons: ["変更する", "変更しない"],
             cancelId: 1,
           });
@@ -413,9 +413,9 @@ export const settingStore = createPartialStore<SettingStoreTypes>({
         if (!result.success && useGpu) {
           await window.backend.showMessageDialog({
             type: "error",
-            title: "GPUモードに変更できませんでした",
+            title: "GPU モードに変更できませんでした",
             message:
-              "GPUモードでエンジンを起動できなかったためCPUモードに戻します",
+              "GPU モードで音声合成エンジンを起動できなかったため、CPU モードに戻します。",
           });
           await dispatch("CHANGE_USE_GPU", { useGpu: false, engineId });
           return;

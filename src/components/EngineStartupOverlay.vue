@@ -2,7 +2,9 @@
   <!-- TODO: 複数エンジン対応 -->
   <!-- TODO: allEngineStateが "ERROR" のときエラーになったエンジンを探してトーストで案内 -->
   <div v-if="allEngineState === 'FAILED_STARTING'" class="waiting-engine">
-    <div>エンジンの起動に失敗しました。エンジンの再起動をお試しください。</div>
+    <div>
+      音声合成エンジンの起動に失敗しました。音声合成エンジンの再起動をお試しください。
+    </div>
   </div>
   <div
     v-else-if="
@@ -15,14 +17,14 @@
       <div class="q-mt-xs">
         {{
           allEngineState === "STARTING"
-            ? "エンジン起動中・・・"
+            ? "音声合成エンジン起動中・・・"
             : "データ準備中・・・"
         }}
       </div>
 
       <template v-if="isEngineWaitingLong">
         <QSeparator spaced />
-        エンジン起動に時間がかかっています。<br />
+        音声合成エンジン起動に時間がかかっています。<br />
         <QBtn
           v-if="isMultipleEngine"
           class="q-mt-sm"

@@ -304,7 +304,7 @@ export class VvppManager {
           }
         }
         if (deletingEngineDir == null) {
-          throw new Error("エンジンが見つかりませんでした。");
+          throw new Error("音声合成エンジンが見つかりませんでした。");
         }
 
         for (let i = 0; i < 5; i++) {
@@ -319,8 +319,8 @@ export class VvppManager {
             if (i === 4) {
               log.error(e);
               dialog.showErrorBox(
-                "エンジン削除エラー",
-                `エンジンの削除に失敗しました。エンジンのフォルダを手動で削除してください。\n${deletingEngineDir}\nエラー内容: ${e}`
+                "音声合成エンジン削除エラー",
+                `音声合成エンジンの削除に失敗しました。音声合成エンジンのフォルダを手動で削除してください。\n${deletingEngineDir}\nエラー内容: ${e}`
               );
             } else {
               log.error(`Failed to rename engine directory: ${e}, retrying`);
@@ -343,8 +343,8 @@ export class VvppManager {
             if (i === 4) {
               log.error(e);
               dialog.showErrorBox(
-                "エンジン追加エラー",
-                `エンジンの追加に失敗しました。エンジンのフォルダを手動で移動してください。\n${from}\nエラー内容: ${e}`
+                "音声合成エンジン追加エラー",
+                `音声合成エンジンの追加に失敗しました。音声合成エンジンのフォルダを手動で移動してください。\n${from}\nエラー内容: ${e}`
               );
             } else {
               log.error(`Failed to rename engine directory: ${e}, retrying`);
