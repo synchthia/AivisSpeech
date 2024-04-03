@@ -21,7 +21,6 @@
             <QToolbarTitle class="text-display">
               ツールバーのカスタマイズ
             </QToolbarTitle>
-            <QSpace />
             <QBtn
               outline
               icon="settings_backup_restore"

@@ -25,7 +25,6 @@
           <QToolbarTitle class="text-display">
             デフォルトスタイル・試聴
           </QToolbarTitle>
-          <QSpace />
         </QToolbar>
       </QHeader>
 

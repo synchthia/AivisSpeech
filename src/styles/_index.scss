@@ -133,6 +133,9 @@ img {
 .q-field__native, .q-field__prefix, .q-field__suffix, .q-field__input {
   line-height: 1.00 !important;
 }
+.q-btn .block, .q-btn .q-btn__content {
+  margin-top: 2px;  // テキストの位置調整
+}
 
 // Markdown
 .q-card .markdown-body {

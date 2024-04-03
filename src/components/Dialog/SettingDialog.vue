@@ -20,7 +20,6 @@
               @click="settingDialogOpenedComputed = false"
             />
             <QToolbarTitle class="text-display">オプション</QToolbarTitle>
-            <QSpace />
           </QToolbar>
         </QHeader>
         <QPage ref="scroller" class="scroller">

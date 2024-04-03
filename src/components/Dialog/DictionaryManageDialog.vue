@@ -21,7 +21,6 @@
             <QToolbarTitle class="text-display">
               読み方＆アクセント辞書
             </QToolbarTitle>
-            <QSpace />
             <QBtn
               outline
               icon="add"

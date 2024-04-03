@@ -22,7 +22,6 @@
             <QToolbarTitle class="text-display">
               音声合成エンジンの管理
             </QToolbarTitle>
-            <QSpace />
             <QBtn
               outline
               icon="add"

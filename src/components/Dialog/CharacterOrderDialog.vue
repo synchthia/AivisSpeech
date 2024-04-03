@@ -13,7 +13,6 @@
           <QToolbarTitle class="text-display">
             音声合成モデルの管理
           </QToolbarTitle>
-          <QSpace />
         </QToolbar>
       </QHeader>
 

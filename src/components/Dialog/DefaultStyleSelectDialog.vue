@@ -21,7 +21,6 @@
             デフォルトスタイル・試聴 -
             {{ characterInfo.metas.speakerName }}
           </QToolbarTitle>
-          <QSpace />
         </QToolbar>
       </QHeader>
 
