@@ -17,9 +17,9 @@ body:not(#dummy) {
 }
 
 body {
-  font-family: 'Open Sans', 'YakuHanJPs', 'Twemoji', 'Noto Sans JP', sans-serif;
+  font-family: 'LINE Seed JP', 'Twemoji', sans-serif;
   font-weight: 500;
-  line-height: 1.65;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -128,7 +128,10 @@ img {
 
 // line-height を調整
 .text-body1, .text-body2 {
-  line-height: 1.65 !important;
+  line-height: 1.55 !important;
+}
+.q-field__native, .q-field__prefix, .q-field__suffix, .q-field__input {
+  line-height: 1.00 !important;
 }
 
 // Markdown
@@ -156,7 +159,7 @@ img {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-    line-height: 1.65;
+    line-height: 1.55;
   }
   h1 {
     font-size: 28px;
