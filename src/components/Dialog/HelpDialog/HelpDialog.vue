@@ -94,6 +94,7 @@ import ContactInfo from "./ContactInfo.vue";
 import { UpdateInfo as UpdateInfoObject, UrlString } from "@/type/preload";
 import { useStore } from "@/store";
 import { useFetchNewUpdateInfos } from "@/composables/useFetchNewUpdateInfos";
+import { createLogger } from "@/domain/frontend/log";
 
 type PageItem = {
   type: "item";
@@ -124,6 +125,7 @@ const modelValueComputed = computed({
 
 // エディタのアップデート確認
 const store = useStore();
+const { warn } = createLogger("HelpDialog");
 
 const updateInfos = ref<UpdateInfoObject[]>();
 store.dispatch("GET_UPDATE_INFOS").then((obj) => (updateInfos.value = obj));
@@ -207,7 +209,7 @@ const pagedata = computed(() => {
     for (const id of store.getters.GET_SORTED_ENGINE_INFOS.map((m) => m.uuid)) {
       const manifest = store.state.engineManifests[id];
       if (!manifest) {
-        store.dispatch("LOG_WARN", `manifest not found: ${id}`);
+        warn(`manifest not found: ${id}`);
         continue;
       }
 

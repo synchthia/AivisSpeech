@@ -1,5 +1,4 @@
 <template>
-  <MenuBar />
   <ToolBar />
   <div class="sing-main">
     <EngineStartupOverlay
@@ -22,13 +21,12 @@
         />
       </div>
     </div>
-    <ScoreSequencer :is-activated="isActivated" />
+    <ScoreSequencer />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onActivated, onDeactivated, ref } from "vue";
-import MenuBar from "./MenuBar.vue";
+import { computed, ref } from "vue";
 import ToolBar from "./ToolBar.vue";
 import ScoreSequencer from "./ScoreSequencer.vue";
 import EngineStartupOverlay from "@/components/EngineStartupOverlay.vue";
@@ -109,16 +107,6 @@ onetimeWatch(
     immediate: true,
   }
 );
-
-const isActivated = ref(false);
-
-onActivated(() => {
-  isActivated.value = true;
-});
-
-onDeactivated(() => {
-  isActivated.value = false;
-});
 </script>
 
 <style scoped lang="scss">

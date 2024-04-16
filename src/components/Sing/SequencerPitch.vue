@@ -3,13 +3,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, toRaw, computed, onUnmounted, onMounted } from "vue";
+import { ref, watch, computed } from "vue";
 import * as PIXI from "pixi.js";
 import { useStore } from "@/store";
 import { frequencyToNoteNumber, secondToTick } from "@/sing/domain";
 import { noteNumberToBaseY, tickToBaseX } from "@/sing/viewHelper";
 import { LineStrip } from "@/sing/graphics/lineStrip";
 import { FramePhoneme } from "@/openapi";
+import {
+  onMountedOrActivated,
+  onUnmountedOrDeactivated,
+} from "@/composables/onMountOrActivate";
+import { SingingGuideSourceHash } from "@/store/type";
 
 type VoicedSection = {
   readonly startFrame: number;
@@ -26,13 +31,12 @@ type PitchLine = {
 const pitchLineColor = [0.647, 0.831, 0.678, 1]; // RGBA
 const pitchLineWidth = 1.5;
 
-const props =
-  defineProps<{ isActivated: boolean; offsetX: number; offsetY: number }>();
+const props = defineProps<{ offsetX: number; offsetY: number }>();
 
 const store = useStore();
 const queries = computed(() => {
-  const phrases = [...store.state.phrases.values()];
-  return phrases.map((value) => value.query);
+  const singingGuides = [...store.state.singingGuides.values()];
+  return singingGuides.map((value) => value.query);
 });
 
 const canvasContainer = ref<HTMLElement | null>(null);
@@ -45,7 +49,7 @@ let stage: PIXI.Container | undefined;
 let requestId: number | undefined;
 let renderInNextFrame = false;
 
-const pitchLinesMap = new Map<string, PitchLine[]>();
+const pitchLinesMap = new Map<SingingGuideSourceHash, PitchLine[]>();
 
 const searchVoicedSections = (phonemes: FramePhoneme[]) => {
   const voicedSections: VoicedSection[] = [];
@@ -79,42 +83,50 @@ const render = () => {
   if (canvasHeight == undefined) {
     throw new Error("canvasHeight is undefined.");
   }
-  if (!renderer) {
+  if (renderer == undefined) {
     throw new Error("renderer is undefined.");
   }
-  if (!stage) {
+  if (stage == undefined) {
     throw new Error("stage is undefined.");
   }
 
-  const phrases = toRaw(store.state.phrases);
+  const tpqn = store.state.tpqn;
+  const tempos = [store.state.tempos[0]];
+  const singer = store.getters.SELECTED_TRACK.singer;
+  const singingGuides = store.state.singingGuides;
   const zoomX = store.state.sequencerZoomX;
   const zoomY = store.state.sequencerZoomY;
   const offsetX = props.offsetX;
   const offsetY = props.offsetY;
 
   // 無くなったフレーズを調べて、そのフレーズに対応するピッチラインを削除する
-  for (const [phraseKey, pitchLines] of pitchLinesMap) {
-    if (!phrases.has(phraseKey)) {
+  for (const [singingGuideKey, pitchLines] of pitchLinesMap) {
+    if (!singingGuides.has(singingGuideKey)) {
       for (const pitchLine of pitchLines) {
         stage.removeChild(pitchLine.lineStrip.displayObject);
         pitchLine.lineStrip.destroy();
       }
-      pitchLinesMap.delete(phraseKey);
+      pitchLinesMap.delete(singingGuideKey);
     }
   }
-  // ピッチラインの生成・更新を行う
-  for (const [phraseKey, phrase] of phrases) {
-    if (!phrase.singer || !phrase.query || phrase.startTime == undefined) {
-      continue;
+  // シンガーが未設定の場合はピッチラインをすべて非表示にして終了
+  if (!singer) {
+    for (const pitchLines of pitchLinesMap.values()) {
+      for (const pitchLine of pitchLines) {
+        pitchLine.lineStrip.renderable = false;
+      }
     }
-    const tempos = [toRaw(phrase.tempos[0])];
-    const tpqn = phrase.tpqn;
-    const startTime = phrase.startTime;
-    const f0 = phrase.query.f0;
-    const phonemes = phrase.query.phonemes;
-    const engineId = phrase.singer.engineId;
-    const frameRate = store.state.engineManifests[engineId].frameRate;
-    let pitchLines = pitchLinesMap.get(phraseKey);
+    renderer.render(stage);
+    return;
+  }
+  // ピッチラインの生成・更新を行う
+  for (const [singingGuideKey, singingGuide] of singingGuides) {
+    const f0 = singingGuide.query.f0;
+    const frameRate = singingGuide.frameRate;
+    const startTime = singingGuide.startTime;
+    const phonemes = singingGuide.query.phonemes;
+
+    let pitchLines = pitchLinesMap.get(singingGuideKey);
 
     // フレーズに対応するピッチラインが無かったら生成する
     if (!pitchLines) {
@@ -151,7 +163,7 @@ const render = () => {
       for (const pitchLine of pitchLines) {
         stage.addChild(pitchLine.lineStrip.displayObject);
       }
-      pitchLinesMap.set(phraseKey, pitchLines);
+      pitchLinesMap.set(singingGuideKey, pitchLines);
     }
 
     // ピッチラインを更新
@@ -205,9 +217,7 @@ watch(
   }
 );
 
-let isInstantiated = false;
-
-const initialize = () => {
+onMountedOrActivated(() => {
   const canvasContainerElement = canvasContainer.value;
   if (!canvasContainerElement) {
     throw new Error("canvasContainerElement is null.");
@@ -253,11 +263,9 @@ const initialize = () => {
     }
   });
   resizeObserver.observe(canvasContainerElement);
+});
 
-  isInstantiated = true;
-};
-
-const cleanUp = () => {
+onUnmountedOrDeactivated(() => {
   if (requestId != undefined) {
     window.cancelAnimationFrame(requestId);
   }
@@ -270,38 +278,6 @@ const cleanUp = () => {
   pitchLinesMap.clear();
   renderer?.destroy(true);
   resizeObserver?.disconnect();
-
-  isInstantiated = false;
-};
-
-let isMounted = false;
-
-onMounted(() => {
-  isMounted = true;
-  if (props.isActivated) {
-    initialize();
-  }
-});
-
-watch(
-  () => props.isActivated,
-  (isActivated) => {
-    if (!isMounted) {
-      return;
-    }
-    if (isActivated && !isInstantiated) {
-      initialize();
-    }
-    if (!isActivated && isInstantiated) {
-      cleanUp();
-    }
-  }
-);
-
-onUnmounted(() => {
-  if (isInstantiated) {
-    cleanUp();
-  }
 });
 </script>
 

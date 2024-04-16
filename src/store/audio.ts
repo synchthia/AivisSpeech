@@ -681,10 +681,12 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
       ) {
         //引数にbaseAudioItemがある場合、話速等のパラメータを引き継いだAudioItemを返す
         //baseAudioItem.queryが未設定の場合は引き継がない(起動直後等？)
-        newAudioItem.query.speedScale = baseAudioItem.query.speedScale;
-        newAudioItem.query.pitchScale = baseAudioItem.query.pitchScale;
+        newAudioItem.query.styleStrengthScale =
+          baseAudioItem.query.styleStrengthScale;
         newAudioItem.query.intonationScale =
           baseAudioItem.query.intonationScale;
+        newAudioItem.query.speedScale = baseAudioItem.query.speedScale;
+        newAudioItem.query.pitchScale = baseAudioItem.query.pitchScale;
         newAudioItem.query.volumeScale = baseAudioItem.query.volumeScale;
         newAudioItem.query.prePhonemeLength =
           baseAudioItem.query.prePhonemeLength;
