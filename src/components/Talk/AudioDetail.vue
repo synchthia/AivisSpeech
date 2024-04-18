@@ -250,10 +250,20 @@ const play = async () => {
     });
   } catch (e) {
     const msg = handlePossiblyNotMorphableError(e);
-    store.dispatch("SHOW_ALERT_DIALOG", {
-      title: "再生に失敗しました",
-      message: msg ?? "音声合成エンジンの再起動をお試しください。",
-    });
+    // AivisSpeech Engine から音声合成エラーが返された
+    if (e instanceof Error && e.message === "Response returned an error code") {
+      store.dispatch("SHOW_ALERT_DIALOG", {
+        title: "音声合成に失敗しました",
+        message:
+          msg ??
+          "現在のテキストや読み方では音声合成できない可能性があります。テキストや読み方を変更して再度お試しください。",
+      });
+    } else {
+      store.dispatch("SHOW_ALERT_DIALOG", {
+        title: "再生に失敗しました",
+        message: msg ?? "音声合成エンジンの再起動をお試しください。",
+      });
+    }
   }
 };
 
