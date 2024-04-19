@@ -145,6 +145,7 @@ img {
   min-height: max-content;
   color: colors.$display;
   background: colors.$background;
+  overflow-x: auto;
   a {
     color: colors.$display-hyperlink;
   }
