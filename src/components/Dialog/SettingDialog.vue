@@ -90,7 +90,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      再生・保存時の音声のサンプリングレートを変更できます（サンプリングレートを上げても音声の品質は上がりません）。
+                      再生・保存時の音声のサンプリングレートを変更できます。サンプリングレートを上げても音声の品質は上がりません。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -143,7 +143,7 @@
                   >
                     <div>スタイル変更時にデフォルトプリセットを適用</div>
                     <div
-                      aria-label="ONの場合、キャラやスタイルの変更時にデフォルトプリセットが自動的に適用されます。"
+                      aria-label="キャラやスタイルの変更時にデフォルトプリセットを自動的に適用します。"
                     >
                       <QIcon
                         name="help_outline"
@@ -157,7 +157,7 @@
                           transition-show="jump-right"
                           transition-hide="jump-left"
                         >
-                          ONの場合、キャラやスタイルの変更時にデフォルトプリセットが自動的に適用されます。
+                          キャラやスタイルの変更時にデフォルトプリセットを自動的に適用します。
                         </QTooltip>
                       </QIcon>
                     </div>
@@ -180,7 +180,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>パラメータの引き継ぎ</div>
                 <div
-                  aria-label="ONの場合、テキスト欄追加の際に、現在の話速等のパラメータが引き継がれます。"
+                  aria-label="テキスト欄追加時に、現在の話速などのパラメータを引き継ぎます。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -190,7 +190,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、テキスト欄追加の際に、現在の話速等のパラメータが引き継がれます。
+                      テキスト欄追加時に、現在の話速などのパラメータを引き継ぎます。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -265,7 +265,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>テキスト自動分割</div>
                 <div
-                  aria-label="テキスト貼り付けの際のテキストの分割箇所を選べます。"
+                  aria-label="テキスト貼り付け時のテキストの分割箇所を選べます。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -275,7 +275,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      テキスト貼り付けの際のテキストの分割箇所を選べます。
+                      テキスト貼り付け時のテキストの分割箇所を選べます。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -306,12 +306,12 @@
                 >
                   <template #splitTextPeriodAndNewLine>
                     <QTooltip :delay="500">
-                      句点と改行を基にテキストを分割します。
+                      句点と改行をもとにテキストを分割します。
                     </QTooltip>
                   </template>
                   <template #splitTextNewLine>
                     <QTooltip :delay="500">
-                      改行のみを基にテキストを分割します。
+                      改行のみをもとにテキストを分割します。
                     </QTooltip>
                   </template>
                   <template #splitTextOFF>
@@ -322,7 +322,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>メモ機能</div>
                 <div
-                  aria-label="ONの場合、テキストを [] で囲むことで、テキスト中にメモを書けます。"
+                  aria-label="ON にすると、テキストを [] で囲むことで、テキスト中にメモを書けます。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -332,8 +332,8 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、テキストを []
-                      で囲むことで、テキスト中にメモを書けます。
+                      <!-- eslint-disable-next-line -->
+                      ON にすると、テキストを [] で囲むことで、テキスト中にメモを書けます。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -347,7 +347,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>ルビ機能</div>
                 <div
-                  aria-label="ONの場合、テキストに {ルビ対象|よみかた} と書くことで、テキストの読み方を変えられます。"
+                  aria-label="ON にすると、テキストに {ルビ対象|よみかた} と書くことで、テキストの読み方を変えられます。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -357,8 +357,8 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、テキストに {ルビ対象|よみかた}
-                      と書くことで、テキストの読み方を変えられます。
+                      <!-- eslint-disable-next-line -->
+                      ON にすると、テキストに {ルビ対象|よみかた} と書くことで、テキストの読み方を変えられます。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -421,7 +421,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>書き出し先を固定</div>
                 <div
-                  aria-label="ONの場合、書き出す際のフォルダをあらかじめ指定できます。"
+                  aria-label="ON にすると、書き出し先フォルダをあらかじめ指定できます。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -431,7 +431,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、書き出す際のフォルダをあらかじめ指定できます。
+                      ON にすると、書き出し先フォルダをあらかじめ指定できます。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -487,7 +487,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>書き出しファイル名パターン</div>
                 <div
-                  aria-label="書き出す際のファイル名のパターンをカスタマイズできます。"
+                  aria-label="書き出し時のファイル名パターンをカスタマイズできます。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -497,7 +497,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      書き出す際のファイル名のパターンをカスタマイズできます。
+                      書き出し時のファイル名パターンをカスタマイズできます。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -518,7 +518,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>上書き防止</div>
                 <div
-                  aria-label="ONの場合、書き出す際に同名ファイルが既にあったとき、ファイル名に連番を付けて別名で保存されます。"
+                  aria-label="書き出し時に同名ファイルが既にあったとき、ファイル名に連番を付けて別名で保存します。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -528,7 +528,8 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、書き出す際に同名ファイルが既にあったとき、ファイル名に連番を付けて別名で保存されます。
+                      <!-- eslint-disable-next-line -->
+                      書き出し時に同名ファイルが既にあったとき、ファイル名に連番を付けて別名で保存します。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -544,7 +545,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>文字コード</div>
                 <div
-                  aria-label="テキストファイルを書き出す際の文字コードを選べます。"
+                  aria-label="テキストファイルを書き出すときの文字コードを選べます。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -554,7 +555,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      テキストファイルを書き出す際の文字コードを選べます。
+                      テキストファイルを書き出すときの文字コードを選べます。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -577,9 +578,9 @@
                 />
               </QCardActions>
               <QCardActions class="q-px-md bg-surface-darken">
-                <div>txtファイルを書き出し</div>
+                <div>txt ファイルを書き出し</div>
                 <div
-                  aria-label="ONの場合、音声書き出しの際にテキストがtxtファイルとして書き出されます。"
+                  aria-label="音声書き出し時にテキストを txt ファイルとして書き出します。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -589,7 +590,8 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、音声書き出しの際にテキストがtxtファイルとして書き出されます。
+                      <!-- eslint-disable-next-line -->
+                      音声書き出し時にテキストを txt ファイルとして書き出します。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -604,9 +606,9 @@
                 </QToggle>
               </QCardActions>
               <QCardActions class="q-px-md bg-surface-darken">
-                <div>labファイルを書き出し</div>
+                <div>lab ファイルを書き出し</div>
                 <div
-                  aria-label="ONの場合、音声書き出しの際にリップシンク用のlabファイルが書き出されます。"
+                  aria-label="音声書き出し時にリップシンク用の lab ファイルを書き出します。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -616,7 +618,8 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、音声書き出しの際にリップシンク用のlabファイルが書き出されます。
+                      <!-- eslint-disable-next-line -->
+                      音声書き出し時にリップシンク用の lab ファイルを書き出します。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -696,9 +699,7 @@
               </QCardActions> -->
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>行番号の表示</div>
-                <div
-                  aria-label="ONの場合、テキスト欄の左側に行番号が表示されます。"
-                >
+                <div aria-label="テキスト欄の左側に行番号を表示します。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
@@ -707,7 +708,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、テキスト欄の左側に行番号が表示されます。
+                      テキスト欄の左側に行番号を表示します。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -721,7 +722,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>テキスト追加ボタンの表示</div>
                 <div
-                  aria-label="OFFの場合、右下にテキスト追加ボタンが表示されません。（テキスト欄は Shift + Enter で追加できます）"
+                  aria-label="OFF にしたときは、右下にテキスト追加ボタンが表示されません。(テキスト欄は Shift + Enter で追加できます)"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -731,8 +732,8 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      OFFの場合、右下にテキスト追加ボタンが表示されません。（テキスト欄は
-                      Shift + Enter で追加できます）
+                      <!-- eslint-disable-next-line -->
+                      OFF にしたときは、右下にテキスト追加ボタンが表示されません。(テキスト欄は Shift + Enter で追加できます)
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -761,7 +762,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      複数の VOICEVOX 準拠音声合成エンジンを利用可能にする
+                      複数の VOICEVOX 準拠音声合成エンジンを利用可能にします。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -775,7 +776,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>音声をステレオ化</div>
                 <div
-                  aria-label="ONの場合、音声データがモノラルからステレオに変換されてから再生・保存が行われます。"
+                  aria-label="音声データをモノラルからステレオに変換してから再生・保存を行います。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -785,7 +786,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、音声データがモノラルからステレオに変換されてから再生・保存が行われます。
+                      音声データをモノラルからステレオに変換してから再生・保存を行います。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -932,8 +933,9 @@
                       self="center left"
                       transition-show="jump-right"
                       transition-hide="jump-left"
-                      >ONの場合、テキスト変更時、同じ読みのアクセント区間内の調整結果を保持します。</QTooltip
                     >
+                      テキスト変更時、同じ読みのアクセント区間内の調整結果を保持します。
+                    </QTooltip>
                   </QIcon>
                 </div>
                 <QSpace />
@@ -983,7 +985,7 @@
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>ソフトウェア利用状況のデータ収集を許可</div>
                 <div
-                  aria-label="ONの場合、各UIの利用率などのデータが送信され、AivisSpeechの改善に役立てられます。テキストデータや音声データは送信されません。"
+                  aria-label="ON にすると、各 UI の利用率などのデータが送信され、AivisSpeech の改善に役立てられます。テキストデータや音声データは送信されません。"
                 >
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
@@ -993,7 +995,8 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      ONの場合、各UIの利用率などのデータが送信され、AivisSpeechの改善に役立てられます。テキストデータ・音声データは送信されません。
+                      <!-- eslint-disable-next-line -->
+                      ON にすると、各 UI の利用率などのデータが送信され、AivisSpeech の改善に役立てられます。テキストデータ・音声データは送信されません。
                     </QTooltip>
                   </QIcon>
                 </div>
@@ -1176,7 +1179,7 @@ const acceptRetrieveTelemetryComputed = computed({
     store.dispatch("SHOW_ALERT_DIALOG", {
       title: "ソフトウェア利用状況のデータ収集の無効化",
       message:
-        "ソフトウェア利用状況のデータ収集を完全に無効にするには、AivisSpeechを再起動する必要があります",
+        "ソフトウェア利用状況のデータ収集を完全に無効にするには、AivisSpeech を再起動する必要があります",
       ok: "OK",
     });
   },
@@ -1267,7 +1270,7 @@ const outputSamplingRate = computed({
       const result = await store.dispatch("SHOW_CONFIRM_DIALOG", {
         title: "出力サンプリングレートを変更します",
         message:
-          "出力サンプリングレートを変更しても、音質は変化しません。また、音声の生成処理に若干時間がかかる場合があります。<br />変更しますか？",
+          "出力サンプリングレートを変更しても、音声の品質は上がりません。また、音声の生成処理に若干時間がかかる場合があります。<br />それでも変更しますか？",
         html: true,
         actionName: "変更する",
         cancel: "変更しない",
