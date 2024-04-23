@@ -77,7 +77,7 @@
                   </QTooltip>
                 </QBtnToggle>
               </QCardActions>
-              <!-- <QCardActions class="q-px-md bg-surface-darken">
+              <QCardActions class="q-px-md bg-surface-darken">
                 <div>音声のサンプリングレート</div>
                 <div
                   aria-label="再生と保存時の音声のサンプリングレートを変更できます（サンプリングレートを上げても音声の品質は上がりません）。"
@@ -104,7 +104,7 @@
                   :option-label="renderSamplingRateLabel"
                 >
                 </QSelect>
-              </QCardActions> -->
+              </QCardActions>
             </QCard>
             <!-- Preservation Setting -->
             <QCard flat class="setting-card">
@@ -867,7 +867,7 @@
                 >
                 </QToggle>
               </QCardActions> -->
-              <QCardActions class="q-px-md bg-surface-darken">
+              <!-- <QCardActions class="q-px-md bg-surface-darken">
                 <div>モーフィング機能</div>
                 <div
                   aria-label="モーフィング機能を有効にします。2つの音声を混ぜられるようになります。"
@@ -892,7 +892,7 @@
                   "
                 >
                 </QToggle>
-              </QCardActions>
+              </QCardActions> -->
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>複数選択</div>
                 <div aria-label="複数のテキスト欄を選択できるようにします。">
