@@ -81,7 +81,7 @@ const engineName = computed(() => {
 });
 
 const portraitPath = computed(
-  () => styleInfo.value?.portraitPath || characterInfo.value?.portraitPath,
+  () => styleInfo.value?.iconPath || characterInfo.value?.portraitPath,
 );
 
 const isInitializingSpeaker = computed(() => {
@@ -142,6 +142,7 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
     aspect-ratio: 1 / 1;
     background-position: center top;
     background-size: contain;
+    background-color: var(--color-splitter);
     // iOS アプリアイコンライクな Squircle な角丸
     // ref: https://b.0218.jp/202112010005.html
     clip-path: polygon(

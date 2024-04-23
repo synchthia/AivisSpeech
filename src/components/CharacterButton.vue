@@ -77,6 +77,7 @@
               <QAvatar rounded size="2rem" class="q-mr-md">
                 <QImg
                   v-if="characterInfo"
+                  class="character-icon"
                   no-spinner
                   no-transition
                   :ratio="1"
@@ -149,6 +150,7 @@
                     >
                       <QAvatar rounded size="2rem" class="q-mr-md">
                         <QImg
+                          class="character-icon"
                           no-spinner
                           no-transition
                           :ratio="1"
@@ -340,6 +342,7 @@ const updateMenuHeight = () => {
 .character-button {
   border: solid 1px;
   border-color: colors.$primary;
+  border-radius: 6px;
   font-size: 0;
   height: fit-content;
 
@@ -352,7 +355,9 @@ const updateMenuHeight = () => {
     img {
       max-height: 100%;
       max-width: 100%;
+      border-radius: 5px;
       object-fit: scale-down;
+      background-color: var(--color-splitter);
     }
   }
 
@@ -409,6 +414,11 @@ const updateMenuHeight = () => {
   .selected-style-item,
   .selected-background {
     background-color: rgba(colors.$primary-rgb, 0.2);
+  }
+
+  .character-icon {
+    border-radius: 5px;
+    background-color: var(--color-splitter);
   }
 
   .engine-icon {
