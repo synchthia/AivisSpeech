@@ -32,8 +32,8 @@
     "browser:build": "cross-env VITE_TARGET=browser vite build",
     "postinstall": "electron-builder install-app-deps && node build/download7z.js",
     "postuninstall": "electron-builder install-app-deps",
-    "license:generate": "node build/generateLicenses.js",
-    "license:merge": "node build/mergeLicenses.js",
+    "license:generate": "node build/generateLicenses.js -o public/licenses.json",
+    "license:merge": "node build/mergeLicenses.js -o public/licenses.json -i public/licenses.json",
     "openapi:generate": "rm -rf src/openapi/ && curl http://127.0.0.1:10101/openapi.json > openapi.json && openapi-generator-cli generate -i openapi.json -g typescript-fetch -o src/openapi/ --additional-properties \"modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true\""
   },
   "dependencies": {

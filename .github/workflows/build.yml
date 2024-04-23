@@ -3,14 +3,14 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - master
   release:
     types:
       - created
   workflow_dispatch:
     inputs:
       version:
-        description: "バージョン情報（A.BB.C / A.BB.C-preview.D）"
+        description: "バージョン情報 (A.BB.C / A.BB.C-preview.D)"
         required: true
       prerelease:
         description: "プレリリースかどうか"
@@ -21,14 +21,13 @@ on:
         type: boolean
         default: false
       upload_artifact:
-        description: "デバッグ用に成果物をartifactにアップロードするか"
+        description: "デバッグ用に成果物を artifact にアップロードするか"
         type: boolean
         default: false
 
 env:
   AIVISSPEECH_ENGINE_REPO_URL: "https://github.com/Aivis-Project/AivisSpeech-Engine"
   AIVISSPEECH_ENGINE_VERSION: 1.0.0
-  VOICEVOX_RESOURCE_VERSION: 0.18.0
   AIVISSPEECH_EDITOR_VERSION:
     |- # releaseタグ名か、workflow_dispatchでのバージョン名か、999.999.999-developが入る
     ${{ github.event.release.tag_name || github.event.inputs.version || '999.999.999-develop' }}
@@ -50,77 +49,53 @@ jobs:
       fail-fast: false
       matrix:
         artifact_name:
-          - linux-nvidia-prepackage
-          - linux-cpu-prepackage
-          - windows-nvidia-prepackage
-          - windows-cpu-prepackage
-          - windows-directml-prepackage
-          - macos-cpu-prepackage
+          - windows-x64-prepackage
+          - macos-x64-prepackage
+          - macos-arm64-prepackage
+          - linux-x64-prepackage
         include:
-          # Linux NVIDIA GPU
-          - artifact_name: linux-nvidia-prepackage
-            artifact_path: dist_electron/linux-unpacked
-            aivisspeech_engine_asset_name: linux-nvidia
+          # Windows x64
+          - artifact_name: windows-x64-prepackage
+            artifact_path: dist_electron/win-unpacked
+            aivisspeech_engine_asset_name: windows-x64
             package_name: AivisSpeech
-            compressed_artifact_name: aivisspeech-linux-nvidia
+            compressed_artifact_name: aivisspeech-windows-x64
             app_asar_dir: prepackage/resources
-            installer_artifact_name: linux-nvidia-appimage
+            installer_artifact_name: windows-x64-nsis-web
+            nsis_web_artifact_name: "AivisSpeech.Web.Setup.${version}.${ext}"
+            os: windows-2019
+          # macOS x64 (Intel Mac)
+          - artifact_name: macos-x64-prepackage
+            artifact_path: dist_electron/mac
+            aivisspeech_engine_asset_name: macos-x64
+            package_name: AivisSpeech
+            compressed_artifact_name: aivisspeech-macos-x64
+            app_asar_dir: prepackage/AivisSpeech.app/Contents/Resources
+            installer_artifact_name: macos-x64-dmg
+            macos_artifact_name: "AivisSpeech.${version}.${ext}"
+            os: macos-11
+          # macOS arm64 (Apple Silicon Mac)
+          - artifact_name: macos-arm64-prepackage
+            artifact_path: dist_electron/mac
+            aivisspeech_engine_asset_name: macos-arm64
+            package_name: AivisSpeech
+            compressed_artifact_name: aivisspeech-macos-arm64
+            app_asar_dir: prepackage/AivisSpeech.app/Contents/Resources
+            installer_artifact_name: macos-arm64-dmg
+            macos_artifact_name: "AivisSpeech.${version}.${ext}"
+            os: macos-11
+          # Linux x64
+          - artifact_name: linux-x64-prepackage
+            artifact_path: dist_electron/linux-unpacked
+            aivisspeech_engine_asset_name: linux-x64
+            package_name: AivisSpeech
+            compressed_artifact_name: aivisspeech-linux-x64
+            app_asar_dir: prepackage/resources
+            installer_artifact_name: linux-x64-appimage
             linux_artifact_name: "AivisSpeech.${ext}"
             linux_executable_name: AivisSpeech
             linux_appimage_7z_name: AivisSpeech.AppImage
             os: ubuntu-20.04
-          # Linux CPU
-          - artifact_name: linux-cpu-prepackage
-            artifact_path: dist_electron/linux-unpacked
-            aivisspeech_engine_asset_name: linux-cpu
-            package_name: aivisspeech-cpu
-            compressed_artifact_name: aivisspeech-linux-cpu
-            app_asar_dir: prepackage/resources
-            installer_artifact_name: linux-cpu-appimage
-            linux_artifact_name: "AivisSpeech.${ext}"
-            linux_executable_name: AivisSpeech
-            linux_appimage_7z_name: AivisSpeech-CPU.AppImage
-            os: ubuntu-20.04
-          # Windows CUDA
-          - artifact_name: windows-nvidia-prepackage
-            artifact_path: dist_electron/win-unpacked
-            aivisspeech_engine_asset_name: windows-nvidia
-            package_name: aivisspeech-cuda
-            compressed_artifact_name: aivisspeech-windows-nvidia
-            app_asar_dir: prepackage/resources
-            installer_artifact_name: windows-nvidia-nsis-web
-            nsis_web_artifact_name: "AivisSpeech-CUDA.Web.Setup.${version}.${ext}"
-            os: windows-2019
-          # Windows CPU
-          - artifact_name: windows-cpu-prepackage
-            artifact_path: dist_electron/win-unpacked
-            aivisspeech_engine_asset_name: windows-cpu
-            package_name: aivisspeech-cpu
-            compressed_artifact_name: aivisspeech-windows-cpu
-            app_asar_dir: prepackage/resources
-            installer_artifact_name: windows-cpu-nsis-web
-            nsis_web_artifact_name: "AivisSpeech-CPU.Web.Setup.${version}.${ext}"
-            os: windows-2019
-          # Windows DirectML
-          - artifact_name: windows-directml-prepackage
-            artifact_path: dist_electron/win-unpacked
-            aivisspeech_engine_asset_name: windows-directml
-            package_name: aivisspeech
-            compressed_artifact_name: aivisspeech-windows-directml
-            app_asar_dir: prepackage/resources
-            installer_artifact_name: windows-directml-nsis-web
-            nsis_web_artifact_name: "AivisSpeech.Web.Setup.${version}.${ext}"
-            os: windows-2019
-          # macOS CPU
-          - artifact_name: macos-cpu-prepackage
-            artifact_path: dist_electron/mac
-            aivisspeech_engine_asset_name: macos-x64
-            package_name: aivisspeech-cpu
-            compressed_artifact_name: aivisspeech-macos-cpu
-            app_asar_dir: prepackage/AivisSpeech.app/Contents/Resources
-            installer_artifact_name: macos-cpu-dmg
-            macos_artifact_name: "AivisSpeech.${version}.${ext}"
-            os: macos-11
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -172,27 +147,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Checkout Product Version Resource
-        uses: actions/checkout@v3
-        with:
-          repository: VOICEVOX/voicevox_resource
-          ref: ${{ env.VOICEVOX_RESOURCE_VERSION }}
-          path: resource
-
-      - name: Create and replace software resources
-        run: |
-          rm build/README.txt
-          rm public/policy.md
-          {
-            cat resource/editor/README.md
-            echo
-            cat resource/editor/ACKNOWLEDGMENTS.md
-          } \
-          > build/README.txt
-          cp build/README.txt public/policy.md
-
-          cp resource/editor/PRIVACYPOLICY.md public/privacyPolicy.md
-
       - name: Overwrite .env.production for Linux and macOS
         if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'macos-')
         run: |
@@ -201,11 +155,12 @@ jobs:
       - name: Replace .env.production infomations
         run: |
           # GTM ID
-          gtm_id=$(jq -er '.gtm_container_id' resource/editor/metas.json)
+          # FIXME: AivisSpeech 向けの GTM ID を設定する
+          gtm_id="GTM-DUMMY"
           $sed -i 's/VITE_GTM_CONTAINER_ID=.*/VITE_GTM_CONTAINER_ID='"$gtm_id"'/' .env.production
 
       - name: Generate public/licenses.json
-        run: npm run license:generate -- -o public/licenses.json
+        run: npm run license:generate
 
       - name: Define Code Signing Envs
         if: startsWith(matrix.os, 'windows-') && github.event.inputs.code_signing == 'true'
@@ -267,8 +222,7 @@ jobs:
           npx asar extract "${{ matrix.app_asar_dir }}/app.asar" "${{ matrix.app_asar_dir }}/app"
           rm "${{ matrix.app_asar_dir }}/app.asar"
 
-          mv AivisSpeech-Engine/licenses.json engine_licenses.json
-          npm run license:merge -- -o "${{ matrix.app_asar_dir }}/app/dist/licenses.json" -i engine_licenses.json -i "${{ matrix.app_asar_dir }}/app/dist/licenses.json"
+          npm run license:merge -- -i AivisSpeech-Engine/engine_manifest_assets/dependency_licenses.json
 
           # Repack asar
           npx asar pack "${{ matrix.app_asar_dir }}/app" "${{ matrix.app_asar_dir }}/app.asar"

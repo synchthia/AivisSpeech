@@ -68,11 +68,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            aivisspeech_engine_asset_name: linux-cpu
+            aivisspeech_engine_asset_name: linux-x64
           - os: macos-latest
             aivisspeech_engine_asset_name: macos-x64
           - os: windows-latest
-            aivisspeech_engine_asset_name: windows-cpu
+            aivisspeech_engine_asset_name: windows-x64
     steps:
       - uses: actions/checkout@v3
       - name: Setup environment
@@ -193,7 +193,7 @@ jobs:
         uses: ./.github/actions/setup-environment
 
       - name: Disallowed licenses check
-        run: npm run license:generate -- -o aivisspeech_licenses.json
+        run: npm run license:generate
 
       - run: npm run typecheck
       - run: npm run lint

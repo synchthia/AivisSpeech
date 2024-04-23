@@ -68,6 +68,11 @@ npm run lint
 
 # OpenAPI Generator による自動生成コードを更新
 npm run openapi:generate
+
+# 依存ライブラリのライセンス情報を生成
+## license:merge の -i オプションには AivisSpeech Engine の engine_manifest_assets/dependency_licenses.json のパスを指定
+npm run license:generate
+npm run license:merge -- -i ../AivisSpeech-Engine/engine_manifest_assets/dependency_licenses.json
 ```
 
 -----

@@ -10,7 +10,7 @@ on:
 defaults:
   run:
     shell: bash
-    
+
 jobs:
   typos:
     runs-on: ubuntu-latest
