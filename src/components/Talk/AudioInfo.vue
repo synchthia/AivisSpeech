@@ -337,6 +337,17 @@ const uiLocked = computed(() => store.getters.UI_LOCKED);
 const audioItem = computed(() => store.state.audioItems[props.activeAudioKey]);
 const query = computed(() => audioItem.value?.query);
 
+function findDefaultEngineId() {
+  // 'default'タイプのエンジンIDを検索
+  for (const engineInfo of store.getters.GET_SORTED_ENGINE_INFOS) {
+    if (engineInfo.type === "default") {
+      return engineInfo.uuid;
+    }
+  }
+  throw new Error("default engine not found");
+}
+const defaultEngineId = findDefaultEngineId();
+
 const supportedFeatures = computed(
   () =>
     (store.state.engineIds.some(
@@ -359,26 +370,35 @@ const selectedAudioKeys = computed(() =>
     : [props.activeAudioKey],
 );
 const parameters = computed<Parameter[]>(() => [
+  // AivisSpeech Engine 以外の音声合成エンジンでは「スタイルの強さ」を表示しない
+  ...(audioItem.value.voice.engineId === defaultEngineId
+    ? ([
+        {
+          label: "スタイルの強さ",
+          slider: previewSliderHelper({
+            modelValue: () => query.value?.styleStrengthScale ?? null,
+            disable: () => uiLocked.value,
+            max: SLIDER_PARAMETERS.STYLE_STRENGTH.max,
+            min: SLIDER_PARAMETERS.STYLE_STRENGTH.min,
+            step: SLIDER_PARAMETERS.STYLE_STRENGTH.step,
+            scrollStep: SLIDER_PARAMETERS.STYLE_STRENGTH.scrollStep,
+            onChange: (styleStrengthScale: number) =>
+              store.dispatch("COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE", {
+                audioKeys: selectedAudioKeys.value,
+                styleStrengthScale,
+              }),
+          }),
+          action: "COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE",
+          key: "styleStrengthScale",
+        },
+      ] as Parameter[])
+    : []),
   {
-    label: "スタイルの強さ",
-    slider: previewSliderHelper({
-      modelValue: () => query.value?.styleStrengthScale ?? null,
-      disable: () => uiLocked.value,
-      max: SLIDER_PARAMETERS.STYLE_STRENGTH.max,
-      min: SLIDER_PARAMETERS.STYLE_STRENGTH.min,
-      step: SLIDER_PARAMETERS.STYLE_STRENGTH.step,
-      scrollStep: SLIDER_PARAMETERS.STYLE_STRENGTH.scrollStep,
-      onChange: (styleStrengthScale: number) =>
-        store.dispatch("COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE", {
-          audioKeys: selectedAudioKeys.value,
-          styleStrengthScale,
-        }),
-    }),
-    action: "COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE",
-    key: "styleStrengthScale",
-  },
-  {
-    label: "テンポの緩急",
+    // AivisSpeech Engine 以外の音声合成エンジンでは「音高」と表示
+    label:
+      audioItem.value.voice.engineId === defaultEngineId
+        ? "テンポの緩急"
+        : "音高",
     slider: previewSliderHelper({
       modelValue: () => query.value?.intonationScale ?? null,
       disable: () =>
