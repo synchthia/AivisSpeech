@@ -26,7 +26,7 @@ AivisSpeech は、[VOICEVOX](https://github.com/VOICEVOX/voicevox) のエディ�
 
 ## 開発環境の構築
 
-手順は一部オリジナルの VOICEVOX と異なります。  
+手順はオリジナルの VOICEVOX と異なります。  
 事前に Node.js 18.13.0 がインストールされている必要があります。
 
 ```bash
@@ -44,6 +44,8 @@ poetry run task serve
 ```
 
 ## 開発
+
+手順は一部オリジナルの VOICEVOX と異なります。
 
 ```bash
 # 開発環境で Electron 版 AivisSpeech を起動
