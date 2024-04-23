@@ -92,7 +92,7 @@
                     :label="
                       getHotkeyText(
                         tableProps.row.action,
-                        tableProps.row.combination
+                        tableProps.row.combination,
                       )
                         .split(' ')
                         .map((hotkeyText) => {
@@ -190,7 +190,7 @@
           :disabled="confirmBtnEnabled"
           @click="
             changeHotkeySettings(lastAction, lastRecord).then(() =>
-              closeHotkeyDialog()
+              closeHotkeyDialog(),
             )
           "
         />
@@ -220,14 +220,12 @@ import {
 } from "@/type/preload";
 import { useHotkeyManager, eventToCombination } from "@/plugins/hotkeyPlugin";
 
-const props =
-  defineProps<{
-    modelValue: boolean;
-  }>();
-const emit =
-  defineEmits<{
-    (e: "update:modelValue", val: boolean): void;
-  }>();
+const props = defineProps<{
+  modelValue: boolean;
+}>();
+const emit = defineEmits<{
+  (e: "update:modelValue", val: boolean): void;
+}>();
 
 const store = useStore();
 
@@ -282,7 +280,7 @@ const recordCombination = (event: KeyboardEvent) => {
 const { hotkeyManager } = useHotkeyManager();
 const changeHotkeySettings = (
   action: string,
-  combination: HotkeyCombination
+  combination: HotkeyCombination,
 ) => {
   hotkeyManager.replace({
     action: action as HotkeyActionNameType,
@@ -300,7 +298,7 @@ const duplicatedHotkey = computed(() => {
   if (lastRecord.value == "") return undefined;
   return hotkeySettings.value.find(
     (item) =>
-      item.combination == lastRecord.value && item.action != lastAction.value
+      item.combination == lastRecord.value && item.action != lastAction.value,
   );
 });
 
@@ -353,7 +351,7 @@ const confirmBtnEnabled = computed(() => {
   return (
     lastRecord.value == "" ||
     ["Ctrl", "Shift", "Alt", "Meta"].includes(
-      lastRecord.value.split(" ")[lastRecord.value.split(" ").length - 1]
+      lastRecord.value.split(" ")[lastRecord.value.split(" ").length - 1],
     )
   );
 });
@@ -378,7 +376,7 @@ const resetHotkey = async (action: string) => {
         if (setting.combination) {
           const duplicated = hotkeySettings.value.find(
             (item) =>
-              item.combination == setting.combination && item.action != action
+              item.combination == setting.combination && item.action != action,
           );
           if (duplicated != undefined) {
             openHotkeyDialog(action);
@@ -393,8 +391,8 @@ const resetHotkey = async (action: string) => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-@use '@/styles/colors' as colors;
+@use "@/styles/variables" as vars;
+@use "@/styles/colors" as colors;
 
 .search-box {
   width: 200px;

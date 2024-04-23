@@ -8,7 +8,7 @@
       <QList v-if="selectedInfo === undefined">
         <template
           v-for="(engineId, engineIndex) in sortedEngineInfos.map(
-            (engineInfo) => engineInfo.uuid
+            (engineInfo) => engineInfo.uuid,
           )"
           :key="engineIndex"
         >
@@ -22,7 +22,7 @@
           <template
             v-for="([, characterInfo], characterIndex) in mapNullablePipe(
               engineInfos.get(engineId),
-              (v) => v.characterInfos
+              (v) => v.characterInfos,
             )"
             :key="characterIndex"
           >
@@ -59,7 +59,7 @@
               engineInfos.get(selectedInfo.engine),
               (v) => v.characterInfos,
               (v) => mapNullablePipe(selectedInfo, (i) => v.get(i.character)),
-              (v) => v.metas.speakerName
+              (v) => v.metas.speakerName,
             )
           }}
         </h3>
@@ -101,13 +101,13 @@ const engineInfos = computed(
               engineId,
               name: store.state.engineManifests[engineId].name,
               characterInfos: new Map(
-                characterInfos.map((ci) => [ci.metas.speakerUuid, ci])
+                characterInfos.map((ci) => [ci.metas.speakerUuid, ci]),
               ),
             },
           ];
-        }
-      )
-    )
+        },
+      ),
+    ),
 );
 
 const policy = computed<string | undefined>(() => {
@@ -117,7 +117,7 @@ const policy = computed<string | undefined>(() => {
   if (engineInfo == undefined) return undefined;
 
   const characterInfo = engineInfo.characterInfos.get(
-    selectedInfo.value.character
+    selectedInfo.value.character,
   );
   if (characterInfo == undefined) return undefined;
 

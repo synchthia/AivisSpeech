@@ -44,10 +44,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const props =
-  defineProps<{
-    licenses: Record<string, string>[];
-  }>();
+const props = defineProps<{
+  licenses: Record<string, string>[];
+}>();
 
 const detailIndex = ref<number | undefined>(undefined);
 

@@ -540,7 +540,7 @@ export type AudioCommandStoreTypes = {
       payload: { audioKey: AudioKey; accentPhraseIndex: number } & (
         | { isPause: false; moraIndex: number }
         | { isPause: true }
-      )
+      ),
     ): void;
   };
 
@@ -1760,7 +1760,7 @@ export type UiStoreTypes = {
         | {
             closeOrReload: "reload";
             isMultiEngineOffMode?: boolean;
-          }
+          },
     ): Promise<void>;
   };
 
@@ -1909,11 +1909,11 @@ export type IEngineConnectorFactoryActions = ReturnType<
 >;
 
 export type IEngineConnectorFactoryActionsMapper = <
-  K extends keyof IEngineConnectorFactoryActions
+  K extends keyof IEngineConnectorFactoryActions,
 >(
-  action: K
+  action: K,
 ) => (
-  _: Parameters<IEngineConnectorFactoryActions[K]>[0]
+  _: Parameters<IEngineConnectorFactoryActions[K]>[0],
 ) => ReturnType<IEngineConnectorFactoryActions[K]>;
 
 export type ProxyStoreTypes = {
@@ -1965,22 +1965,22 @@ export type AllActions = StoreType<AllStoreTypes, "action">;
 
 export const commandMutationsCreator = <S, M extends MutationsBase>(
   arg: PayloadRecipeTree<S, M>,
-  editor: EditorType
+  editor: EditorType,
 ): MutationTree<S, M> => createCommandMutationTree<S, M>(arg, editor);
 
 export const transformCommandStore = <
   S,
   G extends GettersBase,
   A extends ActionsBase,
-  M extends MutationsBase
+  M extends MutationsBase,
 >(
   options: StoreOptions<S, G, A, M, AllGetters, AllActions, AllMutations>,
-  editor: EditorType
+  editor: EditorType,
 ): StoreOptions<S, G, A, M, AllGetters, AllActions, AllMutations> => {
   if (options.mutations)
     options.mutations = commandMutationsCreator<S, M>(
       options.mutations as PayloadRecipeTree<S, M>,
-      editor
+      editor,
     );
   return options;
 };

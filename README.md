@@ -27,7 +27,7 @@ AivisSpeech は、[VOICEVOX](https://github.com/VOICEVOX/voicevox) のエディ�
 ## 開発環境の構築
 
 手順はオリジナルの VOICEVOX と異なります。  
-事前に Node.js 18.13.0 がインストールされている必要があります。
+事前に Node.js 20.12.2 がインストールされている必要があります。
 
 ```bash
 # 依存関係をすべてインストール

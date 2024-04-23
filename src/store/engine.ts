@@ -88,14 +88,14 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
       {
         engineIds,
         engineInfos,
-      }: { engineIds: EngineId[]; engineInfos: EngineInfo[] }
+      }: { engineIds: EngineId[]; engineInfos: EngineInfo[] },
     ) {
       state.engineIds = engineIds;
       state.engineInfos = Object.fromEntries(
-        engineInfos.map((engineInfo) => [engineInfo.uuid, engineInfo])
+        engineInfos.map((engineInfo) => [engineInfo.uuid, engineInfo]),
       );
       state.engineStates = Object.fromEntries(
-        engineInfos.map((engineInfo) => [engineInfo.uuid, "STARTING"])
+        engineInfos.map((engineInfo) => [engineInfo.uuid, "STARTING"]),
       );
     },
   },
@@ -103,7 +103,9 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
   SET_ENGINE_MANIFESTS: {
     mutation(
       state,
-      { engineManifests }: { engineManifests: Record<EngineId, EngineManifest> }
+      {
+        engineManifests,
+      }: { engineManifests: Record<EngineId, EngineManifest> },
     ) {
       state.engineManifests = engineManifests;
     },
@@ -121,9 +123,9 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
                 }).then(async (instance) => [
                   engineId,
                   await instance.invoke("engineManifestEngineManifestGet")({}),
-                ])
-            )
-          )
+                ]),
+            ),
+          ),
         ),
       });
     },
@@ -194,7 +196,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
             engineState: "FAILED_STARTING",
           });
         }
-      }
+      },
     ),
   },
 
@@ -213,7 +215,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
               anyNewCharacters: false,
             };
           }
-        })
+        }),
       );
 
       await dispatch("GET_ONLY_ENGINE_INFOS", { engineIds });
@@ -248,7 +250,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
             anyNewCharacters: newCharacters.length > 0,
           };
           return result;
-        })
+        }),
       );
       const mergedResult = {
         success: result.every((r) => r.success),
@@ -299,7 +301,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
       {
         engineId,
         engineState,
-      }: { engineId: EngineId; engineState: EngineState }
+      }: { engineId: EngineId; engineState: EngineState },
     ) {
       state.engineStates[engineId] = engineState;
     },
@@ -315,7 +317,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
       }).then((instance) =>
         instance.invoke("isInitializedSpeakerIsInitializedSpeakerGet")({
           speaker: styleId,
-        })
+        }),
       );
 
       return isInitialized;
@@ -334,7 +336,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
           }).then((instance) =>
             instance.invoke("initializeSpeakerInitializeSpeakerPost")({
               speaker: styleId,
-            })
+            }),
           ),
       });
     },
@@ -347,7 +349,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
   ADD_ENGINE_DIR: {
     action: async (_, { engineDir }) => {
       const registeredEngineDirs = await window.backend.getSetting(
-        "registeredEngineDirs"
+        "registeredEngineDirs",
       );
       await window.backend.setSetting("registeredEngineDirs", [
         ...registeredEngineDirs,
@@ -358,11 +360,11 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
   REMOVE_ENGINE_DIR: {
     action: async (_, { engineDir }) => {
       const registeredEngineDirs = await window.backend.getSetting(
-        "registeredEngineDirs"
+        "registeredEngineDirs",
       );
       await window.backend.setSetting(
         "registeredEngineDirs",
-        registeredEngineDirs.filter((path) => path !== engineDir)
+        registeredEngineDirs.filter((path) => path !== engineDir),
       );
     },
   },
@@ -382,7 +384,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
       {
         engineId,
         engineManifest,
-      }: { engineId: EngineId; engineManifest: EngineManifest }
+      }: { engineId: EngineId; engineManifest: EngineManifest },
     ) {
       state.engineManifests = {
         ...state.engineManifests,
@@ -398,7 +400,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
         engineManifest: await this.dispatch("INSTANTIATE_ENGINE_CONNECTOR", {
           engineId,
         }).then((instance) =>
-          instance.invoke("engineManifestEngineManifestGet")({})
+          instance.invoke("engineManifestEngineManifestGet")({}),
         ),
       });
     },
@@ -419,7 +421,7 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
         engineId,
       }).then(
         async (instance) =>
-          await instance.invoke("supportedDevicesSupportedDevicesGet")({})
+          await instance.invoke("supportedDevicesSupportedDevicesGet")({}),
       );
 
       commit("SET_ENGINE_SUPPORTED_DEVICES", {

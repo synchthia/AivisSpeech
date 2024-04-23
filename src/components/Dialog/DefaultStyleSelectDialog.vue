@@ -87,7 +87,7 @@
                           : play(
                               characterInfo.metas.speakerUuid,
                               style,
-                              voiceSampleIndex
+                              voiceSampleIndex,
                             )
                       "
                     />
@@ -120,18 +120,16 @@ import {
   StyleInfo,
 } from "@/type/preload";
 
-const props =
-  defineProps<{
-    isOpen: boolean;
-    selectedStyleIndex: number;
-    characterInfo: CharacterInfo;
-  }>();
+const props = defineProps<{
+  isOpen: boolean;
+  selectedStyleIndex: number;
+  characterInfo: CharacterInfo;
+}>();
 
-const emit =
-  defineEmits<{
-    (e: "update:isOpen", value: boolean): void;
-    (e: "update:selectedStyleIndex", value: number): void;
-  }>();
+const emit = defineEmits<{
+  (e: "update:isOpen", value: boolean): void;
+  (e: "update:selectedStyleIndex", value: number): void;
+}>();
 
 const store = useStore();
 
@@ -185,7 +183,7 @@ audio.onended = () => stop();
 const play = (
   speakerUuid: SpeakerId,
   { styleId, voiceSamplePaths }: StyleInfo,
-  index: number
+  index: number,
 ) => {
   if (audio.src !== "") stop();
 
@@ -204,12 +202,12 @@ const stop = () => {
 // 既に設定が存在する場合があるので、新しい設定と既存設定を合成させる
 const closeDialog = () => {
   const defaultStyleIds = JSON.parse(
-    JSON.stringify(store.state.defaultStyleIds)
+    JSON.stringify(store.state.defaultStyleIds),
   ) as DefaultStyleId[];
   store.dispatch("SET_DEFAULT_STYLE_IDS", [
     ...defaultStyleIds.filter(
       (defaultStyleId) =>
-        defaultStyleId.speakerUuid !== props.characterInfo.metas.speakerUuid
+        defaultStyleId.speakerUuid !== props.characterInfo.metas.speakerUuid,
     ),
     {
       speakerUuid: props.characterInfo.metas.speakerUuid,
@@ -228,8 +226,8 @@ const closeDialog = () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/variables' as vars;
-@use '@/styles/colors' as colors;
+@use "@/styles/variables" as vars;
+@use "@/styles/colors" as colors;
 
 .q-toolbar div:first-child {
   min-width: 0;

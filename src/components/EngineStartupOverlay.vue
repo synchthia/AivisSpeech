@@ -45,10 +45,9 @@ import { useStore } from "@/store";
 import { EngineState } from "@/store/type";
 
 const store = useStore();
-const props =
-  defineProps<{
-    isCompletedInitialStartup: boolean;
-  }>();
+const props = defineProps<{
+  isCompletedInitialStartup: boolean;
+}>();
 
 const reloadingLocked = computed(() => store.state.reloadingLock);
 const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
@@ -107,8 +106,8 @@ const openQa = () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/colors' as colors;
-@use '@/styles/variables' as vars;
+@use "@/styles/colors" as colors;
+@use "@/styles/variables" as vars;
 
 .waiting-engine {
   background-color: rgba(colors.$display-rgb, 0.15);
