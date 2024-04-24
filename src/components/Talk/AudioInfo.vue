@@ -384,15 +384,14 @@ const selectedAudioKeys = computed(() =>
 );
 const parameters = computed<Parameter[]>(() => [
   // AivisSpeech Engine 以外の音声合成エンジンでは「スタイルの強さ」を表示しない
-  // デフォルトスタイルの場合も表示しない
-  // eslint-disable-next-line prettier/prettier
-  ...(audioItem.value.voice.engineId === defaultEngineId && isDefaultStyle.value === false
+  ...(audioItem.value.voice.engineId === defaultEngineId
     ? ([
         {
           label: "スタイルの強さ",
           slider: previewSliderHelper({
             modelValue: () => query.value?.styleStrengthScale ?? null,
-            disable: () => uiLocked.value,
+            // デフォルトスタイルでは「スタイルの強さ」は効果がないので無効化
+            disable: () => uiLocked.value || isDefaultStyle.value,
             max: SLIDER_PARAMETERS.STYLE_STRENGTH.max,
             min: SLIDER_PARAMETERS.STYLE_STRENGTH.min,
             step: SLIDER_PARAMETERS.STYLE_STRENGTH.step,
