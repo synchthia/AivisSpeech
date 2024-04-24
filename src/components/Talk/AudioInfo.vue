@@ -174,7 +174,7 @@
             dense
             maxlength="5"
             step="0.1"
-            style="width: 38px; margin-left: auto"
+            style="width: 39px; margin-left: auto"
             class="audio-info-input"
             :class="{
               disabled: parameter.slider.qSliderProps.disable.value,
@@ -348,6 +348,19 @@ function findDefaultEngineId() {
 }
 const defaultEngineId = findDefaultEngineId();
 
+// 操作対象のスタイルがデフォルトスタイル (当該話者の 0 番目のスタイル) かどうか
+const isDefaultStyle = computed(() => {
+  const allCharacterInfos = store.getters.USER_ORDERED_CHARACTER_INFOS("talk");
+  if (allCharacterInfos == undefined)
+    throw new Error("USER_ORDERED_CHARACTER_INFOS == undefined");
+  const characterInfo = allCharacterInfos.find(
+    (info) => info.metas.speakerUuid === audioItem.value.voice.speakerId,
+  );
+  return (
+    characterInfo?.metas.styles[0].styleId === audioItem.value.voice.styleId
+  );
+});
+
 const supportedFeatures = computed(
   () =>
     (store.state.engineIds.some(
@@ -371,7 +384,9 @@ const selectedAudioKeys = computed(() =>
 );
 const parameters = computed<Parameter[]>(() => [
   // AivisSpeech Engine 以外の音声合成エンジンでは「スタイルの強さ」を表示しない
-  ...(audioItem.value.voice.engineId === defaultEngineId
+  // デフォルトスタイルの場合も表示しない
+  // eslint-disable-next-line prettier/prettier
+  ...(audioItem.value.voice.engineId === defaultEngineId && isDefaultStyle.value === false
     ? ([
         {
           label: "スタイルの強さ",
@@ -394,11 +409,11 @@ const parameters = computed<Parameter[]>(() => [
       ] as Parameter[])
     : []),
   {
-    // AivisSpeech Engine 以外の音声合成エンジンでは「音高」と表示
+    // AivisSpeech Engine 以外の音声合成エンジンでは「抑揚」と表示
     label:
       audioItem.value.voice.engineId === defaultEngineId
         ? "テンポの緩急"
-        : "音高",
+        : "抑揚",
     slider: previewSliderHelper({
       modelValue: () => query.value?.intonationScale ?? null,
       disable: () =>

@@ -14,7 +14,11 @@
         >
           <!-- エンジンが一つだけの場合は名前を表示しない -->
           <template v-if="engineInfos.size > 1">
-            <QSeparator v-if="engineIndex > 0" spaced />
+            <QSeparator
+              v-if="engineIndex > 0"
+              style="margin-top: 20px !important"
+              spaced
+            />
             <QItemLabel header>{{
               mapNullablePipe(engineInfos.get(engineId), (v) => v.name)
             }}</QItemLabel>
