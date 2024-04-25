@@ -96,15 +96,15 @@ if (!isDevelopment) {
 }
 
 log.initialize({ preload: false });
-// silly以上のログをコンソールに出力
-log.transports.console.format = "[{h}:{i}:{s}.{ms}] [{level}] {text}";
+// silly 以上のログをコンソールに出力
+log.transports.console.format = "[{y}/{m}/{d} {h}:{i}:{s}] {level}: {text}";
 log.transports.console.level = "silly";
 
-// warn以上のログをファイルに出力
+// info 以上のログをファイルに出力
 const prefix = dayjs().format("YYYYMMDD_HHmmss");
-log.transports.file.format = "[{h}:{i}:{s}.{ms}] [{level}] {text}";
-log.transports.file.level = "warn";
-log.transports.file.fileName = `${prefix}_error.log`;
+log.transports.file.format = "[{y}/{m}/{d} {h}:{i}:{s}] {level}: {text}";
+log.transports.file.level = "info";
+log.transports.file.fileName = `${prefix}.log`;
 
 if (errorForRemoveBeforeUserDataDir != undefined) {
   log.error(errorForRemoveBeforeUserDataDir);
