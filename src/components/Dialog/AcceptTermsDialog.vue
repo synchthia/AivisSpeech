@@ -19,6 +19,7 @@
             <QBtn
               outline
               label="同意せずに終了"
+              icon="close"
               color="toolbar-button"
               text-color="toolbar-button-display"
               class="text-no-wrap q-mr-md text-bold"
@@ -28,6 +29,7 @@
             <QBtn
               outline
               label="同意して使用開始"
+              icon="done"
               color="toolbar-button"
               text-color="toolbar-button-display"
               class="text-no-wrap text-bold"
