@@ -22,7 +22,7 @@ import {
 
 /**
  * AIVM (Aivis Voice Model) マニフェストの話者の定義
- * 画像や音声サンプルは容量が大きいためマニフェストには含まれず、 別途ファイルとして AIVM に格納される
+ * 画像やボイスサンプルは容量が大きいためマニフェストには含まれず、 別途ファイルとして AIVM に格納される
  * @export
  * @interface AivmManifestSpeaker
  */

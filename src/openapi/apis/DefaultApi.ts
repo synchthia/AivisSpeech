@@ -260,7 +260,7 @@ export interface DefaultApiInterface {
      * @param {string} text 
      * @param {number} speaker 
      * @param {boolean} [isKana] 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -314,7 +314,7 @@ export interface DefaultApiInterface {
      * @summary 音声合成用のクエリを作成する
      * @param {string} text 
      * @param {number} speaker 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -332,7 +332,7 @@ export interface DefaultApiInterface {
      * @summary 音声合成用のクエリをプリセットを用いて作成する
      * @param {string} text 
      * @param {number} presetId 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -350,7 +350,7 @@ export interface DefaultApiInterface {
      * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {number} speaker 
      * @param {AudioQuery} audioQuery 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -443,7 +443,7 @@ export interface DefaultApiInterface {
      * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {number} speaker 
      * @param {FrameAudioQuery} frameAudioQuery 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -589,7 +589,7 @@ export interface DefaultApiInterface {
      * @summary アクセント句から音高・音素長を得る
      * @param {number} speaker 
      * @param {Array<AccentPhrase>} accentPhrase 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -606,7 +606,7 @@ export interface DefaultApiInterface {
      * @summary アクセント句から音素長を得る
      * @param {number} speaker 
      * @param {Array<AccentPhrase>} accentPhrase 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -623,7 +623,7 @@ export interface DefaultApiInterface {
      * @summary アクセント句から音高を得る
      * @param {number} speaker 
      * @param {Array<AccentPhrase>} accentPhrase 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -639,7 +639,7 @@ export interface DefaultApiInterface {
      * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
      * @summary 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      * @param {Array<number>} requestBody 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -657,7 +657,7 @@ export interface DefaultApiInterface {
      * @summary 複数まとめて音声合成する
      * @param {number} speaker 
      * @param {Array<AudioQuery>} audioQuery 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -727,7 +727,7 @@ export interface DefaultApiInterface {
      * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
      * @param {number} speaker 
      * @param {Score} score 
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -742,8 +742,8 @@ export interface DefaultApiInterface {
     /**
      * 
      * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
-     * @param {string} speakerUuid 
-     * @param {string} [coreVersion] 
+     * @param {string} speakerUuid 話者の UUID 。
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -758,7 +758,7 @@ export interface DefaultApiInterface {
     /**
      * 
      * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
-     * @param {string} [coreVersion] 
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -842,8 +842,8 @@ export interface DefaultApiInterface {
      * @summary 音声合成する
      * @param {number} speaker 
      * @param {AudioQuery} audioQuery 
-     * @param {boolean} [enableInterrogativeUpspeak] 疑問系のテキストが与えられたら語尾を自動調整する
-     * @param {string} [coreVersion] 
+     * @param {boolean} [enableInterrogativeUpspeak] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
+     * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface

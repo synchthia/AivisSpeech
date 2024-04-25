@@ -43,6 +43,12 @@ export interface StyleInfo {
      * @memberof StyleInfo
      */
     voiceSamples: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof StyleInfo
+     */
+    voiceSampleTranscripts?: Array<string>;
 }
 
 /**
@@ -71,6 +77,7 @@ export function StyleInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'icon': json['icon'],
         'portrait': !exists(json, 'portrait') ? undefined : json['portrait'],
         'voiceSamples': json['voice_samples'],
+        'voiceSampleTranscripts': !exists(json, 'voice_sample_transcripts') ? undefined : json['voice_sample_transcripts'],
     };
 }
 
@@ -87,6 +94,7 @@ export function StyleInfoToJSON(value?: StyleInfo | null): any {
         'icon': value.icon,
         'portrait': value.portrait,
         'voice_samples': value.voiceSamples,
+        'voice_sample_transcripts': value.voiceSampleTranscripts,
     };
 }
 
