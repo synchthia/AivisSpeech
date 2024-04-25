@@ -4,7 +4,12 @@
       v-if="$q.platform.is.mac && !isFullscreen"
       class="mac-traffic-light-space"
     ></div>
-    <img v-else src="/icon.png" class="window-logo" alt="application logo" />
+    <img
+      v-else
+      src="/icon-square.png"
+      class="window-logo"
+      alt="application logo"
+    />
     <MenuButton
       v-for="(root, index) of menudata"
       :key="index"
