@@ -70,9 +70,9 @@ npm run lint
 npm run openapi:generate
 
 # 依存ライブラリのライセンス情報を生成
-## license:merge の -i オプションには AivisSpeech Engine の engine_manifest_assets/dependency_licenses.json のパスを指定
+## VOICEVOX と異なり、音声合成エンジンとのライセンス情報との統合は行わない
+## エディタ側で別途エンジンマニフェストから取得したライセンス情報を表示できるようにしているため不要
 npm run license:generate
-npm run license:merge -- -i ../AivisSpeech-Engine/engine_manifest_assets/dependency_licenses.json
 ```
 
 -----

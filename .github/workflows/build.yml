@@ -215,19 +215,6 @@ jobs:
           dest: ${{ github.workspace }}/AivisSpeech-Engine
           target: ${{ matrix.aivisspeech_engine_asset_name }}
 
-      # FIXME: asarをextract/packせず、ビルド前にengine_licenses.jsonとlicenses.jsonを結合する
-      - name: Merge licenses.json (ENGINE, AivisSpeech)
-        run: |
-          # Unpack asar
-          npx asar extract "${{ matrix.app_asar_dir }}/app.asar" "${{ matrix.app_asar_dir }}/app"
-          rm "${{ matrix.app_asar_dir }}/app.asar"
-
-          npm run license:merge -- -i AivisSpeech-Engine/engine_manifest_assets/dependency_licenses.json
-
-          # Repack asar
-          npx asar pack "${{ matrix.app_asar_dir }}/app" "${{ matrix.app_asar_dir }}/app.asar"
-          rm -rf "${{ matrix.app_asar_dir }}/app"
-
       - name: Merge AivisSpeech Engine into prepackage/
         if: startsWith(matrix.artifact_name, 'windows-') || startsWith(matrix.artifact_name, 'linux-')
         run: |
