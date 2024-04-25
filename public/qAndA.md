@@ -118,11 +118,11 @@ Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project))
 
 #### Mac 版
 
-`/Users/(ユーザー名)/Library/Application Support/AivisSpeech/logs`
+`/Users/(ユーザー名)/Library/Logs/AivisSpeech`
 
 ### Q. 音声合成エンジンのエラーログはどこで確認できますか？
 
-ヘルプ → お問い合わせ → 音声合成エンジンのログフォルダを開くボタン から確認できます。具体的には以下のフォルダに保存されています。
+以下のフォルダに保存されています。
 
 #### Windows 版
 
