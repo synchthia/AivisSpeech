@@ -17,7 +17,7 @@
 
           <div class="row items-center no-wrap">
             <QBtn
-              unelevated
+              outline
               label="同意せずに終了"
               color="toolbar-button"
               text-color="toolbar-button-display"
@@ -26,7 +26,7 @@
             />
 
             <QBtn
-              unelevated
+              outline
               label="同意して使用開始"
               color="toolbar-button"
               text-color="toolbar-button-display"
