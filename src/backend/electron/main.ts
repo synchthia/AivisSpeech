@@ -480,6 +480,7 @@ async function loadUrl(obj: {
 
 // 開始。その他の準備が完了した後に呼ばれる。
 async function start() {
+  log.info(`AivisSpeech version ${app.getVersion()}`);
   await launchEngines();
   await createWindow();
 }
