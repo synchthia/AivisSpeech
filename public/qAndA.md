@@ -52,7 +52,7 @@ macOS: macOS Catalina 以降
 
 ### Q. 過去のバージョンに戻すことはできますか？
 
-[こちら](https://github.com/Aivis-Project/AivisSpeech/releases)から過去のバージョンを入手することが出来ます。
+[こちら](https://github.com/Aivis-Project/AivisSpeech/releases) から過去のバージョンを入手することが出来ます。
 
 ## 使い方に関する質問
 
@@ -91,14 +91,14 @@ Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project))
 
 ### Q. 音声合成エンジンの起動が失敗したというエラーが表示されます
 
-対応する GPU が搭載されていない PC で GPU モードとして起動するとエラーが表示されます。  
+対応する GPU が搭載されていない PC で GPU モードとして起動するとエラーが表示される場合があります。  
 設定 → 音声合成エンジンから CPU モードを選んでください。
 
 また、以前起動した音声合成エンジンが正常に停止されずに残っているかもしれません。その場合は PC の再起動をお試しください。
 
 ### Q. GPU モードで起動するとエラーが表示されます
 
-対応する GPU が搭載されていない PC で GPU モードとして起動するとエラーが表示されます。  
+対応する GPU が搭載されていない PC で GPU モードとして起動するとエラーが表示される場合があります。  
 設定 → 音声合成エンジンから CPU モードを選んでください。
 
 ### Q. 音声が再生されません
@@ -118,7 +118,19 @@ Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project))
 
 #### Mac 版
 
-`/Users/(ユーザー名)/Library/Logs/AivisSpeech`
+`/Users/(ユーザー名)/Library/Application Support/AivisSpeech/logs`
+
+### Q. 音声合成エンジンのエラーログはどこで確認できますか？
+
+ヘルプ → お問い合わせ → 音声合成エンジンのログフォルダを開くボタン から確認できます。具体的には以下のフォルダに保存されています。
+
+#### Windows 版
+
+`C:\Users\(ユーザー名)\AppData\Roaming\AivisSpeech-Engine\logs`
+
+#### Mac 版
+
+`/Users/(ユーザー名)/Library/Application Support/AivisSpeech-Engine/logs`
 
 ## その他
 
