@@ -71,9 +71,8 @@
                     :delay="500"
                     :target="!gpuSwitchEnabled(selectedEngineId)"
                   >
-                    {{
-                      engineInfos[selectedEngineId].name
-                    }}はCPU版のためGPUモードを利用できません。
+                    {{ engineInfos[selectedEngineId].name }}
+                    は CPU 版のため、GPU モードは利用できません。
                   </QTooltip>
                 </QBtnToggle>
               </QCardActions>
