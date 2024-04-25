@@ -42,7 +42,7 @@
               </QCardActions>
               <QCardActions class="q-px-md bg-surface-darken">
                 <div>エンジンモード</div>
-                <div aria-label="GPU モードの利用には GPU が必要です。">
+                <div aria-label="GPU モードの利用には NVIDIA GPU が必要です。">
                   <QIcon name="help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
@@ -51,7 +51,7 @@
                       transition-show="jump-right"
                       transition-hide="jump-left"
                     >
-                      GPU モードの利用には対応 GPU が必要です。
+                      GPU モードの利用には NVIDIA GPU が必要です。
                     </QTooltip>
                   </QIcon>
                 </div>

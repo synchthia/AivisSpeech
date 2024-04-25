@@ -149,6 +149,26 @@ const pagedata = computed(() => {
   const data: PageData[] = [
     {
       type: "item",
+      name: "使い方",
+      component: HowToUse,
+    },
+    {
+      type: "item",
+      name: "よくある質問 / Q&A",
+      component: QAndA,
+    },
+    {
+      type: "item",
+      name: "お問い合わせ",
+      component: ContactInfo,
+    },
+    {
+      type: "item",
+      name: "音声合成モデルの利用規約",
+      component: LibraryPolicy,
+    },
+    {
+      type: "item",
       name: "アップデート情報",
       component: UpdateInfo,
       props: {
@@ -167,21 +187,6 @@ const pagedata = computed(() => {
     },
     {
       type: "item",
-      name: "使い方",
-      component: HowToUse,
-    },
-    {
-      type: "item",
-      name: "よくある質問 / Q&A",
-      component: QAndA,
-    },
-    {
-      type: "item",
-      name: "音声合成モデルの利用規約",
-      component: LibraryPolicy,
-    },
-    {
-      type: "item",
       name: "ライセンス情報",
       component: HelpPolicy,
       props: {
@@ -196,58 +201,50 @@ const pagedata = computed(() => {
         licenses: licenses.value,
       },
     },
-    {
-      type: "item",
-      name: "お問い合わせ",
-      component: ContactInfo,
-    },
   ];
-  // エンジンが一つだけの場合は従来の表示のみ
-  if (store.state.engineIds.length > 1) {
-    for (const id of store.getters.GET_SORTED_ENGINE_INFOS.map((m) => m.uuid)) {
-      const manifest = store.state.engineManifests[id];
-      if (!manifest) {
-        warn(`manifest not found: ${id}`);
-        continue;
-      }
-
-      data.push(
-        {
-          type: "separator",
-          name: manifest.name,
-        },
-        {
-          type: "item",
-          name: "利用規約",
-          parent: manifest.name,
-          component: HelpPolicy,
-          props: {
-            policy: manifest.termsOfService,
-          },
-        },
-        {
-          type: "item",
-          name: "ライセンス情報",
-          parent: manifest.name,
-          component: OssLicense,
-          props: {
-            licenses: manifest.dependencyLicenses,
-          },
-        },
-        {
-          type: "item",
-          name: "アップデート情報",
-          parent: manifest.name,
-          component: UpdateInfo,
-          props: {
-            updateInfos: manifest.updateInfos,
-            // TODO: エンジン側で最新バージョンチェックAPIが出来たら実装する。
-            //       https://github.com/VOICEVOX/voicevox_engine/issues/476
-            isUpdateAvailable: false,
-          },
-        },
-      );
+  for (const id of store.getters.GET_SORTED_ENGINE_INFOS.map((m) => m.uuid)) {
+    const manifest = store.state.engineManifests[id];
+    if (!manifest) {
+      warn(`manifest not found: ${id}`);
+      continue;
     }
+
+    data.push(
+      {
+        type: "separator",
+        name: manifest.name,
+      },
+      {
+        type: "item",
+        name: "アップデート情報",
+        parent: manifest.name,
+        component: UpdateInfo,
+        props: {
+          updateInfos: manifest.updateInfos,
+          // TODO: エンジン側で最新バージョンチェックAPIが出来たら実装する。
+          //       https://github.com/VOICEVOX/voicevox_engine/issues/476
+          isUpdateAvailable: false,
+        },
+      },
+      {
+        type: "item",
+        name: "ライセンス情報",
+        parent: manifest.name,
+        component: HelpPolicy,
+        props: {
+          policy: manifest.termsOfService,
+        },
+      },
+      {
+        type: "item",
+        name: "オープンソースライセンス",
+        parent: manifest.name,
+        component: OssLicense,
+        props: {
+          licenses: manifest.dependencyLicenses,
+        },
+      },
+    );
   }
   return data;
 });
