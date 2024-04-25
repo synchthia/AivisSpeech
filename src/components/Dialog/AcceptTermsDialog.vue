@@ -28,8 +28,8 @@
 
             <QBtn
               outline
-              label="同意して使用開始"
-              icon="done"
+              label="同意してはじめる"
+              icon="power_settings_new"
               color="toolbar-button"
               text-color="toolbar-button-display"
               class="text-no-wrap text-bold"
