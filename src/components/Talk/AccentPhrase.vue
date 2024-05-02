@@ -435,7 +435,10 @@ const handleChangeVoicing = (mora: Mora, moraIndex: number) => {
 }
 .text-cell-highlighted {
   font-weight: bold;
-  cursor: pointer;
+  cursor: text !important;
+  span {
+    text-decoration: underline;
+  }
 }
 .splitter-cell {
   min-width: 20px;
@@ -446,6 +449,7 @@ const handleChangeVoicing = (mora: Mora, moraIndex: number) => {
 .splitter-cell-accent {
   @extend.splitter-cell;
   grid-row: 2 / 4;
+  cursor: col-resize !important;
 }
 .splitter-cell:hover {
   background-color: colors.$text-splitter-hover;
@@ -455,6 +459,7 @@ const handleChangeVoicing = (mora: Mora, moraIndex: number) => {
   min-width: 40px;
   max-width: 40px;
   grid-row: 1 / span 3;
+  cursor: col-resize !important;
 }
 .splitter-cell-be-split-pause {
   min-width: 20px;
@@ -479,7 +484,7 @@ const handleChangeVoicing = (mora: Mora, moraIndex: number) => {
 }
 
 .mora-table-hover:hover {
-  cursor: pointer;
+  cursor: cell;
   background-color: colors.$active-point-hover;
 }
 
