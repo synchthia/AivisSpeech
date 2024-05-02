@@ -686,11 +686,10 @@ const toDialogClosedState = () => {
 }
 
 .word-list {
-  // menubar-height + toolbar-height + window-border-width +
-  // 82(title & buttons) + 30(margin 15x2)
+  // menubar-height + toolbar-height + window-border-width
   height: calc(
     100vh - #{vars.$menubar-height + vars.$toolbar-height +
-      vars.$window-border-width + 82px + 30px}
+      vars.$window-border-width}
   );
   width: 100%;
   overflow-y: auto;
