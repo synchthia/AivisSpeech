@@ -43,7 +43,7 @@ export const useMenuBarData = () => {
     },
     {
       type: "button",
-      label: "テキスト読み込み",
+      label: "テキストを読み込む",
       onClick: () => {
         store.dispatch("COMMAND_IMPORT_FROM_FILE", {});
       },

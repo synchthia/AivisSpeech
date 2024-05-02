@@ -8,6 +8,8 @@
 
 ### Mac 版
 
+<details><summary>クリックで展開</summary>
+
 初回起動時は Apple に登録されていないアプリケーションとして警告ダイアログが表示されるかもしれません。
 
 <img src="res/gatekeeper.png" style="max-height: 16rem" alt="「AivisSpeechは開発を検証できないため開けません」というダイアログ"/>
@@ -26,6 +28,8 @@ macOS Ventura 以前をお使いの場合は、アップルメニューから「
 初めて AivisSpeech を起動する際に Rosetta のインストールを促される場合は、案内に従ってインストールしてください。
 
 <img src="res/macos-big-sur-software-update-rosetta-alert.jpg" style="max-height: 12rem" alt="Rosettaのインストールを確認するダイアログ"/>
+
+</details>
 
 ## 音声合成エンジンの起動
 
