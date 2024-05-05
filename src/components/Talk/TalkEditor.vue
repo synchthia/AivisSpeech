@@ -24,6 +24,7 @@
         >
           <template #before>
             <QSplitter
+              unit="px"
               :limits="[MIN_PORTRAIT_PANE_WIDTH, MAX_PORTRAIT_PANE_WIDTH]"
               separator-class="home-splitter"
               :separator-style="{ width: shouldShowPanes ? '3px' : '0' }"
@@ -265,9 +266,9 @@ const removeAudioItem = async () => {
 };
 
 // view
-const DEFAULT_PORTRAIT_PANE_WIDTH = 22; // %
+const DEFAULT_PORTRAIT_PANE_WIDTH = 165; // px
 const MIN_PORTRAIT_PANE_WIDTH = 0;
-const MAX_PORTRAIT_PANE_WIDTH = 40;
+const MAX_PORTRAIT_PANE_WIDTH = 400;
 const DEFAULT_AUDIO_INFO_PANE_WIDTH = 200; // px
 const MIN_AUDIO_INFO_PANE_WIDTH = 200;
 const MAX_AUDIO_INFO_PANE_WIDTH = 250;
