@@ -73,7 +73,7 @@ jobs:
             app_asar_dir: prepackage/AivisSpeech.app/Contents/Resources
             installer_artifact_name: macos-x64-dmg
             macos_artifact_name: "AivisSpeech.${version}.${ext}"
-            os: macos-11
+            os: macos-12
           # macOS arm64 (Apple Silicon Mac)
           - artifact_name: macos-arm64-prepackage
             artifact_path: dist_electron/mac
@@ -83,7 +83,7 @@ jobs:
             app_asar_dir: prepackage/AivisSpeech.app/Contents/Resources
             installer_artifact_name: macos-arm64-dmg
             macos_artifact_name: "AivisSpeech.${version}.${ext}"
-            os: macos-11
+            os: macos-12
           # Linux x64
           - artifact_name: linux-x64-prepackage
             artifact_path: dist_electron/linux-unpacked
@@ -190,7 +190,7 @@ jobs:
 
           # https://github.com/electron-userland/electron-builder/issues/3179
           USE_HARD_LINKS: false
-        run: npm run electron:build_dir
+        run: npm run electron:build -- --dir
 
       - name: Reset Code Signing Envs
         if: startsWith(matrix.os, 'windows-') && github.event.inputs.code_signing == 'true'
@@ -334,14 +334,14 @@ jobs:
           LINUX_ARTIFACT_NAME: ${{ matrix.linux_artifact_name }}
           LINUX_EXECUTABLE_NAME: ${{ matrix.linux_executable_name }}
         run: |
-          PREPACKAGED="prepackage" npm run electron:build_pnever_prepackaged
+          npm run electron:build -- --prepackaged prepackage/
 
       - name: Build Electron (for macOS)
         if: endsWith(matrix.installer_artifact_name, '-dmg') # macOS
         env:
           MACOS_ARTIFACT_NAME: ${{ matrix.macos_artifact_name }}
         run: |
-          PREPACKAGED="prepackage/AivisSpeech.app" npm run electron:build_pnever_prepackaged
+          npm run electron:build -- --prepackaged prepackage/AivisSpeech.app
 
       - name: Reset Code Signing Envs
         if: startsWith(matrix.os, 'windows-') && github.event.inputs.code_signing == 'true'
