@@ -362,13 +362,22 @@ VOICEVOX API 準拠音声合成エンジンを AivisSpeech 内で利用できる
 
 インストールしたフォルダの中にある Uninstall AivisSpeech.exe を実行してください。
 
+すべての設定データを削除するには、以下のフォルダを削除してください。
+
+- `C:\Users\(ユーザー名)\AppData\Roaming\AivisSpeech`
+- `C:\Users\(ユーザー名)\AppData\Roaming\AivisSpeech-Engine`
+
 ### Mac 版
 
 「アプリケーション」フォルダにある AivisSpeech を「ゴミ箱」にドラッグ＆ドロップしてください。  
 
 マルチエンジン機能で追加したエンジンを削除する場合は、Finder のメニューバーの「移動」をクリックし、「フォルダへ移動」をクリックして表示された画面に `~/Library/Application Support/AivisSpeech` と入力して `Enter` キーを押し、`vvpp-engines` フォルダを削除すれば完了です。
 
-すべての設定データを削除するには、`~/Library/Application Support/AivisSpeech`・`~/Library/Logs/AivisSpeech` フォルダを削除してください。
+すべての設定データを削除するには、以下のフォルダを削除してください。
+
+- `~/Library/Application Support/AivisSpeech`
+- `~/Library/Application Support/AivisSpeech-Engine`
+- `~/Library/Logs/AivisSpeech`
 
 ## ご感想・ご要望・バグ報告など
 
