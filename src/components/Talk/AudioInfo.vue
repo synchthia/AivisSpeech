@@ -426,8 +426,8 @@ const parameters = computed<Parameter[]>(() => [
           tooltip:
             "話者スタイルの声色の強弱を調整できます\n" +
             "強くするとよりそのスタイルに近い抑揚がついた声になります\n" +
-            "強くしすぎるとスタイル次第で棒読みになるため適宜調整してください\n" +
-            "（デフォルトスタイルでは変更できません）",
+            "強くしすぎるとスタイル次第では棒読みになるため注意\n" +
+            "（ノーマルスタイルでは変更できません）",
           slider: previewSliderHelper({
             modelValue: () => query.value?.styleStrengthScale ?? null,
             // デフォルトスタイルでは「スタイルの強さ」は効果がないので無効化
