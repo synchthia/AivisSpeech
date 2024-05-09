@@ -34,12 +34,6 @@ import {
 export interface Speaker {
     /**
      * 
-     * @type {SpeakerSupportedFeatures}
-     * @memberof Speaker
-     */
-    supportedFeatures?: SpeakerSupportedFeatures;
-    /**
-     * 
      * @type {string}
      * @memberof Speaker
      */
@@ -62,6 +56,12 @@ export interface Speaker {
      * @memberof Speaker
      */
     version?: string;
+    /**
+     * 
+     * @type {SpeakerSupportedFeatures}
+     * @memberof Speaker
+     */
+    supportedFeatures?: SpeakerSupportedFeatures;
 }
 
 /**
@@ -86,11 +86,11 @@ export function SpeakerFromJSONTyped(json: any, ignoreDiscriminator: boolean): S
     }
     return {
         
-        'supportedFeatures': !exists(json, 'supported_features') ? undefined : SpeakerSupportedFeaturesFromJSON(json['supported_features']),
         'name': json['name'],
         'speakerUuid': json['speaker_uuid'],
         'styles': ((json['styles'] as Array<any>).map(SpeakerStyleFromJSON)),
         'version': !exists(json, 'version') ? undefined : json['version'],
+        'supportedFeatures': !exists(json, 'supported_features') ? undefined : SpeakerSupportedFeaturesFromJSON(json['supported_features']),
     };
 }
 
@@ -103,11 +103,11 @@ export function SpeakerToJSON(value?: Speaker | null): any {
     }
     return {
         
-        'supported_features': SpeakerSupportedFeaturesToJSON(value.supportedFeatures),
         'name': value.name,
         'speaker_uuid': value.speakerUuid,
         'styles': ((value.styles as Array<any>).map(SpeakerStyleToJSON)),
         'version': value.version,
+        'supported_features': SpeakerSupportedFeaturesToJSON(value.supportedFeatures),
     };
 }
 

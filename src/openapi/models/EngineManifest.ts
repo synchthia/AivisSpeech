@@ -109,7 +109,7 @@ export interface EngineManifest {
      * @type {string}
      * @memberof EngineManifest
      */
-    supportedAivmManifestVersion?: string | null;
+    supportedVvlibManifestVersion?: string | null;
     /**
      * 
      * @type {SupportedFeatures}
@@ -160,7 +160,7 @@ export function EngineManifestFromJSONTyped(json: any, ignoreDiscriminator: bool
         'termsOfService': json['terms_of_service'],
         'updateInfos': ((json['update_infos'] as Array<any>).map(UpdateInfoFromJSON)),
         'dependencyLicenses': ((json['dependency_licenses'] as Array<any>).map(LicenseInfoFromJSON)),
-        'supportedAivmManifestVersion': !exists(json, 'supported_aivm_manifest_version') ? undefined : json['supported_aivm_manifest_version'],
+        'supportedVvlibManifestVersion': !exists(json, 'supported_vvlib_manifest_version') ? undefined : json['supported_vvlib_manifest_version'],
         'supportedFeatures': SupportedFeaturesFromJSON(json['supported_features']),
     };
 }
@@ -185,7 +185,7 @@ export function EngineManifestToJSON(value?: EngineManifest | null): any {
         'terms_of_service': value.termsOfService,
         'update_infos': ((value.updateInfos as Array<any>).map(UpdateInfoToJSON)),
         'dependency_licenses': ((value.dependencyLicenses as Array<any>).map(LicenseInfoToJSON)),
-        'supported_aivm_manifest_version': value.supportedAivmManifestVersion,
+        'supported_vvlib_manifest_version': value.supportedVvlibManifestVersion,
         'supported_features': SupportedFeaturesToJSON(value.supportedFeatures),
     };
 }

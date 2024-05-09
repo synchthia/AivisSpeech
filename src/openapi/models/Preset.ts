@@ -44,34 +44,41 @@ export interface Preset {
      */
     styleId: number;
     /**
-     * 指定された話者のスタイルをどの程度全体に反映するかを指定する。
-     * 例えばスタイルが Happy ならば、この値を大きくするほど全体の話し方が明るくなる。
-     * 一方値を大きくしすぎると発声がおかしくなりがちなので、適宜調整が必要。
-     * VOICEVOX ENGINE との互換性のため、未指定時はデフォルト値が適用される。
-     * @type {number}
-     * @memberof Preset
-     */
-    styleStrengthScale?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Preset
-     */
-    intonationScale: number;
-    /**
-     * 
+     * 全体の話速を 0.5 ~ 2.0 の範囲で指定する (デフォルト: 1.0) 。
+     * 2.0 で 2 倍速、0.5 で 0.5 倍速になる。
      * @type {number}
      * @memberof Preset
      */
     speedScale: number;
     /**
-     * 
+     * 話者スタイルの声色の強弱を 0.0 ~ 2.0 の範囲で指定する (デフォルト: 1.0) 。
+     * 値が大きいほどそのスタイルに近い抑揚がついた声になる。
+     * 例えば話者スタイルが「うれしい」なら、値が大きいほどより嬉しそうな明るい話し方になる。
+     * 一方スタイルによっては値を大きくしすぎると不自然な棒読みボイスになりがちなので、適宜調整が必要。
+     * 全スタイルの平均であるノーマルスタイルには指定できない (値にかかわらず無視される) 。
+     * @type {number}
+     * @memberof Preset
+     */
+    intonationScale: number;
+    /**
+     * 話す速さの緩急の強弱を 0.0 ~ 2.0 の範囲で指定する (デフォルト: 1.0) 。
+     * 値が大きいほどより早口で生っぽい抑揚がついた声になる。
+     * VOICEVOX ENGINE との互換性のため、未指定時はデフォルト値が適用される。
+     * @type {number}
+     * @memberof Preset
+     */
+    tempoDynamicsScale?: number;
+    /**
+     * 全体の音高を -0.15 ~ 0.15 の範囲で指定する (デフォルト: 0.0) 。
+     * 値が大きいほど高い声になる。
+     * VOICEVOX ENGINE と異なり、この値を 0.0 から変更すると音質が劣化するため注意が必要。
      * @type {number}
      * @memberof Preset
      */
     pitchScale: number;
     /**
-     * 
+     * 全体の音量を 0.0 ~ 2.0 の範囲で指定する (デフォルト: 1.0) 。
+     * 値が大きいほど大きな声になる。
      * @type {number}
      * @memberof Preset
      */
@@ -99,8 +106,8 @@ export function instanceOfPreset(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "speakerUuid" in value;
     isInstance = isInstance && "styleId" in value;
-    isInstance = isInstance && "intonationScale" in value;
     isInstance = isInstance && "speedScale" in value;
+    isInstance = isInstance && "intonationScale" in value;
     isInstance = isInstance && "pitchScale" in value;
     isInstance = isInstance && "volumeScale" in value;
     isInstance = isInstance && "prePhonemeLength" in value;
@@ -123,9 +130,9 @@ export function PresetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pr
         'name': json['name'],
         'speakerUuid': json['speaker_uuid'],
         'styleId': json['style_id'],
-        'styleStrengthScale': !exists(json, 'styleStrengthScale') ? undefined : json['styleStrengthScale'],
-        'intonationScale': json['intonationScale'],
         'speedScale': json['speedScale'],
+        'intonationScale': json['intonationScale'],
+        'tempoDynamicsScale': !exists(json, 'tempoDynamicsScale') ? undefined : json['tempoDynamicsScale'],
         'pitchScale': json['pitchScale'],
         'volumeScale': json['volumeScale'],
         'prePhonemeLength': json['prePhonemeLength'],
@@ -146,9 +153,9 @@ export function PresetToJSON(value?: Preset | null): any {
         'name': value.name,
         'speaker_uuid': value.speakerUuid,
         'style_id': value.styleId,
-        'styleStrengthScale': value.styleStrengthScale,
-        'intonationScale': value.intonationScale,
         'speedScale': value.speedScale,
+        'intonationScale': value.intonationScale,
+        'tempoDynamicsScale': value.tempoDynamicsScale,
         'pitchScale': value.pitchScale,
         'volumeScale': value.volumeScale,
         'prePhonemeLength': value.prePhonemeLength,

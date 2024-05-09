@@ -496,6 +496,21 @@ export interface DefaultApiInterface {
     getInstalledAivmInfosAivmModelsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: AivmInfo; }>;
 
     /**
+     * ポータルページを返します。
+     * @summary Get Portal
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getPortalGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>>;
+
+    /**
+     * ポータルページを返します。
+     * Get Portal
+     */
+    getPortalGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string>;
+
+    /**
      * エンジンが保持しているプリセットの設定を返します
      * @summary Get Presets
      * @param {*} [options] Override http request option.
@@ -645,7 +660,7 @@ export interface DefaultApiInterface {
     moraPitchMoraPitchPost(requestParameters: MoraPitchMoraPitchPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AccentPhrase>>;
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
      * @summary 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      * @param {Array<number>} requestBody 
      * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
@@ -656,7 +671,7 @@ export interface DefaultApiInterface {
     morphableTargetsMorphableTargetsPostRaw(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: MorphableTargetInfo; }>>>;
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
      * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      */
     morphableTargetsMorphableTargetsPost(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<{ [key: string]: MorphableTargetInfo; }>>;
@@ -844,7 +859,7 @@ export interface DefaultApiInterface {
     supportedDevicesSupportedDevicesGet(requestParameters: SupportedDevicesSupportedDevicesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SupportedDevicesInfo>;
 
     /**
-     * 指定された2種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は`morph_rate`で指定でき、0.0でベースのスタイル、1.0でターゲットのスタイルに近づきます。
+     * 指定された 2 種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は `morph_rate` で指定でき、0.0 でベースのスタイル、1.0 でターゲットのスタイルに近づきます。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 常に 400 Bad Request を返します。
      * @summary 2種類のスタイルでモーフィングした音声を合成する
      * @param {number} baseSpeaker 
      * @param {number} targetSpeaker 
@@ -858,7 +873,7 @@ export interface DefaultApiInterface {
     synthesisMorphingSynthesisMorphingPostRaw(requestParameters: SynthesisMorphingSynthesisMorphingPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
 
     /**
-     * 指定された2種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は`morph_rate`で指定でき、0.0でベースのスタイル、1.0でターゲットのスタイルに近づきます。
+     * 指定された 2 種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は `morph_rate` で指定でき、0.0 でベースのスタイル、1.0 でターゲットのスタイルに近づきます。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 常に 400 Bad Request を返します。
      * 2種類のスタイルでモーフィングした音声を合成する
      */
     synthesisMorphingSynthesisMorphingPost(requestParameters: SynthesisMorphingSynthesisMorphingPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
@@ -1505,6 +1520,38 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * ポータルページを返します。
+     * Get Portal
+     */
+    async getPortalGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<string>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * ポータルページを返します。
+     * Get Portal
+     */
+    async getPortalGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
+        const response = await this.getPortalGetRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
      * エンジンが保持しているプリセットの設定を返します
      * Get Presets
      */
@@ -1856,7 +1903,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
      * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      */
     async morphableTargetsMorphableTargetsPostRaw(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: MorphableTargetInfo; }>>> {
@@ -1886,7 +1933,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は`/speakers`の`speaker.supported_features.synthesis_morphing`に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイルIDはstring型なので注意。
+     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
      * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
      */
     async morphableTargetsMorphableTargetsPost(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<{ [key: string]: MorphableTargetInfo; }>> {
@@ -2342,7 +2389,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定された2種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は`morph_rate`で指定でき、0.0でベースのスタイル、1.0でターゲットのスタイルに近づきます。
+     * 指定された 2 種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は `morph_rate` で指定でき、0.0 でベースのスタイル、1.0 でターゲットのスタイルに近づきます。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 常に 400 Bad Request を返します。
      * 2種類のスタイルでモーフィングした音声を合成する
      */
     async synthesisMorphingSynthesisMorphingPostRaw(requestParameters: SynthesisMorphingSynthesisMorphingPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
@@ -2396,7 +2443,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定された2種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は`morph_rate`で指定でき、0.0でベースのスタイル、1.0でターゲットのスタイルに近づきます。
+     * 指定された 2 種類のスタイルで音声を合成、指定した割合でモーフィングした音声を得ます。 モーフィングの割合は `morph_rate` で指定でき、0.0 でベースのスタイル、1.0 でターゲットのスタイルに近づきます。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 常に 400 Bad Request を返します。
      * 2種類のスタイルでモーフィングした音声を合成する
      */
     async synthesisMorphingSynthesisMorphingPost(requestParameters: SynthesisMorphingSynthesisMorphingPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
