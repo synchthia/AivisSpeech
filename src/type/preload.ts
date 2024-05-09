@@ -418,9 +418,9 @@ export type EngineInfo = {
 
 export type Preset = {
   name: string;
-  styleStrengthScale?: number; // AiviSpeech 固有のフィールド
-  intonationScale: number;
   speedScale: number;
+  intonationScale: number;
+  tempoDynamicsScale?: number; // AivisSpeech 固有のフィールド
   pitchScale: number;
   volumeScale: number;
   prePhonemeLength: number;
@@ -642,9 +642,9 @@ export const configSchema = z
             presetKeySchema,
             z.object({
               name: z.string(),
-              styleStrengthScale: z.number().optional(), // AiviSpeech 固有のフィールド
-              intonationScale: z.number(),
               speedScale: z.number(),
+              intonationScale: z.number(),
+              tempoDynamicsScale: z.number().optional(), // AivisSpeech 固有のフィールド
               pitchScale: z.number(),
               volumeScale: z.number(),
               prePhonemeLength: z.number(),

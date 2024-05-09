@@ -681,11 +681,11 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
       ) {
         //引数にbaseAudioItemがある場合、話速等のパラメータを引き継いだAudioItemを返す
         //baseAudioItem.queryが未設定の場合は引き継がない(起動直後等？)
-        newAudioItem.query.styleStrengthScale =
-          baseAudioItem.query.styleStrengthScale;
+        newAudioItem.query.speedScale = baseAudioItem.query.speedScale;
         newAudioItem.query.intonationScale =
           baseAudioItem.query.intonationScale;
-        newAudioItem.query.speedScale = baseAudioItem.query.speedScale;
+        newAudioItem.query.tempoDynamicsScale =
+          baseAudioItem.query.tempoDynamicsScale;
         newAudioItem.query.pitchScale = baseAudioItem.query.pitchScale;
         newAudioItem.query.volumeScale = baseAudioItem.query.volumeScale;
         newAudioItem.query.prePhonemeLength =
@@ -797,17 +797,14 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
     },
   },
 
-  SET_AUDIO_STYLE_STRENGTH_SCALE: {
+  SET_AUDIO_SPEED_SCALE: {
     mutation(
       state,
-      {
-        audioKey,
-        styleStrengthScale,
-      }: { audioKey: AudioKey; styleStrengthScale: number },
+      { audioKey, speedScale }: { audioKey: AudioKey; speedScale: number },
     ) {
       const query = state.audioItems[audioKey].query;
       if (query == undefined) throw new Error("query == undefined");
-      query.styleStrengthScale = styleStrengthScale;
+      query.speedScale = speedScale;
     },
   },
 
@@ -825,14 +822,17 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
     },
   },
 
-  SET_AUDIO_SPEED_SCALE: {
+  SET_AUDIO_TEMPO_DYNAMICS_SCALE: {
     mutation(
       state,
-      { audioKey, speedScale }: { audioKey: AudioKey; speedScale: number },
+      {
+        audioKey,
+        tempoDynamicsScale,
+      }: { audioKey: AudioKey; tempoDynamicsScale: number },
     ) {
       const query = state.audioItems[audioKey].query;
       if (query == undefined) throw new Error("query == undefined");
-      query.speedScale = speedScale;
+      query.tempoDynamicsScale = tempoDynamicsScale;
     },
   },
 
@@ -2591,23 +2591,20 @@ export const audioCommandStore = transformCommandStore(
       },
     },
 
-    COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE: {
-      mutation(
-        draft,
-        payload: { audioKeys: AudioKey[]; styleStrengthScale: number },
-      ) {
+    COMMAND_MULTI_SET_AUDIO_SPEED_SCALE: {
+      mutation(draft, payload: { audioKeys: AudioKey[]; speedScale: number }) {
         for (const audioKey of payload.audioKeys) {
-          audioStore.mutations.SET_AUDIO_STYLE_STRENGTH_SCALE(draft, {
+          audioStore.mutations.SET_AUDIO_SPEED_SCALE(draft, {
             audioKey,
-            styleStrengthScale: payload.styleStrengthScale,
+            speedScale: payload.speedScale,
           });
         }
       },
       action(
         { commit },
-        payload: { audioKeys: AudioKey[]; styleStrengthScale: number },
+        payload: { audioKeys: AudioKey[]; speedScale: number },
       ) {
-        commit("COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE", payload);
+        commit("COMMAND_MULTI_SET_AUDIO_SPEED_SCALE", payload);
       },
     },
 
@@ -2631,20 +2628,23 @@ export const audioCommandStore = transformCommandStore(
       },
     },
 
-    COMMAND_MULTI_SET_AUDIO_SPEED_SCALE: {
-      mutation(draft, payload: { audioKeys: AudioKey[]; speedScale: number }) {
+    COMMAND_MULTI_SET_AUDIO_TEMPO_DYNAMICS_SCALE: {
+      mutation(
+        draft,
+        payload: { audioKeys: AudioKey[]; tempoDynamicsScale: number },
+      ) {
         for (const audioKey of payload.audioKeys) {
-          audioStore.mutations.SET_AUDIO_SPEED_SCALE(draft, {
+          audioStore.mutations.SET_AUDIO_TEMPO_DYNAMICS_SCALE(draft, {
             audioKey,
-            speedScale: payload.speedScale,
+            tempoDynamicsScale: payload.tempoDynamicsScale,
           });
         }
       },
       action(
         { commit },
-        payload: { audioKeys: AudioKey[]; speedScale: number },
+        payload: { audioKeys: AudioKey[]; tempoDynamicsScale: number },
       ) {
-        commit("COMMAND_MULTI_SET_AUDIO_SPEED_SCALE", payload);
+        commit("COMMAND_MULTI_SET_AUDIO_TEMPO_DYNAMICS_SCALE", payload);
       },
     },
 

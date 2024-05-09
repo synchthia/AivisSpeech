@@ -418,50 +418,27 @@ const parameters = computed<Parameter[]>(() => [
     action: "COMMAND_MULTI_SET_AUDIO_SPEED_SCALE",
     key: "speedScale",
   },
-  // AivisSpeech Engine 以外の音声合成エンジンでは「スタイルの強さ」を表示しない
-  ...(audioItem.value.voice.engineId === defaultEngineId
-    ? ([
-        {
-          label: "スタイルの強さ",
-          tooltip:
-            "話者スタイルの声色の強弱を調整できます\n" +
-            "強くするとよりそのスタイルに近い抑揚がついた声になります\n" +
-            "強くしすぎるとスタイル次第では棒読みになるため注意\n" +
-            "（ノーマルスタイルでは変更できません）",
-          slider: previewSliderHelper({
-            modelValue: () => query.value?.styleStrengthScale ?? null,
-            // デフォルトスタイルでは「スタイルの強さ」は効果がないので無効化
-            disable: () => uiLocked.value || isDefaultStyle.value,
-            max: SLIDER_PARAMETERS.STYLE_STRENGTH.max,
-            min: SLIDER_PARAMETERS.STYLE_STRENGTH.min,
-            step: SLIDER_PARAMETERS.STYLE_STRENGTH.step,
-            scrollStep: SLIDER_PARAMETERS.STYLE_STRENGTH.scrollStep,
-            onChange: (styleStrengthScale: number) =>
-              store.dispatch("COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE", {
-                audioKeys: selectedAudioKeys.value,
-                styleStrengthScale,
-              }),
-          }),
-          action: "COMMAND_MULTI_SET_AUDIO_STYLE_STRENGTH_SCALE",
-          key: "styleStrengthScale",
-        },
-      ] as Parameter[])
-    : []),
   {
-    // AivisSpeech Engine 以外の音声合成エンジンでは「抑揚」と表示
+    // 「スタイルの強さ」は AivisSpeech Engine 以外の音声合成エンジンでは「抑揚」と表示
     label:
       audioItem.value.voice.engineId === defaultEngineId
-        ? "テンポの緩急"
+        ? "スタイルの強さ"
         : "抑揚",
     tooltip:
       audioItem.value.voice.engineId === defaultEngineId
-        ? "話す速さの緩急の強弱を調整できます\n強くするとより早口で生っぽい抑揚がついた声になります"
+        ? "話者スタイルの声色の強弱を調整できます\n" +
+          "強くするとよりそのスタイルに近い抑揚がついた声になります\n" +
+          "強くしすぎるとスタイル次第では棒読みになるため注意\n" +
+          "（ノーマルスタイルでは変更できません）"
         : "抑揚の強弱を調整できます",
     slider: previewSliderHelper({
       modelValue: () => query.value?.intonationScale ?? null,
+      // デフォルトスタイルでは「スタイルの強さ」は効果がないので無効化
       disable: () =>
         uiLocked.value ||
-        supportedFeatures.value?.adjustIntonationScale === false,
+        supportedFeatures.value?.adjustIntonationScale === false ||
+        (audioItem.value.voice.engineId === defaultEngineId &&
+          isDefaultStyle.value),
       max: SLIDER_PARAMETERS.INTONATION.max,
       min: SLIDER_PARAMETERS.INTONATION.min,
       step: SLIDER_PARAMETERS.INTONATION.step,
@@ -476,6 +453,31 @@ const parameters = computed<Parameter[]>(() => [
     action: "COMMAND_MULTI_SET_AUDIO_INTONATION_SCALE",
     key: "intonationScale",
   },
+  // AivisSpeech Engine 以外の音声合成エンジンでは「テンポの緩急」を表示しない
+  ...(audioItem.value.voice.engineId === defaultEngineId
+    ? ([
+        {
+          label: "テンポの緩急",
+          tooltip:
+            "話す速さの緩急の強弱を調整できます\n強くするとより早口で生っぽい抑揚がついた声になります",
+          slider: previewSliderHelper({
+            modelValue: () => query.value?.tempoDynamicsScale ?? null,
+            disable: () => uiLocked.value,
+            max: SLIDER_PARAMETERS.TEMPO_DYNAMICS.max,
+            min: SLIDER_PARAMETERS.TEMPO_DYNAMICS.min,
+            step: SLIDER_PARAMETERS.TEMPO_DYNAMICS.step,
+            scrollStep: SLIDER_PARAMETERS.TEMPO_DYNAMICS.scrollStep,
+            onChange: (tempoDynamicsScale: number) =>
+              store.dispatch("COMMAND_MULTI_SET_AUDIO_TEMPO_DYNAMICS_SCALE", {
+                audioKeys: selectedAudioKeys.value,
+                tempoDynamicsScale,
+              }),
+          }),
+          action: "COMMAND_MULTI_SET_AUDIO_TEMPO_DYNAMICS_SCALE",
+          key: "tempoDynamicsScale",
+        },
+      ] as Parameter[])
+    : []),
   {
     label: "音高",
     tooltip: "声の高さを調整できます\n0.00 から変更すると音質が劣化します",

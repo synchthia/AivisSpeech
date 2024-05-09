@@ -45,17 +45,17 @@ export function sanitizeFileName(fileName: string): string {
  */
 export const SLIDER_PARAMETERS = {
   /**
-   * スタイルの強さパラメータの定義
+   * 話速パラメータの定義
    */
-  STYLE_STRENGTH: {
-    max: () => 10,
-    min: () => 0,
+  SPEED: {
+    max: () => 2,
+    min: () => 0.5,
     step: () => 0.01,
     scrollStep: () => 0.1,
     scrollMinStep: () => 0.01,
   },
   /**
-   * テンポの緩急パラメータの定義
+   * スタイルの強さパラメータの定義
    */
   INTONATION: {
     max: () => 2,
@@ -65,11 +65,11 @@ export const SLIDER_PARAMETERS = {
     scrollMinStep: () => 0.01,
   },
   /**
-   * 話速パラメータの定義
+   * テンポの緩急パラメータの定義
    */
-  SPEED: {
+  TEMPO_DYNAMICS: {
     max: () => 2,
-    min: () => 0.5,
+    min: () => 0,
     step: () => 0.01,
     scrollStep: () => 0.1,
     scrollMinStep: () => 0.01,
