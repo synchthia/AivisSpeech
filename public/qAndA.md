@@ -7,7 +7,7 @@
 Windows・macOS 搭載の PC に対応しています。
 
 Windows: Windows 10・Windows 11  
-macOS: macOS Catalina 以降  
+macOS: macOS 12 Monterey 以降  
 
 ## インストールに関する質問
 

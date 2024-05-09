@@ -1384,7 +1384,7 @@ export type IndexStoreTypes = {
   };
 
   GET_ALL_VOICES: {
-    getter: Voice[];
+    getter(styleType: "all" | "singerLike" | "talk"): Voice[];
   };
 
   GET_HOW_TO_USE_TEXT: {
