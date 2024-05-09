@@ -149,7 +149,6 @@ div {
   &.accent-select-cell {
     grid-row-start: 2;
     text-align: center;
-    cursor: pointer;
     svg line {
       stroke: colors.$primary;
       stroke-dasharray: 3;

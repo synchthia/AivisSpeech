@@ -2,7 +2,11 @@
   <div
     ref="container"
     class="mora-table"
-    :class="[isActive && 'mora-table-focus', uiLocked || 'mora-table-hover']"
+    :class="[
+      isActive && 'mora-table-focus',
+      uiLocked || 'mora-table-hover',
+      isDefaultEngine && 'mora-table-default-engine',
+    ]"
     @click="$emit('click', index)"
   >
     <ContextMenu :menudata="contextMenudata" />
@@ -411,6 +415,20 @@ const handleChangeVoicing = (mora: Mora, moraIndex: number) => {
     changeMoraData(moraIndex, data, "voicing");
   }
 };
+
+function findDefaultEngineId() {
+  // 'default'タイプのエンジンIDを検索
+  for (const engineInfo of store.getters.GET_SORTED_ENGINE_INFOS) {
+    if (engineInfo.type === "default") {
+      return engineInfo.uuid;
+    }
+  }
+  throw new Error("default engine not found");
+}
+const audioItem = computed(() => store.state.audioItems[props.audioKey]);
+const isDefaultEngine = computed(() => {
+  return audioItem.value.voice.engineId === findDefaultEngineId();
+});
 </script>
 
 <style scoped lang="scss">
@@ -449,16 +467,25 @@ const handleChangeVoicing = (mora: Mora, moraIndex: number) => {
 .splitter-cell-accent {
   @extend.splitter-cell;
   grid-row: 2 / 4;
+  cursor: not-allowed;
+}
+.mora-table-hover .splitter-cell-accent {
   cursor: col-resize !important;
 }
 .splitter-cell:hover {
   background-color: colors.$text-splitter-hover;
+  cursor: not-allowed;
+}
+.mora-table-hover .splitter-cell:hover {
   cursor: pointer;
 }
 .splitter-cell-be-split {
   min-width: 40px;
   max-width: 40px;
   grid-row: 1 / span 3;
+  cursor: not-allowed;
+}
+.mora-table-hover .splitter-cell-be-split {
   cursor: col-resize !important;
 }
 .splitter-cell-be-split-pause {
@@ -491,5 +518,18 @@ const handleChangeVoicing = (mora: Mora, moraIndex: number) => {
 .mora-table-focus {
   // hover色に負けるので、importantが必要
   background-color: colors.$active-point-focus !important;
+}
+
+// デフォルトエンジン (= AivisSpeech Engine) は実装上常にダミーの音素長 (0.0) を返すため、
+// 合成音声の再生中は常に最後のアクセント区系列だけがハイライトされる
+// これだと見栄えが悪いので、デフォルトエンジンのみ再生中位置のハイライトを無効化する (機能としては残っているが、見た目上は無効化)
+.mora-table-default-engine {
+  &.mora-table-hover:hover {
+    cursor: default;
+    background-color: transparent !important;
+  }
+  &.mora-table-focus {
+    background-color: transparent !important;
+  }
 }
 </style>
