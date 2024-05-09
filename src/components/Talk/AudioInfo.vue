@@ -169,7 +169,19 @@
     <div class="parameters q-px-md q-mt-sm">
       <div v-for="parameter in parameters" :key="parameter.label">
         <div class="row items-center">
-          <span class="text-body1 text-display">{{ parameter.label }}</span>
+          <span
+            class="text-body1 text-display"
+            style="font-feature-settings: &quot;halt&quot;"
+          >
+            {{ parameter.label }}
+          </span>
+          <QIcon name="help_outline" size="xs" class="help-hover-icon">
+            <QTooltip anchor="top middle" self="bottom middle" :offset="[0, 8]">
+              <span style="white-space: pre-line; word-break: keep-all">
+                {{ parameter.tooltip }}
+              </span>
+            </QTooltip>
+          </QIcon>
           <QInput
             dense
             maxlength="5"
@@ -373,6 +385,7 @@ const supportedFeatures = computed(
 // FIXME: slider.onChangeとhandleParameterChangeでstate変更が２経路になっているので統一する
 type Parameter = {
   label: string;
+  tooltip: string;
   slider: PreviewSliderHelper;
   action: Parameters<typeof store.dispatch>[0]["type"];
   key: keyof Omit<Preset, "name" | "morphingInfo">;
@@ -383,11 +396,38 @@ const selectedAudioKeys = computed(() =>
     : [props.activeAudioKey],
 );
 const parameters = computed<Parameter[]>(() => [
+  {
+    label: "話速",
+    tooltip:
+      "話す速さを調整できます\n2.00 で 2 倍速、0.50 で 0.5 倍速になります",
+    slider: previewSliderHelper({
+      modelValue: () => query.value?.speedScale ?? null,
+      disable: () =>
+        uiLocked.value || supportedFeatures.value?.adjustSpeedScale === false,
+      max: SLIDER_PARAMETERS.SPEED.max,
+      min: SLIDER_PARAMETERS.SPEED.min,
+      step: SLIDER_PARAMETERS.SPEED.step,
+      scrollStep: SLIDER_PARAMETERS.SPEED.scrollStep,
+      scrollMinStep: SLIDER_PARAMETERS.SPEED.scrollMinStep,
+      onChange: (speedScale: number) =>
+        store.dispatch("COMMAND_MULTI_SET_AUDIO_SPEED_SCALE", {
+          audioKeys: selectedAudioKeys.value,
+          speedScale,
+        }),
+    }),
+    action: "COMMAND_MULTI_SET_AUDIO_SPEED_SCALE",
+    key: "speedScale",
+  },
   // AivisSpeech Engine 以外の音声合成エンジンでは「スタイルの強さ」を表示しない
   ...(audioItem.value.voice.engineId === defaultEngineId
     ? ([
         {
           label: "スタイルの強さ",
+          tooltip:
+            "話者スタイルの声色の強弱を調整できます\n" +
+            "強くするとよりそのスタイルに近い抑揚がついた声になります\n" +
+            "強くしすぎるとスタイル次第で棒読みになるため適宜調整してください\n" +
+            "（デフォルトスタイルでは変更できません）",
           slider: previewSliderHelper({
             modelValue: () => query.value?.styleStrengthScale ?? null,
             // デフォルトスタイルでは「スタイルの強さ」は効果がないので無効化
@@ -413,6 +453,10 @@ const parameters = computed<Parameter[]>(() => [
       audioItem.value.voice.engineId === defaultEngineId
         ? "テンポの緩急"
         : "抑揚",
+    tooltip:
+      audioItem.value.voice.engineId === defaultEngineId
+        ? "話す速さの緩急の強弱を調整できます\n強くするとより早口で生っぽい抑揚がついた声になります"
+        : "抑揚の強弱を調整できます",
     slider: previewSliderHelper({
       modelValue: () => query.value?.intonationScale ?? null,
       disable: () =>
@@ -433,27 +477,8 @@ const parameters = computed<Parameter[]>(() => [
     key: "intonationScale",
   },
   {
-    label: "話速",
-    slider: previewSliderHelper({
-      modelValue: () => query.value?.speedScale ?? null,
-      disable: () =>
-        uiLocked.value || supportedFeatures.value?.adjustSpeedScale === false,
-      max: SLIDER_PARAMETERS.SPEED.max,
-      min: SLIDER_PARAMETERS.SPEED.min,
-      step: SLIDER_PARAMETERS.SPEED.step,
-      scrollStep: SLIDER_PARAMETERS.SPEED.scrollStep,
-      scrollMinStep: SLIDER_PARAMETERS.SPEED.scrollMinStep,
-      onChange: (speedScale: number) =>
-        store.dispatch("COMMAND_MULTI_SET_AUDIO_SPEED_SCALE", {
-          audioKeys: selectedAudioKeys.value,
-          speedScale,
-        }),
-    }),
-    action: "COMMAND_MULTI_SET_AUDIO_SPEED_SCALE",
-    key: "speedScale",
-  },
-  {
     label: "音高",
+    tooltip: "声の高さを調整できます\n0.00 から変更すると音質が劣化します",
     slider: previewSliderHelper({
       modelValue: () => query.value?.pitchScale ?? null,
       disable: () =>
@@ -473,6 +498,7 @@ const parameters = computed<Parameter[]>(() => [
   },
   {
     label: "音量",
+    tooltip: "声の大きさ（音量）を調整できます",
     slider: previewSliderHelper({
       modelValue: () => query.value?.volumeScale ?? null,
       disable: () =>
@@ -492,7 +518,8 @@ const parameters = computed<Parameter[]>(() => [
     key: "volumeScale",
   },
   {
-    label: "開始無音",
+    label: "開始無音（秒）",
+    tooltip: "音声先頭の無音時間の長さを調整できます",
     slider: previewSliderHelper({
       modelValue: () => query.value?.prePhonemeLength ?? null,
       disable: () => uiLocked.value,
@@ -511,7 +538,8 @@ const parameters = computed<Parameter[]>(() => [
     key: "prePhonemeLength",
   },
   {
-    label: "終了無音",
+    label: "終了無音（秒）",
+    tooltip: "音声末尾の無音時間の長さを調整できます",
     slider: previewSliderHelper({
       modelValue: () => query.value?.postPhonemeLength ?? null,
       disable: () => uiLocked.value,
@@ -1020,6 +1048,8 @@ const convertFullWidthNumbers = (inputStr: string) => {
 </script>
 
 <style scoped lang="scss">
+@use "@/styles/colors" as colors;
+
 .root {
   display: flex;
   flex-direction: column;
@@ -1048,5 +1078,11 @@ const convertFullWidthNumbers = (inputStr: string) => {
       text-align: right;
     }
   }
+}
+
+.help-hover-icon {
+  margin-left: 3px;
+  color: colors.$display;
+  opacity: 0.5;
 }
 </style>
