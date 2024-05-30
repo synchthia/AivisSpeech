@@ -194,11 +194,11 @@
 <script setup lang="ts">
 import { debounce, QBtn } from "quasar";
 import { computed, Ref, ref } from "vue";
-import { base64ImageToUri } from "@/helpers/imageHelper";
 import { useStore } from "@/store";
 import { CharacterInfo, SpeakerId, Voice } from "@/type/preload";
 import { formatCharacterStyleName } from "@/store/utility";
 import { getDefaultStyle } from "@/domain/talk";
+import { useEngineIcons } from "@/composables/useEngineIcons";
 
 const props = withDefaults(
   defineProps<{
@@ -273,14 +273,7 @@ const selectedStyleInfo = computed(() => {
   return style;
 });
 
-const engineIcons = computed(() =>
-  Object.fromEntries(
-    store.state.engineIds.map((engineId) => [
-      engineId,
-      base64ImageToUri(store.state.engineManifests[engineId].icon),
-    ]),
-  ),
-);
+const engineIcons = useEngineIcons(() => store.state.engineManifests);
 
 const getDefaultStyleWrapper = (speakerUuid: SpeakerId) =>
   getDefaultStyle(
