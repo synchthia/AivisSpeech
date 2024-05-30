@@ -15,9 +15,15 @@
         :src="selectedStyleInfo.iconPath"
         :alt="selectedVoiceInfoText"
       />
-      <QAvatar v-else-if="!emptiable" rounded size="2rem" color="primary"
-        ><span color="text-display-on-primary">?</span></QAvatar
+      <QAvatar
+        v-else-if="!emptiable"
+        rounded
+        size="2rem"
+        color="primary"
+        style="width: 100%; height: 100%"
       >
+        <span color="text-display-on-primary">?</span>
+      </QAvatar>
     </div>
     <div v-if="loading" class="loading">
       <QSpinner color="primary" size="1.6rem" :thickness="7" />
