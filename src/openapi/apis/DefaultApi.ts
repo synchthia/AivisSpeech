@@ -388,7 +388,7 @@ export interface DefaultApiInterface {
     connectWavesConnectWavesPost(requestParameters: ConnectWavesConnectWavesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
     /**
-     * 
+     * 利用可能なコアのバージョン一覧を取得します。
      * @summary Core Versions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -397,6 +397,7 @@ export interface DefaultApiInterface {
     coreVersionsCoreVersionsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>>;
 
     /**
+     * 利用可能なコアのバージョン一覧を取得します。
      * Core Versions
      */
     coreVersionsCoreVersionsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>>;
@@ -434,7 +435,7 @@ export interface DefaultApiInterface {
     deleteUserDictWordUserDictWordWordUuidDelete(requestParameters: DeleteUserDictWordUserDictWordWordUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
-     * 
+     * エンジンマニフェストを取得します。
      * @summary Engine Manifest
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -443,6 +444,7 @@ export interface DefaultApiInterface {
     engineManifestEngineManifestGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EngineManifest>>;
 
     /**
+     * エンジンマニフェストを取得します。
      * Engine Manifest
      */
     engineManifestEngineManifestGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EngineManifest>;
@@ -497,18 +499,18 @@ export interface DefaultApiInterface {
 
     /**
      * ポータルページを返します。
-     * @summary Get Portal
+     * @summary Get Portal Page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
      */
-    getPortalGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>>;
+    getPortalPageGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>>;
 
     /**
      * ポータルページを返します。
-     * Get Portal
+     * Get Portal Page
      */
-    getPortalGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string>;
+    getPortalPageGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string>;
 
     /**
      * エンジンが保持しているプリセットの設定を返します
@@ -844,7 +846,7 @@ export interface DefaultApiInterface {
     speakersSpeakersGet(requestParameters: SpeakersSpeakersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Speaker>>;
 
     /**
-     * 
+     * 対応デバイスの一覧を取得します。
      * @summary Supported Devices
      * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
@@ -854,6 +856,7 @@ export interface DefaultApiInterface {
     supportedDevicesSupportedDevicesGetRaw(requestParameters: SupportedDevicesSupportedDevicesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SupportedDevicesInfo>>;
 
     /**
+     * 対応デバイスの一覧を取得します。
      * Supported Devices
      */
     supportedDevicesSupportedDevicesGet(requestParameters: SupportedDevicesSupportedDevicesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SupportedDevicesInfo>;
@@ -945,7 +948,7 @@ export interface DefaultApiInterface {
     validateKanaValidateKanaPost(requestParameters: ValidateKanaValidateKanaPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<boolean>;
 
     /**
-     * 
+     * エンジンのバージョンを取得します。
      * @summary Version
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -954,6 +957,7 @@ export interface DefaultApiInterface {
     versionVersionGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>>;
 
     /**
+     * エンジンのバージョンを取得します。
      * Version
      */
     versionVersionGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string>;
@@ -1297,6 +1301,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * 利用可能なコアのバージョン一覧を取得します。
      * Core Versions
      */
     async coreVersionsCoreVersionsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
@@ -1315,6 +1320,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * 利用可能なコアのバージョン一覧を取得します。
      * Core Versions
      */
     async coreVersionsCoreVersionsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>> {
@@ -1389,6 +1395,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * エンジンマニフェストを取得します。
      * Engine Manifest
      */
     async engineManifestEngineManifestGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EngineManifest>> {
@@ -1407,6 +1414,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * エンジンマニフェストを取得します。
      * Engine Manifest
      */
     async engineManifestEngineManifestGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EngineManifest> {
@@ -1521,9 +1529,9 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
 
     /**
      * ポータルページを返します。
-     * Get Portal
+     * Get Portal Page
      */
-    async getPortalGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+    async getPortalPageGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -1544,10 +1552,10 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
 
     /**
      * ポータルページを返します。
-     * Get Portal
+     * Get Portal Page
      */
-    async getPortalGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
-        const response = await this.getPortalGetRaw(initOverrides);
+    async getPortalPageGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
+        const response = await this.getPortalPageGetRaw(initOverrides);
         return await response.value();
     }
 
@@ -2359,6 +2367,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * 対応デバイスの一覧を取得します。
      * Supported Devices
      */
     async supportedDevicesSupportedDevicesGetRaw(requestParameters: SupportedDevicesSupportedDevicesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SupportedDevicesInfo>> {
@@ -2381,6 +2390,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * 対応デバイスの一覧を取得します。
      * Supported Devices
      */
     async supportedDevicesSupportedDevicesGet(requestParameters: SupportedDevicesSupportedDevicesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SupportedDevicesInfo> {
@@ -2611,6 +2621,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * エンジンのバージョンを取得します。
      * Version
      */
     async versionVersionGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
@@ -2633,6 +2644,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
+     * エンジンのバージョンを取得します。
      * Version
      */
     async versionVersionGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
