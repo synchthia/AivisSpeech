@@ -10,13 +10,11 @@
       <QHeader class="q-py-sm">
         <QToolbar>
           <QBtn round flat icon="close" color="display" @click="closeDialog" />
-          <QToolbarTitle class="text-display">
-            音声合成モデルの管理
-          </QToolbarTitle>
+          <QToolbarTitle class="text-display">話者リスト</QToolbarTitle>
         </QToolbar>
       </QHeader>
 
-      <QDrawer
+      <!-- <QDrawer
         bordered
         show-if-above
         :model-value="true"
@@ -26,13 +24,13 @@
         <div class="character-portrait-wrapper">
           <img :src="portrait" class="character-portrait" />
         </div>
-      </QDrawer>
+      </QDrawer> -->
 
       <QPageContainer>
         <QPage class="main">
           <div class="character-items-container">
-            <span class="text-h6 q-py-md">サンプルボイス一覧</span>
-            <div class="q-pb-lg">
+            <!-- <span class="text-h6 q-py-md">サンプルボイス一覧</span> -->
+            <div>
               <CharacterTryListenCard
                 v-for="characterInfo of characterInfos"
                 :key="characterInfo.metas.speakerUuid"
@@ -53,7 +51,7 @@
 
           <div class="character-order-container">
             <div class="text-subtitle1 text-weight-bold text-center q-py-md">
-              キャラクター並び替え
+              話者の並び替え
             </div>
             <Draggable
               v-model="characterOrder"
@@ -203,6 +201,9 @@ const play = (
 ) => {
   if (audio.src !== "") stop();
 
+  // 指定されたインデックスのパスが存在しない場合は再生しない
+  if (index >= voiceSamplePaths.length) return;
+
   audio.src = voiceSamplePaths[index];
   audio.play();
   playing.value = { speakerUuid, styleId, index };
@@ -251,6 +252,20 @@ const portrait = ref<string | undefined>(
 const updatePortrait = (portraitPath: string) => {
   portrait.value = portraitPath;
 };
+
+// characterOrder の変更を監視し、characterInfos の順序を更新
+watch(characterOrder, (newOrder) => {
+  // characterInfos を新しい順序に基づいて再構築
+  const newCharacterInfos = newOrder.map(
+    (info) => characterInfosMap.value[info.metas.speakerUuid],
+  );
+  // eslint-disable-next-line vue/no-mutating-props
+  props.characterInfos.splice(
+    0,
+    props.characterInfos.length,
+    ...newCharacterInfos,
+  );
+});
 </script>
 
 <style scoped lang="scss">
@@ -283,7 +298,7 @@ const updatePortrait = (portraitPath: string) => {
 
 .character-items-container {
   height: 100%;
-  padding: 0px 16px;
+  padding: 20px 16px;
 
   flex-grow: 1;
 

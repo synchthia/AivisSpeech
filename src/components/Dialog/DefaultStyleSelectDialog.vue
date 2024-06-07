@@ -18,13 +18,13 @@
             @click="closeDialog"
           />
           <QToolbarTitle class="text-display">
-            デフォルトスタイル・試聴 -
+            デフォルトスタイル -
             {{ characterInfo.metas.speakerName }}
           </QToolbarTitle>
         </QToolbar>
       </QHeader>
 
-      <QDrawer
+      <!-- <QDrawer
         bordered
         show-if-above
         :model-value="true"
@@ -34,7 +34,7 @@
         <div class="character-portrait-wrapper">
           <img :src="characterInfo.portraitPath" class="character-portrait" />
         </div>
-      </QDrawer>
+      </QDrawer> -->
 
       <QPageContainer>
         <QPage>
@@ -60,7 +60,9 @@
                   }}</span>
                   <div class="voice-samples">
                     <QBtn
-                      v-for="voiceSampleIndex of [...Array(3).keys()]"
+                      v-for="voiceSampleIndex of [
+                        ...Array(style.voiceSamplePaths.length).keys(),
+                      ]"
                       :key="voiceSampleIndex"
                       round
                       outline
@@ -187,6 +189,9 @@ const play = (
 ) => {
   if (audio.src !== "") stop();
 
+  // 指定されたインデックスのパスが存在しない場合は再生しない
+  if (index >= voiceSamplePaths.length) return;
+
   audio.src = voiceSamplePaths[index];
   audio.play();
   playing.value = { speakerUuid, styleId, index };
@@ -293,10 +298,11 @@ const closeDialog = () => {
             $icon-size: $style-item-size / 2;
             width: $icon-size;
             height: $icon-size;
-            border-radius: 5px;
+            clip-path: vars.$squircle;
           }
           .voice-samples {
             display: flex;
+            height: 42px;
             column-gap: 5px;
             align-items: center;
             justify-content: center;

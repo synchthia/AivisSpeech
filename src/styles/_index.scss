@@ -201,6 +201,9 @@ img {
     margin-top: 12px;
     margin-bottom: 8px;
   }
+  p {
+    margin-bottom: 16px;
+  }
   ul, ol {
     padding-inline-start: 25px;
   }
@@ -219,6 +222,9 @@ img {
     padding: 2px 4px;
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
+  }
+  *:last-child {
+    margin-bottom: 0 !important;
   }
 }
 

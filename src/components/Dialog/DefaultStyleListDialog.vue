@@ -23,7 +23,7 @@
         <QToolbar>
           <QBtn round flat icon="close" color="display" @click="closeDialog" />
           <QToolbarTitle class="text-display">
-            デフォルトスタイル・試聴
+            デフォルトスタイル
           </QToolbarTitle>
         </QToolbar>
       </QHeader>
@@ -226,7 +226,7 @@ const openStyleSelectDialog = (characterInfo: CharacterInfo) => {
 
 .character-items-container {
   height: 100%;
-  padding: 16px 16px;
+  padding: 20px 16px;
 
   flex-grow: 1;
 
@@ -267,7 +267,7 @@ const openStyleSelectDialog = (characterInfo: CharacterInfo) => {
           $icon-size: $character-item-size / 2;
           width: $icon-size;
           height: $icon-size;
-          border-radius: 5px;
+          clip-path: vars.$squircle;
         }
         .style-select-container {
           display: flex;

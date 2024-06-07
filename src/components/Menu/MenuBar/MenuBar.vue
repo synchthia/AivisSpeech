@@ -409,7 +409,7 @@ const menudata = computed<MenuItemData[]>(() => [
     subMenu: [
       {
         type: "button",
-        label: "音声合成モデルの管理",
+        label: "話者リスト",
         onClick() {
           store.dispatch("SET_DIALOG_OPEN", {
             isCharacterOrderDialogOpen: true,

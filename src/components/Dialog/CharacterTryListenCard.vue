@@ -59,7 +59,9 @@
       </div>
       <div class="voice-samples">
         <QBtn
-          v-for="voiceSampleIndex of [...Array(3).keys()]"
+          v-for="voiceSampleIndex of [
+            ...Array(selectedStyle.voiceSamplePaths.length).keys(),
+          ]"
           :key="voiceSampleIndex"
           round
           outline
@@ -164,6 +166,7 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
 @use "@/styles/colors" as colors;
 
 .character-item {
+  height: 230px;
   box-shadow: 0 0 0 1px rgba(colors.$primary-rgb, 0.5);
   border-radius: 10px;
   overflow: hidden;
@@ -187,7 +190,7 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
       $icon-size: vars.$character-item-size / 2;
       width: $icon-size;
       height: $icon-size;
-      border-radius: 5px;
+      clip-path: vars.$squircle;
     }
     .style-select-container {
       display: flex;
@@ -198,6 +201,7 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
     }
     .voice-samples {
       display: flex;
+      height: 42px;
       column-gap: 5px;
       align-items: center;
       justify-content: center;
