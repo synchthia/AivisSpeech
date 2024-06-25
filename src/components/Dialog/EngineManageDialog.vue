@@ -2,8 +2,8 @@
   <QDialog
     v-model="engineManageDialogOpenedComputed"
     maximized
-    transition-show="jump-up"
-    transition-hide="jump-down"
+    transitionShow="jump-up"
+    transitionHide="jump-down"
     class="setting-dialog transparent-backdrop"
   >
     <QLayout container view="hHh Lpr fFf" class="bg-background">
@@ -26,7 +26,7 @@
               outline
               icon="add"
               label="追加"
-              text-color="display"
+              textColor="display"
               class="text-bold"
               :disable="uiLocked"
               @click="toAddEngineState"
@@ -69,7 +69,7 @@
                   tag="label"
                   clickable
                   :active="selectedId === id"
-                  active-class="active-engine"
+                  activeClass="active-engine"
                   @click="selectEngine(id)"
                 >
                   <QItemSection avatar>
@@ -114,9 +114,9 @@
                   ]"
                   color="surface"
                   unelevated
-                  text-color="display"
-                  toggle-color="primary"
-                  toggle-text-color="display-on-primary"
+                  textColor="display"
+                  toggleColor="primary"
+                  toggleTextColor="display-on-primary"
                 />
               </div>
             </div>
@@ -210,7 +210,7 @@
                 outline
                 icon="close"
                 label="キャンセル"
-                text-color="display"
+                textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 @click="toInitialState"
               />
@@ -218,7 +218,7 @@
                 outline
                 icon="add"
                 label="追加"
-                text-color="display"
+                textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disabled="!canAddEngine"
                 @click="addEngine"
@@ -318,7 +318,7 @@
                 outline
                 icon="delete"
                 label="削除"
-                text-color="warning"
+                textColor="warning"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="
                   uiLocked ||
@@ -330,7 +330,7 @@
                 outline
                 icon="folder_open"
                 label="フォルダを開く"
-                text-color="display"
+                textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="uiLocked || !engineInfos[selectedId].path"
                 @click="openSelectedEngineDirectory"
@@ -339,7 +339,7 @@
                 outline
                 icon="restart_alt"
                 label="再起動"
-                text-color="display"
+                textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
                 :disable="uiLocked || engineStates[selectedId] === 'STARTING'"
                 @click="restartSelectedEngine"

@@ -99,7 +99,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # NOTE: The default sed of macOS is BSD sed.
       #       There is a difference in specification between BSD sed and GNU sed,
@@ -123,13 +123,13 @@ jobs:
           $sed -i 's/"version": "999.999.999"/"version": "${{ env.AIVISSPEECH_EDITOR_VERSION }}"/' package.json
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: ".node-version"
           cache: "npm"
 
       - name: Cache Electron
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.ELECTRON_CACHE }}
           key: ${{ env.cache-version }}-${{ runner.os }}--electron-cache-${{ hashFiles('**/package-lock.json') }}
@@ -137,7 +137,7 @@ jobs:
             ${{ env.cache-version }}-${{ runner.os }}--electron-cache-
 
       - name: Cache Electron-Builder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.ELECTRON_BUILDER_CACHE }}
           key: ${{ env.cache-version }}-${{ runner.os }}--electron-builder-cache-${{ hashFiles('**/package-lock.json') }}
@@ -147,10 +147,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Overwrite .env.production for Linux and macOS
-        if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'macos-')
+      - name: Overwrite .env.production for Linux
+        if: startsWith(matrix.os, 'ubuntu-')
         run: |
           $sed -i 's|run.exe|./run|g' .env.production
+
+      - name: Overwrite .env.production for macOS
+        if: startsWith(matrix.os, 'macos-')
+        run: |
+          $sed -i 's|AivisSpeech-Engine/run.exe|../Resources/AivisSpeech-Engine/run|g' .env.production
 
       - name: Replace .env.production infomations
         run: |
@@ -220,10 +225,10 @@ jobs:
         run: |
           mv AivisSpeech-Engine/ prepackage/AivisSpeech-Engine/
 
-      - name: Merge AivisSpeech Engine into prepackage/AivisSpeech.app/Contents/MacOS/
+      - name: Merge AivisSpeech Engine into prepackage/AivisSpeech.app/Contents/Resources/
         if: startsWith(matrix.artifact_name, 'macos-')
         run: |
-          mv AivisSpeech-Engine/ prepackage/AivisSpeech.app/Contents/MacOS/AivisSpeech-Engine/
+          mv AivisSpeech-Engine/ prepackage/AivisSpeech.app/Contents/Resources/AivisSpeech-Engine/
 
       - name: Recover file permissions
         if: startsWith(matrix.artifact_name, 'linux-') # linux
@@ -234,17 +239,21 @@ jobs:
       - name: Recover file permissions for macOS build
         if: startsWith(matrix.artifact_name, 'macos-') # macOS
         run: |
-          chmod +x "prepackage/AivisSpeech.app/Contents/MacOS/AivisSpeech-Engine/run"
+          chmod +x "prepackage/AivisSpeech.app/Contents/Resources/AivisSpeech-Engine/run"
           chmod +x "prepackage/AivisSpeech.app/Contents/Frameworks/AivisSpeech Helper (GPU).app/Contents/MacOS/AivisSpeech Helper (GPU)"
           chmod +x "prepackage/AivisSpeech.app/Contents/Frameworks/AivisSpeech Helper (Plugin).app/Contents/MacOS/AivisSpeech Helper (Plugin)"
           chmod +x "prepackage/AivisSpeech.app/Contents/Frameworks/AivisSpeech Helper (Renderer).app/Contents/MacOS/AivisSpeech Helper (Renderer)"
           chmod +x "prepackage/AivisSpeech.app/Contents/Frameworks/AivisSpeech Helper.app/Contents/MacOS/AivisSpeech Helper"
 
-      # NOTE: actions/upload-artifact@v3 does not upload `**.lproj` directories, which are an empty directory.
+      # NOTE: actions/upload-artifact@v4 does not upload `**.lproj` directories, which are an empty directory.
       #       Make `ja.lproj` directory because it is necessary for Japanese localization on macOS.
       - name: Make .lproj directories in Resources directory of AivisSpeech.app
         if: startsWith(matrix.artifact_name, 'macos-')
         run: mkdir -p prepackage/AivisSpeech.app/Contents/Resources/ja.lproj prepackage/AivisSpeech.app/Contents/Resources/en.lproj
+
+      - name: Ad hoc code signing
+        if: endsWith(matrix.installer_artifact_name, '-dmg') # macOS
+        run: codesign --force --deep -s - prepackage/VOICEVOX.app
 
       - name: Create Linux tar.gz (without nvidia)
         if: startsWith(matrix.artifact_name, 'linux-') && !contains(matrix.artifact_name, 'nvidia')
@@ -257,7 +266,7 @@ jobs:
 
       - name: Upload Linux tar.gz (without nvidia) to Artifacts
         if: startsWith(matrix.artifact_name, 'linux-') && !contains(matrix.artifact_name, 'nvidia') && github.event.inputs.upload_artifact == 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}-targz
           path: |-
@@ -265,7 +274,7 @@ jobs:
 
       - name: Upload Linux tar.gz (without nvidia) to Release Assets
         if: startsWith(matrix.artifact_name, 'linux-') && !contains(matrix.artifact_name, 'nvidia') && (github.event.release.tag_name || github.event.inputs.version) != ''
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           prerelease: ${{ github.event.inputs.prerelease }}
           tag_name: ${{ env.AIVISSPEECH_EDITOR_VERSION }}
@@ -287,7 +296,7 @@ jobs:
 
       - name: Upload Windows & Mac zip (without nvidia) to Artifacts
         if: (startsWith(matrix.artifact_name, 'windows-') || startsWith(matrix.artifact_name, 'macos-')) && !contains(matrix.artifact_name, 'nvidia') && github.event.inputs.upload_artifact == 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}-zip
           path: |-
@@ -295,7 +304,7 @@ jobs:
 
       - name: Upload Windows & Mac zip (without nvidia) to Release Assets
         if: (startsWith(matrix.artifact_name, 'windows-') || startsWith(matrix.artifact_name, 'macos-')) && !contains(matrix.artifact_name, 'nvidia') && (github.event.release.tag_name || github.event.inputs.version) != ''
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           prerelease: ${{ github.event.inputs.prerelease }}
           tag_name: ${{ env.AIVISSPEECH_EDITOR_VERSION }}
@@ -376,7 +385,7 @@ jobs:
 
       - name: Upload Linux AppImage split to Artifacts
         if: endsWith(matrix.installer_artifact_name, '-appimage') && github.event.inputs.upload_artifact == 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.installer_artifact_name }}-release
           path: |-
@@ -384,7 +393,7 @@ jobs:
 
       - name: Upload Linux AppImage split to Release Assets
         if: endsWith(matrix.installer_artifact_name, '-appimage') && (github.event.release.tag_name || github.event.inputs.version) != ''
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           prerelease: ${{ github.event.inputs.prerelease }}
           tag_name: ${{ env.AIVISSPEECH_EDITOR_VERSION }}
@@ -394,7 +403,7 @@ jobs:
 
       - name: Upload macOS dmg to Artifacts
         if: endsWith(matrix.installer_artifact_name, '-dmg') && github.event.inputs.upload_artifact == 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.installer_artifact_name }}-release
           path: |-
@@ -402,7 +411,7 @@ jobs:
 
       - name: Upload macOS dmg to Release Assets
         if: endsWith(matrix.installer_artifact_name, '-dmg') && (github.event.release.tag_name || github.event.inputs.version) != ''
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           prerelease: ${{ github.event.inputs.prerelease }}
           tag_name: ${{ env.AIVISSPEECH_EDITOR_VERSION }}
@@ -412,7 +421,7 @@ jobs:
 
       - name: Upload Windows NSIS Web to Artifacts
         if: endsWith(matrix.installer_artifact_name, '-nsis-web') && github.event.inputs.upload_artifact == 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.installer_artifact_name }}-release
           path: |-
@@ -421,7 +430,7 @@ jobs:
 
       - name: Upload Windows NSIS Web to Release Assets
         if: endsWith(matrix.installer_artifact_name, '-nsis-web') && (github.event.release.tag_name || github.event.inputs.version) != ''
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           prerelease: ${{ github.event.inputs.prerelease }}
           tag_name: ${{ env.AIVISSPEECH_EDITOR_VERSION }}

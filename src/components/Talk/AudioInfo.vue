@@ -6,7 +6,7 @@
           <b>プリセット</b>
         </div>
         <QBtn dense flat icon="more_vert" :disable="uiLocked">
-          <QMenu transition-duration="100">
+          <QMenu transitionDuration="100">
             <QList>
               <QItem
                 v-close-popup
@@ -17,7 +17,7 @@
                   <QAvatar
                     icon="add_circle_outline"
                     color="primary"
-                    text-color="display-on-primary"
+                    textColor="display-on-primary"
                   ></QAvatar>
                 </QItemSection>
                 <QItemSection>
@@ -33,7 +33,7 @@
                   <QAvatar
                     icon="edit_note"
                     color="primary"
-                    text-color="display-on-primary"
+                    textColor="display-on-primary"
                   ></QAvatar>
                 </QItemSection>
                 <QItemSection>
@@ -52,11 +52,11 @@
           :options="selectablePresetList"
           class="col overflow-hidden"
           color="primary"
-          text-color="display-on-primary"
+          textColor="display-on-primary"
           outlined
           dense
-          transition-show="none"
-          transition-hide="none"
+          transitionShow="none"
+          transitionHide="none"
           :disable="uiLocked"
         >
           <template #selected-item="scope">
@@ -79,7 +79,7 @@
           outline
           class="col-auto q-ml-xs"
           size="md"
-          text-color="display"
+          textColor="display"
           style="font-size: 12.5px; padding: 0 6px"
           :label="isRegisteredPreset ? '再登録' : '登録'"
           @click="registerPreset({ overwrite: isRegisteredPreset })"
@@ -89,7 +89,7 @@
       <PresetManageDialog v-model:open-dialog="showsPresetEditDialog" />
 
       <!-- プリセット登録ダイアログ -->
-      <QDialog v-model="showsPresetNameDialog" @before-hide="closeAllDialog">
+      <QDialog v-model="showsPresetNameDialog" @beforeHide="closeAllDialog">
         <QCard style="min-width: 350px">
           <QCardSection>
             <div class="text-h6">プリセット登録</div>
@@ -98,16 +98,16 @@
           <QForm @submit.prevent="checkRewritePreset">
             <QCardSection class="q-pt-none">
               <QSelect
-                fill-input
+                fillInput
                 autofocus
-                hide-selected
+                hideSelected
                 label="タイトル"
                 color="primary"
-                use-input
-                input-debounce="0"
-                :model-value="presetName"
+                useInput
+                inputDebounce="0"
+                :modelValue="presetName"
                 :options="presetOptionsList"
-                @input-value="setPresetName"
+                @inputValue="setPresetName"
                 @filter="filterPresetOptionsList"
               />
             </QCardSection>
@@ -126,7 +126,7 @@
       </QDialog>
 
       <!-- プリセット再登録ダイアログ -->
-      <QDialog v-model="showsPresetRewriteDialog" @before-hide="closeAllDialog">
+      <QDialog v-model="showsPresetRewriteDialog" @beforeHide="closeAllDialog">
         <QCard>
           <QCardSection>
             <div class="text-h6">プリセットの再登録</div>
@@ -135,7 +135,7 @@
             <QList>
               <QItem clickable class="no-margin" @click="updatePreset(true)">
                 <QItemSection avatar>
-                  <QAvatar icon="arrow_forward" text-color="blue" />
+                  <QAvatar icon="arrow_forward" textColor="blue" />
                 </QItemSection>
                 <QItemSection>
                   プリセットを再登録し、このプリセットが設定されたテキスト欄全てに再適用する
@@ -143,7 +143,7 @@
               </QItem>
               <QItem clickable class="no-margin" @click="updatePreset(false)">
                 <QItemSection avatar>
-                  <QAvatar icon="arrow_forward" text-color="blue" />
+                  <QAvatar icon="arrow_forward" textColor="blue" />
                 </QItemSection>
                 <QItemSection> プリセットの再登録のみ行う </QItemSection>
               </QItem>
@@ -154,7 +154,7 @@
                 @click="closeAllDialog"
               >
                 <QItemSection avatar>
-                  <QAvatar icon="arrow_forward" text-color="blue" />
+                  <QAvatar icon="arrow_forward" textColor="blue" />
                 </QItemSection>
                 <QItemSection>キャンセル</QItemSection>
               </QItem>
@@ -192,7 +192,7 @@
               disabled: parameter.slider.qSliderProps.disable.value,
             }"
             :disable="parameter.slider.qSliderProps.disable.value"
-            :model-value="
+            :modelValue="
               parameter.slider.state.currentValue.value != undefined
                 ? parameter.slider.state.currentValue.value.toFixed(2)
                 : parameter.slider.qSliderProps.min.value.toFixed(2)
@@ -204,13 +204,13 @@
           dense
           snap
           color="primary"
-          track-size="2px"
+          trackSize="2px"
           :min="parameter.slider.qSliderProps.min.value"
           :max="parameter.slider.qSliderProps.max.value"
           :step="parameter.slider.qSliderProps.step.value"
           :disable="parameter.slider.qSliderProps.disable.value"
-          :model-value="parameter.slider.qSliderProps.modelValue.value"
-          @update:model-value="
+          :modelValue="parameter.slider.qSliderProps.modelValue.value"
+          @update:modelValue="
             parameter.slider.qSliderProps['onUpdate:modelValue']
           "
           @change="handleParameterChange(parameter, $event)"
@@ -232,10 +232,10 @@
         <CharacterButton
           v-model:selected-voice="morphingTargetVoice"
           class="q-my-xs"
-          :character-infos="morphingTargetCharacters"
-          :show-engine-info="morphingTargetEngines.length >= 2"
+          :characterInfos="morphingTargetCharacters"
+          :showEngineInfo="morphingTargetEngines.length >= 2"
           :emptiable="true"
-          :ui-locked="uiLocked"
+          :uiLocked
         />
         <div class="q-pl-sm row overflow-hidden">
           <div class="text-body2 ellipsis overflow-hidden">
@@ -291,7 +291,7 @@
           dense
           snap
           color="primary"
-          track-size="2px"
+          trackSize="2px"
           :min="morphingRateSlider.qSliderProps.min.value"
           :max="morphingRateSlider.qSliderProps.max.value"
           :step="morphingRateSlider.qSliderProps.step.value"
@@ -299,8 +299,8 @@
             morphingRateSlider.qSliderProps.disable.value ||
             morphingTargetStyleInfo == undefined
           "
-          :model-value="morphingRateSlider.qSliderProps.modelValue.value"
-          @update:model-value="
+          :modelValue="morphingRateSlider.qSliderProps.modelValue.value"
+          @update:modelValue="
             morphingRateSlider.qSliderProps['onUpdate:modelValue']
           "
           @change="morphingRateSlider.qSliderProps.onChange"

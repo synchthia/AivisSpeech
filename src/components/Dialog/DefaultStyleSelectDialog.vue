@@ -2,9 +2,9 @@
   <QDialog
     v-model="isOpenComputed"
     maximized
-    transition-show="none"
-    transition-hide="none"
-    transition-duration="100"
+    transitionShow="none"
+    transitionHide="none"
+    transitionDuration="100"
     class="default-style-select-dialog transparent-backdrop"
   >
     <QLayout container view="hHh Lpr lff" class="bg-background">
@@ -26,8 +26,8 @@
 
       <!-- <QDrawer
         bordered
-        show-if-above
-        :model-value="true"
+        showIfAbove
+        :modelValue="true"
         :width="$q.screen.width / 3"
         :breakpoint="0"
       >
@@ -95,9 +95,9 @@
                     />
                     <QRadio
                       class="absolute-top-right no-pointer-events text-primary"
-                      :model-value="selectedStyleIndexComputed"
+                      :modelValue="selectedStyleIndexComputed"
                       :val="styleIndex"
-                      @update:model-value="selectStyleIndex(styleIndex)"
+                      @update:modelValue="selectStyleIndex(styleIndex)"
                     />
                   </div>
                 </div>

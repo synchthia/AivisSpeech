@@ -30,10 +30,10 @@
     </div>
     <QMenu
       class="character-menu"
-      transition-show="none"
-      transition-hide="none"
+      transitionShow="none"
+      transitionHide="none"
       :max-height="maxMenuHeight"
-      @before-show="updateMenuHeight"
+      @beforeShow="updateMenuHeight"
     >
       <QList style="min-width: max-content" class="character-item-container">
         <QItem
@@ -56,7 +56,7 @@
           <QBtn
             v-close-popup
             flat
-            no-caps
+            noCaps
             class="full-width"
             :class="selectedCharacter == undefined && 'selected-background'"
             @click="$emit('update:selectedVoice', undefined)"
@@ -74,7 +74,7 @@
             <QBtn
               v-close-popup
               flat
-              no-caps
+              noCaps
               class="col-grow"
               @click="onSelectSpeaker(characterInfo.metas.speakerUuid)"
               @mouseover="reassignSubMenuOpen(-1)"
@@ -84,8 +84,8 @@
                 <QImg
                   v-if="characterInfo"
                   class="character-icon"
-                  no-spinner
-                  no-transition
+                  noSpinner
+                  noTransition
                   :ratio="1"
                   :src="
                     getDefaultStyleWrapper(characterInfo.metas.speakerUuid)
@@ -124,11 +124,11 @@
                 <QIcon name="keyboard_arrow_right" color="grey-6" size="sm" />
                 <QMenu
                   v-model="subMenuOpenFlags[characterIndex]"
-                  no-parent-event
+                  noParentEvent
                   anchor="top end"
                   self="top start"
-                  transition-show="none"
-                  transition-hide="none"
+                  transitionShow="none"
+                  transitionHide="none"
                   class="character-menu"
                 >
                   <QList style="min-width: max-content">
@@ -137,7 +137,7 @@
                       :key="styleIndex"
                       v-close-popup
                       clickable
-                      active-class="selected-style-item"
+                      activeClass="selected-style-item"
                       :active="
                         selectedVoice != undefined &&
                         style.styleId === selectedVoice.styleId
@@ -158,8 +158,8 @@
                       <QAvatar rounded size="2rem" class="q-mr-md">
                         <QImg
                           class="character-icon"
-                          no-spinner
-                          no-transition
+                          noSpinner
+                          noTransition
                           :ratio="1"
                           :src="characterInfo.metas.styles[styleIndex].iconPath"
                         />

@@ -2,8 +2,8 @@
   <QDialog
     v-model="ToolBarCustomDialogOpenComputed"
     maximized
-    transition-show="jump-up"
-    transition-hide="jump-down"
+    transitionShow="jump-up"
+    transitionHide="jump-down"
     class="tool-bar-custom-dialog transparent-backdrop"
   >
     <QLayout container view="hHh Lpr fFf" class="bg-background">
@@ -25,7 +25,7 @@
               outline
               icon="settings_backup_restore"
               label="デフォルトに戻す"
-              text-color="warning"
+              textColor="warning"
               class="text-no-wrap text-bold q-mr-sm"
               :disable="isDefault"
               @click="applyDefaultSetting"
@@ -34,7 +34,7 @@
               outline
               icon="save"
               label="保存"
-              text-color="display"
+              textColor="display"
               class="text-no-wrap text-bold q-mr-sm"
               :disable="!isChanged"
               @click="saveCustomToolbar"
@@ -46,7 +46,7 @@
             <QToolbar class="bg-toolbar preview-toolbar">
               <Draggable
                 v-model="toolbarButtons"
-                :item-key="toolbarButtonKey"
+                :itemKey="toolbarButtonKey"
                 @start="toolbarButtonDragging = true"
                 @end="toolbarButtonDragging = false"
               >
@@ -56,7 +56,7 @@
                   <QBtn
                     unelevated
                     color="toolbar-button"
-                    text-color="toolbar-button-display"
+                    textColor="toolbar-button-display"
                     :class="
                       (button === 'EMPTY' ? ' radio-space' : ' radio') +
                       ' text-no-wrap text-bold q-mr-sm'
@@ -67,8 +67,8 @@
                       :delay="800"
                       anchor="center right"
                       self="center left"
-                      transition-show="jump-right"
-                      transition-hide="jump-left"
+                      transitionShow="jump-right"
+                      transitionHide="jump-left"
                       :style="{
                         display: toolbarButtonDragging ? 'none' : 'block',
                       }"
@@ -91,7 +91,7 @@
               <QList class="usable-button-list bg-surface-darken">
                 <QItem
                   v-for="(desc, key) in usableButtonsDesc"
-                  :key="key"
+                  :key
                   v-ripple
                   tag="label"
                 >

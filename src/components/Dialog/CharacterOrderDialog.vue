@@ -2,8 +2,8 @@
   <QDialog
     v-model="modelValueComputed"
     maximized
-    transition-show="jump-up"
-    transition-hide="jump-down"
+    transitionShow="jump-up"
+    transitionHide="jump-down"
     class="transparent-backdrop"
   >
     <QLayout container view="hHh Lpr lff" class="bg-background">
@@ -16,8 +16,8 @@
 
       <!-- <QDrawer
         bordered
-        show-if-above
-        :model-value="true"
+        showIfAbove
+        :modelValue="true"
         :width="$q.screen.width / 3 > 300 ? 300 : $q.screen.width / 3"
         :breakpoint="0"
       >
@@ -34,17 +34,17 @@
               <CharacterTryListenCard
                 v-for="characterInfo of characterInfos"
                 :key="characterInfo.metas.speakerUuid"
-                :character-info="characterInfo"
-                :is-selected="
+                :characterInfo
+                :isSelected="
                   selectedCharacter === characterInfo.metas.speakerUuid
                 "
-                :is-new-character="
+                :isNewCharacter="
                   newCharacters.includes(characterInfo.metas.speakerUuid)
                 "
-                :playing="playing"
-                :toggle-play-or-stop="togglePlayOrStop"
+                :playing
+                :togglePlayOrStop
                 @update:portrait="updatePortrait"
-                @update:select-character="selectCharacter"
+                @update:selectCharacter="selectCharacter"
               />
             </div>
           </div>
@@ -56,7 +56,7 @@
             <Draggable
               v-model="characterOrder"
               class="character-order q-px-sm"
-              :item-key="keyOfCharacterOrderItem"
+              :itemKey="keyOfCharacterOrderItem"
               @start="characterOrderDragging = true"
               @end="characterOrderDragging = false"
             >

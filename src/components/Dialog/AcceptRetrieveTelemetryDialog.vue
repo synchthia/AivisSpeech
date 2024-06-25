@@ -3,8 +3,8 @@
   <QDialog
     v-model="modelValueComputed"
     maximized
-    transition-show="jump-up"
-    transition-hide="jump-down"
+    transitionShow="jump-up"
+    transitionHide="jump-down"
     class="accept-retrieve-telemetry-dialog transparent-backdrop"
   >
     <QLayout container view="hHh Lpr lff" class="bg-background">
@@ -24,7 +24,7 @@
               label="拒否"
               icon="close"
               color="toolbar-button"
-              text-color="toolbar-button-display"
+              textColor="toolbar-button-display"
               class="text-no-wrap q-mr-md text-bold"
               @click="handler(false)"
             />
@@ -34,7 +34,7 @@
               label="許可"
               icon="done"
               color="toolbar-button"
-              text-color="toolbar-button-display"
+              textColor="toolbar-button-display"
               class="text-no-wrap text-bold"
               @click="handler(true)"
             />
