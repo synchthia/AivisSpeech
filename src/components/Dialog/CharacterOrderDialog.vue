@@ -309,7 +309,7 @@ watch(characterOrder, (newOrder) => {
   > div {
     display: grid;
     grid-template-columns: repeat(auto-fit, vars.$character-item-size);
-    grid-auto-rows: vars.$character-item-size;
+    grid-auto-rows: 230px;
     column-gap: 16px;
     row-gap: 16px;
     align-content: center;
