@@ -37,8 +37,27 @@ npm ci
 ## コピーした .env を編集する必要はない
 cp .env.development .env
 
-# 事前に AivisSpeech Engine を起動しておく
-## AivisSpeech Engine の開発環境は別で構築する必要がある
+# macOS のみ、.env.production を編集
+nano .env.production
+--------------------
+# executionFilePath を "AivisSpeech-Engine/run.exe" から "../Resources/AivisSpeech-Engine/run" に書き換える
+## executionFilePath は、npm run electron:build でビルドした製品ビルドの AivisSpeech の起動時に使用される
+...
+VITE_DEFAULT_ENGINE_INFOS=`[
+    {
+        "uuid": "1b4a5014-d9fd-11ee-b97d-83c170a68ed3",
+        "name": "AivisSpeech Engine",
+        "executionEnabled": true,
+        "executionFilePath": "../Resources/AivisSpeech-Engine/run",
+        "executionArgs": [],
+        "host": "http://127.0.0.1:10101"
+    }
+]`
+...
+--------------------
+
+# 事前に別のターミナルで AivisSpeech Engine を起動しておく
+## AivisSpeech Engine の開発環境は別途構築する必要がある
 cd ../AivisSpeech-Engine
 poetry run task serve
 ```

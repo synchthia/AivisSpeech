@@ -92,7 +92,10 @@ const builderOptions = {
     },
     {
       from: AIVISSPEECH_ENGINE_DIR,
-      to: path.join(extraFilePrefix, "AivisSpeech-Engine"),
+      to: path.join(
+        extraFilePrefix === "MacOS/" ? "Resources/" : "",
+        "AivisSpeech-Engine",
+      ),
     },
     {
       from: path.resolve(__dirname, "build", "vendored", "7z", sevenZipFile),
