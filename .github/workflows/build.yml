@@ -253,7 +253,7 @@ jobs:
 
       - name: Ad hoc code signing
         if: endsWith(matrix.installer_artifact_name, '-dmg') # macOS
-        run: codesign --force --deep -s - prepackage/VOICEVOX.app
+        run: codesign --force --deep -s - prepackage/AivisSpeech.app
 
       - name: Create Linux tar.gz (without nvidia)
         if: startsWith(matrix.artifact_name, 'linux-') && !contains(matrix.artifact_name, 'nvidia')
