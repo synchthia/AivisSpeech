@@ -7,6 +7,7 @@
   <SettingDialog v-model="isSettingDialogOpenComputed" />
   <HotkeySettingDialog v-model="isHotkeySettingDialogOpenComputed" />
   <ToolBarCustomDialog v-model="isToolbarSettingDialogOpenComputed" />
+  <ModelManageDialog v-model="isModelManageDialogOpenComputed" />
   <CharacterOrderDialog
     v-if="orderedAllCharacterInfos.length > 0"
     v-model="isCharacterOrderDialogOpenComputed"
@@ -32,6 +33,7 @@ import SettingDialog from "@/components/Dialog/SettingDialog/SettingDialog.vue";
 import HotkeySettingDialog from "@/components/Dialog/HotkeySettingDialog.vue";
 import ToolBarCustomDialog from "@/components/Dialog/ToolBarCustomDialog.vue";
 import DefaultStyleListDialog from "@/components/Dialog/DefaultStyleListDialog.vue";
+import ModelManageDialog from "@/components/Dialog/ModelManageDialog.vue";
 import CharacterOrderDialog from "@/components/Dialog/CharacterOrderDialog.vue";
 import AcceptRetrieveTelemetryDialog from "@/components/Dialog/AcceptRetrieveTelemetryDialog.vue";
 import AcceptTermsDialog from "@/components/Dialog/AcceptTermsDialog.vue";
@@ -83,6 +85,15 @@ const isAcceptTermsDialogOpenComputed = computed({
   set: (val) =>
     store.dispatch("SET_DIALOG_OPEN", {
       isAcceptTermsDialogOpen: val,
+    }),
+});
+
+// 音声合成モデル管理
+const isModelManageDialogOpenComputed = computed({
+  get: () => store.state.isModelManageDialogOpen,
+  set: (val) =>
+    store.dispatch("SET_DIALOG_OPEN", {
+      isModelManageDialogOpen: val,
     }),
 });
 

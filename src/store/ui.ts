@@ -59,6 +59,7 @@ export const uiStoreState: UiStoreState = {
   isSettingDialogOpen: false,
   isHotkeySettingDialogOpen: false,
   isToolbarSettingDialogOpen: false,
+  isModelManageDialogOpen: false,
   isCharacterOrderDialogOpen: false,
   isDefaultStyleSelectDialogOpen: false,
   isAcceptRetrieveTelemetryDialogOpen: false,
@@ -183,6 +184,7 @@ export const uiStore = createPartialStore<UiStoreTypes>({
         isSettingDialogOpen?: boolean;
         isHotkeySettingDialogOpen?: boolean;
         isToolbarSettingDialogOpen?: boolean;
+        isModelManageDialogOpen?: boolean;
         isCharacterOrderDialogOpen?: boolean;
         isEngineManageDialogOpen?: boolean;
         isUpdateNotificationDialogOpen?: boolean;

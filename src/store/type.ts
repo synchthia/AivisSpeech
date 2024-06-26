@@ -1647,6 +1647,7 @@ export type UiStoreState = {
   activePointScrollMode: ActivePointScrollMode;
   isHelpDialogOpen: boolean;
   isSettingDialogOpen: boolean;
+  isModelManageDialogOpen: boolean;
   isCharacterOrderDialogOpen: boolean;
   isDefaultStyleSelectDialogOpen: boolean;
   isHotkeySettingDialogOpen: boolean;
@@ -1725,6 +1726,7 @@ export type UiStoreTypes = {
       isSettingDialogOpen?: boolean;
       isHotkeySettingDialogOpen?: boolean;
       isToolbarSettingDialogOpen?: boolean;
+      isModelManageDialogOpen?: boolean;
       isCharacterOrderDialogOpen?: boolean;
       isEngineManageDialogOpen?: boolean;
       isUpdateNotificationDialogOpen?: boolean;
@@ -1739,6 +1741,7 @@ export type UiStoreTypes = {
       isSettingDialogOpen?: boolean;
       isHotkeySettingDialogOpen?: boolean;
       isToolbarSettingDialogOpen?: boolean;
+      isModelManageDialogOpen?: boolean;
       isCharacterOrderDialogOpen?: boolean;
       isEngineManageDialogOpen?: boolean;
       isUpdateNotificationDialogOpen?: boolean;
