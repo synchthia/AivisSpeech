@@ -76,7 +76,6 @@ const engineName = computed(() => {
   const engineId = audioItem?.voice.engineId ?? store.state.engineIds[0];
   const engineManifest = store.state.engineManifests[engineId];
   const engineInfo = store.state.engineInfos[engineId];
-  // eslint-disable-next-line prettier/prettier
   return engineManifest ? engineManifest.brandName : (engineInfo ? engineInfo.name : "取得中...");
 });
 

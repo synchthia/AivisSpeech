@@ -8,9 +8,9 @@ module.exports = {
     "plugin:vue/vue3-recommended",
     "eslint:recommended",
     "@vue/typescript/recommended",
-    "@vue/prettier",
+    // "@vue/prettier",
     "@vue/eslint-config-typescript/recommended",
-    "@vue/eslint-config-prettier",
+    // "@vue/eslint-config-prettier",
     "plugin:@voicevox/all",
   ],
   plugins: ["import"],
@@ -28,12 +28,12 @@ module.exports = {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-constant-condition": ["error", { checkLoops: false }], // while(true) などを許可
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-      },
-    ],
+    // "prettier/prettier": [
+    //   "error",
+    //   {
+    //     endOfLine: "auto",
+    //   },
+    // ],
     "vue/no-restricted-syntax": [
       "error",
       {
@@ -75,6 +75,12 @@ module.exports = {
       },
     ],
     "import/order": "error",
+    "vue/html-closing-bracket-newline": "off",
+    "vue/html-indent": "off",
+    "vue/html-self-closing": "off",
+    "vue/max-attributes-per-line": "off",
+    "vue/multiline-html-element-content-newline": "off",
+    "vue/singleline-html-element-content-newline": "off",
   },
   overrides: [
     {
