@@ -2,10 +2,10 @@
 /* eslint-disable */
 export * from './AccentPhrase';
 export * from './AivmInfo';
-export * from './AivmInfoSpeaker';
 export * from './AivmManifest';
 export * from './AivmManifestSpeaker';
 export * from './AivmManifestSpeakerStyle';
+export * from './AivmManifestVoiceSample';
 export * from './AudioQuery';
 export * from './BodySingFrameVolumeSingFrameVolumePost';
 export * from './CorsPolicyMode';
@@ -13,7 +13,9 @@ export * from './EngineManifest';
 export * from './FrameAudioQuery';
 export * from './FramePhoneme';
 export * from './HTTPValidationError';
+export * from './LibrarySpeaker';
 export * from './LicenseInfo';
+export * from './ModelArchitecture';
 export * from './Mora';
 export * from './MorphableTargetInfo';
 export * from './Note';

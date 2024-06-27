@@ -19,9 +19,15 @@ import {
     AivmManifestSpeakerFromJSONTyped,
     AivmManifestSpeakerToJSON,
 } from './AivmManifestSpeaker';
+import type { ModelArchitecture } from './ModelArchitecture';
+import {
+    ModelArchitectureFromJSON,
+    ModelArchitectureFromJSONTyped,
+    ModelArchitectureToJSON,
+} from './ModelArchitecture';
 
 /**
- * AIVM (Aivis Voice Model) マニフェストの定義
+ * AIVM マニフェストのスキーマ 
  * @export
  * @interface AivmManifest
  */
@@ -43,13 +49,19 @@ export interface AivmManifest {
      * @type {string}
      * @memberof AivmManifest
      */
-    description: string;
+    description?: string;
     /**
      * 
      * @type {string}
      * @memberof AivmManifest
      */
-    modelArchitecture: string;
+    termsOfUse?: string;
+    /**
+     * 
+     * @type {ModelArchitecture}
+     * @memberof AivmManifest
+     */
+    modelArchitecture: ModelArchitecture;
     /**
      * 
      * @type {string}
@@ -77,7 +89,6 @@ export function instanceOfAivmManifest(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "manifestVersion" in value;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "description" in value;
     isInstance = isInstance && "modelArchitecture" in value;
     isInstance = isInstance && "uuid" in value;
     isInstance = isInstance && "version" in value;
@@ -98,8 +109,9 @@ export function AivmManifestFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'manifestVersion': json['manifest_version'],
         'name': json['name'],
-        'description': json['description'],
-        'modelArchitecture': json['model_architecture'],
+        'description': !exists(json, 'description') ? undefined : json['description'],
+        'termsOfUse': !exists(json, 'terms_of_use') ? undefined : json['terms_of_use'],
+        'modelArchitecture': ModelArchitectureFromJSON(json['model_architecture']),
         'uuid': json['uuid'],
         'version': json['version'],
         'speakers': ((json['speakers'] as Array<any>).map(AivmManifestSpeakerFromJSON)),
@@ -118,7 +130,8 @@ export function AivmManifestToJSON(value?: AivmManifest | null): any {
         'manifest_version': value.manifestVersion,
         'name': value.name,
         'description': value.description,
-        'model_architecture': value.modelArchitecture,
+        'terms_of_use': value.termsOfUse,
+        'model_architecture': ModelArchitectureToJSON(value.modelArchitecture),
         'uuid': value.uuid,
         'version': value.version,
         'speakers': ((value.speakers as Array<any>).map(AivmManifestSpeakerToJSON)),

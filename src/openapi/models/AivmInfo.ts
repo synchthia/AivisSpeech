@@ -13,15 +13,24 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { AivmInfoSpeaker } from './AivmInfoSpeaker';
+import type { AivmManifest } from './AivmManifest';
 import {
-    AivmInfoSpeakerFromJSON,
-    AivmInfoSpeakerFromJSONTyped,
-    AivmInfoSpeakerToJSON,
-} from './AivmInfoSpeaker';
+    AivmManifestFromJSON,
+    AivmManifestFromJSONTyped,
+    AivmManifestToJSON,
+} from './AivmManifest';
+import type { LibrarySpeaker } from './LibrarySpeaker';
+import {
+    LibrarySpeakerFromJSON,
+    LibrarySpeakerFromJSONTyped,
+    LibrarySpeakerToJSON,
+} from './LibrarySpeaker';
 
 /**
- * 音声合成モデルの情報
+ * AIVM (Aivis Voice Model) ファイルフォーマットの音声合成モデルの情報
+ * AIVM マニフェストには音声合成モデルに関連するほぼ全てのメタデータが含まれる
+ * speakers フィールド内の話者情報は、VOICEVOX ENGINE との API 互換性のため
+ * AIVM マニフェストを元に Speaker / SpeakerStyle / SpeakerInfo / StyleInfo モデルに変換したもの
  * @export
  * @interface AivmInfo
  */
@@ -31,37 +40,19 @@ export interface AivmInfo {
      * @type {string}
      * @memberof AivmInfo
      */
-    name: string;
+    filePath: string;
     /**
      * 
-     * @type {string}
+     * @type {AivmManifest}
      * @memberof AivmInfo
      */
-    description: string;
+    manifest: AivmManifest;
     /**
      * 
-     * @type {string}
+     * @type {Array<LibrarySpeaker>}
      * @memberof AivmInfo
      */
-    modelArchitecture: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AivmInfo
-     */
-    uuid: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AivmInfo
-     */
-    version: string;
-    /**
-     * 
-     * @type {Array<AivmInfoSpeaker>}
-     * @memberof AivmInfo
-     */
-    speakers: Array<AivmInfoSpeaker>;
+    speakers: Array<LibrarySpeaker>;
 }
 
 /**
@@ -69,11 +60,8 @@ export interface AivmInfo {
  */
 export function instanceOfAivmInfo(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "description" in value;
-    isInstance = isInstance && "modelArchitecture" in value;
-    isInstance = isInstance && "uuid" in value;
-    isInstance = isInstance && "version" in value;
+    isInstance = isInstance && "filePath" in value;
+    isInstance = isInstance && "manifest" in value;
     isInstance = isInstance && "speakers" in value;
 
     return isInstance;
@@ -89,12 +77,9 @@ export function AivmInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
-        'name': json['name'],
-        'description': json['description'],
-        'modelArchitecture': json['model_architecture'],
-        'uuid': json['uuid'],
-        'version': json['version'],
-        'speakers': ((json['speakers'] as Array<any>).map(AivmInfoSpeakerFromJSON)),
+        'filePath': json['file_path'],
+        'manifest': AivmManifestFromJSON(json['manifest']),
+        'speakers': ((json['speakers'] as Array<any>).map(LibrarySpeakerFromJSON)),
     };
 }
 
@@ -107,12 +92,9 @@ export function AivmInfoToJSON(value?: AivmInfo | null): any {
     }
     return {
         
-        'name': value.name,
-        'description': value.description,
-        'model_architecture': value.modelArchitecture,
-        'uuid': value.uuid,
-        'version': value.version,
-        'speakers': ((value.speakers as Array<any>).map(AivmInfoSpeakerToJSON)),
+        'file_path': value.filePath,
+        'manifest': AivmManifestToJSON(value.manifest),
+        'speakers': ((value.speakers as Array<any>).map(LibrarySpeakerToJSON)),
     };
 }
 

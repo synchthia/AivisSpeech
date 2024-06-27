@@ -13,8 +13,15 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { AivmManifestVoiceSample } from './AivmManifestVoiceSample';
+import {
+    AivmManifestVoiceSampleFromJSON,
+    AivmManifestVoiceSampleFromJSONTyped,
+    AivmManifestVoiceSampleToJSON,
+} from './AivmManifestVoiceSample';
+
 /**
- * AIVM (Aivis Voice Model) マニフェストの話者スタイルの定義
+ * AIVM マニフェストの話者スタイル情報 
  * @export
  * @interface AivmManifestSpeakerStyle
  */
@@ -27,10 +34,22 @@ export interface AivmManifestSpeakerStyle {
     name: string;
     /**
      * 
+     * @type {string}
+     * @memberof AivmManifestSpeakerStyle
+     */
+    icon: string;
+    /**
+     * 
+     * @type {Array<AivmManifestVoiceSample>}
+     * @memberof AivmManifestSpeakerStyle
+     */
+    voiceSamples: Array<AivmManifestVoiceSample>;
+    /**
+     * 
      * @type {number}
      * @memberof AivmManifestSpeakerStyle
      */
-    id: number;
+    localId: number;
 }
 
 /**
@@ -39,7 +58,9 @@ export interface AivmManifestSpeakerStyle {
 export function instanceOfAivmManifestSpeakerStyle(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "icon" in value;
+    isInstance = isInstance && "voiceSamples" in value;
+    isInstance = isInstance && "localId" in value;
 
     return isInstance;
 }
@@ -55,7 +76,9 @@ export function AivmManifestSpeakerStyleFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'name': json['name'],
-        'id': json['id'],
+        'icon': json['icon'],
+        'voiceSamples': ((json['voice_samples'] as Array<any>).map(AivmManifestVoiceSampleFromJSON)),
+        'localId': json['local_id'],
     };
 }
 
@@ -69,7 +92,9 @@ export function AivmManifestSpeakerStyleToJSON(value?: AivmManifestSpeakerStyle 
     return {
         
         'name': value.name,
-        'id': value.id,
+        'icon': value.icon,
+        'voice_samples': ((value.voiceSamples as Array<any>).map(AivmManifestVoiceSampleToJSON)),
+        'local_id': value.localId,
     };
 }
 

@@ -21,8 +21,7 @@ import {
 } from './AivmManifestSpeakerStyle';
 
 /**
- * AIVM (Aivis Voice Model) マニフェストの話者の定義
- * 画像やボイスサンプルは容量が大きいためマニフェストには含まれず、 別途ファイルとして AIVM に格納される
+ * AIVM マニフェストの話者情報 
  * @export
  * @interface AivmManifestSpeaker
  */
@@ -41,16 +40,16 @@ export interface AivmManifestSpeaker {
     supportedLanguages: Array<string>;
     /**
      * 
-     * @type {number}
-     * @memberof AivmManifestSpeaker
-     */
-    id: number;
-    /**
-     * 
      * @type {string}
      * @memberof AivmManifestSpeaker
      */
     uuid: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AivmManifestSpeaker
+     */
+    localId: number;
     /**
      * 
      * @type {string}
@@ -72,8 +71,8 @@ export function instanceOfAivmManifestSpeaker(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "supportedLanguages" in value;
-    isInstance = isInstance && "id" in value;
     isInstance = isInstance && "uuid" in value;
+    isInstance = isInstance && "localId" in value;
     isInstance = isInstance && "version" in value;
     isInstance = isInstance && "styles" in value;
 
@@ -92,8 +91,8 @@ export function AivmManifestSpeakerFromJSONTyped(json: any, ignoreDiscriminator:
         
         'name': json['name'],
         'supportedLanguages': json['supported_languages'],
-        'id': json['id'],
         'uuid': json['uuid'],
+        'localId': json['local_id'],
         'version': json['version'],
         'styles': ((json['styles'] as Array<any>).map(AivmManifestSpeakerStyleFromJSON)),
     };
@@ -110,8 +109,8 @@ export function AivmManifestSpeakerToJSON(value?: AivmManifestSpeaker | null): a
         
         'name': value.name,
         'supported_languages': value.supportedLanguages,
-        'id': value.id,
         'uuid': value.uuid,
+        'local_id': value.localId,
         'version': value.version,
         'styles': ((value.styles as Array<any>).map(AivmManifestSpeakerStyleToJSON)),
     };

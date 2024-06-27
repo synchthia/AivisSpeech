@@ -17,7 +17,6 @@ import * as runtime from '../runtime';
 import type {
   AccentPhrase,
   AivmInfo,
-  AivmManifest,
   AudioQuery,
   BodySingFrameVolumeSingFrameVolumePost,
   CorsPolicyMode,
@@ -39,8 +38,6 @@ import {
     AccentPhraseToJSON,
     AivmInfoFromJSON,
     AivmInfoToJSON,
-    AivmManifestFromJSON,
-    AivmManifestToJSON,
     AudioQueryFromJSON,
     AudioQueryToJSON,
     BodySingFrameVolumeSingFrameVolumePostFromJSON,
@@ -128,7 +125,7 @@ export interface FrameSynthesisFrameSynthesisPostRequest {
     coreVersion?: string | null;
 }
 
-export interface GetAivmManifestAivmModelsAivmUuidManifestGetRequest {
+export interface GetAivmInfoAivmModelsAivmUuidGetRequest {
     aivmUuid: string;
 }
 
@@ -143,8 +140,9 @@ export interface InitializeSpeakerInitializeSpeakerPostRequest {
     coreVersion?: string | null;
 }
 
-export interface InstallAivmAivmModelsAivmUuidPostRequest {
-    aivmUuid: string;
+export interface InstallAivmAivmModelsInstallPostRequest {
+    file?: Blob | null;
+    url?: string | null;
 }
 
 export interface IsInitializedSpeakerIsInitializedSpeakerGetRequest {
@@ -244,7 +242,7 @@ export interface SynthesisSynthesisPostRequest {
     coreVersion?: string | null;
 }
 
-export interface UninstallAivmAivmModelsAivmUuidDeleteRequest {
+export interface UninstallAivmAivmModelsAivmUuidUninstallDeleteRequest {
     aivmUuid: string;
 }
 
@@ -467,20 +465,20 @@ export interface DefaultApiInterface {
     frameSynthesisFrameSynthesisPost(requestParameters: FrameSynthesisFrameSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
     /**
-     * 音声合成モデルの AIVM マニフェストを返します。
-     * @summary Get Aivm Manifest
-     * @param {string} aivmUuid 音声合成モデルの UUID
+     * 指定された音声合成モデルの情報を取得します。
+     * @summary Get Aivm Info
+     * @param {string} aivmUuid AIVM ファイルの UUID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
      */
-    getAivmManifestAivmModelsAivmUuidManifestGetRaw(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AivmManifest>>;
+    getAivmInfoAivmModelsAivmUuidGetRaw(requestParameters: GetAivmInfoAivmModelsAivmUuidGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AivmInfo>>;
 
     /**
-     * 音声合成モデルの AIVM マニフェストを返します。
-     * Get Aivm Manifest
+     * 指定された音声合成モデルの情報を取得します。
+     * Get Aivm Info
      */
-    getAivmManifestAivmModelsAivmUuidManifestGet(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AivmManifest>;
+    getAivmInfoAivmModelsAivmUuidGet(requestParameters: GetAivmInfoAivmModelsAivmUuidGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AivmInfo>;
 
     /**
      * インストールした音声合成モデルの情報を返します。
@@ -578,20 +576,21 @@ export interface DefaultApiInterface {
     initializeSpeakerInitializeSpeakerPost(requestParameters: InitializeSpeakerInitializeSpeakerPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
-     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * 音声合成モデルをインストールします。 ファイルからインストールする場合は `file` を指定してください。 URL からインストールする場合は `url` を指定してください。
      * @summary Install Aivm
-     * @param {string} aivmUuid 音声合成モデルの UUID
+     * @param {Blob} [file] 
+     * @param {string} [url] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
      */
-    installAivmAivmModelsAivmUuidPostRaw(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
+    installAivmAivmModelsInstallPostRaw(requestParameters: InstallAivmAivmModelsInstallPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * 音声合成モデルをインストールします。 ファイルからインストールする場合は `file` を指定してください。 URL からインストールする場合は `url` を指定してください。
      * Install Aivm
      */
-    installAivmAivmModelsAivmUuidPost(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
+    installAivmAivmModelsInstallPost(requestParameters: InstallAivmAivmModelsInstallPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
      * 指定されたスタイルが初期化されているかどうかを返します。
@@ -901,20 +900,20 @@ export interface DefaultApiInterface {
     synthesisSynthesisPost(requestParameters: SynthesisSynthesisPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
 
     /**
-     * 音声合成モデルをアンインストールします。
+     * 指定された音声合成モデルをアンインストールします。
      * @summary Uninstall Aivm
-     * @param {string} aivmUuid 音声合成モデルの UUID
+     * @param {string} aivmUuid AIVM ファイルの UUID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
      */
-    uninstallAivmAivmModelsAivmUuidDeleteRaw(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
+    uninstallAivmAivmModelsAivmUuidUninstallDeleteRaw(requestParameters: UninstallAivmAivmModelsAivmUuidUninstallDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>>;
 
     /**
-     * 音声合成モデルをアンインストールします。
+     * 指定された音声合成モデルをアンインストールします。
      * Uninstall Aivm
      */
-    uninstallAivmAivmModelsAivmUuidDelete(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
+    uninstallAivmAivmModelsAivmUuidUninstallDelete(requestParameters: UninstallAivmAivmModelsAivmUuidUninstallDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void>;
 
     /**
      * 既存のプリセットを更新します
@@ -1469,12 +1468,12 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声合成モデルの AIVM マニフェストを返します。
-     * Get Aivm Manifest
+     * 指定された音声合成モデルの情報を取得します。
+     * Get Aivm Info
      */
-    async getAivmManifestAivmModelsAivmUuidManifestGetRaw(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AivmManifest>> {
+    async getAivmInfoAivmModelsAivmUuidGetRaw(requestParameters: GetAivmInfoAivmModelsAivmUuidGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AivmInfo>> {
         if (requestParameters.aivmUuid === null || requestParameters.aivmUuid === undefined) {
-            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling getAivmManifestAivmModelsAivmUuidManifestGet.');
+            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling getAivmInfoAivmModelsAivmUuidGet.');
         }
 
         const queryParameters: any = {};
@@ -1482,21 +1481,21 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/aivm_models/{aivm_uuid}/manifest`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
+            path: `/aivm_models/{aivm_uuid}`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AivmManifestFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AivmInfoFromJSON(jsonValue));
     }
 
     /**
-     * 音声合成モデルの AIVM マニフェストを返します。
-     * Get Aivm Manifest
+     * 指定された音声合成モデルの情報を取得します。
+     * Get Aivm Info
      */
-    async getAivmManifestAivmModelsAivmUuidManifestGet(requestParameters: GetAivmManifestAivmModelsAivmUuidManifestGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AivmManifest> {
-        const response = await this.getAivmManifestAivmModelsAivmUuidManifestGetRaw(requestParameters, initOverrides);
+    async getAivmInfoAivmModelsAivmUuidGet(requestParameters: GetAivmInfoAivmModelsAivmUuidGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AivmInfo> {
+        const response = await this.getAivmInfoAivmModelsAivmUuidGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -1702,34 +1701,55 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * 音声合成モデルをインストールします。 ファイルからインストールする場合は `file` を指定してください。 URL からインストールする場合は `url` を指定してください。
      * Install Aivm
      */
-    async installAivmAivmModelsAivmUuidPostRaw(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.aivmUuid === null || requestParameters.aivmUuid === undefined) {
-            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling installAivmAivmModelsAivmUuidPost.');
-        }
-
+    async installAivmAivmModelsInstallPostRaw(requestParameters: InstallAivmAivmModelsInstallPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.file !== undefined) {
+            formParams.append('file', requestParameters.file as any);
+        }
+
+        if (requestParameters.url !== undefined) {
+            formParams.append('url', requestParameters.url as any);
+        }
+
         const response = await this.request({
-            path: `/aivm_models/{aivm_uuid}`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
+            path: `/aivm_models/install`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: formParams,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
     }
 
     /**
-     * 音声合成モデルをインストールします。 音声合成モデルパッケージファイル (`.aivm`) をリクエストボディとして送信してください。
+     * 音声合成モデルをインストールします。 ファイルからインストールする場合は `file` を指定してください。 URL からインストールする場合は `url` を指定してください。
      * Install Aivm
      */
-    async installAivmAivmModelsAivmUuidPost(requestParameters: InstallAivmAivmModelsAivmUuidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.installAivmAivmModelsAivmUuidPostRaw(requestParameters, initOverrides);
+    async installAivmAivmModelsInstallPost(requestParameters: InstallAivmAivmModelsInstallPostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.installAivmAivmModelsInstallPostRaw(requestParameters, initOverrides);
     }
 
     /**
@@ -2514,12 +2534,12 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声合成モデルをアンインストールします。
+     * 指定された音声合成モデルをアンインストールします。
      * Uninstall Aivm
      */
-    async uninstallAivmAivmModelsAivmUuidDeleteRaw(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async uninstallAivmAivmModelsAivmUuidUninstallDeleteRaw(requestParameters: UninstallAivmAivmModelsAivmUuidUninstallDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.aivmUuid === null || requestParameters.aivmUuid === undefined) {
-            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling uninstallAivmAivmModelsAivmUuidDelete.');
+            throw new runtime.RequiredError('aivmUuid','Required parameter requestParameters.aivmUuid was null or undefined when calling uninstallAivmAivmModelsAivmUuidUninstallDelete.');
         }
 
         const queryParameters: any = {};
@@ -2527,7 +2547,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/aivm_models/{aivm_uuid}`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
+            path: `/aivm_models/{aivm_uuid}/uninstall`.replace(`{${"aivm_uuid"}}`, encodeURIComponent(String(requestParameters.aivmUuid))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -2537,11 +2557,11 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 音声合成モデルをアンインストールします。
+     * 指定された音声合成モデルをアンインストールします。
      * Uninstall Aivm
      */
-    async uninstallAivmAivmModelsAivmUuidDelete(requestParameters: UninstallAivmAivmModelsAivmUuidDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.uninstallAivmAivmModelsAivmUuidDeleteRaw(requestParameters, initOverrides);
+    async uninstallAivmAivmModelsAivmUuidUninstallDelete(requestParameters: UninstallAivmAivmModelsAivmUuidUninstallDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.uninstallAivmAivmModelsAivmUuidUninstallDeleteRaw(requestParameters, initOverrides);
     }
 
     /**
