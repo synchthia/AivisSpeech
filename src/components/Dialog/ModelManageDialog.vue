@@ -16,7 +16,8 @@
         <QPage class="row no-wrap">
           <div style="width: 245px; flex-shrink: 0; border-right: solid 1px var(--color-surface);">
             <QList>
-              <QItem v-for="aivmInfo in Object.values(aivmInfoDict)" :key="aivmInfo.manifest.uuid" v-ripple clickable>
+              <QItem v-for="aivmInfo in Object.values(aivmInfoDict)" :key="aivmInfo.manifest.uuid" v-ripple clickable
+                :active="activeAivmUuid === aivmInfo.manifest.uuid" @click="activeAivmUuid = aivmInfo.manifest.uuid">
                   <QItemSection avatar>
                     <QAvatar rounded color="primary">
                       <img :src="aivmInfo.manifest.speakers[0].styles[0].icon" />
@@ -31,8 +32,27 @@
               </QItem>
             </QList>
           </div>
-          <div style="width: 100%;">
-            _
+          <div v-if="activeAivmInfo" style="width: 100%;">
+            <div class="q-pa-md">
+              <div style="font-size: 20px; font-weight: bold;">
+                {{ activeAivmInfo.manifest.name }}
+              </div>
+              <div class="q-mt-sm" style="font-size: 13.5px; color: #D2D3D4;">
+                {{ activeAivmInfo.manifest.description === '' ? '（この音声合成モデルの説明は提供されていません）' : activeAivmInfo.manifest.description }}
+              </div>
+            </div>
+            <!-- タブは複数の話者がモデルに含まれる場合のみ表示する -->
+            <QTabs v-if="activeAivmInfo && activeAivmInfo.manifest.speakers.length > 1" v-model="activeSpeakerIndex"
+              dense activeColor="primary">
+              <QTab v-for="(speaker, index) of activeAivmInfo.manifest.speakers" :key="speaker.uuid" :name="index">
+                話者{{ index + 1 }} ({{ speaker.name }})
+              </QTab>
+            </QTabs>
+            <QTabPanels v-model="activeSpeakerIndex"
+              animated class="bg-background">
+              <QTabPanel v-for="(speaker, index) of activeAivmInfo.manifest.speakers" :key="speaker.uuid" :name="index">
+              </QTabPanel>
+            </QTabPanels>
           </div>
         </QPage>
       </QPageContainer>
@@ -88,6 +108,8 @@ const aivmInfoDict = ref<{ [key: string]: AivmInfo }>({});
 const getAivmInfos = async () => {
   const res = await getApiInstance().then((instance) => instance.invoke("getInstalledAivmInfosAivmModelsGet")({}));
   aivmInfoDict.value = res;
+  // アクティブな AIVM 音声合成モデルの UUID を設定
+  activeAivmUuid.value = Object.values(aivmInfoDict.value)[0].manifest.uuid;
 };
 
 // ダイヤログが開かれた時
@@ -97,10 +119,26 @@ watch(engineManageDialogOpenedComputed, () => {
   }
 });
 
+// アクティブな AIVM 音声合成モデルの UUID
+const activeAivmUuid = ref<string | null>(null);
+
+// アクティブな AIVM 音声合成モデルの情報
+const activeAivmInfo = computed(() => {
+  return activeAivmUuid.value ? aivmInfoDict.value[activeAivmUuid.value] : null;
+});
+
+// アクティブな AIVM 音声合成モデルの話者タブのインデックス
+// QTab / QTabPanel の name 属性の値と一致する
+const activeSpeakerIndex = ref(0);
+
 </script>
 <style lang="scss" scoped>
 
 @use "@/styles/colors" as colors;
 @use "@/styles/variables" as vars;
+
+.q-item--active {
+  background: rgba(colors.$primary-rgb, 0.4);
+}
 
 </style>
