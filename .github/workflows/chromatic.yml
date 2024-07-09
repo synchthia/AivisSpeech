@@ -7,9 +7,10 @@
 name: "Chromatic"
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - master
+  workflow_dispatch:
 
 jobs:
   chromatic:
