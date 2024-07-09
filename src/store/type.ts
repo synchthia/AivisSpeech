@@ -60,7 +60,6 @@ import {
   NotifyAndNotShowAgainButtonOption,
   LoadingScreenOption,
 } from "@/components/Dialog/Dialog";
-import { OverlappingNoteInfos } from "@/sing/storeHelper";
 import {
   LatestProjectType,
   noteSchema,
@@ -842,7 +841,6 @@ export type SingingStoreState = {
   sequencerEditTarget: SequencerEditTarget;
   selectedNoteIds: Set<NoteId>;
   overlappingNoteIds: Set<NoteId>;
-  overlappingNoteInfos: OverlappingNoteInfos;
   editingLyricNoteId?: NoteId;
   nowPlaying: boolean;
   volume: number;
@@ -1487,6 +1485,10 @@ export type ProjectStoreState = {
 };
 
 export type ProjectStoreTypes = {
+  PROJECT_NAME_WITH_EXT: {
+    getter: string | undefined;
+  };
+
   PROJECT_NAME: {
     getter: string | undefined;
   };

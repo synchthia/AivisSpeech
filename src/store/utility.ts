@@ -11,6 +11,7 @@ import {
 import { AccentPhrase, Mora } from "@/openapi";
 
 export const DEFAULT_STYLE_NAME = "ノーマル";
+export const DEFAULT_PROJECT_NAME = "Untitled";
 
 export const formatCharacterStyleName = (
   characterName: string,
@@ -131,6 +132,7 @@ export const replaceTagIdToTagString = {
   styleName: "スタイル",
   text: "テキスト",
   date: "日付",
+  projectName: "プロジェクト名",
 };
 const replaceTagStringToTagId: { [tagString: string]: string } = Object.entries(
   replaceTagIdToTagString,
@@ -145,6 +147,7 @@ const DEFAULT_AUDIO_FILE_NAME_VARIABLES = {
   text: "テキストテキストテキスト",
   styleName: DEFAULT_STYLE_NAME,
   date: currentDateString(),
+  projectName: "VOICEVOXプロジェクト",
 };
 
 export function currentDateString(): string {
@@ -353,12 +356,14 @@ export function buildAudioFileNameFromRawData(
   const index = (vars.index + 1).toString().padStart(3, "0");
   const styleName = sanitizeFileName(vars.styleName);
   const date = vars.date;
+  const projectName = sanitizeFileName(vars.projectName);
   return replaceTag(pattern, {
     text,
     characterName,
     index,
     styleName,
     date,
+    projectName,
   });
 }
 

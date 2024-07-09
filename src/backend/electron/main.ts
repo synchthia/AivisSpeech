@@ -3,6 +3,7 @@
 import path from "path";
 
 import fs from "fs";
+import { pathToFileURL } from "url";
 import {
   app,
   protocol,
@@ -400,9 +401,6 @@ async function createWindow() {
     backgroundColor,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      nodeIntegration: false,
-      contextIsolation: true,
-      sandbox: false, // TODO: 外しても問題ないか検証して外す
     },
     icon: path.join(__static, "icon.png"),
   });
@@ -431,8 +429,23 @@ async function createWindow() {
   // ソフトウェア起動時はプロトコルを app にする
   if (process.env.VITE_DEV_SERVER_URL == undefined) {
     protocol.handle("app", (request) => {
-      const filePath = path.join(__dirname, new URL(request.url).pathname);
-      return net.fetch(`file://${filePath}`);
+      // 読み取り先のファイルがインストールディレクトリ内であることを確認する
+      // ref: https://www.electronjs.org/ja/docs/latest/api/protocol#protocolhandlescheme-handler
+      const { pathname } = new URL(request.url);
+      const pathToServe = path.resolve(path.join(__dirname, pathname));
+      const relativePath = path.relative(__dirname, pathToServe);
+      const isUnsafe =
+        path.isAbsolute(relativePath) ||
+        relativePath.startsWith("..") ||
+        relativePath === "";
+      if (isUnsafe) {
+        log.error(`Bad Request URL: ${request.url}`);
+        return new Response("bad", {
+          status: 400,
+          headers: { "content-type": "text/html" },
+        });
+      }
+      return net.fetch(pathToFileURL(pathToServe).toString());
     });
   }
 
@@ -978,8 +991,8 @@ ipcMainHandle("VALIDATE_ENGINE_DIR", (_, { engineDir }) => {
 ipcMainHandle("RELOAD_APP", async (_, { isMultiEngineOffMode }) => {
   win.hide(); // FIXME: ダミーページ表示のほうが良い
 
-  // FIXME: 同じようなURLだとスーパーリロードされないことがあるので一度ダミーページを読み込む
-  await win.loadURL(firstUrl + "dummypage");
+  // 一旦適当なURLに飛ばしてページをアンロードする
+  await win.loadURL("about:blank");
 
   log.info("Checking ENGINE status before reload app");
   const engineCleanupResult = cleanupEngines();
@@ -1022,11 +1035,22 @@ ipcMainHandle("READ_FILE", async (_, { filePath }) => {
 app.on("web-contents-created", (e, contents) => {
   // リンククリック時はブラウザを開く
   contents.setWindowOpenHandler(({ url }) => {
-    if (url.match(/^http/)) {
+    const { protocol } = new URL(url);
+    if (protocol.match(/^https?:/)) {
       shell.openExternal(url);
-      return { action: "deny" };
+    } else {
+      log.error(`許可されないリンクです。url: ${url}`);
     }
-    return { action: "allow" };
+    return { action: "deny" };
+  });
+
+  // ナビゲーションを無効化
+  contents.on("will-navigate", (event) => {
+    // preloadスクリプト変更時のホットリロードを許容する
+    if (contents.getURL() !== event.url) {
+      log.error(`ナビゲーションは無効化されています。url: ${event.url}`);
+      event.preventDefault();
+    }
   });
 });
 
