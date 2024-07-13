@@ -52,7 +52,7 @@ macOS: macOS 12 Monterey 以降
 
 ### Q. 過去のバージョンに戻すことはできますか？
 
-[こちら](https://github.com/Aivis-Project/AivisSpeech/releases) から過去のバージョンを入手することが出来ます。
+[こちら](https://github.com/Aivis-Project/AivisSpeech/releases) から過去のバージョンを入手できます。
 
 ## 使い方に関する質問
 
