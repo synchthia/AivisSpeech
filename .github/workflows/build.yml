@@ -160,8 +160,7 @@ jobs:
       - name: Replace .env.production infomations
         run: |
           # GTM ID
-          # FIXME: AivisSpeech 向けの GTM ID を設定する
-          gtm_id="GTM-DUMMY"
+          gtm_id="GTM-PNHDPBZ4"
           $sed -i 's/VITE_GTM_CONTAINER_ID=.*/VITE_GTM_CONTAINER_ID='"$gtm_id"'/' .env.production
 
       - name: Generate public/licenses.json

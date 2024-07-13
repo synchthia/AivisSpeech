@@ -20,7 +20,7 @@ createApp(App)
   .use(store, storeKey)
   .use(
     createGtm({
-      id: import.meta.env.VITE_GTM_CONTAINER_ID ?? "GTM-DUMMY",
+      id: import.meta.env.VITE_GTM_CONTAINER_ID ?? "GTM-PNHDPBZ4",
       // NOTE: 最初はgtm.jsを読まず、プライバシーポリシーに同意後に読み込む
       enabled: false,
     }),
