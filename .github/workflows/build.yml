@@ -52,7 +52,7 @@ jobs:
           - windows-x64-prepackage
           - macos-x64-prepackage
           - macos-arm64-prepackage
-          - linux-x64-prepackage
+          # - linux-x64-prepackage
         include:
           # Windows x64
           - artifact_name: windows-x64-prepackage
@@ -63,7 +63,7 @@ jobs:
             app_asar_dir: prepackage/resources
             installer_artifact_name: windows-x64-nsis-web
             nsis_web_artifact_name: "AivisSpeech.Web.Setup.${version}.${ext}"
-            os: windows-2019
+            os: windows-2022
           # macOS x64 (Intel Mac)
           - artifact_name: macos-x64-prepackage
             artifact_path: dist_electron/mac
