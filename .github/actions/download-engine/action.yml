@@ -1,29 +1,29 @@
 name: "Download AivisSpeech Engine"
 description: |
-  AivisSpeech Engineをダウンロードし、指定したディレクトリに展開する。
+  AivisSpeech Engine をダウンロードし、指定したディレクトリに展開する。
 inputs:
   repo:
     description: "リポジトリ名。デフォルトは Aivis-Project/AivisSpeech-Engine 。"
     required: false
     default: "Aivis-Project/AivisSpeech-Engine"
   version:
-    description: "AivisSpeech Engineのバージョン。latest（デフォルト）、prerelease-latest、バージョン番号（例：1.0.0）で指定できる。"
+    description: "AivisSpeech Engine のバージョン。latest (デフォルト) 、prerelease-latest、バージョン番号 (例: 1.0.0) で指定できる。"
     required: false
     default: "latest"
   dest:
-    description: "AivisSpeech Engineを展開するディレクトリ。"
+    description: "AivisSpeech Engine を展開するディレクトリ。"
     required: true
   target:
-    description: "ダウンロードする対象。デフォルトは各OSのCPU版。"
+    description: "ダウンロードする対象。"
     required: false
     default: ""
 
 outputs:
   run_path:
-    description: "run.exe、またはrunのパス。"
+    description: "run.exe or run のパス。"
     value: ${{ steps.result.outputs.run_path }}
   version:
-    description: "AivisSpeech Engineのバージョン。"
+    description: "AivisSpeech Engine のバージョン。"
     value: ${{ steps.result.outputs.version }}
 runs:
   using: "composite"
@@ -57,12 +57,12 @@ runs:
       run: |
         if [ "${{ inputs.target }}" = "" ]; then
           OS=$(echo "${{ runner.os }}" | tr "[:upper:]" "[:lower:]") # 小文字にする
-          TARGET="$OS-cpu"
+          TARGET="$OS"
         else
           TARGET="${{ inputs.target }}"
         fi
 
-        # リリース情報からファイル一覧のtxtを取得
+        # リリース情報からファイル一覧の txt を取得
         cat $TEMPDIR/target.json | jq -er '[.assets[] | select(.name | contains("'$TARGET'") and endswith(".7z.txt"))][0]' > $TEMPDIR/assets_txt.json
         LIST_URL=$(cat $TEMPDIR/assets_txt.json | jq -er '.browser_download_url')
         echo "7z.txt url: $LIST_URL"
@@ -70,7 +70,7 @@ runs:
         echo "Files to download:"
         cat $TEMPDIR/download_name.txt | sed -e 's|^|- |'
 
-        # ファイル一覧のtxtにあるファイルをダウンロード
+        # ファイル一覧の txt にあるファイルをダウンロード
         for i in $(cat $TEMPDIR/download_name.txt); do
           URL=$(cat $TEMPDIR/target.json | jq -er "[.assets[] | select(.name == \"$i\")][0].browser_download_url")
           echo "Download url: $URL, dest: $TEMPDIR/$i"
@@ -80,7 +80,7 @@ runs:
           wait $job
         done
 
-        # 一時ディレクトリに展開してから、本体（windows-cpuなどの中）を取り出す
+        # 一時ディレクトリに展開してから、本体を取り出す
         7z x -y -o$TEMPDIR/tmp-extract $TEMPDIR/$(head -1 $TEMPDIR/download_name.txt)
         mkdir -p $DEST
         mv $TEMPDIR/tmp-extract/$TARGET/* $DEST
