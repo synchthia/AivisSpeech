@@ -89,6 +89,18 @@ export interface AudioQuery {
      * @type {number}
      * @memberof AudioQuery
      */
+    pauseLength?: number | null;
+    /**
+     * 句読点などの無音時間（倍率）。デフォルト値は 1 。
+     * @type {number}
+     * @memberof AudioQuery
+     */
+    pauseLengthScale?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AudioQuery
+     */
     outputSamplingRate: number;
     /**
      * 
@@ -97,11 +109,14 @@ export interface AudioQuery {
      */
     outputStereo: boolean;
     /**
-     * 
+     * 読み上げるテキストを指定する。
+     * VOICEVOX ENGINE では AquesTalk 風記法テキストが入る読み取り専用フィールドだが (音声合成時には無視される) 、AivisSpeech Engine では音声合成時に漢字や記号が含まれた通常の読み上げテキストも必要なため、苦肉の策で読み上げテキスト指定用のフィールドとして転用した。
+     * VOICEVOX ENGINE との互換性のため None や空文字列が指定された場合も動作するが、その場合はアクセント句から自動生成されたひらがな文字列が読み上げテキストになるため、不自然なイントネーションになってしまう。
+     * 可能な限り kana に通常の読み上げテキストを指定した上で音声合成 API に渡すことを推奨する。
      * @type {string}
      * @memberof AudioQuery
      */
-    kana?: string | null;
+    kana?: string;
 }
 
 /**
@@ -140,6 +155,8 @@ export function AudioQueryFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'volumeScale': json['volumeScale'],
         'prePhonemeLength': json['prePhonemeLength'],
         'postPhonemeLength': json['postPhonemeLength'],
+        'pauseLength': !exists(json, 'pauseLength') ? undefined : json['pauseLength'],
+        'pauseLengthScale': !exists(json, 'pauseLengthScale') ? undefined : json['pauseLengthScale'],
         'outputSamplingRate': json['outputSamplingRate'],
         'outputStereo': json['outputStereo'],
         'kana': !exists(json, 'kana') ? undefined : json['kana'],
@@ -163,6 +180,8 @@ export function AudioQueryToJSON(value?: AudioQuery | null): any {
         'volumeScale': value.volumeScale,
         'prePhonemeLength': value.prePhonemeLength,
         'postPhonemeLength': value.postPhonemeLength,
+        'pauseLength': value.pauseLength,
+        'pauseLengthScale': value.pauseLengthScale,
         'outputSamplingRate': value.outputSamplingRate,
         'outputStereo': value.outputStereo,
         'kana': value.kana,

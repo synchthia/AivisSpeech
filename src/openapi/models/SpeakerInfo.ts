@@ -21,25 +21,25 @@ import {
 } from './StyleInfo';
 
 /**
- * 話者の追加情報
+ * キャラクターの追加情報
  * @export
  * @interface SpeakerInfo
  */
 export interface SpeakerInfo {
     /**
-     * 
+     * policy.md
      * @type {string}
      * @memberof SpeakerInfo
      */
     policy: string;
     /**
-     * 
+     * アイコンを base64 エンコードしたもの、あるいは URL (「立ち絵画像を base64 エンコードしたもの」ではない点で VOICEVOX ENGINE と異なる)
      * @type {string}
      * @memberof SpeakerInfo
      */
     portrait: string;
     /**
-     * 
+     * スタイルの追加情報
      * @type {Array<StyleInfo>}
      * @memberof SpeakerInfo
      */

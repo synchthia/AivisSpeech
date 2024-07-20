@@ -27,35 +27,35 @@ import {
 } from './SpeakerSupportedFeatures';
 
 /**
- * 話者情報
+ * キャラクター情報
  * @export
  * @interface Speaker
  */
 export interface Speaker {
     /**
-     * 
+     * 名前
      * @type {string}
      * @memberof Speaker
      */
     name: string;
     /**
-     * 
+     * キャラクターの UUID
      * @type {string}
      * @memberof Speaker
      */
     speakerUuid: string;
     /**
-     * 
+     * スタイルの一覧
      * @type {Array<SpeakerStyle>}
      * @memberof Speaker
      */
     styles: Array<SpeakerStyle>;
     /**
-     * 
+     * キャラクターのバージョン
      * @type {string}
      * @memberof Speaker
      */
-    version?: string;
+    version: string;
     /**
      * 
      * @type {SpeakerSupportedFeatures}
@@ -72,6 +72,7 @@ export function instanceOfSpeaker(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "speakerUuid" in value;
     isInstance = isInstance && "styles" in value;
+    isInstance = isInstance && "version" in value;
 
     return isInstance;
 }
@@ -89,7 +90,7 @@ export function SpeakerFromJSONTyped(json: any, ignoreDiscriminator: boolean): S
         'name': json['name'],
         'speakerUuid': json['speaker_uuid'],
         'styles': ((json['styles'] as Array<any>).map(SpeakerStyleFromJSON)),
-        'version': !exists(json, 'version') ? undefined : json['version'],
+        'version': json['version'],
         'supportedFeatures': !exists(json, 'supported_features') ? undefined : SpeakerSupportedFeaturesFromJSON(json['supported_features']),
     };
 }

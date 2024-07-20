@@ -20,19 +20,19 @@ import { exists, mapValues } from '../runtime';
  */
 export interface Note {
     /**
-     * 
+     * 音階
      * @type {number}
      * @memberof Note
      */
-    key?: number | null;
+    key?: number;
     /**
-     * 
+     * 音符のフレーム長
      * @type {number}
      * @memberof Note
      */
     frameLength: number;
     /**
-     * 
+     * 音符の歌詞
      * @type {string}
      * @memberof Note
      */

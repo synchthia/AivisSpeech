@@ -74,7 +74,7 @@ export interface AccentPhrasesAccentPhrasesPostRequest {
     text: string;
     speaker: number;
     isKana?: boolean;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface AddPresetAddPresetPostRequest {
@@ -85,26 +85,26 @@ export interface AddUserDictWordUserDictWordPostRequest {
     surface: string;
     pronunciation: string;
     accentType: number;
-    wordType?: WordTypes | null;
-    priority?: number | null;
+    wordType?: WordTypes;
+    priority?: number;
 }
 
 export interface AudioQueryAudioQueryPostRequest {
     text: string;
     speaker: number;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface AudioQueryFromPresetAudioQueryFromPresetPostRequest {
     text: string;
     presetId: number;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface CancellableSynthesisCancellableSynthesisPostRequest {
     speaker: number;
     audioQuery: AudioQuery;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface ConnectWavesConnectWavesPostRequest {
@@ -122,7 +122,7 @@ export interface DeleteUserDictWordUserDictWordWordUuidDeleteRequest {
 export interface FrameSynthesisFrameSynthesisPostRequest {
     speaker: number;
     frameAudioQuery: FrameAudioQuery;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface GetAivmInfoAivmModelsAivmUuidGetRequest {
@@ -137,7 +137,7 @@ export interface ImportUserDictWordsImportUserDictPostRequest {
 export interface InitializeSpeakerInitializeSpeakerPostRequest {
     speaker: number;
     skipReinit?: boolean;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface InstallAivmAivmModelsInstallPostRequest {
@@ -147,36 +147,36 @@ export interface InstallAivmAivmModelsInstallPostRequest {
 
 export interface IsInitializedSpeakerIsInitializedSpeakerGetRequest {
     speaker: number;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface MoraDataMoraDataPostRequest {
     speaker: number;
     accentPhrase: Array<AccentPhrase>;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface MoraLengthMoraLengthPostRequest {
     speaker: number;
     accentPhrase: Array<AccentPhrase>;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface MoraPitchMoraPitchPostRequest {
     speaker: number;
     accentPhrase: Array<AccentPhrase>;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface MorphableTargetsMorphableTargetsPostRequest {
     requestBody: Array<number>;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface MultiSynthesisMultiSynthesisPostRequest {
     speaker: number;
     audioQuery: Array<AudioQuery>;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface RewriteUserDictWordUserDictWordWordUuidPutRequest {
@@ -184,47 +184,49 @@ export interface RewriteUserDictWordUserDictWordWordUuidPutRequest {
     surface: string;
     pronunciation: string;
     accentType: number;
-    wordType?: WordTypes | null;
-    priority?: number | null;
+    wordType?: WordTypes;
+    priority?: number;
 }
 
 export interface SettingPostSettingPostRequest {
     corsPolicyMode: CorsPolicyMode;
-    allowOrigin?: string | null;
+    allowOrigin?: string;
 }
 
 export interface SingFrameAudioQuerySingFrameAudioQueryPostRequest {
     speaker: number;
     score: Score;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface SingFrameVolumeSingFrameVolumePostRequest {
     speaker: number;
     bodySingFrameVolumeSingFrameVolumePost: BodySingFrameVolumeSingFrameVolumePost;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface SingerInfoSingerInfoGetRequest {
     speakerUuid: string;
-    coreVersion?: string | null;
+    resourceFormat?: SingerInfoSingerInfoGetResourceFormatEnum;
+    coreVersion?: string;
 }
 
 export interface SingersSingersGetRequest {
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface SpeakerInfoSpeakerInfoGetRequest {
     speakerUuid: string;
-    coreVersion?: string | null;
+    resourceFormat?: SpeakerInfoSpeakerInfoGetResourceFormatEnum;
+    coreVersion?: string;
 }
 
 export interface SpeakersSpeakersGetRequest {
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface SupportedDevicesSupportedDevicesGetRequest {
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface SynthesisMorphingSynthesisMorphingPostRequest {
@@ -232,14 +234,14 @@ export interface SynthesisMorphingSynthesisMorphingPostRequest {
     targetSpeaker: number;
     morphRate: number;
     audioQuery: AudioQuery;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface SynthesisSynthesisPostRequest {
     speaker: number;
     audioQuery: AudioQuery;
     enableInterrogativeUpspeak?: boolean;
-    coreVersion?: string | null;
+    coreVersion?: string;
 }
 
 export interface UninstallAivmAivmModelsAivmUuidUninstallDeleteRequest {
@@ -661,8 +663,8 @@ export interface DefaultApiInterface {
     moraPitchMoraPitchPost(requestParameters: MoraPitchMoraPitchPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AccentPhrase>>;
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
-     * @summary 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
+     * 指定されたベーススタイルに対してエンジン内の各キャラクターがモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
+     * @summary 指定したスタイルに対してエンジン内のキャラクターがモーフィングが可能か判定する
      * @param {Array<number>} requestBody 
      * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
@@ -672,8 +674,8 @@ export interface DefaultApiInterface {
     morphableTargetsMorphableTargetsPostRaw(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: MorphableTargetInfo; }>>>;
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
-     * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
+     * 指定されたベーススタイルに対してエンジン内の各キャラクターがモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
+     * 指定したスタイルに対してエンジン内のキャラクターがモーフィングが可能か判定する
      */
     morphableTargetsMorphableTargetsPost(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<{ [key: string]: MorphableTargetInfo; }>>;
 
@@ -784,7 +786,8 @@ export interface DefaultApiInterface {
     /**
      * 
      * @summary AivisSpeech Engine ではサポートされていない API です (常に 501 Not Implemented を返します)
-     * @param {string} speakerUuid 話者の UUID 。
+     * @param {string} speakerUuid 
+     * @param {'base64' | 'url'} [resourceFormat] 
      * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -813,9 +816,10 @@ export interface DefaultApiInterface {
     singersSingersGet(requestParameters: SingersSingersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Speaker>>;
 
     /**
-     * 指定されたspeaker_uuidの話者に関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
+     * UUID で指定された喋れるキャラクターの情報を返します。 画像や音声はresource_formatで指定した形式で返されます。
      * @summary Speaker Info
-     * @param {string} speakerUuid 話者の UUID 。
+     * @param {string} speakerUuid 
+     * @param {'base64' | 'url'} [resourceFormat] 
      * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -824,13 +828,13 @@ export interface DefaultApiInterface {
     speakerInfoSpeakerInfoGetRaw(requestParameters: SpeakerInfoSpeakerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpeakerInfo>>;
 
     /**
-     * 指定されたspeaker_uuidの話者に関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
+     * UUID で指定された喋れるキャラクターの情報を返します。 画像や音声はresource_formatで指定した形式で返されます。
      * Speaker Info
      */
     speakerInfoSpeakerInfoGet(requestParameters: SpeakerInfoSpeakerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SpeakerInfo>;
 
     /**
-     * 話者情報の一覧を取得します。
+     * 喋れるキャラクターの情報の一覧を返します。
      * @summary Speakers
      * @param {string} [coreVersion] AivisSpeech Engine ではサポートされていないパラメータです (常に無視されます) 。
      * @param {*} [options] Override http request option.
@@ -840,7 +844,7 @@ export interface DefaultApiInterface {
     speakersSpeakersGetRaw(requestParameters: SpeakersSpeakersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Speaker>>>;
 
     /**
-     * 話者情報の一覧を取得します。
+     * 喋れるキャラクターの情報の一覧を返します。
      * Speakers
      */
     speakersSpeakersGet(requestParameters: SpeakersSpeakersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Speaker>>;
@@ -1932,8 +1936,8 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
-     * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
+     * 指定されたベーススタイルに対してエンジン内の各キャラクターがモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
+     * 指定したスタイルに対してエンジン内のキャラクターがモーフィングが可能か判定する
      */
     async morphableTargetsMorphableTargetsPostRaw(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<{ [key: string]: MorphableTargetInfo; }>>> {
         if (requestParameters.requestBody === null || requestParameters.requestBody === undefined) {
@@ -1962,8 +1966,8 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたベーススタイルに対してエンジン内の各話者がモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
-     * 指定したスタイルに対してエンジン内の話者がモーフィングが可能か判定する
+     * 指定されたベーススタイルに対してエンジン内の各キャラクターがモーフィング機能を利用可能か返します。 モーフィングの許可/禁止は `/speakers `の `speaker.supported_features.synthesis_morphing` に記載されています。 プロパティが存在しない場合は、モーフィングが許可されているとみなします。 返り値のスタイル ID は string 型なので注意。 AivisSpeech Engine では話者ごとに発声タイミングが異なる関係で実装不可能なため (動作こそするが聴くに耐えない) 、 全ての話者でモーフィングが禁止されています。
+     * 指定したスタイルに対してエンジン内のキャラクターがモーフィングが可能か判定する
      */
     async morphableTargetsMorphableTargetsPost(requestParameters: MorphableTargetsMorphableTargetsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<{ [key: string]: MorphableTargetInfo; }>> {
         const response = await this.morphableTargetsMorphableTargetsPostRaw(requestParameters, initOverrides);
@@ -2263,6 +2267,10 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
             queryParameters['speaker_uuid'] = requestParameters.speakerUuid;
         }
 
+        if (requestParameters.resourceFormat !== undefined) {
+            queryParameters['resource_format'] = requestParameters.resourceFormat;
+        }
+
         if (requestParameters.coreVersion !== undefined) {
             queryParameters['core_version'] = requestParameters.coreVersion;
         }
@@ -2318,7 +2326,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたspeaker_uuidの話者に関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
+     * UUID で指定された喋れるキャラクターの情報を返します。 画像や音声はresource_formatで指定した形式で返されます。
      * Speaker Info
      */
     async speakerInfoSpeakerInfoGetRaw(requestParameters: SpeakerInfoSpeakerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SpeakerInfo>> {
@@ -2330,6 +2338,10 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
 
         if (requestParameters.speakerUuid !== undefined) {
             queryParameters['speaker_uuid'] = requestParameters.speakerUuid;
+        }
+
+        if (requestParameters.resourceFormat !== undefined) {
+            queryParameters['resource_format'] = requestParameters.resourceFormat;
         }
 
         if (requestParameters.coreVersion !== undefined) {
@@ -2349,7 +2361,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 指定されたspeaker_uuidの話者に関する情報をjson形式で返します。 画像や音声はbase64エンコードされたものが返されます。
+     * UUID で指定された喋れるキャラクターの情報を返します。 画像や音声はresource_formatで指定した形式で返されます。
      * Speaker Info
      */
     async speakerInfoSpeakerInfoGet(requestParameters: SpeakerInfoSpeakerInfoGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SpeakerInfo> {
@@ -2358,7 +2370,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 話者情報の一覧を取得します。
+     * 喋れるキャラクターの情報の一覧を返します。
      * Speakers
      */
     async speakersSpeakersGetRaw(requestParameters: SpeakersSpeakersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Speaker>>> {
@@ -2381,7 +2393,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
     /**
-     * 話者情報の一覧を取得します。
+     * 喋れるキャラクターの情報の一覧を返します。
      * Speakers
      */
     async speakersSpeakersGet(requestParameters: SpeakersSpeakersGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Speaker>> {
@@ -2676,3 +2688,20 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
     }
 
 }
+
+/**
+ * @export
+ */
+export const SingerInfoSingerInfoGetResourceFormatEnum = {
+    Base64: 'base64',
+    Url: 'url'
+} as const;
+export type SingerInfoSingerInfoGetResourceFormatEnum = typeof SingerInfoSingerInfoGetResourceFormatEnum[keyof typeof SingerInfoSingerInfoGetResourceFormatEnum];
+/**
+ * @export
+ */
+export const SpeakerInfoSpeakerInfoGetResourceFormatEnum = {
+    Base64: 'base64',
+    Url: 'url'
+} as const;
+export type SpeakerInfoSpeakerInfoGetResourceFormatEnum = typeof SpeakerInfoSpeakerInfoGetResourceFormatEnum[keyof typeof SpeakerInfoSpeakerInfoGetResourceFormatEnum];

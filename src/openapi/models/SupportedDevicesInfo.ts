@@ -20,19 +20,19 @@ import { exists, mapValues } from '../runtime';
  */
 export interface SupportedDevicesInfo {
     /**
-     * 
+     * CPU に対応しているか
      * @type {boolean}
      * @memberof SupportedDevicesInfo
      */
     cpu: boolean;
     /**
-     * 
+     * CUDA (NVIDIA GPU) に対応しているか
      * @type {boolean}
      * @memberof SupportedDevicesInfo
      */
     cuda: boolean;
     /**
-     * 
+     * DirectML (NVIDIA GPU/Radeon GPU 等) に対応しているか
      * @type {boolean}
      * @memberof SupportedDevicesInfo
      */

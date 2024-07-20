@@ -95,6 +95,18 @@ export interface Preset {
      * @memberof Preset
      */
     postPhonemeLength: number;
+    /**
+     * 句読点などの無音時間
+     * @type {number}
+     * @memberof Preset
+     */
+    pauseLength?: number;
+    /**
+     * 句読点などの無音時間（倍率）
+     * @type {number}
+     * @memberof Preset
+     */
+    pauseLengthScale?: number;
 }
 
 /**
@@ -137,6 +149,8 @@ export function PresetFromJSONTyped(json: any, ignoreDiscriminator: boolean): Pr
         'volumeScale': json['volumeScale'],
         'prePhonemeLength': json['prePhonemeLength'],
         'postPhonemeLength': json['postPhonemeLength'],
+        'pauseLength': !exists(json, 'pauseLength') ? undefined : json['pauseLength'],
+        'pauseLengthScale': !exists(json, 'pauseLengthScale') ? undefined : json['pauseLengthScale'],
     };
 }
 
@@ -160,6 +174,8 @@ export function PresetToJSON(value?: Preset | null): any {
         'volumeScale': value.volumeScale,
         'prePhonemeLength': value.prePhonemeLength,
         'postPhonemeLength': value.postPhonemeLength,
+        'pauseLength': value.pauseLength,
+        'pauseLengthScale': value.pauseLengthScale,
     };
 }
 

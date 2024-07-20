@@ -20,13 +20,13 @@ import { exists, mapValues } from '../runtime';
  */
 export interface FramePhoneme {
     /**
-     * 
+     * 音素
      * @type {string}
      * @memberof FramePhoneme
      */
     phoneme: string;
     /**
-     * 
+     * 音素のフレーム長
      * @type {number}
      * @memberof FramePhoneme
      */
