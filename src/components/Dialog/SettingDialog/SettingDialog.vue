@@ -487,8 +487,7 @@
                 "
               />
               <ToggleCell
-                v-if="!isProduction"
-                title="[開発時のみ機能] 調整結果の保持"
+                title="調整結果の保持"
                 description="テキスト変更時、同じ読みのアクセント区間内の調整結果を保持します。"
                 :modelValue="experimentalSetting.shouldKeepTuningOnTextChange"
                 @update:modelValue="
