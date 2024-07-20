@@ -14,9 +14,9 @@
           </QToolbar>
         </QHeader>
         <QPage class="row no-wrap">
-          <div style="width: 245px; flex-shrink: 0; border-right: solid 1px var(--color-surface);">
-            <QList>
-              <QItem v-for="aivmInfo in Object.values(aivmInfoDict)" :key="aivmInfo.manifest.uuid" v-ripple clickable
+          <div style="width: 260px; flex-shrink: 0; border-right: solid 1px var(--color-surface);">
+            <QList class="model-list">
+              <QItem v-for="aivmInfo in Object.values(aivmInfoDict)" :key="aivmInfo.manifest.uuid" v-ripple class="q-pr-none" clickable
                 :active="activeAivmUuid === aivmInfo.manifest.uuid" @click="activeAivmUuid = aivmInfo.manifest.uuid">
                   <QItemSection avatar>
                     <QAvatar rounded color="primary">
@@ -139,6 +139,14 @@ const activeSpeakerIndex = ref(0);
 
 .q-item--active {
   background: rgba(colors.$primary-rgb, 0.4);
+}
+
+.model-list {
+  height: calc(
+    100vh - #{vars.$menubar-height + vars.$toolbar-height +
+      vars.$window-border-width}
+  );
+  overflow-y: auto;
 }
 
 </style>
