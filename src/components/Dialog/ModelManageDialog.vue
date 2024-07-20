@@ -32,7 +32,7 @@
               </QItem>
             </QList>
           </div>
-          <div v-if="activeAivmInfo" style="width: 100%;">
+          <div v-if="activeAivmInfo" class="model-detail" style="width: 100%;">
             <div class="q-pa-md">
               <div style="font-size: 20px; font-weight: bold;">
                 {{ activeAivmInfo.manifest.name }}
@@ -141,7 +141,7 @@ const activeSpeakerIndex = ref(0);
   background: rgba(colors.$primary-rgb, 0.4);
 }
 
-.model-list {
+.model-list, .model-detail {
   height: calc(
     100vh - #{vars.$menubar-height + vars.$toolbar-height +
       vars.$window-border-width}
