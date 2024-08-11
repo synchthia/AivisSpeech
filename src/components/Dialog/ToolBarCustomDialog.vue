@@ -54,17 +54,20 @@
                   #item="{ element: button }: { element: ToolbarButtonTagType }"
                 >
                   <QBtn
+                    v-if="!button.startsWith('SPACER')"
                     unelevated
                     color="toolbar-button"
                     textColor="toolbar-button-display"
+                    :icon="getToolbarButtonIcon(button)"
                     :class="
                       (button === 'EMPTY' ? ' radio-space' : ' radio') +
-                      ' text-no-wrap text-bold q-mr-sm'
+                      ' text-no-wrap text-bold q-px-sm q-mr-sm'
                     "
                   >
-                    {{ getToolbarButtonName(button) }}
+                    <!-- {{ getToolbarButtonName(button) }} -->
                     <QTooltip
                       :delay="500"
+                      :offset="[0, 8]"
                       anchor="bottom middle"
                       self="top middle"
                       transitionShow="jump-down"
@@ -75,6 +78,8 @@
                       >{{ usableButtonsDesc[button] }}</QTooltip
                     >
                   </QBtn>
+                  <!-- 区切り (スペーサー) -->
+                  <div v-else class="spacer radio"></div>
                 </template>
               </Draggable>
               <div class="preview-toolbar-drag-hint">
@@ -117,7 +122,7 @@ import { computed, ref, watch, Ref } from "vue";
 import Draggable from "vuedraggable";
 import { useStore } from "@/store";
 import { ToolbarButtonTagType, ToolbarSettingType } from "@/type/preload";
-import { getToolbarButtonName } from "@/store/utility";
+import { getToolbarButtonName, getToolbarButtonIcon } from "@/store/utility";
 
 const props = defineProps<{
   modelValue: boolean;
@@ -155,6 +160,7 @@ window.backend.getDefaultToolbarSetting().then((setting) => {
 const usableButtonsDesc: Record<ToolbarButtonTagType, string> = {
   PLAY_CONTINUOUSLY:
     "選択されているテキスト以降のすべてのテキストを読み上げます。",
+  PLAY: "選択されているテキストを読み上げます。",
   STOP: "テキストが読み上げられているときに、それを止めます。",
   EXPORT_AUDIO_SELECTED:
     "選択されているテキストの読み上げを音声ファイルに書き出します。",
@@ -165,9 +171,12 @@ const usableButtonsDesc: Record<ToolbarButtonTagType, string> = {
   SAVE_PROJECT: "プロジェクトを上書き保存します。",
   UNDO: "操作を一つ戻します。",
   REDO: "元に戻した操作をやり直します。",
-  IMPORT_TEXT: "テキストファイル(.txt)を読み込みます。",
+  IMPORT_TEXT: "テキストファイル (.txt) を読み込みます。",
   EMPTY:
     "これはボタンではありません。レイアウトの調整に使います。また、実際には表示されません。",
+  SPACER_1: "これはボタンではありません。区切りの挿入に使います。また、実際には表示されません。",
+  SPACER_2: "これはボタンではありません。区切りの挿入に使います。また、実際には表示されません。",
+  SPACER_3: "これはボタンではありません。区切りの挿入に使います。また、実際には表示されません。",
 };
 
 const ToolBarCustomDialogOpenComputed = computed({
@@ -248,6 +257,12 @@ const finishOrNotDialog = async () => {
 <style lang="scss" scoped>
 @use "@/styles/variables" as vars;
 @use "@/styles/colors" as colors;
+
+.spacer {
+  height: 36px;
+  padding-right: 8px;
+  border-left: 2px solid var(--color-splitter);
+}
 
 .tool-bar-custom-dialog .q-layout-container :deep(.absolute-full) {
   right: 0 !important;

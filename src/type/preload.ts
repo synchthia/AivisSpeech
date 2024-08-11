@@ -197,12 +197,18 @@ export const defaultHotkeySettings: HotkeySettingType[] = [
 ];
 
 export const defaultToolbarButtonSetting: ToolbarSettingType = [
-  "PLAY_CONTINUOUSLY",
-  "STOP",
-  "EXPORT_AUDIO_SELECTED",
-  "EMPTY",
   "UNDO",
   "REDO",
+  "SAVE_PROJECT",
+  "SPACER_1",
+  "PLAY_CONTINUOUSLY",
+  "PLAY",
+  "STOP",
+  "SPACER_2",
+  "EMPTY",
+  "SPACER_3",
+  "EXPORT_AUDIO_SELECTED",
+  "EXPORT_AUDIO_CONNECT_ALL",
 ];
 
 export interface Sandbox {
@@ -510,6 +516,7 @@ export type HotkeyReturnType =
 
 export const toolbarButtonTagSchema = z.enum([
   "PLAY_CONTINUOUSLY",
+  "PLAY",
   "STOP",
   "EXPORT_AUDIO_SELECTED",
   "EXPORT_AUDIO_ALL",
@@ -519,6 +526,9 @@ export const toolbarButtonTagSchema = z.enum([
   "REDO",
   "IMPORT_TEXT",
   "EMPTY",
+  "SPACER_1",
+  "SPACER_2",
+  "SPACER_3",
 ]);
 export type ToolbarButtonTagType = z.infer<typeof toolbarButtonTagSchema>;
 

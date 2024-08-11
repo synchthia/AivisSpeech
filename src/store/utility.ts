@@ -382,6 +382,7 @@ export async function generateTempUniqueId(serializable: unknown) {
 export const getToolbarButtonName = (tag: ToolbarButtonTagType): string => {
   const tag2NameObj: Record<ToolbarButtonTagType, string> = {
     PLAY_CONTINUOUSLY: "連続再生",
+    PLAY: "選択音声を再生",
     STOP: "停止",
     EXPORT_AUDIO_SELECTED: "選択音声を書き出し",
     EXPORT_AUDIO_ALL: "全部書き出し",
@@ -391,8 +392,33 @@ export const getToolbarButtonName = (tag: ToolbarButtonTagType): string => {
     REDO: "やり直す",
     IMPORT_TEXT: "テキスト読み込み",
     EMPTY: "空白",
+    SPACER_1: "区切り",
+    SPACER_2: "区切り",
+    SPACER_3: "区切り",
   };
   return tag2NameObj[tag];
+};
+
+export const getToolbarButtonIcon = (tag: ToolbarButtonTagType): string => {
+  // Quasar では - ではなく _ を使う必要がある
+  // ref: https://quasar.dev/vue-components/icon
+  const tag2IconObj: Record<ToolbarButtonTagType, string> = {
+    PLAY_CONTINUOUSLY: "sym_r_autoplay",
+    PLAY: "sym_r_play_arrow",
+    STOP: "sym_r_stop",
+    EXPORT_AUDIO_SELECTED: "sym_r_file_save",
+    EXPORT_AUDIO_ALL: "sym_r_file_save",
+    EXPORT_AUDIO_CONNECT_ALL: "sym_r_file_save",
+    SAVE_PROJECT: "sym_r_save",
+    UNDO: "sym_r_undo",
+    REDO: "sym_r_redo",
+    IMPORT_TEXT: "sym_r_upload_file",
+    EMPTY: "",
+    SPACER_1: "",
+    SPACER_2: "",
+    SPACER_3: "",
+  };
+  return tag2IconObj[tag];
 };
 
 // based on https://github.com/BBWeb/path-browserify/blob/win-version/index.js

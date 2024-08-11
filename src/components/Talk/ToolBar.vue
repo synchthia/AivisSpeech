@@ -2,17 +2,32 @@
   <QHeader class="q-py-sm">
     <QToolbar>
       <template v-for="button in buttons" :key="button.text">
-        <QSpace v-if="button.text === null" />
+        <div v-if="button.text === null && button.tag === 'SPACER_1'" class="spacer"></div>
+        <div v-else-if="button.text === null && button.tag === 'SPACER_2'" class="spacer"></div>
+        <div v-else-if="button.text === null && button.tag === 'SPACER_3'" class="spacer"></div>
+        <QSpace v-else-if="button.text === null" />
         <QBtn
           v-else
           unelevated
           color="toolbar-button"
           textColor="toolbar-button-display"
-          class="text-no-wrap text-bold q-mr-sm"
+          class="text-no-wrap text-bold q-px-sm q-mr-sm"
+          :icon="button.icon"
           :disable="button.disable.value"
           @click="button.click"
-          >{{ button.text }}</QBtn
-        >
+          >
+          <!-- {{ button.text }} -->
+          <QTooltip
+            :delay="500"
+            :offset="[0, 8]"
+            anchor="bottom middle"
+            self="top middle"
+            transitionShow="jump-down"
+            transitionHide="jump-up"
+            >
+            {{ button.text }}
+          </QTooltip>
+        </QBtn>
       </template>
     </QToolbar>
   </QHeader>
@@ -27,17 +42,20 @@ import {
 } from "@/components/Dialog/Dialog";
 import { useStore } from "@/store";
 import { ToolbarButtonTagType } from "@/type/preload";
-import { getToolbarButtonName } from "@/store/utility";
+import { getToolbarButtonName, getToolbarButtonIcon } from "@/store/utility";
 import { useHotkeyManager } from "@/plugins/hotkeyPlugin";
 import { handlePossiblyNotMorphableError } from "@/store/audioGenerate";
 
 type ButtonContent = {
+  tag: ToolbarButtonTagType;
   text: string;
+  icon: string;
   click(): void;
   disable: ComputedRef<boolean>;
 };
 
 type SpacerContent = {
+  tag: ToolbarButtonTagType;
   text: null;
 };
 
@@ -103,6 +121,21 @@ const playContinuously = async () => {
     });
   }
 };
+const play = async () => {
+  if (activeAudioKey.value == undefined)
+    throw new Error("activeAudioKey is undefined");
+  try {
+    await store.dispatch("PLAY_AUDIO", {
+      audioKey: activeAudioKey.value,
+    });
+  } catch (e) {
+    const msg = handlePossiblyNotMorphableError(e);
+    store.dispatch("SHOW_ALERT_DIALOG", {
+      title: "再生に失敗しました",
+      message: msg ?? "音声合成エンジンの再起動をお試しください。",
+    });
+  }
+};
 const stop = () => {
   store.dispatch("STOP_AUDIO");
 };
@@ -150,11 +183,15 @@ const importTextFile = () => {
 
 const usableButtons: Record<
   ToolbarButtonTagType,
-  Omit<ButtonContent, "text"> | null
+  Omit<ButtonContent, "text" | "icon"> | null
 > = {
   PLAY_CONTINUOUSLY: {
     click: playContinuously,
     disable: uiLocked,
+  },
+  PLAY: {
+    click: play,
+    disable: computed(() => !activeAudioKey.value || uiLocked.value),
   },
   STOP: {
     click: stop,
@@ -189,6 +226,9 @@ const usableButtons: Record<
     disable: uiLocked,
   },
   EMPTY: null,
+  SPACER_1: null,
+  SPACER_2: null,
+  SPACER_3: null,
 };
 
 const buttons = computed(() =>
@@ -197,13 +237,26 @@ const buttons = computed(() =>
     if (buttonContent) {
       return {
         ...buttonContent,
+        tag: tag,
+        icon: getToolbarButtonIcon(tag),
         text: getToolbarButtonName(tag),
       };
     } else {
       return {
+        tag: tag,
         text: null,
       };
     }
   }),
 );
 </script>
+
+<style lang="scss" scoped>
+
+.spacer {
+  height: 36px;
+  margin-right: 8px;
+  border-left: 2px solid var(--color-splitter);
+}
+
+</style>

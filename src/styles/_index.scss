@@ -92,7 +92,7 @@ details {
 // 無効時の色
 .q-btn {
   &.disabled {
-    opacity: 0.6 !important;
+    opacity: 0.5 !important;
   }
 }
 
@@ -299,6 +299,9 @@ details {
 }
 .bg-toolbar-button {
   background: colors.$toolbar-button;
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
 
 .text-toolbar-button-display {
