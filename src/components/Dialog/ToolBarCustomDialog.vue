@@ -54,7 +54,6 @@
                   #item="{ element: button }: { element: ToolbarButtonTagType }"
                 >
                   <QBtn
-                    v-if="!button.startsWith('SPACER')"
                     unelevated
                     color="toolbar-button"
                     textColor="toolbar-button-display"
@@ -62,6 +61,7 @@
                     :class="
                       (button === 'EMPTY' ? ' radio-space' : ' radio') +
                       ((button === 'PLAY' || button === 'STOP') ? ' play-stop-button' : '') +
+                      (button.startsWith('SPACER') ? ' spacer' : '') +
                       ' text-no-wrap text-bold q-px-sm q-mr-sm'
                     "
                   >
@@ -79,8 +79,6 @@
                       >{{ usableButtonsDesc[button] }}</QTooltip
                     >
                   </QBtn>
-                  <!-- 区切り (スペーサー) -->
-                  <div v-else class="spacer radio"></div>
                 </template>
               </Draggable>
               <div class="preview-toolbar-drag-hint">
@@ -266,9 +264,16 @@ const finishOrNotDialog = async () => {
 @use "@/styles/colors" as colors;
 
 .spacer {
+  width: 0px;
   height: 36px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
   padding-right: 8px;
   border-left: 2px solid var(--color-splitter);
+  margin-right: 0px;
+  background: transparent;
+  border-radius: 0px;
 }
 
 .tool-bar-custom-dialog .q-layout-container :deep(.absolute-full) {
