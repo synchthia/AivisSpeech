@@ -208,6 +208,7 @@ export const defaultToolbarButtonSetting: ToolbarSettingType = [
   "EMPTY",
   "SPACER_3",
   "EXPORT_AUDIO_SELECTED",
+  "EXPORT_AUDIO_ALL",
   "EXPORT_AUDIO_CONNECT_ALL",
 ];
 
