@@ -22,7 +22,7 @@
     </QItemSection>
 
     <QItemSection side>
-      <QIcon name="keyboard_arrow_right" />
+      <QIcon name="sym_r_keyboard_arrow_right" />
     </QItemSection>
 
     <QMenu

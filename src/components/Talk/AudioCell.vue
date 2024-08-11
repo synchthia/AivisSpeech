@@ -32,7 +32,7 @@
     />
     <QIcon
       v-if="isActiveAudioCell"
-      name="arrow_right"
+      name="sym_r_arrow_right"
       color="primary"
       size="sm"
       class="absolute active-arrow"
@@ -88,7 +88,7 @@
         <QBtn
           round
           flat
-          icon="delete_outline"
+          icon="sym_r_delete_outline"
           size="0.8rem"
           :disable="uiLocked"
           style="margin-left: 6px"

@@ -12,7 +12,7 @@
           <QBtn
             round
             flat
-            icon="close"
+            icon="sym_r_close"
             color="display"
             @click="hotkeySettingDialogOpenComputed = false"
           />
@@ -26,7 +26,7 @@
             class="q-mr-sm search-box"
           >
             <template #prepend>
-              <QIcon name="search" />
+              <QIcon name="sym_r_search" />
             </template>
             <template #append>
               <QIcon
@@ -99,7 +99,7 @@
                   <QBtn
                     rounded
                     flat
-                    icon="settings_backup_restore"
+                    icon="sym_r_settings_backup_restore"
                     padding="none sm"
                     size="1em"
                     :disable="checkHotkeyReadonly(tableProps.row.action)"

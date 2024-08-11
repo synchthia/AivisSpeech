@@ -22,7 +22,7 @@
             <QBtn
               outline
               label="拒否"
-              icon="close"
+              icon="sym_r_close"
               color="toolbar-button"
               textColor="toolbar-button-display"
               class="text-no-wrap q-mr-md text-bold"
@@ -32,7 +32,7 @@
             <QBtn
               outline
               label="許可"
-              icon="done"
+              icon="sym_r_done"
               color="toolbar-button"
               textColor="toolbar-button-display"
               class="text-no-wrap text-bold"

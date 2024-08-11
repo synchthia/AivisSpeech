@@ -33,7 +33,7 @@
       </div>
     </div>
     <QIcon
-      name="arrow_drop_down"
+      name="sym_r_arrow_drop_down"
       size="sm"
       class="character-menu-dropdown-icon"
     />

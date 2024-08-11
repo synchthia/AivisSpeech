@@ -34,7 +34,7 @@
         @change="setTempo"
       >
         <template #prepend>
-          <QIcon name="music_note" size="xs" class="sing-tempo-icon" />
+          <QIcon name="sym_r_music_note" size="xs" class="sing-tempo-icon" />
         </template>
       </QInput>
       <div class="sing-beats">
@@ -67,21 +67,21 @@
         flat
         round
         class="sing-transport-button"
-        icon="skip_previous"
+        icon="sym_r_skip_previous"
         @click="goToZero"
       />
       <QBtn
         v-if="!nowPlaying"
         round
         class="sing-playback-button"
-        icon="play_arrow"
+        icon="sym_r_play_arrow"
         @click="play"
       />
       <QBtn
         v-else
         round
         class="sing-playback-button"
-        icon="stop"
+        icon="sym_r_stop"
         @click="stop"
       />
       <div class="sing-playhead-position">
@@ -102,7 +102,7 @@
         flat
         dense
         round
-        icon="undo"
+        icon="sym_r_undo"
         class="sing-undo-button"
         :disable="!canUndo"
         @click="undo"
@@ -111,12 +111,12 @@
         flat
         dense
         round
-        icon="redo"
+        icon="sym_r_redo"
         class="sing-redo-button"
         :disable="!canRedo"
         @click="redo"
       />
-      <QIcon name="volume_up" size="xs" class="sing-volume-icon" />
+      <QIcon name="sym_r_volume_up" size="xs" class="sing-volume-icon" />
       <QSlider v-model.number="volume" class="sing-volume" />
       <QSelect
         v-model="snapTypeSelectModel"

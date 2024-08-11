@@ -2,7 +2,7 @@
   <div v-if="!tipConfirmed" style="z-index: 10">
     <QBanner class="bg-surface text-display" dense rounded inlineActions>
       <template #avatar>
-        <QIcon name="info" color="primary" />
+        <QIcon name="sym_r_info" color="primary" />
       </template>
       <slot></slot>
       <template #action>

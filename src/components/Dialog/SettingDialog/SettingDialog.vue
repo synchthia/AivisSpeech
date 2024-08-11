@@ -14,7 +14,7 @@
             <QBtn
               round
               flat
-              icon="close"
+              icon="sym_r_close"
               color="display"
               aria-label="設定を閉じる"
               @click="settingDialogOpenedComputed = false"
@@ -60,7 +60,7 @@
                 <div
                   aria-label="再生と保存時の音声のサンプリングレートを変更できます（サンプリングレートを上げても音声の品質は上がりません）。"
                 >
-                  <QIcon name="help_outline" size="sm" class="help-hover-icon">
+                  <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
                       anchor="center right"
@@ -187,7 +187,7 @@
                 <div
                   aria-label="過去に非表示にしたヒントを全て再表示できます。"
                 >
-                  <QIcon name="help_outline" size="sm" class="help-hover-icon">
+                  <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
                       anchor="center right"
@@ -203,7 +203,7 @@
                 <!-- ボタンクリックのフィードバックのためのチェックマーク -->
                 <QIcon
                   v-if="isDefaultConfirmedTips && hasResetConfirmedTips"
-                  name="check"
+                  name="sym_r_check"
                   size="sm"
                   color="primary"
                   style="margin-right: 8px"
@@ -236,7 +236,7 @@
                 <div
                   aria-label="ON にすると、書き出し先フォルダをあらかじめ指定できます。"
                 >
-                  <QIcon name="help_outline" size="sm" class="help-hover-icon">
+                  <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
                       anchor="center right"
@@ -275,7 +275,7 @@
                       dense
                       flat
                       color="primary"
-                      icon="folder_open"
+                      icon="sym_r_folder_open"
                       @click="selectFixedExportDir()"
                     >
                       <QTooltip :delay="500" anchor="bottom left">
@@ -302,7 +302,7 @@
                 <div
                   aria-label="書き出し時のファイル名パターンをカスタマイズできます。"
                 >
-                  <QIcon name="help_outline" size="sm" class="help-hover-icon">
+                  <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
                       anchor="center right"
@@ -425,7 +425,7 @@
               >
                 <div>再生デバイス</div>
                 <div aria-label="音声の再生デバイスを変更できます。">
-                  <QIcon name="help_outline" size="sm" class="help-hover-icon">
+                  <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
                       :delay="500"
                       anchor="center right"

@@ -51,7 +51,7 @@
         <div class="q-mb-md">
           <QBtn
             outline
-            icon="keyboard_arrow_left"
+            icon="sym_r_keyboard_arrow_left"
             label="戻る"
             @click="selectCharacterInfo(undefined)"
           />

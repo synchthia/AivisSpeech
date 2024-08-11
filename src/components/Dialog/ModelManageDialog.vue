@@ -6,11 +6,11 @@
         <QHeader class="q-py-sm">
           <QToolbar>
             <!-- close button -->
-            <QBtn round flat icon="close" color="display" @click="toDialogClosedState" />
+            <QBtn round flat icon="sym_r_close" color="display" @click="toDialogClosedState" />
             <QToolbarTitle class="text-display">
               音声合成モデルの管理
             </QToolbarTitle>
-            <QBtn outline icon="add" label="追加" textColor="display" class="text-bold" @click="() => ''" />
+            <QBtn outline icon="sym_r_add" label="追加" textColor="display" class="text-bold" @click="() => ''" />
           </QToolbar>
         </QHeader>
         <QPage class="row no-wrap">

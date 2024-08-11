@@ -27,7 +27,7 @@
             fab
             color="primary"
             textColor="display-on-primary"
-            icon="play_arrow"
+            icon="sym_r_play_arrow"
             @click="play"
           ></QBtn>
           <QBtn
@@ -35,7 +35,7 @@
             fab
             color="primary"
             textColor="display-on-primary"
-            icon="stop"
+            icon="sym_r_stop"
             :disable="nowGenerating"
             @click="stop"
           ></QBtn>
@@ -367,6 +367,12 @@ watch(nowPlaying, async (newState) => {
 const isShiftKeyDown = useShiftKey();
 const isAltKeyDown = useAltKey();
 </script>
+
+<style lang="scss">
+.play-button-wrapper .material-symbols-rounded {
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 200, 'opsz' 24 !important;
+}
+</style>
 
 <style scoped lang="scss">
 @use "@/styles/colors" as colors;

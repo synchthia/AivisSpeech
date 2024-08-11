@@ -5,7 +5,7 @@
         <div class="text-body1" style="margin-right: auto">
           <b>プリセット</b>
         </div>
-        <QBtn dense flat icon="more_vert" :disable="uiLocked">
+        <QBtn dense flat icon="sym_r_more_vert" :disable="uiLocked">
           <QMenu transitionDuration="100">
             <QList>
               <QItem
@@ -15,7 +15,7 @@
               >
                 <QItemSection avatar>
                   <QAvatar
-                    icon="add_circle_outline"
+                    icon="sym_r_add_circle_outline"
                     color="primary"
                     textColor="display-on-primary"
                   ></QAvatar>
@@ -31,7 +31,7 @@
               >
                 <QItemSection avatar>
                   <QAvatar
-                    icon="edit_note"
+                    icon="sym_r_edit_note"
                     color="primary"
                     textColor="display-on-primary"
                   ></QAvatar>
@@ -135,7 +135,7 @@
             <QList>
               <QItem clickable class="no-margin" @click="updatePreset(true)">
                 <QItemSection avatar>
-                  <QAvatar icon="arrow_forward" textColor="blue" />
+                  <QAvatar icon="sym_r_arrow_forward" textColor="blue" />
                 </QItemSection>
                 <QItemSection>
                   プリセットを再登録し、このプリセットが設定されたテキスト欄全てに再適用する
@@ -143,7 +143,7 @@
               </QItem>
               <QItem clickable class="no-margin" @click="updatePreset(false)">
                 <QItemSection avatar>
-                  <QAvatar icon="arrow_forward" textColor="blue" />
+                  <QAvatar icon="sym_r_arrow_forward" textColor="blue" />
                 </QItemSection>
                 <QItemSection> プリセットの再登録のみ行う </QItemSection>
               </QItem>
@@ -154,7 +154,7 @@
                 @click="closeAllDialog"
               >
                 <QItemSection avatar>
-                  <QAvatar icon="arrow_forward" textColor="blue" />
+                  <QAvatar icon="sym_r_arrow_forward" textColor="blue" />
                 </QItemSection>
                 <QItemSection>キャンセル</QItemSection>
               </QItem>
@@ -175,7 +175,7 @@
           >
             {{ parameter.label }}
           </span>
-          <QIcon name="help_outline" size="xs" class="help-hover-icon">
+          <QIcon name="sym_r_help_outline" size="xs" class="help-hover-icon">
             <QTooltip anchor="top middle" self="bottom middle" :offset="[0, 8]">
               <span style="white-space: pre-line; word-break: keep-all">
                 {{ parameter.tooltip }}

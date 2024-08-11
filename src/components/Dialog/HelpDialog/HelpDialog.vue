@@ -53,7 +53,7 @@
                     <QBtn
                       round
                       flat
-                      icon="close"
+                      icon="sym_r_close"
                       color="display"
                       aria-label="ヘルプを閉じる"
                       @click="modelValueComputed = false"
@@ -62,7 +62,7 @@
                     <QBtn
                       v-if="page.component === ContactInfo"
                       outline
-                      icon="description"
+                      icon="sym_r_description"
                       label="ログフォルダを開く"
                       textColor="display"
                       class="text-no-wrap text-bold q-mr-sm"

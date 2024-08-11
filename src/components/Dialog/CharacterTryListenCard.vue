@@ -28,7 +28,7 @@
         <QBtn
           flat
           dense
-          icon="chevron_left"
+          icon="sym_r_chevron_left"
           textColor="display"
           class="style-select-button"
           aria-label="前のスタイル"
@@ -45,7 +45,7 @@
         <QBtn
           flat
           dense
-          icon="chevron_right"
+          icon="sym_r_chevron_right"
           textColor="display"
           class="style-select-button"
           aria-label="次のスタイル"
@@ -70,8 +70,8 @@
             speakerUuid === playing.speakerUuid &&
             selectedStyle.styleId === playing.styleId &&
             voiceSampleIndex === playing.index
-              ? 'stop'
-              : 'play_arrow'
+              ? 'sym_r_stop'
+              : 'sym_r_play_arrow'
           "
           color="primary"
           class="voice-sample-btn"

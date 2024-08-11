@@ -9,7 +9,7 @@
             :label="`${props.writeErrorArray.length}件の書き込みエラーによる失敗`"
             bordered
             headerClass="text-warning text-bold"
-            icon="warning"
+            icon="sym_r_warning"
           >
             <QItem v-for="(value, index) in props.writeErrorArray" :key="index">
               <QItemSection>
@@ -23,7 +23,7 @@
             :label="`${props.engineErrorArray.length}件の音声合成エンジンエラーによる失敗`"
             bordered
             headerClass="text-warning text-bold"
-            icon="warning"
+            icon="sym_r_warning"
           >
             <QItem
               v-for="(value, index) in props.engineErrorArray"
@@ -40,7 +40,7 @@
           <QExpansionItem
             :label="`${props.successArray.length}件の成功`"
             bordered
-            icon="check"
+            icon="sym_r_check"
             headerClass="text-bold"
           >
             <QList v-if="props.successArray.length > 0" separator>

@@ -21,7 +21,7 @@
     <QLayout container view="hHh Lpr lff" class="bg-background">
       <QHeader class="q-py-sm">
         <QToolbar>
-          <QBtn round flat icon="close" color="display" @click="closeDialog" />
+          <QBtn round flat icon="sym_r_close" color="display" @click="closeDialog" />
           <QToolbarTitle class="text-display">
             デフォルトスタイル
           </QToolbarTitle>

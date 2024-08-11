@@ -18,7 +18,7 @@
                   <QSpace />
                   <QItemSection avatar>
                     <QBtn
-                      icon="delete"
+                      icon="sym_r_delete"
                       flat
                       color="display"
                       @click="deletePreset(item.key)"

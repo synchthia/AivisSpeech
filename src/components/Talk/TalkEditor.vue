@@ -84,7 +84,7 @@
                       >
                         <QBtn
                           fab
-                          icon="add"
+                          icon="sym_r_add"
                           color="primary"
                           textColor="display-on-primary"
                           :disable="uiLocked"

@@ -73,7 +73,7 @@
                 @mouseover="reassignSubMenuOpen(characterIndex)"
                 @mouseleave="reassignSubMenuOpen.cancel()"
               >
-                <QIcon name="keyboard_arrow_right" color="grey-6" size="sm" />
+                <QIcon name="sym_r_keyboard_arrow_right" color="grey-6" size="sm" />
 
                 <QMenu
                   v-model="subMenuOpenFlags[characterIndex]"

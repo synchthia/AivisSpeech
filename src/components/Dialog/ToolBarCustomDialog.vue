@@ -14,7 +14,7 @@
             <QBtn
               round
               flat
-              icon="close"
+              icon="sym_r_close"
               color="display"
               @click="finishOrNotDialog"
             />
@@ -23,7 +23,7 @@
             </QToolbarTitle>
             <QBtn
               outline
-              icon="settings_backup_restore"
+              icon="sym_r_settings_backup_restore"
               label="デフォルトに戻す"
               textColor="warning"
               class="text-no-wrap text-bold q-mr-sm"
@@ -32,7 +32,7 @@
             />
             <QBtn
               outline
-              icon="save"
+              icon="sym_r_save"
               label="保存"
               textColor="display"
               class="text-no-wrap text-bold q-mr-sm"

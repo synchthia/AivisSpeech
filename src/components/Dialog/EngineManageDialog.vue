@@ -14,7 +14,7 @@
             <QBtn
               round
               flat
-              icon="close"
+              icon="sym_r_close"
               color="display"
               :disabled="isAddingEngine || uiLocked"
               @click="toDialogClosedState"
@@ -24,7 +24,7 @@
             </QToolbarTitle>
             <QBtn
               outline
-              icon="add"
+              icon="sym_r_add"
               label="追加"
               textColor="display"
               class="text-bold"
@@ -140,7 +140,7 @@
                       dense
                       flat
                       color="primary"
-                      icon="folder_open"
+                      icon="sym_r_folder_open"
                       @click="selectVvppFile"
                     >
                       <QTooltip :delay="500" anchor="bottom left">
@@ -183,7 +183,7 @@
                       dense
                       flat
                       color="primary"
-                      icon="folder_open"
+                      icon="sym_r_folder_open"
                       @click="selectEngineDir"
                     >
                       <QTooltip :delay="500" anchor="bottom left">
@@ -208,7 +208,7 @@
 
               <QBtn
                 outline
-                icon="close"
+                icon="sym_r_close"
                 label="キャンセル"
                 textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
@@ -216,7 +216,7 @@
               />
               <QBtn
                 outline
-                icon="add"
+                icon="sym_r_add"
                 label="追加"
                 textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
@@ -316,7 +316,7 @@
 
               <QBtn
                 outline
-                icon="delete"
+                icon="sym_r_delete"
                 label="削除"
                 textColor="warning"
                 class="text-no-wrap text-bold q-mr-sm"
@@ -328,7 +328,7 @@
               />
               <QBtn
                 outline
-                icon="folder_open"
+                icon="sym_r_folder_open"
                 label="フォルダを開く"
                 textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
@@ -337,7 +337,7 @@
               />
               <QBtn
                 outline
-                icon="restart_alt"
+                icon="sym_r_restart_alt"
                 label="再起動"
                 textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"

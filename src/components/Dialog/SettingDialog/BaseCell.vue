@@ -2,7 +2,7 @@
   <QCardActions class="q-px-md bg-surface-darken" :class="props.class">
     <div>{{ title }}</div>
     <div :aria-label="description">
-      <QIcon name="help_outline" size="sm" class="help-hover-icon">
+      <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
         <QTooltip
           :delay="500"
           anchor="center right"

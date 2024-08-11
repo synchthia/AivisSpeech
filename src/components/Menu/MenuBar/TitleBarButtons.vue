@@ -12,7 +12,7 @@
       dense
       flat
       round
-      icon="push_pin"
+      icon="sym_r_push_pin"
       color="teal"
       class="title-bar-buttons"
       aria-label="最前面固定を解除"
@@ -28,7 +28,7 @@
       dense
       flat
       round
-      icon="push_pin"
+      icon="sym_r_push_pin"
       color="display"
       class="title-bar-buttons rotate-45"
       aria-label="最前面に固定"
@@ -52,7 +52,7 @@
       dense
       flat
       round
-      icon="push_pin"
+      icon="sym_r_push_pin"
       color="teal"
       class="title-bar-buttons"
       aria-label="最前面固定を解除"
@@ -68,7 +68,7 @@
       dense
       flat
       round
-      icon="push_pin"
+      icon="sym_r_push_pin"
       class="title-bar-buttons rotate-45"
       aria-label="最前面に固定"
       @click="changePinWindow()"

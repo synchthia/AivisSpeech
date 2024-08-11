@@ -14,7 +14,7 @@
             <QBtn
               round
               flat
-              icon="close"
+              icon="sym_r_close"
               color="display"
               @click="discardOrNotDialog(closeDialog)"
             />
@@ -23,7 +23,7 @@
             </QToolbarTitle>
             <QBtn
               outline
-              icon="add"
+              icon="sym_r_add"
               label="追加"
               textColor="display"
               class="text-bold"
@@ -123,7 +123,7 @@
                   fab
                   color="primary"
                   textColor="display-on-primary"
-                  icon="play_arrow"
+                  icon="sym_r_play_arrow"
                   @click="play"
                 />
                 <QBtn
@@ -131,7 +131,7 @@
                   fab
                   color="primary"
                   textColor="display-on-primary"
-                  icon="stop"
+                  icon="sym_r_stop"
                   :disable="nowGenerating"
                   @click="stop"
                 />
@@ -200,7 +200,7 @@
               <QBtn
                 v-show="!!selectedId"
                 outline
-                icon="delete"
+                icon="sym_r_delete"
                 label="削除"
                 textColor="warning"
                 class="text-no-wrap text-bold q-mr-sm"
@@ -210,7 +210,7 @@
               <QBtn
                 v-show="!!selectedId"
                 outline
-                icon="settings_backup_restore"
+                icon="sym_r_settings_backup_restore"
                 label="リセット"
                 textColor="warning"
                 class="text-no-wrap text-bold q-mr-sm"
@@ -220,7 +220,7 @@
               <QBtn
                 v-show="isNewWordEditing"
                 outline
-                icon="close"
+                icon="sym_r_close"
                 label="キャンセル"
                 textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"
@@ -229,7 +229,7 @@
               />
               <QBtn
                 outline
-                icon="save"
+                icon="sym_r_save"
                 label="保存"
                 textColor="display"
                 class="text-no-wrap text-bold q-mr-sm"

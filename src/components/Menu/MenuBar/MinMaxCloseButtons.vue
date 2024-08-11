@@ -10,7 +10,7 @@
       dense
       flat
       round
-      icon="lens"
+      icon="sym_r_lens"
       size="8.5px"
       color="red"
       class="title-bar-buttons"
@@ -21,7 +21,7 @@
       dense
       flat
       round
-      icon="lens"
+      icon="sym_r_lens"
       size="8.5px"
       color="yellow"
       class="title-bar-buttons"
@@ -32,7 +32,7 @@
       dense
       flat
       round
-      icon="lens"
+      icon="sym_r_lens"
       size="8.5px"
       color="green"
       class="title-bar-buttons"
@@ -50,7 +50,7 @@
     <QBtn
       dense
       flat
-      icon="minimize"
+      icon="sym_r_minimize"
       class="title-bar-buttons"
       aria-label="最小化"
       @click="minimizeWindow()"
@@ -60,7 +60,7 @@
       v-if="!isMaximized"
       dense
       flat
-      icon="crop_square"
+      icon="sym_r_crop_square"
       class="title-bar-buttons"
       aria-label="最大化"
       @click="maximizeWindow()"
@@ -79,7 +79,7 @@
     <QBtn
       dense
       flat
-      icon="close"
+      icon="sym_r_close"
       class="title-bar-buttons close"
       aria-label="閉じる"
       @click="closeWindow()"

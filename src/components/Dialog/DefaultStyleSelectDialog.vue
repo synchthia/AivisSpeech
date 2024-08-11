@@ -14,7 +14,7 @@
             round
             flat
             color="display"
-            :icon="isModified ? 'save' : 'arrow_back'"
+            :icon="isModified ? 'sym_r_save' : 'sym_r_arrow_back'"
             @click="closeDialog"
           />
           <QToolbarTitle class="text-display">
@@ -72,8 +72,8 @@
                           playing.speakerUuid &&
                         style.styleId === playing.styleId &&
                         voiceSampleIndex === playing.index
-                          ? 'stop'
-                          : 'play_arrow'
+                          ? 'sym_r_stop'
+                          : 'sym_r_play_arrow'
                       "
                       color="primary"
                       class="voice-sample-btn"

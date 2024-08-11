@@ -19,7 +19,7 @@
             <QBtn
               outline
               label="同意せずに終了"
-              icon="close"
+              icon="sym_r_close"
               color="toolbar-button"
               textColor="toolbar-button-display"
               class="text-no-wrap q-mr-md text-bold"
@@ -29,7 +29,7 @@
             <QBtn
               outline
               label="同意してはじめる"
-              icon="power_settings_new"
+              icon="sym_r_power_settings_new"
               color="toolbar-button"
               textColor="toolbar-button-display"
               class="text-no-wrap text-bold"
