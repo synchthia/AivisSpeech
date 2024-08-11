@@ -1272,7 +1272,7 @@ export const audioStore = createPartialStore<AudioStoreTypes>({
 
         // AivisSpeech Engine の実装上正確な音素単位の長さは取得できないためある程度のズレは避けられないが、
         // 視覚的には少し早めに次の音素の再生部分にハイライトされて行った方がストレスがない
-        const audioDurationMagicDiff = 0.1 * query.speedScale;  // 尺を少しだけ削って若干速く表示されるようにする
+        const audioDurationMagicDiff = 0.06 / query.speedScale;  // 尺を少しだけ削って若干速く表示されるようにする
 
         // 現在再生中の音声の長さを取得
         let audioDuration = getters.ACTIVE_AUDIO_ELEM_DURATION;

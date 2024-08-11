@@ -608,7 +608,7 @@ export const configSchema = z
     inheritAudioInfo: z.boolean().default(true),
     activePointScrollMode: z
       .enum(["CONTINUOUSLY", "PAGE", "OFF"])
-      .default("OFF"),
+      .default("CONTINUOUSLY"),
     savingSetting: z
       .object({
         fileEncoding: z.enum(["UTF-8", "Shift_JIS"]).default("UTF-8"),
