@@ -161,6 +161,12 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
 };
 </script>
 
+<style lang="scss">
+.voice-samples .material-symbols-rounded {
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 200, 'opsz' 24 !important;
+}
+</style>
+
 <style scoped lang="scss">
 @use "@/styles/variables" as vars;
 @use "@/styles/colors" as colors;
@@ -191,6 +197,7 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
       width: $icon-size;
       height: $icon-size;
       clip-path: vars.$squircle;
+      background-color: var(--color-splitter);
     }
     .style-select-container {
       display: flex;

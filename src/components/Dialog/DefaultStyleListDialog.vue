@@ -268,6 +268,7 @@ const openStyleSelectDialog = (characterInfo: CharacterInfo) => {
           width: $icon-size;
           height: $icon-size;
           clip-path: vars.$squircle;
+          background-color: var(--color-splitter);
         }
         .style-select-container {
           display: flex;

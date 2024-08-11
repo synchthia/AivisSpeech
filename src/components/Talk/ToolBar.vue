@@ -11,7 +11,10 @@
           unelevated
           color="toolbar-button"
           textColor="toolbar-button-display"
-          class="text-no-wrap text-bold q-px-sm q-mr-sm"
+          :class="[
+            'text-no-wrap text-bold q-px-sm q-mr-sm',
+            button.tag === 'PLAY' || button.tag === 'STOP' ? 'play-stop-button' : '',
+          ]"
           :icon="button.icon"
           :disable="button.disable.value"
           @click="button.click"
@@ -183,7 +186,7 @@ const importTextFile = () => {
 
 const usableButtons: Record<
   ToolbarButtonTagType,
-  Omit<ButtonContent, "text" | "icon"> | null
+  Omit<ButtonContent, "tag" | "text" | "icon"> | null
 > = {
   PLAY_CONTINUOUSLY: {
     click: playContinuously,
@@ -250,6 +253,12 @@ const buttons = computed(() =>
   }),
 );
 </script>
+
+<style lang="scss">
+.play-stop-button .material-symbols-rounded {
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 200, 'opsz' 24 !important;
+}
+</style>
 
 <style lang="scss" scoped>
 

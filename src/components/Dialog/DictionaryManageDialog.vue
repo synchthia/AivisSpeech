@@ -663,6 +663,12 @@ const toDialogClosedState = () => {
 };
 </script>
 
+<style lang="scss">
+.play-button .material-symbols-rounded {
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 200, 'opsz' 24 !important;
+}
+</style>
+
 <style lang="scss" scoped>
 @use "@/styles/colors" as colors;
 @use "@/styles/variables" as vars;

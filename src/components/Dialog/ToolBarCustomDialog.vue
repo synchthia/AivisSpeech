@@ -61,6 +61,7 @@
                     :icon="getToolbarButtonIcon(button)"
                     :class="
                       (button === 'EMPTY' ? ' radio-space' : ' radio') +
+                      ((button === 'PLAY' || button === 'STOP') ? ' play-stop-button' : '') +
                       ' text-no-wrap text-bold q-px-sm q-mr-sm'
                     "
                   >
@@ -253,6 +254,12 @@ const finishOrNotDialog = async () => {
   }
 };
 </script>
+
+<style lang="scss">
+.play-stop-button .material-symbols-rounded {
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 200, 'opsz' 24 !important;
+}
+</style>
 
 <style lang="scss" scoped>
 @use "@/styles/variables" as vars;
