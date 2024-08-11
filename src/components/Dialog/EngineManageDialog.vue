@@ -143,7 +143,7 @@
                       icon="sym_r_folder_open"
                       @click="selectVvppFile"
                     >
-                      <QTooltip :delay="500" anchor="bottom left">
+                      <QTooltip :delay="150" anchor="bottom left">
                         ファイル選択
                       </QTooltip>
                     </QBtn>
@@ -186,7 +186,7 @@
                       icon="sym_r_folder_open"
                       @click="selectEngineDir"
                     >
-                      <QTooltip :delay="500" anchor="bottom left">
+                      <QTooltip :delay="150" anchor="bottom left">
                         フォルダ選択
                       </QTooltip>
                     </QBtn>

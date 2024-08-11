@@ -48,7 +48,7 @@
                 :disable="!gpuSwitchEnabled(selectedEngineId)"
               >
                 <QTooltip
-                  :delay="500"
+                  :delay="150"
                   :target="!gpuSwitchEnabled(selectedEngineId)"
                 >
                   {{ engineInfos[selectedEngineId].name }}
@@ -62,7 +62,7 @@
                 >
                   <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
-                      :delay="500"
+                      :delay="150"
                       anchor="center right"
                       self="center left"
                       transitionShow="jump-right"
@@ -189,7 +189,7 @@
                 >
                   <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
-                      :delay="500"
+                      :delay="150"
                       anchor="center right"
                       self="center left"
                       transitionShow="jump-right"
@@ -238,7 +238,7 @@
                 >
                   <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
-                      :delay="500"
+                      :delay="150"
                       anchor="center right"
                       self="center left"
                       transitionShow="jump-right"
@@ -278,7 +278,7 @@
                       icon="sym_r_folder_open"
                       @click="selectFixedExportDir()"
                     >
-                      <QTooltip :delay="500" anchor="bottom left">
+                      <QTooltip :delay="150" anchor="bottom left">
                         フォルダ選択
                       </QTooltip>
                     </QBtn>
@@ -304,7 +304,7 @@
                 >
                   <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
-                      :delay="500"
+                      :delay="150"
                       anchor="center right"
                       self="center left"
                       transitionShow="jump-right"
@@ -427,7 +427,7 @@
                 <div aria-label="音声の再生デバイスを変更できます。">
                   <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
                     <QTooltip
-                      :delay="500"
+                      :delay="150"
                       anchor="center right"
                       self="center left"
                       transitionShow="jump-right"

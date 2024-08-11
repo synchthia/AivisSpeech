@@ -18,7 +18,7 @@
       aria-label="最前面固定を解除"
       @click="changePinWindow()"
     >
-      <QTooltip :delay="500" class="text-body2" :offset="[11, 11]">
+      <QTooltip :delay="150" class="text-body2" :offset="[11, 11]">
         最前面固定を解除
       </QTooltip>
     </QBtn>
@@ -34,7 +34,7 @@
       aria-label="最前面に固定"
       @click="changePinWindow()"
     >
-      <QTooltip :delay="500" class="text-body2" :offset="[11, 11]">
+      <QTooltip :delay="150" class="text-body2" :offset="[11, 11]">
         最前面に固定
       </QTooltip>
     </QBtn>
@@ -58,7 +58,7 @@
       aria-label="最前面固定を解除"
       @click="changePinWindow()"
     >
-      <QTooltip :delay="500" class="text-body2" :offset="[11, 11]">
+      <QTooltip :delay="150" class="text-body2" :offset="[11, 11]">
         最前面固定を解除
       </QTooltip>
     </QBtn>
@@ -73,7 +73,7 @@
       aria-label="最前面に固定"
       @click="changePinWindow()"
     >
-      <QTooltip :delay="500" class="text-body2" :offset="[11, 11]">
+      <QTooltip :delay="150" class="text-body2" :offset="[11, 11]">
         最前面に固定
       </QTooltip>
     </QBtn>

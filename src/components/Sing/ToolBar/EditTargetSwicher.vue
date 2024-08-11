@@ -24,10 +24,10 @@
     ]"
     @update:modelValue="changeEditTarget"
     ><template #NOTE
-      ><QTooltip :delay="500" anchor="bottom middle">ノート編集</QTooltip>
+      ><QTooltip :delay="150" anchor="bottom middle">ノート編集</QTooltip>
     </template>
     <template #PITCH>
-      <QTooltip :delay="500" anchor="bottom middle"
+      <QTooltip :delay="150" anchor="bottom middle"
         >ピッチ編集<br />{{ !isMac ? "Ctrl" : "Cmd" }}+クリックで消去</QTooltip
       >
     </template>

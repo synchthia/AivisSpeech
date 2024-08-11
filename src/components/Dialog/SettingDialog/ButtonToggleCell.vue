@@ -24,7 +24,7 @@
         :key="option.label"
         #[option.label]
       >
-        <QTooltip :delay="500">
+        <QTooltip :delay="150">
           {{ option.description }}
         </QTooltip>
       </template>

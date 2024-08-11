@@ -105,7 +105,7 @@
                     :disable="checkHotkeyReadonly(tableProps.row.action)"
                     @click="resetHotkey(tableProps.row.action)"
                   >
-                    <QTooltip :delay="500">デフォルトに戻す</QTooltip>
+                    <QTooltip :delay="150">デフォルトに戻す</QTooltip>
                   </QBtn>
                 </QTd>
               </QTr>

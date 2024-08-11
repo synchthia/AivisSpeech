@@ -21,7 +21,7 @@
           >
           <!-- {{ button.text }} -->
           <QTooltip
-            :delay="500"
+            :delay="150"
             :offset="[0, 8]"
             anchor="bottom middle"
             self="top middle"

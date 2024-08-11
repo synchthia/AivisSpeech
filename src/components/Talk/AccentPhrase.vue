@@ -122,14 +122,14 @@
           v-if="
             selectedDetail === 'pitch' && !unvoicableVowels.includes(mora.vowel)
           "
-          :delay="500"
+          :delay="150"
           transitionShow="jump-up"
           transitionHide="jump-down"
           >イ段とウ段以外の音は無声化できません</QTooltip
         >
         <QTooltip
           v-if="selectedDetail === 'length'"
-          :delay="500"
+          :delay="150"
           transitionShow="jump-up"
           transitionHide="jump-down"
           >読みの変更はアクセント項目でのみ、<br />無声化はイントネーション項目でのみ操作できます</QTooltip
@@ -181,14 +181,14 @@
         <!-- tooltipを変更する場合、pauseMora以外のものも合わせて変更すること-->
         <QTooltip
           v-if="selectedDetail === 'pitch'"
-          :delay="500"
+          :delay="150"
           transitionShow="jump-up"
           transitionHide="jump-down"
           >イ段とウ段以外の音は無声化できません</QTooltip
         >
         <QTooltip
           v-if="selectedDetail === 'length'"
-          :delay="500"
+          :delay="150"
           transitionShow="jump-up"
           transitionHide="jump-down"
           >読みの変更はアクセント項目でのみ、<br />無声化はイントネーション項目でのみ操作できます</QTooltip

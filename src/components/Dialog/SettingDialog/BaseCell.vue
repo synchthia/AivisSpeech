@@ -4,7 +4,7 @@
     <div :aria-label="description">
       <QIcon name="sym_r_help_outline" size="sm" class="help-hover-icon">
         <QTooltip
-          :delay="500"
+          :delay="150"
           anchor="center right"
           self="center left"
           transitionShow="jump-right"
