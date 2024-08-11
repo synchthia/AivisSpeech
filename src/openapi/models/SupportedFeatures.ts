@@ -86,7 +86,7 @@ export interface SupportedFeatures {
      */
     manageLibrary?: boolean;
     /**
-     * speaker_info・singer_info のリソースを URL で返送
+     * キャラクター情報のリソースを URL で返送
      * @type {boolean}
      * @memberof SupportedFeatures
      */
