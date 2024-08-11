@@ -88,7 +88,7 @@ export const defaultHotkeySettings: HotkeySettingType[] = [
   },
   {
     action: "音声をつなげて書き出し",
-    combination: HotkeyCombination(""),
+    combination: HotkeyCombination(!isMac ? "Ctrl Shift E" : "Meta Shift E"),
   },
   {
     action: "再生/停止",
