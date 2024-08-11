@@ -64,11 +64,11 @@
                   >
                     {{ getToolbarButtonName(button) }}
                     <QTooltip
-                      :delay="800"
-                      anchor="center right"
-                      self="center left"
-                      transitionShow="jump-right"
-                      transitionHide="jump-left"
+                      :delay="500"
+                      anchor="bottom middle"
+                      self="top middle"
+                      transitionShow="jump-down"
+                      transitionHide="jump-up"
                       :style="{
                         display: toolbarButtonDragging ? 'none' : 'block',
                       }"
