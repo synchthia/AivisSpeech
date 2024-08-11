@@ -68,6 +68,18 @@ export const engineStore = createPartialStore<EngineStoreTypes>({
     },
   },
 
+  DEFAULT_ENGINE_ID: {
+    getter: (state) => {
+      for (const engineInfo of Object.values(state.engineInfos)) {
+        if (engineInfo.type === "default") {
+          return engineInfo.uuid;
+        }
+      }
+      // 通常はここには到達しない
+      return '' as EngineId;
+    },
+  },
+
   GET_ALT_PORT_INFOS: {
     async action({ commit }) {
       const altPortInfos = await window.backend.getAltPortInfos();

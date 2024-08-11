@@ -29,6 +29,39 @@ export const audioPlayerStore = createPartialStore<AudioPlayerStoreTypes>({
     },
   },
 
+  ACTIVE_AUDIO_ELEM_DURATION: {
+    getter: (state) => {
+      return state._activeAudioKey != undefined
+        ? getAudioElement().duration
+        : undefined;
+    },
+  },
+
+  WAIT_FOR_AUDIO_LOAD: {
+    async getter(state) {
+      if (state._activeAudioKey == undefined) {
+        return false;
+      }
+
+      const audioElement = getAudioElement();
+
+      // readyStateが変化するのを待つ
+      await new Promise<void>((resolve) => {
+        if (audioElement.readyState !== HTMLMediaElement.HAVE_NOTHING) {
+          resolve();
+        } else {
+          const handleLoadedMetadata = () => {
+            audioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
+            resolve();
+          };
+          audioElement.addEventListener('loadedmetadata', handleLoadedMetadata);
+        }
+      });
+
+      return audioElement.readyState === HTMLMediaElement.HAVE_NOTHING;
+    },
+  },
+
   NOW_PLAYING: {
     getter(state, getters) {
       const activeAudioKey = getters.ACTIVE_AUDIO_KEY;

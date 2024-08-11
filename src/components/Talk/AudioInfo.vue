@@ -349,17 +349,6 @@ const uiLocked = computed(() => store.getters.UI_LOCKED);
 const audioItem = computed(() => store.state.audioItems[props.activeAudioKey]);
 const query = computed(() => audioItem.value?.query);
 
-function findDefaultEngineId() {
-  // 'default'タイプのエンジンIDを検索
-  for (const engineInfo of store.getters.GET_SORTED_ENGINE_INFOS) {
-    if (engineInfo.type === "default") {
-      return engineInfo.uuid;
-    }
-  }
-  throw new Error("default engine not found");
-}
-const defaultEngineId = findDefaultEngineId();
-
 // 操作対象のスタイルがデフォルトスタイル (当該話者の 0 番目のスタイル) かどうか
 const isDefaultStyle = computed(() => {
   const allCharacterInfos = store.getters.USER_ORDERED_CHARACTER_INFOS("talk");
@@ -421,11 +410,11 @@ const parameters = computed<Parameter[]>(() => [
   {
     // 「スタイルの強さ」は AivisSpeech Engine 以外の音声合成エンジンでは「抑揚」と表示
     label:
-      audioItem.value.voice.engineId === defaultEngineId
+      audioItem.value.voice.engineId === store.getters.DEFAULT_ENGINE_ID
         ? "スタイルの強さ"
         : "抑揚",
     tooltip:
-      audioItem.value.voice.engineId === defaultEngineId
+      audioItem.value.voice.engineId === store.getters.DEFAULT_ENGINE_ID
         ? "話者スタイルの声色の強弱を調整できます\n" +
           "強くするとよりそのスタイルに近い抑揚がついた声になります\n" +
           "強くしすぎるとスタイル次第では棒読みになるため注意\n" +
@@ -437,7 +426,7 @@ const parameters = computed<Parameter[]>(() => [
       disable: () =>
         uiLocked.value ||
         supportedFeatures.value?.adjustIntonationScale === false ||
-        (audioItem.value.voice.engineId === defaultEngineId &&
+        (audioItem.value.voice.engineId === store.getters.DEFAULT_ENGINE_ID &&
           isDefaultStyle.value),
       max: SLIDER_PARAMETERS.INTONATION.max,
       min: SLIDER_PARAMETERS.INTONATION.min,
@@ -454,7 +443,7 @@ const parameters = computed<Parameter[]>(() => [
     key: "intonationScale",
   },
   // AivisSpeech Engine 以外の音声合成エンジンでは「テンポの緩急」を表示しない
-  ...(audioItem.value.voice.engineId === defaultEngineId
+  ...(audioItem.value.voice.engineId === store.getters.DEFAULT_ENGINE_ID
     ? ([
         {
           label: "テンポの緩急",

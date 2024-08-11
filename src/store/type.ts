@@ -707,6 +707,14 @@ export type AudioPlayerStoreTypes = {
     getter: number | undefined;
   };
 
+  ACTIVE_AUDIO_ELEM_DURATION: {
+    getter: number | undefined;
+  };
+
+  WAIT_FOR_AUDIO_LOAD: {
+    getter: Promise<boolean>;
+  };
+
   NOW_PLAYING: {
     getter: boolean;
   };
@@ -1280,6 +1288,10 @@ export type EngineStoreTypes = {
 
   GET_SORTED_ENGINE_INFOS: {
     getter: EngineInfo[];
+  };
+
+  DEFAULT_ENGINE_ID: {
+    getter: EngineId;
   };
 
   GET_ALT_PORT_INFOS: {

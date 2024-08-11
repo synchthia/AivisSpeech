@@ -84,21 +84,11 @@ const toDialogClosedState = () => {
   engineManageDialogOpenedComputed.value = false;
 };
 
-// デフォルトエンジンの ID
-const defaultEngineId = computed(() => {
-  for (const engineInfo of store.getters.GET_SORTED_ENGINE_INFOS) {
-    if (engineInfo.type === "default") {
-      return engineInfo.uuid;
-    }
-  }
-  throw new Error("default engine not found");
-});
-
 
 // API インスタンスを取得する関数
 // VOICEVOX のお作法ではこうやらないと API を呼べないっぽい…
 const getApiInstance = async () => {
-  return await store.dispatch("INSTANTIATE_ENGINE_CONNECTOR", { engineId: defaultEngineId.value });
+  return await store.dispatch("INSTANTIATE_ENGINE_CONNECTOR", { engineId: store.getters.DEFAULT_ENGINE_ID });
 };
 
 // インストール済み AIVM 音声合成モデルの情報

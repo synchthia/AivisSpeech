@@ -321,6 +321,9 @@ const scrollToActivePoint = () => {
 let requestId: number | undefined;
 watch(nowPlaying, async (newState) => {
   if (newState) {
+    // 現在再生されているaudio elementのロードが完了しないと
+    // GET_AUDIO_PLAY_OFFSETS 側で近似する音素長を算出するために必要な音声長が取得できないので待機
+    await store.getters.WAIT_FOR_AUDIO_LOAD;
     const accentPhraseOffsets = await store.dispatch("GET_AUDIO_PLAY_OFFSETS", {
       audioKey: props.activeAudioKey,
     });
