@@ -157,6 +157,9 @@ window.backend.getDefaultToolbarSetting().then((setting) => {
 });
 
 const usableButtonsDesc: Record<ToolbarButtonTagType, string> = {
+  UNDO: "操作を一つ戻します。",
+  REDO: "元に戻した操作をやり直します。",
+  SAVE_PROJECT: "プロジェクトを上書き保存します。",
   PLAY_CONTINUOUSLY:
     "選択されているテキスト以降のすべてのテキストを読み上げます。",
   PLAY: "選択されているテキストを読み上げます。",
@@ -167,9 +170,6 @@ const usableButtonsDesc: Record<ToolbarButtonTagType, string> = {
     "入力されているすべてのテキストの読み上げを音声ファイルに書き出します。",
   EXPORT_AUDIO_CONNECT_ALL:
     "入力されているすべてのテキストの読み上げを一つの音声ファイルにつなげて書き出します。",
-  SAVE_PROJECT: "プロジェクトを上書き保存します。",
-  UNDO: "操作を一つ戻します。",
-  REDO: "元に戻した操作をやり直します。",
   IMPORT_TEXT: "テキストファイル (.txt) を読み込みます。",
   EMPTY:
     "これはボタンではありません。レイアウトの調整に使います。また、実際には表示されません。",

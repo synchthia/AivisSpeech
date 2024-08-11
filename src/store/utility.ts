@@ -392,9 +392,9 @@ export const getToolbarButtonName = (tag: ToolbarButtonTagType): string => {
     REDO: "やり直す",
     IMPORT_TEXT: "テキスト読み込み",
     EMPTY: "空白",
-    SPACER_1: "区切り",
-    SPACER_2: "区切り",
-    SPACER_3: "区切り",
+    SPACER_1: "区切り1",
+    SPACER_2: "区切り2",
+    SPACER_3: "区切り3",
   };
   return tag2NameObj[tag];
 };
