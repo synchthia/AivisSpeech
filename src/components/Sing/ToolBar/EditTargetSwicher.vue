@@ -12,12 +12,12 @@
     class="edit-target-switcher q-mr-sm"
     :options="[
       {
-        icon: 'piano',
+        icon: 'sym_r_piano',
         value: 'NOTE',
         slot: 'NOTE',
       },
       {
-        icon: 'show_chart',
+        icon: 'sym_r_show_chart',
         value: 'PITCH',
         slot: 'PITCH',
       },

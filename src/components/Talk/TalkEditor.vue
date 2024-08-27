@@ -560,7 +560,7 @@ watch(
 
       store.dispatch("SHOW_NOTIFY_AND_NOT_SHOW_AGAIN_BUTTON", {
         message: `${altPort.from}番ポートが使用中であるため ${engineName} は、${altPort.to}番ポートで起動しました。`,
-        icon: "compare_arrows",
+        icon: "sym_r_compare_arrows",
         tipName: "engineStartedOnAltPort",
       });
     }
