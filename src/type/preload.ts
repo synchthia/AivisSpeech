@@ -579,7 +579,7 @@ export const experimentalSettingSchema = z.object({
   enableInterrogativeUpspeak: z.boolean().default(false),
   enableMorphing: z.boolean().default(true),
   enableMultiSelect: z.boolean().default(true),
-  shouldKeepTuningOnTextChange: z.boolean().default(false),
+  shouldKeepTuningOnTextChange: z.boolean().default(true),
   enablePitchEditInSongEditor: z.boolean().default(false),
 });
 
