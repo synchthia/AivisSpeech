@@ -164,7 +164,7 @@ const pagedata = computed(() => {
     },
     {
       type: "item",
-      name: "音声合成モデルの利用規約",
+      name: "音声合成モデルのライセンス",
       component: LibraryPolicy,
     },
     {

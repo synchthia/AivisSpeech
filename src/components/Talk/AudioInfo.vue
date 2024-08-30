@@ -456,6 +456,7 @@ const parameters = computed<Parameter[]>(() => [
             min: SLIDER_PARAMETERS.TEMPO_DYNAMICS.min,
             step: SLIDER_PARAMETERS.TEMPO_DYNAMICS.step,
             scrollStep: SLIDER_PARAMETERS.TEMPO_DYNAMICS.scrollStep,
+            scrollMinStep: SLIDER_PARAMETERS.TEMPO_DYNAMICS.scrollMinStep,
             onChange: (tempoDynamicsScale: number) =>
               store.dispatch("COMMAND_MULTI_SET_AUDIO_TEMPO_DYNAMICS_SCALE", {
                 audioKeys: selectedAudioKeys.value,

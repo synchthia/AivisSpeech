@@ -21,9 +21,9 @@ test("「ヘルプ」メニューから各項目をクリックすると、そ�
   await page.getByText("よくある質問 / Q&A", { exact: true }).click();
   await expect(page.getByText("よくある質問 / Q&A")).toBeVisible();
 
-  // 音声合成モデルの利用規約
-  await page.getByText("音声合成モデルの利用規約", { exact: true }).click();
-  await expect(page.getByText("音声合成モデルの利用規約")).toBeVisible();
+  // 音声合成モデルのライセンス
+  await page.getByText("音声合成モデルのライセンス", { exact: true }).click();
+  await expect(page.getByText("音声合成モデルのライセンス")).toBeVisible();
 
   // ライセンス情報
   await page.getByText("ライセンス情報", { exact: true }).click();
