@@ -63,8 +63,8 @@ export const settingStoreState: SettingStoreState = {
   },
   engineSettings: {},
   enableMultiEngine: true,
-  enableMemoNotation: true,
-  enableRubyNotation: true,
+  enableMemoNotation: false,
+  enableRubyNotation: false,
 };
 
 export const settingStore = createPartialStore<SettingStoreTypes>({
