@@ -31,6 +31,12 @@ export interface FramePhoneme {
      * @memberof FramePhoneme
      */
     frameLength: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FramePhoneme
+     */
+    noteId?: string | null;
 }
 
 /**
@@ -56,6 +62,7 @@ export function FramePhonemeFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'phoneme': json['phoneme'],
         'frameLength': json['frame_length'],
+        'noteId': !exists(json, 'note_id') ? undefined : json['note_id'],
     };
 }
 
@@ -70,6 +77,7 @@ export function FramePhonemeToJSON(value?: FramePhoneme | null): any {
         
         'phoneme': value.phoneme,
         'frame_length': value.frameLength,
+        'note_id': value.noteId,
     };
 }
 

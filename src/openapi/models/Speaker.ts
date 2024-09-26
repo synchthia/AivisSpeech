@@ -57,7 +57,7 @@ export interface Speaker {
      */
     version: string;
     /**
-     * 
+     * キャラクターの対応機能
      * @type {SpeakerSupportedFeatures}
      * @memberof Speaker
      */

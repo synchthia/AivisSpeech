@@ -20,6 +20,12 @@ import { exists, mapValues } from '../runtime';
  */
 export interface Note {
     /**
+     * 
+     * @type {string}
+     * @memberof Note
+     */
+    id?: string | null;
+    /**
      * 音階
      * @type {number}
      * @memberof Note
@@ -60,6 +66,7 @@ export function NoteFromJSONTyped(json: any, ignoreDiscriminator: boolean): Note
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'key': !exists(json, 'key') ? undefined : json['key'],
         'frameLength': json['frame_length'],
         'lyric': json['lyric'],
@@ -75,6 +82,7 @@ export function NoteToJSON(value?: Note | null): any {
     }
     return {
         
+        'id': value.id,
         'key': value.key,
         'frame_length': value.frameLength,
         'lyric': value.lyric,

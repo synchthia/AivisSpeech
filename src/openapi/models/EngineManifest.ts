@@ -111,7 +111,7 @@ export interface EngineManifest {
      */
     supportedVvlibManifestVersion?: string;
     /**
-     * 
+     * エンジンが持つ機能
      * @type {SupportedFeatures}
      * @memberof EngineManifest
      */

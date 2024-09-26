@@ -39,7 +39,7 @@ export interface AccentPhrase {
      */
     accent: number;
     /**
-     * 
+     * 後ろに無音を付けるかどうか
      * @type {Mora}
      * @memberof AccentPhrase
      */
