@@ -336,7 +336,9 @@ watch(characterOrder, (newOrder) => {
 
     .character-order-item {
       border-radius: 10px;
-      border: 2px solid rgba(colors.$display-rgb, 0.15);
+      background: #363A3F;
+      border: 1.5px #3B3E43 solid;
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
       text-align: center;
       cursor: grab;
       &.selected-character-order-item {

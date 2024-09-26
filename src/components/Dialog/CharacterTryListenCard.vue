@@ -18,7 +18,7 @@
         :alt="characterInfo.metas.speakerName"
         class="style-icon"
       />
-      <span class="text-subtitle1 q-ma-sm">{{
+      <span class="text-subtitle1 q-ma-sm" style="font-weight: bold;">{{
         characterInfo.metas.speakerName
       }}</span>
       <div
@@ -64,7 +64,7 @@
           ]"
           :key="voiceSampleIndex"
           round
-          outline
+          unelevated
           :icon="
             playing != undefined &&
             speakerUuid === playing.speakerUuid &&
@@ -173,10 +173,13 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
 
 .character-item {
   height: 230px;
-  box-shadow: 0 0 0 1px rgba(colors.$primary-rgb, 0.5);
+  background: #363A3F;
+  border: 1.5px #3B3E43 solid;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   overflow: hidden;
   &.selected-character-item {
+    border: none;
     box-shadow: 0 0 0 2px colors.$primary;
   }
   &:hover :deep(.q-focus-helper) {
@@ -193,9 +196,8 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
     width: 100%;
     height: 100%;
     .style-icon {
-      $icon-size: vars.$character-item-size / 2;
-      width: $icon-size;
-      height: $icon-size;
+      width: 100px;
+      height: 100px;
       clip-path: vars.$squircle;
       background-color: var(--color-splitter);
     }
@@ -204,7 +206,8 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      margin-top: -1rem;
+      margin-top: -12px;
+      padding-bottom: 4px;
     }
     .voice-samples {
       display: flex;
@@ -212,6 +215,9 @@ const rollStyleIndex = (speakerUuid: SpeakerId, diff: number) => {
       column-gap: 5px;
       align-items: center;
       justify-content: center;
+      .voice-sample-btn {
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+      }
     }
     .new-character-item {
       color: colors.$primary;

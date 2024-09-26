@@ -39,7 +39,7 @@
       <QPageContainer>
         <QPage>
           <div class="style-items-container">
-            <div class="q-py-md">
+            <div class="q-px-sm">
               <QItem
                 v-for="(style, styleIndex) of characterInfo.metas.styles"
                 :key="styleIndex"
@@ -55,7 +55,7 @@
               >
                 <div class="style-item-inner">
                   <img :src="style.iconPath" class="style-icon" />
-                  <span class="text-subtitle1 q-ma-sm">{{
+                  <span class="text-subtitle1 q-ma-sm" style="font-weight: bold;">{{
                     style.styleName || DEFAULT_STYLE_NAME
                   }}</span>
                   <div class="voice-samples">
@@ -65,7 +65,7 @@
                       ]"
                       :key="voiceSampleIndex"
                       round
-                      outline
+                      unelevated
                       :icon="
                         playing != undefined &&
                         characterInfo.metas.speakerUuid ===
@@ -268,6 +268,7 @@ const closeDialog = () => {
   }
 
   .style-items-container {
+    padding: 20px 12px;
     display: grid;
     align-items: center;
     height: calc(100% - 30px);
@@ -281,10 +282,13 @@ const closeDialog = () => {
       align-content: center;
       justify-content: center;
       .style-item {
-        box-shadow: 0 0 0 1px rgba(colors.$primary-rgb, 0.5);
+        background: #363A3F;
+        border: 1.5px #3B3E43 solid;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
         overflow: hidden;
         &.active-style-item {
+          border: none;
           box-shadow: 0 0 0 2px colors.$primary;
         }
         &:hover :deep(.q-focus-helper) {
@@ -301,9 +305,8 @@ const closeDialog = () => {
           width: 100%;
           height: 100%;
           .style-icon {
-            $icon-size: $style-item-size / 2;
-            width: $icon-size;
-            height: $icon-size;
+            width: 100px;
+            height: 100px;
             clip-path: vars.$squircle;
             background-color: var(--color-splitter);
           }
@@ -313,6 +316,9 @@ const closeDialog = () => {
             column-gap: 5px;
             align-items: center;
             justify-content: center;
+            .voice-sample-btn {
+              box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+            }
           }
         }
       }

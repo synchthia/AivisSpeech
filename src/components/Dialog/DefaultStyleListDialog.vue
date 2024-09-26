@@ -51,7 +51,7 @@
                     class="style-icon"
                   />
                   <span
-                    class="text-subtitle1 q-mt-sm q-mb-xs text-weight-bold"
+                    class="text-subtitle1 q-mt-sm text-weight-bold"
                     >{{
                       characterInfosMap[speaker.metas.speakerUuid].metas
                         .speakerName
@@ -64,7 +64,7 @@
                     "
                     class="style-select-container"
                   >
-                    <span>{{
+                    <span class="q-mb-xs">デフォルト: {{
                       selectedStyles[speaker.metas.speakerUuid]
                         ? selectedStyles[speaker.metas.speakerUuid].styleName
                         : DEFAULT_STYLE_NAME
@@ -244,10 +244,13 @@ const openStyleSelectDialog = (characterInfo: CharacterInfo) => {
     align-content: center;
     justify-content: center;
     .character-item {
-      box-shadow: 0 0 0 1px rgba(colors.$primary-rgb, 0.5);
+      background: #363A3F;
+      border: 1.5px #3B3E43 solid;
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
       border-radius: 10px;
       overflow: hidden;
       &.selected-character-item {
+        border: none;
         box-shadow: 0 0 0 2px colors.$primary;
       }
       &:hover :deep(.q-focus-helper) {
@@ -264,9 +267,8 @@ const openStyleSelectDialog = (characterInfo: CharacterInfo) => {
         width: 100%;
         height: 100%;
         .style-icon {
-          $icon-size: $character-item-size / 2;
-          width: $icon-size;
-          height: $icon-size;
+          width: 100px;
+          height: 100px;
           clip-path: vars.$squircle;
           background-color: var(--color-splitter);
         }

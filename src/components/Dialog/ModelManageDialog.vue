@@ -10,7 +10,7 @@
             <QToolbarTitle class="text-display">
               音声合成モデルの管理
             </QToolbarTitle>
-            <QBtn outline icon="sym_r_add" label="追加" textColor="display" class="text-bold" @click="() => ''" />
+            <QBtn outline icon="sym_r_add" label="インストール" textColor="display" class="text-bold" @click="() => ''" />
           </QToolbar>
         </QHeader>
         <QPage class="row no-wrap">
@@ -68,9 +68,53 @@
                   </div>
                 </div>
                 <div class="q-mt-md" style="font-size: 13.5px; color: #D2D3D4;">
-                  {{ activeAivmInfo.manifest.description === '' ? '（この音声合成モデルの説明は提供されていません）' : activeAivmInfo.manifest.description }}
+                  {{ activeAivmInfo.manifest.description === '' ?
+                    '（この音声合成モデルの説明は提供されていません）' :
+                    activeAivmInfo.manifest.description
+                  }}
                 </div>
-                <div class="q-mt-md" style="font-size: 17px; font-weight: bold;">ボイスサンプル</div>
+                <div class="q-mt-md" style="margin-bottom: 12px; font-size: 17px; font-weight: bold;">ボイスサンプル</div>
+                <div class="row" style="gap: 12px;">
+                  <div v-for="style in activeAivmInfo.manifest.speakers[activeSpeakerIndex].styles" :key="style.localId" class="col-12">
+                    <div class="style-card">
+                      <div class="style-content">
+                        <div class="style-icon-container">
+                          <img class="style-icon" :src="style.icon" />
+                          <div class="style-name">{{ style.name }}</div>
+                        </div>
+                        <div class="voice-samples-container">
+                          <div v-if="style.voiceSamples.length === 0" class="sample-transcript">
+                            （このスタイルの音声サンプルは提供されていません）
+                          </div>
+                          <div v-for="(sample, voiceSampleIndex) in style.voiceSamples" :key="voiceSampleIndex" class="voice-sample">
+                            <div
+                              class="play-button"
+                              :class="{ 'playing': audioPlaying[`${style.localId}-${voiceSampleIndex}`] }"
+                              @click="toggleAudio(style.localId, voiceSampleIndex, sample.audio)"
+                            >
+                              <QIcon
+                                :name="audioPlaying[`${style.localId}-${voiceSampleIndex}`] ? 'sym_r_stop' : 'sym_r_volume_up'"
+                                size="25px"
+                                color="white"
+                              />
+                            </div>
+                            <div class="sample-transcript">{{ sample.transcript }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="q-mt-md q-mb-xs row">
+                  <QSpace />
+                  <QBtn
+                    outline
+                    icon="sym_r_delete"
+                    label="アンインストール"
+                    textColor="warning"
+                    class="text-no-wrap text-bold"
+                  />
+                </div>
               </QTabPanel>
             </QTabPanels>
           </div>
@@ -81,7 +125,7 @@
 </template>
 <script setup lang="ts">
 
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, onUnmounted } from "vue";
 import { AivmInfo } from "@/openapi";
 import { useStore } from "@/store";
 
@@ -141,6 +185,47 @@ const activeAivmInfo = computed(() => {
 // QTab / QTabPanel の name 属性の値と一致する
 const activeSpeakerIndex = ref(0);
 
+// 音声再生中かどうか
+const audioPlaying = ref<{ [key: string]: boolean }>({});
+// 音声再生用の Audio 要素
+const audioElements: { [key: string]: HTMLAudioElement } = {};
+
+// 音声再生を切り替える関数
+const toggleAudio = (styleId: number, sampleIndex: number, audioDataUrl: string) => {
+  const key = `${styleId}-${sampleIndex}`;
+  if (!audioElements[key]) {
+    audioElements[key] = new Audio(audioDataUrl);
+    audioElements[key].addEventListener('ended', () => {
+      audioPlaying.value[key] = false;
+    });
+  }
+
+  if (audioPlaying.value[key]) {
+    audioElements[key].pause();
+    audioElements[key].currentTime = 0;
+    audioPlaying.value[key] = false;
+  } else {
+    Object.keys(audioPlaying.value).forEach(k => {
+      if (audioPlaying.value[k]) {
+        audioElements[k].pause();
+        audioElements[k].currentTime = 0;
+        audioPlaying.value[k] = false;
+      }
+    });
+    audioElements[key].play();
+    audioPlaying.value[key] = true;
+  }
+};
+
+// コンポーネントがアンマウントされる時に音声を停止し、イベントリスナーを削除する
+onUnmounted(() => {
+  Object.values(audioElements).forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.removeEventListener('ended', () => {});
+  });
+});
+
 </script>
 <style lang="scss" scoped>
 
@@ -159,4 +244,90 @@ const activeSpeakerIndex = ref(0);
   overflow-y: auto;
 }
 
+.bg-surface {
+  background: #363A3F;
+}
+
+.style-card {
+  padding: 12px 20px;
+  background: #363A3F;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px #3B3E43 solid;
+}
+
+.style-content {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.style-icon-container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100px;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.style-icon {
+  width: 100px;
+  height: 100px;
+  clip-path: vars.$squircle;
+  background-color: var(--color-splitter);
+}
+
+.style-name {
+  text-align: center;
+  color: #FBEEEA;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19.20px;
+  word-wrap: break-word;
+}
+
+.voice-samples-container {
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+  display: inline-flex;
+}
+
+.voice-sample {
+  align-self: stretch;
+  background: #363A3F;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  display: inline-flex;
+  margin-bottom: 8px;
+}
+
+.play-button {
+  width: 45px;
+  height: 45px;
+  background: #41A2EC;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px #3B3E43 solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sample-transcript {
+  flex: 1 1 0;
+  color: white;
+  font-size: 13.50px;
+  font-weight: 400;
+  line-height: 19.58px;
+  word-wrap: break-word;
+}
 </style>
