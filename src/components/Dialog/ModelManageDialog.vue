@@ -221,8 +221,14 @@ const getAivmInfos = async () => {
   }
   const res = await getApiInstance().then((instance) => instance.invoke("getInstalledAivmInfosAivmModelsGet")({}));
   aivmInfoDict.value = res;
-  // アクティブな AIVM 音声合成モデルの UUID を設定
-  activeAivmUuid.value = Object.values(aivmInfoDict.value)[0].manifest.uuid;
+  // 初回のみアクティブな AIVM 音声合成モデルの UUID を設定
+  if (activeAivmUuid.value == null && Object.keys(aivmInfoDict.value).length > 0) {
+    activeAivmUuid.value = Object.values(aivmInfoDict.value)[0].manifest.uuid;
+  }
+  // この時点で activeAivmUuid に対応する AIVM 音声合成モデルが存在しない場合は (削除されたなど) 、上記同様に最初の AIVM 音声合成モデルをアクティブにする
+  if (activeAivmUuid.value != null && !(activeAivmUuid.value in aivmInfoDict.value)) {
+    activeAivmUuid.value = Object.values(aivmInfoDict.value)[0].manifest.uuid;
+  }
   if (Object.keys(aivmInfoDict.value).length > 0) {
     store.dispatch("HIDE_ALL_LOADING_SCREEN");
   }
