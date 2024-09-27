@@ -74,7 +74,7 @@ const formattedProgress = computed(() =>
 @use "@/styles/colors" as colors;
 
 .progress {
-  background-color: rgba(colors.$display-rgb, 0.10);
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   inset: 0;
   z-index: 10;
