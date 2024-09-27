@@ -218,8 +218,8 @@
                 outline
                 icon="sym_r_add"
                 label="追加"
-                textColor="display"
-                class="text-no-wrap text-bold q-mr-sm"
+                textColor="primary"
+                class="text-no-wrap text-bold"
                 :disabled="!canAddEngine"
                 @click="addEngine"
               />

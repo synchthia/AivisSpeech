@@ -12,11 +12,16 @@
             </QToolbarTitle>
             <QBtn outline icon="sym_r_search" label="音声合成モデルを見つける" textColor="display"
               class="text-bold q-mr-sm" @click="openAivisHub" />
-            <QBtn outline icon="sym_r_add" label="インストール" textColor="display" class="text-bold" @click="() => ''" />
+            <QBtn outline icon="sym_r_add" label="インストール" textColor="display" class="text-bold" @click="isInstalling = true" />
           </QToolbar>
         </QHeader>
         <QPage class="row no-wrap">
-          <div style="width: 260px; flex-shrink: 0; border-right: solid 1px var(--color-surface);">
+          <div style="position: relative; width: 260px; flex-shrink: 0; border-right: solid 1px var(--color-surface);">
+            <div
+              v-if="isInstalling"
+              class="model-list-disable-overlay"
+              @click="cancelInstall"
+            ></div>
             <QList class="model-list">
               <QItem v-for="aivmInfo in Object.values(aivmInfoDict)" :key="aivmInfo.manifest.uuid" v-ripple class="q-pr-none" clickable
                 :active="activeAivmUuid === aivmInfo.manifest.uuid" @click="activeAivmUuid = aivmInfo.manifest.uuid">
@@ -34,7 +39,7 @@
               </QItem>
             </QList>
           </div>
-          <div v-if="activeAivmInfo" class="model-detail" style="width: 100%;">
+          <div v-if="activeAivmInfo && !isInstalling" class="model-detail" style="width: 100%;">
             <!-- タブは複数の話者がモデルに含まれる場合のみ表示する -->
             <QTabs v-if="activeAivmInfo && activeAivmInfo.manifest.speakers.length > 1" v-model="activeSpeakerIndex"
               dense activeColor="primary">
@@ -110,17 +115,59 @@
                 </div>
                 <div class="q-mt-md q-mb-xs row">
                   <QSpace />
-                  <QBtn
-                    outline
-                    icon="sym_r_delete"
-                    label="アンインストール"
-                    textColor="warning"
-                    class="text-no-wrap text-bold"
-                    @click="unInstallAivmModel"
-                  />
+                  <QBtn outline icon="sym_r_delete" label="アンインストール" textColor="warning" class="text-no-wrap text-bold"
+                    @click="unInstallAivmModel" />
                 </div>
               </QTabPanel>
             </QTabPanels>
+          </div>
+          <div v-if="isInstalling" class="model-detail q-pa-lg column" style="width: 100%;">
+            <div class="text-h5">音声合成モデルのインストール</div>
+            <div class="q-mt-lg">
+              <QBtnToggle
+                v-model="installMethod"
+                :options="[
+                  { label: 'ファイルからインストール', value: 'file' },
+                  { label: 'URL からインストール', value: 'url' },
+                ]"
+                color="surface"
+                unelevated
+                textColor="display"
+                toggleColor="primary"
+                toggleTextColor="display-on-primary"
+              />
+            </div>
+            <div v-if="installMethod === 'file'">
+              <div class="q-mt-lg">
+                PC 内の AIVM ファイルを選択して音声合成モデルをインストールします。
+              </div>
+              <div class="q-mt-md">
+                <QFile v-model="selectedFile" label="AIVM ファイルを選択" accept=".aivm"
+                  @click.stop="selectedFile = null" @update:modelValue="(file: File) => selectedFile = file">
+                  <template #prepend>
+                    <QIcon name="sym_r_attach_file" />
+                  </template>
+                  <template #append>
+                    <QIcon name="sym_r_close" class="cursor-pointer" @click.stop="selectedFile = null" />
+                  </template>
+                </QFile>
+              </div>
+            </div>
+            <div v-else>
+              <div class="q-mt-lg">
+                AIVM ファイルの URL を指定して音声合成モデルをインストールします。
+              </div>
+              <div class="q-mt-sm q-mt-md">
+                <QInput v-model="installUrl" label="AIVM ファイルの URL を指定" />
+              </div>
+            </div>
+            <div class="row q-mt-auto right-pane-buttons">
+              <QSpace />
+              <QBtn outline icon="sym_r_close" label="キャンセル" textColor="display" class="text-no-wrap text-bold q-mr-sm"
+                @click="cancelInstall" />
+              <QBtn outline icon="sym_r_add" label="インストール" textColor="primary" class="text-no-wrap text-bold"
+                :disabled="!canInstall" @click="installModel" />
+            </div>
           </div>
         </QPage>
       </QPageContainer>
@@ -174,6 +221,11 @@ const getAivmInfos = async () => {
 watch(engineManageDialogOpenedComputed, () => {
   if (engineManageDialogOpenedComputed.value) {
     getAivmInfos();
+    installMethod.value = 'file';
+    selectedFile.value = null;
+    installUrl.value = '';
+    isInstalling.value = false;
+    isInstallLoading.value = false;
   }
 });
 
@@ -226,6 +278,58 @@ const openAivisHub = () => {
   window.open('https://hub.aivis-project.com/', '_blank');
 };
 
+const isInstalling = ref(false);
+const installMethod = ref('file');
+const selectedFile = ref<File | null>(null);
+const installUrl = ref('');
+const isInstallLoading = ref(false);
+
+const canInstall = computed(() => {
+  return (installMethod.value === 'file' && selectedFile.value!= null) ||
+         (installMethod.value === 'url' && installUrl.value.trim() !== '');
+});
+
+const cancelInstall = () => {
+  // インストール中はキャンセルできない
+  if (isInstallLoading.value) {
+    return;
+  }
+  isInstalling.value = false;
+  selectedFile.value = null;
+  installUrl.value = '';
+};
+
+// 音声合成モデルをインストールする
+const installModel = async () => {
+  isInstallLoading.value = true;
+  try {
+    const apiInstance = await store.dispatch("INSTANTIATE_ENGINE_CONNECTOR", { engineId: store.getters.DEFAULT_ENGINE_ID });
+    store.dispatch("SHOW_LOADING_SCREEN", {
+      message: "インストール中...",
+    });
+    if (installMethod.value === 'file' && selectedFile.value) {
+      await apiInstance.invoke("installAivmAivmModelsInstallPost")({ file: selectedFile.value });
+    } else if (installMethod.value === 'url') {
+      await apiInstance.invoke("installAivmAivmModelsInstallPost")({ url: installUrl.value });
+    }
+    // インストール成功時の処理
+    store.dispatch("SHOW_ALERT_DIALOG", {
+      title: "インストール完了",
+      message: "音声合成モデルが正常にインストールされました。",
+    });
+    cancelInstall();
+  } catch (error) {
+    // エラー処理
+    store.dispatch("SHOW_ALERT_DIALOG", {
+      title: "インストール失敗",
+      message: `音声合成モデルのインストールに失敗しました: ${error}`,
+    });
+  } finally {
+    isInstallLoading.value = false;
+    store.dispatch("HIDE_ALL_LOADING_SCREEN");
+  }
+};
+
 // 音声合成モデルをアンインストールする
 const unInstallAivmModel = async () => {
   if (activeAivmUuid.value == null) {
@@ -247,7 +351,7 @@ const unInstallAivmModel = async () => {
     ).catch((err) => {
       console.error(err);
       store.dispatch("SHOW_ALERT_DIALOG", {
-        title: "アンインストールに失敗しました",
+        title: "アンインストール失敗",
         message: `音声合成モデル「${activeAivmInfo.value?.manifest.name}」のアンインストールに失敗しました。(${err})`,
       });
     });
@@ -281,6 +385,14 @@ onUnmounted(() => {
       vars.$window-border-width}
   );
   overflow-y: auto;
+}
+
+.model-list-disable-overlay {
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
 }
 
 .bg-surface {
@@ -369,4 +481,11 @@ onUnmounted(() => {
   line-height: 19.58px;
   word-wrap: break-word;
 }
+
+.right-pane-buttons {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+}
+
 </style>
