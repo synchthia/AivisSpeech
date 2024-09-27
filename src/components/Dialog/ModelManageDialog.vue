@@ -12,7 +12,7 @@
             </QToolbarTitle>
             <QBtn outline icon="sym_r_search" label="音声合成モデルを見つける" textColor="display"
               class="text-bold q-mr-sm" @click="openAivisHub" />
-            <QBtn outline icon="sym_r_add" label="インストール" textColor="display" class="text-bold" @click="isInstalling = true" />
+            <QBtn outline icon="sym_r_upload" label="インストール / 更新" textColor="display" class="text-bold" @click="isInstalling = true" />
           </QToolbar>
         </QHeader>
         <QPage class="row no-wrap">
@@ -122,7 +122,7 @@
             </QTabPanels>
           </div>
           <div v-if="isInstalling" class="model-detail q-pa-lg column" style="width: 100%;">
-            <div class="text-h5">音声合成モデルのインストール</div>
+            <div class="text-h5">音声合成モデルのインストール / 更新</div>
             <div class="q-mt-lg">
               <QBtnToggle
                 v-model="installMethod"
@@ -139,10 +139,10 @@
             </div>
             <div v-if="installMethod === 'file'">
               <div class="q-mt-lg">
-                PC 内の AIVM ファイルを選択して音声合成モデルをインストールします。
+                PC 内の AIVM ファイル (.aivm) を選択して、音声合成モデルをインストール / 更新します。
               </div>
               <div class="q-mt-md">
-                <QFile v-model="selectedFile" label="AIVM ファイルを選択" accept=".aivm"
+                <QFile v-model="selectedFile" label="AIVM ファイル (.aivm) を選択" accept=".aivm"
                   @click.stop="selectedFile = null" @update:modelValue="(file: File) => selectedFile = file">
                   <template #prepend>
                     <QIcon name="sym_r_attach_file" />
@@ -155,17 +155,19 @@
             </div>
             <div v-else>
               <div class="q-mt-lg">
-                AIVM ファイルの URL を指定して音声合成モデルをインストールします。
+                AIVM ファイルのダウンロード先 URL を指定して、音声合成モデルをインストール / 更新します。
               </div>
               <div class="q-mt-sm q-mt-md">
-                <QInput v-model="installUrl" label="AIVM ファイルの URL を指定" />
+                <QInput v-model="installUrl" label="AIVM ファイルの URL を指定" :rules="[
+                  (url) => /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/i.test(url) || 'URL が不正です。',
+                ]" />
               </div>
             </div>
             <div class="row q-mt-auto right-pane-buttons">
               <QSpace />
               <QBtn outline icon="sym_r_close" label="キャンセル" textColor="display" class="text-no-wrap text-bold q-mr-sm"
                 @click="cancelInstall" />
-              <QBtn outline icon="sym_r_add" label="インストール" textColor="primary" class="text-no-wrap text-bold"
+              <QBtn outline icon="sym_r_upload" label="インストール / 更新" textColor="primary" class="text-no-wrap text-bold"
                 :disabled="!canInstall" @click="installModel" />
             </div>
           </div>
@@ -177,7 +179,7 @@
 <script setup lang="ts">
 
 import { computed, ref, watch, onUnmounted } from "vue";
-import { AivmInfo } from "@/openapi";
+import { AivmInfo, ResponseError } from "@/openapi";
 import { useStore } from "@/store";
 
 const store = useStore();
@@ -211,10 +213,19 @@ const aivmInfoDict = ref<{ [key: string]: AivmInfo }>({});
 
 // インストール済み AIVM 音声合成モデルの情報を取得する関数
 const getAivmInfos = async () => {
+  // 初回のみ読み込み中のローディングを表示する
+  if (Object.keys(aivmInfoDict.value).length === 0) {
+    store.dispatch("SHOW_LOADING_SCREEN", {
+      message: "読み込み中...",
+    });
+  }
   const res = await getApiInstance().then((instance) => instance.invoke("getInstalledAivmInfosAivmModelsGet")({}));
   aivmInfoDict.value = res;
   // アクティブな AIVM 音声合成モデルの UUID を設定
   activeAivmUuid.value = Object.values(aivmInfoDict.value)[0].manifest.uuid;
+  if (Object.keys(aivmInfoDict.value).length > 0) {
+    store.dispatch("HIDE_ALL_LOADING_SCREEN");
+  }
 };
 
 // ダイヤログが開かれた時
@@ -302,11 +313,11 @@ const cancelInstall = () => {
 // 音声合成モデルをインストールする
 const installModel = async () => {
   isInstallLoading.value = true;
+  store.dispatch("SHOW_LOADING_SCREEN", {
+    message: "インストール中...",
+  });
   try {
-    const apiInstance = await store.dispatch("INSTANTIATE_ENGINE_CONNECTOR", { engineId: store.getters.DEFAULT_ENGINE_ID });
-    store.dispatch("SHOW_LOADING_SCREEN", {
-      message: "インストール中...",
-    });
+    const apiInstance = await getApiInstance();
     if (installMethod.value === 'file' && selectedFile.value) {
       await apiInstance.invoke("installAivmAivmModelsInstallPost")({ file: selectedFile.value });
     } else if (installMethod.value === 'url') {
@@ -319,11 +330,19 @@ const installModel = async () => {
     });
     cancelInstall();
   } catch (error) {
-    // エラー処理
-    store.dispatch("SHOW_ALERT_DIALOG", {
-      title: "インストール失敗",
-      message: `音声合成モデルのインストールに失敗しました: ${error}`,
-    });
+    console.error(error);
+    if (error instanceof ResponseError) {
+      store.dispatch("SHOW_ALERT_DIALOG", {
+        title: "インストール失敗",
+        message: `音声合成モデルのインストールに失敗しました。
+          (HTTP Error ${error.response.status} / ${await error.response.text()})`,
+      });
+    } else {
+      store.dispatch("SHOW_ALERT_DIALOG", {
+        title: "インストール失敗",
+        message: `音声合成モデルのインストールに失敗しました。(${error})`,
+      });
+    }
   } finally {
     isInstallLoading.value = false;
     store.dispatch("HIDE_ALL_LOADING_SCREEN");
@@ -346,17 +365,27 @@ const unInstallAivmModel = async () => {
     store.dispatch("SHOW_LOADING_SCREEN", {
       message: "アンインストールしています...",
     });
-    await getApiInstance().then((instance) =>
-      instance.invoke("uninstallAivmAivmModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! })
-    ).catch((err) => {
-      console.error(err);
-      store.dispatch("SHOW_ALERT_DIALOG", {
-        title: "アンインストール失敗",
-        message: `音声合成モデル「${activeAivmInfo.value?.manifest.name}」のアンインストールに失敗しました。(${err})`,
-      });
-    });
-    store.dispatch("HIDE_ALL_LOADING_SCREEN");
-    getAivmInfos();
+    try {
+      await getApiInstance().then((instance) =>
+        instance.invoke("uninstallAivmAivmModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! }))
+    } catch (error) {
+      console.error(error);
+      if (error instanceof ResponseError) {
+        store.dispatch("SHOW_ALERT_DIALOG", {
+          title: "アンインストール失敗",
+          message: `音声合成モデル「${activeAivmInfo.value?.manifest.name}」のアンインストールに失敗しました。
+            (HTTP Error ${error.response.status} / ${await error.response.text()})`,
+        });
+      } else {
+        store.dispatch("SHOW_ALERT_DIALOG", {
+          title: "アンインストール失敗",
+          message: `音声合成モデル「${activeAivmInfo.value?.manifest.name}」のアンインストールに失敗しました。(${error})`,
+        });
+      }
+    } finally {
+      store.dispatch("HIDE_ALL_LOADING_SCREEN");
+      getAivmInfos();
+    }
   }
 };
 
