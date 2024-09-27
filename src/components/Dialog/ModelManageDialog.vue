@@ -236,7 +236,6 @@ watch(engineManageDialogOpenedComputed, () => {
     selectedFile.value = null;
     installUrl.value = '';
     isInstalling.value = false;
-    isInstallLoading.value = false;
   }
 });
 
@@ -293,7 +292,6 @@ const isInstalling = ref(false);
 const installMethod = ref('file');
 const selectedFile = ref<File | null>(null);
 const installUrl = ref('');
-const isInstallLoading = ref(false);
 
 const canInstall = computed(() => {
   return (installMethod.value === 'file' && selectedFile.value!= null) ||
@@ -301,10 +299,6 @@ const canInstall = computed(() => {
 });
 
 const cancelInstall = () => {
-  // インストール中はキャンセルできない
-  if (isInstallLoading.value) {
-    return;
-  }
   isInstalling.value = false;
   selectedFile.value = null;
   installUrl.value = '';
@@ -312,7 +306,6 @@ const cancelInstall = () => {
 
 // 音声合成モデルをインストールする
 const installModel = async () => {
-  isInstallLoading.value = true;
   store.dispatch("SHOW_LOADING_SCREEN", {
     message: "インストール中...",
   });
@@ -344,8 +337,8 @@ const installModel = async () => {
       });
     }
   } finally {
-    isInstallLoading.value = false;
     store.dispatch("HIDE_ALL_LOADING_SCREEN");
+    getAivmInfos();  // 再取得
   }
 };
 
@@ -384,7 +377,7 @@ const unInstallAivmModel = async () => {
       }
     } finally {
       store.dispatch("HIDE_ALL_LOADING_SCREEN");
-      getAivmInfos();
+      getAivmInfos();  // 再取得
     }
   }
 };
