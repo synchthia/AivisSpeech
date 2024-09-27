@@ -38,10 +38,10 @@
               <QSpinner color="primary" size="2.5rem" />
               <div class="q-mt-xs">
                 <template v-if="loadingDictState === 'loading'"
-                  >読み込み中・・・</template
+                  >読み込み中...</template
                 >
                 <template v-if="loadingDictState === 'synchronizing'"
-                  >同期中・・・</template
+                  >同期中...</template
                 >
               </div>
             </div>
@@ -720,7 +720,7 @@ const toDialogClosedState = () => {
 }
 
 .loading-dict {
-  background-color: rgba(colors.$display-rgb, 0.15);
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   inset: 0;
   z-index: 10;

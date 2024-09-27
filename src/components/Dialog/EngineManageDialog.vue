@@ -38,12 +38,12 @@
             <div class="q-pa-md">
               <QSpinner color="primary" size="2.5rem" />
               <div class="q-mt-xs">
-                <template v-if="uiLockedState === 'addingEngine'"
-                  >追加中・・・</template
-                >
-                <template v-if="uiLockedState === 'deletingEngine'"
-                  >削除中・・・</template
-                >
+                <template v-if="uiLockedState === 'addingEngine'">
+                  音声合成エンジンを追加しています...
+                </template>
+                <template v-if="uiLockedState === 'deletingEngine'">
+                  音声合成エンジンを削除しています...
+                </template>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@
             </div>
 
             <div v-if="engineLoaderType === 'vvpp'" class="no-wrap q-px-md">
-              <div class="q-ma-sm">
+              <div class="q-mt-md q-ma-sm">
                 VVPP ファイルで音声合成エンジンをインストールします。
               </div>
               <div class="q-ma-sm q-mt-md">
@@ -161,7 +161,7 @@
               </div>
             </div>
             <div v-if="engineLoaderType === 'dir'" class="no-wrap q-px-md">
-              <div class="q-ma-sm">
+              <div class="q-mt-md q-ma-sm">
                 PC 内にある音声合成エンジンを追加します。
               </div>
               <div class="q-ma-sm q-mt-md">
@@ -513,7 +513,7 @@ const addEngine = async () => {
       );
       if (success) {
         requireReload(
-          "エンジンを追加しました。反映には再読み込みが必要です。今すぐ再読み込みしますか？",
+          "音声合成エンジンを追加しました。反映には再読み込みが必要です。今すぐ再読み込みしますか？",
         );
       }
     }
@@ -756,7 +756,7 @@ function findDefaultEngineId() {
 }
 
 .ui-lock-popup {
-  background-color: rgba(colors.$display-rgb, 0.15);
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   inset: 0;
   z-index: 10;

@@ -17,8 +17,8 @@
       <div class="q-mt-xs">
         {{
           allEngineState === "STARTING"
-            ? "音声合成エンジン起動中・・・"
-            : "データ準備中・・・"
+            ? "音声合成エンジン起動中..."
+            : "データ準備中..."
         }}
       </div>
 
@@ -110,7 +110,7 @@ const openQa = () => {
 @use "@/styles/variables" as vars;
 
 .waiting-engine {
-  background-color: rgba(colors.$display-rgb, 0.15);
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   inset: 0;
   z-index: 10;
@@ -120,7 +120,7 @@ const openQa = () => {
   justify-content: center;
   > div {
     color: colors.$display;
-    background: colors.$surface;
+    background: colors.$background;
     border-radius: 6px;
     padding: 14px;
   }

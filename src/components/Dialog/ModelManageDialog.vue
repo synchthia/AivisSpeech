@@ -142,7 +142,7 @@
                 PC 内の AIVM ファイル (.aivm) を選択して、音声合成モデルをインストール / 更新します。
               </div>
               <div class="q-mt-md">
-                <QFile v-model="selectedFile" label="AIVM ファイル (.aivm) を選択" accept=".aivm"
+                <QFile v-model="selectedFile" label="AIVM ファイル (.aivm) を選択" accept=".aivm" dense
                   @click.stop="selectedFile = null" @update:modelValue="(file: File) => selectedFile = file">
                   <template #prepend>
                     <QIcon name="sym_r_attach_file" />
@@ -155,10 +155,10 @@
             </div>
             <div v-else>
               <div class="q-mt-lg">
-                AIVM ファイルのダウンロード先 URL を指定して、音声合成モデルをインストール / 更新します。
+                AIVM ファイルのダウンロード URL を指定して、音声合成モデルをインストール / 更新します。
               </div>
               <div class="q-mt-sm q-mt-md">
-                <QInput v-model="installUrl" label="AIVM ファイルの URL を指定" :rules="[
+                <QInput v-model="installUrl" label="AIVM ファイルのダウンロード URL を指定" dense :rules="[
                   (url) => /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/i.test(url) || 'URL が不正です。',
                 ]" />
               </div>
