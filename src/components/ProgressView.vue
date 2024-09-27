@@ -23,7 +23,7 @@
         :thickness="0.3"
         size="xl"
       />
-      <div class="q-mt-md">生成中です...</div>
+      <div class="q-mt-md">音声合成中...</div>
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@ const formattedProgress = computed(() =>
 @use "@/styles/colors" as colors;
 
 .progress {
-  background-color: rgba(colors.$display-rgb, 0.15);
+  background-color: rgba(colors.$display-rgb, 0.10);
   position: absolute;
   inset: 0;
   z-index: 10;
@@ -85,7 +85,7 @@ const formattedProgress = computed(() =>
 
   > div {
     color: colors.$display;
-    background: colors.$surface;
+    background: colors.$background;
     width: 200px;
     border-radius: 6px;
     padding: 14px 48px;

@@ -231,8 +231,8 @@
                 outline
                 icon="sym_r_save"
                 label="保存"
-                textColor="display"
-                class="text-no-wrap text-bold q-mr-sm"
+                textColor="primary"
+                class="text-no-wrap text-bold"
                 :disable="uiLocked || !isWordChanged"
                 @click="saveWord"
               />
@@ -517,6 +517,9 @@ const saveWord = async () => {
   const accent = computeRegisteredAccent();
   if (selectedId.value) {
     try {
+      store.dispatch("SHOW_LOADING_SCREEN", {
+        message: "変更を保存しています...",
+      });
       await store.dispatch("REWRITE_WORD", {
         wordUuid: selectedId.value,
         surface: surface.value,
@@ -530,12 +533,17 @@ const saveWord = async () => {
         message: "音声合成エンジンの再起動をお試しください。",
       });
       return;
+    } finally {
+      store.dispatch("HIDE_ALL_LOADING_SCREEN");
     }
     await loadingDictProcess();
     selectWord(selectedId.value);
     editWord();
   } else {
     try {
+      store.dispatch("SHOW_LOADING_SCREEN", {
+        message: "単語を辞書に追加しています...",
+      });
       await createUILockAction(
         store.dispatch("ADD_WORD", {
           surface: surface.value,
@@ -550,6 +558,8 @@ const saveWord = async () => {
         message: "音声合成エンジンの再起動をお試しください。",
       });
       return;
+    } finally {
+      store.dispatch("HIDE_ALL_LOADING_SCREEN");
     }
     await loadingDictProcess();
     toInitialState();
@@ -564,6 +574,9 @@ const deleteWord = async () => {
   });
   if (result === "OK") {
     try {
+      store.dispatch("SHOW_LOADING_SCREEN", {
+        message: "単語を辞書から削除しています...",
+      });
       await createUILockAction(
         store.dispatch("DELETE_WORD", {
           wordUuid: selectedId.value,
@@ -575,6 +588,8 @@ const deleteWord = async () => {
         message: "音声合成エンジンの再起動をお試しください。",
       });
       return;
+    } finally {
+      store.dispatch("HIDE_ALL_LOADING_SCREEN");
     }
     await loadingDictProcess();
     toInitialState();
