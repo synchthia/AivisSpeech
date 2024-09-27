@@ -10,6 +10,8 @@
             <QToolbarTitle class="text-display">
               音声合成モデルの管理
             </QToolbarTitle>
+            <QBtn outline icon="sym_r_search" label="音声合成モデルを見つける" textColor="display"
+              class="text-bold q-mr-sm" @click="openAivisHub" />
             <QBtn outline icon="sym_r_add" label="インストール" textColor="display" class="text-bold" @click="() => ''" />
           </QToolbar>
         </QHeader>
@@ -36,7 +38,8 @@
             <!-- タブは複数の話者がモデルに含まれる場合のみ表示する -->
             <QTabs v-if="activeAivmInfo && activeAivmInfo.manifest.speakers.length > 1" v-model="activeSpeakerIndex"
               dense activeColor="primary">
-              <QTab v-for="(speaker, index) of activeAivmInfo.manifest.speakers" :key="speaker.uuid" :name="index">
+              <QTab v-for="(speaker, index) of activeAivmInfo.manifest.speakers" :key="speaker.uuid" :name="index"
+                style="text-transform: none !important;">
                 話者{{ index + 1 }} ({{ speaker.name }})
               </QTab>
             </QTabs>
@@ -113,6 +116,7 @@
                     label="アンインストール"
                     textColor="warning"
                     class="text-no-wrap text-bold"
+                    @click="unInstallAivmModel"
                   />
                 </div>
               </QTabPanel>
@@ -190,7 +194,7 @@ const audioPlaying = ref<{ [key: string]: boolean }>({});
 // 音声再生用の Audio 要素
 const audioElements: { [key: string]: HTMLAudioElement } = {};
 
-// 音声再生を切り替える関数
+// 音声再生を切り替える
 const toggleAudio = (styleId: number, sampleIndex: number, audioDataUrl: string) => {
   const key = `${styleId}-${sampleIndex}`;
   if (!audioElements[key]) {
@@ -214,6 +218,41 @@ const toggleAudio = (styleId: number, sampleIndex: number, audioDataUrl: string)
     });
     audioElements[key].play();
     audioPlaying.value[key] = true;
+  }
+};
+
+// AivisHub の外部リンクを開く
+const openAivisHub = () => {
+  window.open('https://hub.aivis-project.com/', '_blank');
+};
+
+// 音声合成モデルをアンインストールする
+const unInstallAivmModel = async () => {
+  if (activeAivmUuid.value == null) {
+    throw new Error("aivm model is not selected");
+  }
+  const result = await store.dispatch("SHOW_CONFIRM_DIALOG", {
+    title: "アンインストールの確認",
+    message: `本当に音声合成モデル「${activeAivmInfo.value?.manifest.name}」をアンインストールしますか？<br>
+              アンインストールすると、この音声合成モデル内の話者/スタイルは再度インストールするまで使えなくなります。`,
+    actionName: "アンインストール",
+    html: true,
+  });
+  if (result === "OK") {
+    store.dispatch("SHOW_LOADING_SCREEN", {
+      message: "アンインストールしています...",
+    });
+    await getApiInstance().then((instance) =>
+      instance.invoke("uninstallAivmAivmModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! })
+    ).catch((err) => {
+      console.error(err);
+      store.dispatch("SHOW_ALERT_DIALOG", {
+        title: "アンインストールに失敗しました",
+        message: `音声合成モデル「${activeAivmInfo.value?.manifest.name}」のアンインストールに失敗しました。(${err})`,
+      });
+    });
+    store.dispatch("HIDE_ALL_LOADING_SCREEN");
+    getAivmInfos();
   }
 };
 
