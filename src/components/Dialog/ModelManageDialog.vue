@@ -10,7 +10,7 @@
             <QToolbarTitle class="text-display">
               音声合成モデルの管理
             </QToolbarTitle>
-            <QBtn outline icon="sym_r_search" label="音声合成モデルを見つける" textColor="display"
+            <QBtn outline icon="sym_r_search" label="音声合成モデルを探す" textColor="display"
               class="text-bold q-mr-sm" @click="openAivisHub" />
             <QBtn outline icon="sym_r_upload" label="インストール / 更新" textColor="display" class="text-bold" @click="isInstalling = true" />
           </QToolbar>
@@ -68,10 +68,10 @@
                   </div>
                 </div>
                 <div class="q-mt-sm row items-center">
-                  <div class="col-auto" style="font-size: 15px; font-weight: bold;">
+                  <div class="col-auto q-mr-sm" style="font-size: 15px; font-weight: bold;">
                     {{ activeAivmInfo.manifest.speakers.reduce((acc, speaker) => acc + speaker.styles.length, 0) }}スタイル
                   </div>
-                  <div class="col-auto q-ml-sm" style="font-size: 13.5px; font-weight: bold; color: #D2D3D4;">
+                  <div class="col-auto" style="font-size: 13.5px; font-weight: bold; color: #D2D3D4;">
                     {{ activeAivmInfo.manifest.speakers[activeSpeakerIndex].styles.map(style => style.name).join(' / ') }}
                   </div>
                 </div>
