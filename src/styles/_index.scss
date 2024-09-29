@@ -159,6 +159,7 @@ details {
   color: colors.$display;
   background: colors.$background;
   overflow-x: auto;
+  user-select: text;
   a {
     color: colors.$display-hyperlink;
   }
