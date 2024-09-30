@@ -11,7 +11,7 @@
               音声合成モデルの管理
             </QToolbarTitle>
             <QBtn outline icon="sym_r_search" label="音声合成モデルを探す" textColor="display"
-              class="text-bold q-mr-sm" @click="openAivisHub" />
+              class="text-bold q-mr-sm" @click="openExternalLink" />
             <QBtn outline icon="sym_r_upload" label="インストール / 更新" textColor="display" class="text-bold" @click="isInstalling = true" />
           </QToolbar>
         </QHeader>
@@ -215,7 +215,7 @@ const getAivmInfos = async () => {
       message: "読み込み中...",
     });
   }
-  const res = await getApiInstance().then((instance) => instance.invoke("getInstalledAivmInfosAivmModelsGet")({}));
+  const res = await getApiInstance().then((instance) => instance.invoke("getInstalledAivmInfosVoiceModelsGet")({}));
   aivmInfoDict.value = res;
   // 初回のみアクティブな AIVM 音声合成モデルの UUID を設定
   if (activeAivmUuid.value == null && Object.keys(aivmInfoDict.value).length > 0) {
@@ -285,8 +285,8 @@ const toggleAudio = (styleId: number, sampleIndex: number, audioDataUrl: string)
   }
 };
 
-// AivisHub の外部リンクを開く
-const openAivisHub = () => {
+// 外部リンクを開く
+const openExternalLink = () => {
   window.open('https://hub.aivis-project.com/', '_blank');
 };
 
@@ -314,9 +314,9 @@ const installModel = async () => {
   try {
     const apiInstance = await getApiInstance();
     if (installMethod.value === 'file' && selectedFile.value) {
-      await apiInstance.invoke("installAivmAivmModelsInstallPost")({ file: selectedFile.value });
+      await apiInstance.invoke("installAivmVoiceModelsInstallPost")({ file: selectedFile.value });
     } else if (installMethod.value === 'url') {
-      await apiInstance.invoke("installAivmAivmModelsInstallPost")({ url: installUrl.value });
+      await apiInstance.invoke("installAivmVoiceModelsInstallPost")({ url: installUrl.value });
     }
     // インストール成功時の処理
     store.dispatch("SHOW_ALERT_DIALOG", {
@@ -362,7 +362,7 @@ const unInstallAivmModel = async () => {
     });
     try {
       await getApiInstance().then((instance) =>
-        instance.invoke("uninstallAivmAivmModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! }))
+        instance.invoke("uninstallAivmVoiceModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! }))
     } catch (error) {
       console.error(error);
       if (error instanceof ResponseError) {
