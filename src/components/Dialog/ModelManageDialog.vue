@@ -61,10 +61,6 @@
                   </div>
                   <div class="col-auto q-ml-auto" style="font-size: 13.5px; color: #D2D3D4;">
                     <span>{{ activeAivmInfo.manifest.speakers.length }} Speakers / Version {{ activeAivmInfo.manifest.version }}</span>
-                    <!-- 音声合成モデルのバージョンと現在の話者のバージョンが一致しない場合のみ、Speaker Version を表示する -->
-                    <span v-if="activeAivmInfo.manifest.version !== activeAivmInfo.manifest.speakers[activeSpeakerIndex].version">
-                      (Speaker Version {{ activeAivmInfo.manifest.speakers[activeSpeakerIndex].version }})
-                    </span>
                   </div>
                 </div>
                 <div class="q-mt-sm row items-center">
