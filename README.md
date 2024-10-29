@@ -1,10 +1,77 @@
 
 # AivisSpeech
 
+[![Releases](https://img.shields.io/github/v/release/Aivis-Project/AivisSpeech?label=Release)](https://github.com/Aivis-Project/AivisSpeech/releases)
+[![License: LGPL-3.0](https://img.shields.io/badge/License-LGPL3-blue.svg)](LICENSE)
+[![CI: Build](https://github.com/Aivis-Project/AivisSpeech/actions/workflows/build.yml/badge.svg)](https://github.com/Aivis-Project/AivisSpeech/actions/workflows/build.yml)
+[![CI: Test](https://github.com/Aivis-Project/AivisSpeech/actions/workflows/test.yml/badge.svg)](https://github.com/Aivis-Project/AivisSpeech/actions/workflows/test.yml)
+
 💠 **AivisSpeech:** **AI** **V**oice **I**mitation **S**ystem - Text to **Speech** Software
 
-AivisSpeech は、[VOICEVOX](https://github.com/VOICEVOX/voicevox) のエディター UI をベースにした、日本語音声合成ソフトウェアです。  
+-----
+
+**AivisSpeech は、[VOICEVOX](https://github.com/VOICEVOX/voicevox) のエディター UI をベースにした、日本語音声合成ソフトウェアです。**  
 日本語音声合成エンジンの [AivisSpeech Engine](https://github.com/Aivis-Project/AivisSpeech-Engine) を組み込んでおり、簡単にとても抑揚豊かな音声を生成できます。
+
+#### [💠 AivisSpeech をダウンロード](https://aivis-project.com/speech/) ／ [💠 AivisSpeech Engine をダウンロード](https://github.com/Aivis-Project/AivisSpeech-Engine/releases)
+
+-----
+
+- [サポートされている音声合成モデル](#サポートされている音声合成モデル)
+  - [対応モデルアーキテクチャ](#対応モデルアーキテクチャ)
+  - [モデルファイルの配置場所](#モデルファイルの配置場所)
+- [開発方針](#開発方針)
+- [開発環境の構築](#開発環境の構築)
+- [開発](#開発)
+- [ライセンス](#ライセンス)
+
+## サポートされている音声合成モデル
+
+**AivisSpeech に組み込まれている AivisSpeech Engine は、[AIVMX (**Ai**vis **V**oice **M**odel for ONN**X**)](https://github.com/Aivis-Project/aivmlib#aivmx-file-format-specification) (拡張子 `.aivmx`) フォーマットの音声合成モデルファイルをサポートしています。**
+
+**AIVM** (**Ai**vis **V**oice **M**odel) / **AIVMX** (**Ai**vis **V**oice **M**odel for ONN**X**) は、**学習済みモデル・ハイパーパラメータ・スタイルベクトル・話者メタデータ（名前・概要・ライセンス・アイコン・ボイスサンプル など）を 1 つのファイルにギュッとまとめた、AI 音声合成モデル用オープンファイルフォーマット**です。  
+
+AIVM 仕様や AIVM / AIVMX ファイルについての詳細は、Aivis Project にて策定した **[AIVM 仕様](https://github.com/Aivis-Project/aivmlib#aivm-specification)** をご参照ください。
+
+> [!NOTE]  
+> **「AIVM」は、AIVM / AIVMX 両方のフォーマット仕様・メタデータ仕様の総称でもあります。**  
+> 具体的には、AIVM ファイルは「AIVM メタデータを追加した Safetensors 形式」、AIVMX ファイルは「AIVM メタデータを追加した ONNX 形式」のモデルファイルです。  
+> 「AIVM メタデータ」とは、AIVM 仕様に定義されている、学習済みモデルに紐づく各種メタデータのことをいいます。
+
+> [!IMPORTANT]  
+> **AivisSpeech Engine は AIVM 仕様のリファレンス実装でもありますが、敢えて AIVMX ファイルのみをサポートする設計としています。**  
+> これにより、PyTorch への依存を排除してインストールサイズを削減し、ONNXRuntime による高速な CPU 推論を実現しています。
+
+> [!TIP]  
+> **[AIVM Generator](https://aivm-generator.aivis-project.com/) を使うと、既存の音声合成モデルから AIVM / AIVMX ファイルを生成したり、既存の AIVM / AIVMX ファイルのメタデータを編集したりできます！**
+
+### 対応モデルアーキテクチャ
+
+以下のモデルアーキテクチャの AIVMX ファイルを利用できます。
+
+- `Style-Bert-VITS2`
+- `Style-Bert-VITS2 (JP-Extra)`
+
+> [!NOTE]
+> AIVM の仕様上は多言語対応の話者を定義できますが、AivisSpeech Engine は VOICEVOX ENGINE と同様に、日本語音声合成のみに対応しています。  
+> そのため、英語や中国語に対応した音声合成モデルであっても、日本語以外の音声合成はできません。
+
+### モデルファイルの配置場所
+
+AIVMX ファイルは、OS ごとに以下のフォルダに配置してください。  
+
+- **Windows:** `C:\Users\(ユーザー名)\AppData\Roaming\AivisSpeech-Engine\voice_models`
+- **macOS:** `~/Library/Application Support/AivisSpeech-Engine/voice_models`
+- **Linux:** `~/.local/share/AivisSpeech-Engine/voice_models`
+
+実際のフォルダパスは、AivisSpeech Engine の起動直後のログに `Voice models directory:` として表示されます。
+
+> [!TIP]  
+> **AivisSpeech 利用時は、AivisSpeech の UI 画面から簡単に音声合成モデルを追加できます！**  
+> エンドユーザーの方は、基本的にこちらの方法で音声合成モデルを追加することをおすすめします。
+
+> [!IMPORTANT]
+> 開発版 (PyInstaller でビルドされていない状態で実行している場合) の配置フォルダは、`AivisSpeech-Engine` 以下ではなく `AivisSpeech-Engine-Dev` 以下となります。
 
 ## 開発方針
 
@@ -76,7 +143,7 @@ npm run browser:serve
 # Electron 版 AivisSpeech をビルド
 npm run electron:build
 
-# ブラウザ版 AivisSpeech をビルド
+# ブラウザ版 AivisSpeech (WIP) をビルド
 npm run browser:build
 
 # コードフォーマットを自動修正
@@ -94,10 +161,11 @@ npm run openapi:generate
 npm run license:generate
 ```
 
------
+## ライセンス
 
-以下はオリジナルの VOICEVOX の README です。
-<br>
+ベースである VOICEVOX / VOICEVOX ENGINE のデュアルライセンスのうち、[LGPL-3.0](LICENSE) のみを単独で継承します。
+
+下記ならびに [docs/](docs/) 以下のドキュメントは、[VOICEVOX](https://github.com/VOICEVOX/voicevox) 本家のドキュメントを改変なしでそのまま引き継いでいます。これらのドキュメントの内容が AivisSpeech にも通用するかは保証されません。
 
 -----
 
