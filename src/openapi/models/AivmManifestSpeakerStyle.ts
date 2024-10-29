@@ -37,19 +37,19 @@ export interface AivmManifestSpeakerStyle {
      * @type {string}
      * @memberof AivmManifestSpeakerStyle
      */
-    icon: string;
-    /**
-     * 
-     * @type {Array<AivmManifestVoiceSample>}
-     * @memberof AivmManifestSpeakerStyle
-     */
-    voiceSamples: Array<AivmManifestVoiceSample>;
+    icon?: string | null;
     /**
      * 
      * @type {number}
      * @memberof AivmManifestSpeakerStyle
      */
     localId: number;
+    /**
+     * 
+     * @type {Array<AivmManifestVoiceSample>}
+     * @memberof AivmManifestSpeakerStyle
+     */
+    voiceSamples?: Array<AivmManifestVoiceSample>;
 }
 
 /**
@@ -58,8 +58,6 @@ export interface AivmManifestSpeakerStyle {
 export function instanceOfAivmManifestSpeakerStyle(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "icon" in value;
-    isInstance = isInstance && "voiceSamples" in value;
     isInstance = isInstance && "localId" in value;
 
     return isInstance;
@@ -76,9 +74,9 @@ export function AivmManifestSpeakerStyleFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'name': json['name'],
-        'icon': json['icon'],
-        'voiceSamples': ((json['voice_samples'] as Array<any>).map(AivmManifestVoiceSampleFromJSON)),
+        'icon': !exists(json, 'icon') ? undefined : json['icon'],
         'localId': json['local_id'],
+        'voiceSamples': !exists(json, 'voice_samples') ? undefined : ((json['voice_samples'] as Array<any>).map(AivmManifestVoiceSampleFromJSON)),
     };
 }
 
@@ -93,8 +91,8 @@ export function AivmManifestSpeakerStyleToJSON(value?: AivmManifestSpeakerStyle 
         
         'name': value.name,
         'icon': value.icon,
-        'voice_samples': ((value.voiceSamples as Array<any>).map(AivmManifestVoiceSampleToJSON)),
         'local_id': value.localId,
+        'voice_samples': value.voiceSamples === undefined ? undefined : ((value.voiceSamples as Array<any>).map(AivmManifestVoiceSampleToJSON)),
     };
 }
 

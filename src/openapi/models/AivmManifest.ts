@@ -25,6 +25,12 @@ import {
     ModelArchitectureFromJSONTyped,
     ModelArchitectureToJSON,
 } from './ModelArchitecture';
+import type { ModelFormat } from './ModelFormat';
+import {
+    ModelFormatFromJSON,
+    ModelFormatFromJSONTyped,
+    ModelFormatToJSON,
+} from './ModelFormat';
 
 /**
  * AIVM マニフェストのスキーマ 
@@ -37,7 +43,7 @@ export interface AivmManifest {
      * @type {string}
      * @memberof AivmManifest
      */
-    manifestVersion: string;
+    manifestVersion: AivmManifestManifestVersionEnum;
     /**
      * 
      * @type {string}
@@ -52,16 +58,40 @@ export interface AivmManifest {
     description?: string;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof AivmManifest
+     */
+    creators?: Array<string>;
+    /**
+     * 
      * @type {string}
      * @memberof AivmManifest
      */
-    termsOfUse?: string;
+    license?: string | null;
     /**
      * 
      * @type {ModelArchitecture}
      * @memberof AivmManifest
      */
     modelArchitecture: ModelArchitecture;
+    /**
+     * 
+     * @type {ModelFormat}
+     * @memberof AivmManifest
+     */
+    modelFormat: ModelFormat;
+    /**
+     * 
+     * @type {number}
+     * @memberof AivmManifest
+     */
+    trainingEpochs?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AivmManifest
+     */
+    trainingSteps?: number | null;
     /**
      * 
      * @type {string}
@@ -82,6 +112,16 @@ export interface AivmManifest {
     speakers: Array<AivmManifestSpeaker>;
 }
 
+
+/**
+ * @export
+ */
+export const AivmManifestManifestVersionEnum = {
+    _10: '1.0'
+} as const;
+export type AivmManifestManifestVersionEnum = typeof AivmManifestManifestVersionEnum[keyof typeof AivmManifestManifestVersionEnum];
+
+
 /**
  * Check if a given object implements the AivmManifest interface.
  */
@@ -90,6 +130,7 @@ export function instanceOfAivmManifest(value: object): boolean {
     isInstance = isInstance && "manifestVersion" in value;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "modelArchitecture" in value;
+    isInstance = isInstance && "modelFormat" in value;
     isInstance = isInstance && "uuid" in value;
     isInstance = isInstance && "version" in value;
     isInstance = isInstance && "speakers" in value;
@@ -110,8 +151,12 @@ export function AivmManifestFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'manifestVersion': json['manifest_version'],
         'name': json['name'],
         'description': !exists(json, 'description') ? undefined : json['description'],
-        'termsOfUse': !exists(json, 'terms_of_use') ? undefined : json['terms_of_use'],
+        'creators': !exists(json, 'creators') ? undefined : json['creators'],
+        'license': !exists(json, 'license') ? undefined : json['license'],
         'modelArchitecture': ModelArchitectureFromJSON(json['model_architecture']),
+        'modelFormat': ModelFormatFromJSON(json['model_format']),
+        'trainingEpochs': !exists(json, 'training_epochs') ? undefined : json['training_epochs'],
+        'trainingSteps': !exists(json, 'training_steps') ? undefined : json['training_steps'],
         'uuid': json['uuid'],
         'version': json['version'],
         'speakers': ((json['speakers'] as Array<any>).map(AivmManifestSpeakerFromJSON)),
@@ -130,8 +175,12 @@ export function AivmManifestToJSON(value?: AivmManifest | null): any {
         'manifest_version': value.manifestVersion,
         'name': value.name,
         'description': value.description,
-        'terms_of_use': value.termsOfUse,
+        'creators': value.creators,
+        'license': value.license,
         'model_architecture': ModelArchitectureToJSON(value.modelArchitecture),
+        'model_format': ModelFormatToJSON(value.modelFormat),
+        'training_epochs': value.trainingEpochs,
+        'training_steps': value.trainingSteps,
         'uuid': value.uuid,
         'version': value.version,
         'speakers': ((value.speakers as Array<any>).map(AivmManifestSpeakerToJSON)),

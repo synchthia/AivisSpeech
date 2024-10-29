@@ -18,6 +18,7 @@ models/HTTPValidationError.ts
 models/LibrarySpeaker.ts
 models/LicenseInfo.ts
 models/ModelArchitecture.ts
+models/ModelFormat.ts
 models/Mora.ts
 models/MorphableTargetInfo.ts
 models/Note.ts

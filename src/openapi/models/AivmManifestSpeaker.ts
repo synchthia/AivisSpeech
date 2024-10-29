@@ -34,6 +34,12 @@ export interface AivmManifestSpeaker {
     name: string;
     /**
      * 
+     * @type {string}
+     * @memberof AivmManifestSpeaker
+     */
+    icon: string;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof AivmManifestSpeaker
      */
@@ -52,12 +58,6 @@ export interface AivmManifestSpeaker {
     localId: number;
     /**
      * 
-     * @type {string}
-     * @memberof AivmManifestSpeaker
-     */
-    version: string;
-    /**
-     * 
      * @type {Array<AivmManifestSpeakerStyle>}
      * @memberof AivmManifestSpeaker
      */
@@ -70,10 +70,10 @@ export interface AivmManifestSpeaker {
 export function instanceOfAivmManifestSpeaker(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
+    isInstance = isInstance && "icon" in value;
     isInstance = isInstance && "supportedLanguages" in value;
     isInstance = isInstance && "uuid" in value;
     isInstance = isInstance && "localId" in value;
-    isInstance = isInstance && "version" in value;
     isInstance = isInstance && "styles" in value;
 
     return isInstance;
@@ -90,10 +90,10 @@ export function AivmManifestSpeakerFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'name': json['name'],
+        'icon': json['icon'],
         'supportedLanguages': json['supported_languages'],
         'uuid': json['uuid'],
         'localId': json['local_id'],
-        'version': json['version'],
         'styles': ((json['styles'] as Array<any>).map(AivmManifestSpeakerStyleFromJSON)),
     };
 }
@@ -108,10 +108,10 @@ export function AivmManifestSpeakerToJSON(value?: AivmManifestSpeaker | null): a
     return {
         
         'name': value.name,
+        'icon': value.icon,
         'supported_languages': value.supportedLanguages,
         'uuid': value.uuid,
         'local_id': value.localId,
-        'version': value.version,
         'styles': ((value.styles as Array<any>).map(AivmManifestSpeakerStyleToJSON)),
     };
 }

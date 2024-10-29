@@ -16,6 +16,7 @@ export * from './HTTPValidationError';
 export * from './LibrarySpeaker';
 export * from './LicenseInfo';
 export * from './ModelArchitecture';
+export * from './ModelFormat';
 export * from './Mora';
 export * from './MorphableTargetInfo';
 export * from './Note';
