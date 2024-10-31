@@ -27,7 +27,7 @@
                 :active="activeAivmUuid === aivmInfo.manifest.uuid" @click="activeAivmUuid = aivmInfo.manifest.uuid">
                 <QItemSection avatar>
                   <QAvatar rounded color="primary">
-                    <img :src="aivmInfo.manifest.speakers[0].styles[0].icon" />
+                    <img :src="aivmInfo.manifest.speakers[0].icon" />
                   </QAvatar>
                 </QItemSection>
                 <QItemSection>
@@ -68,7 +68,7 @@
                     {{ activeAivmInfo.manifest.speakers.reduce((acc, speaker) => acc + speaker.styles.length, 0) }}スタイル
                   </div>
                   <div class="col-auto" style="font-size: 13.5px; font-weight: bold; color: #D2D3D4;">
-                    {{ activeAivmInfo.manifest.speakers[activeSpeakerIndex].styles.map(style => style.name).join(' / ') }}
+                    {{ speaker.styles.map(style => style.name).join(' / ') }}
                   </div>
                 </div>
                 <div class="q-mt-md" style="font-size: 13.5px; color: #D2D3D4;">
@@ -79,15 +79,15 @@
                 </div>
                 <div class="q-mt-md" style="margin-bottom: 12px; font-size: 17px; font-weight: bold;">ボイスサンプル</div>
                 <div class="row" style="gap: 12px;">
-                  <div v-for="style in activeAivmInfo.manifest.speakers[activeSpeakerIndex].styles" :key="style.localId" class="col-12">
+                  <div v-for="style in speaker.styles" :key="style.localId" class="col-12">
                     <div class="style-card">
                       <div class="style-content">
                         <div class="style-icon-container">
-                          <img class="style-icon" :src="style.icon" />
+                          <img class="style-icon" :src="style.icon ? style.icon : speaker.icon" />
                           <div class="style-name">{{ style.name }}</div>
                         </div>
                         <div class="voice-samples-container">
-                          <div v-if="style.voiceSamples.length === 0" class="sample-transcript">
+                          <div v-if="style.voiceSamples!.length === 0" class="sample-transcript">
                             （このスタイルの音声サンプルは提供されていません）
                           </div>
                           <div v-for="(sample, voiceSampleIndex) in style.voiceSamples" :key="voiceSampleIndex" class="voice-sample">
