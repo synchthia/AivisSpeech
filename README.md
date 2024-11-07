@@ -11,7 +11,7 @@
 -----
 
 **AivisSpeech は、[VOICEVOX](https://github.com/VOICEVOX/voicevox) のエディター UI をベースにした、日本語音声合成ソフトウェアです。**  
-日本語音声合成エンジンの [AivisSpeech Engine](https://github.com/Aivis-Project/AivisSpeech-Engine) を組み込んでおり、簡単にとても抑揚豊かな音声を生成できます。
+日本語音声合成エンジンの [AivisSpeech Engine](https://github.com/Aivis-Project/AivisSpeech-Engine) を組み込んでおり、かんたんに感情豊かな音声を生成できます。
 
 #### [💠 AivisSpeech をダウンロード](https://aivis-project.com/speech/) ／ [💠 AivisSpeech Engine をダウンロード](https://github.com/Aivis-Project/AivisSpeech-Engine/releases)
 
@@ -66,11 +66,11 @@ AIVM 仕様や AIVM / AIVMX ファイルについての詳細は、Aivis Project
 
 AIVMX ファイルは、OS ごとに以下のフォルダに配置してください。  
 
-- **Windows:** `C:\Users\(ユーザー名)\AppData\Roaming\AivisSpeech-Engine\voice_models`
-- **macOS:** `~/Library/Application Support/AivisSpeech-Engine/voice_models`
-- **Linux:** `~/.local/share/AivisSpeech-Engine/voice_models`
+- **Windows:** `C:\Users\(ユーザー名)\AppData\Roaming\AivisSpeech-Engine\Models`
+- **macOS:** `~/Library/Application Support/AivisSpeech-Engine/Models`
+- **Linux:** `~/.local/share/AivisSpeech-Engine/Models`
 
-実際のフォルダパスは、AivisSpeech Engine の起動直後のログに `Voice models directory:` として表示されます。
+実際のフォルダパスは、AivisSpeech Engine の起動直後のログに `Models directory:` として表示されます。
 
 > [!TIP]  
 > **AivisSpeech 利用時は、AivisSpeech の UI 画面から簡単に音声合成モデルを追加できます！**  

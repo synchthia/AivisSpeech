@@ -223,7 +223,7 @@ const getAivmInfos = async () => {
       message: "読み込み中...",
     });
   }
-  const res = await getApiInstance().then((instance) => instance.invoke("getInstalledAivmInfosVoiceModelsGet")({}));
+  const res = await getApiInstance().then((instance) => instance.invoke("getInstalledAivmInfosAivmModelsGet")({}));
   aivmInfoDict.value = res;
   // 初回のみアクティブな AIVM 音声合成モデルの UUID を設定
   if (activeAivmUuid.value == null && Object.keys(aivmInfoDict.value).length > 0) {
@@ -322,9 +322,9 @@ const installModel = async () => {
   try {
     const apiInstance = await getApiInstance();
     if (installMethod.value === 'file' && selectedFile.value) {
-      await apiInstance.invoke("installAivmVoiceModelsInstallPost")({ file: selectedFile.value });
+      await apiInstance.invoke("installAivmAivmModelsInstallPost")({ file: selectedFile.value });
     } else if (installMethod.value === 'url') {
-      await apiInstance.invoke("installAivmVoiceModelsInstallPost")({ url: installUrl.value });
+      await apiInstance.invoke("installAivmAivmModelsInstallPost")({ url: installUrl.value });
     }
     // インストール成功時の処理
     store.dispatch("SHOW_ALERT_DIALOG", {
@@ -370,7 +370,7 @@ const unInstallAivmModel = async () => {
     });
     try {
       await getApiInstance().then((instance) =>
-        instance.invoke("uninstallAivmVoiceModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! }))
+        instance.invoke("uninstallAivmAivmModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! }))
     } catch (error) {
       console.error(error);
       if (error instanceof ResponseError) {
