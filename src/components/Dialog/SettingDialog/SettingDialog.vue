@@ -43,7 +43,7 @@
               <ButtonToggleCell
                 v-model="engineUseGpu"
                 title="エンジンモード"
-                description="GPU モードの利用には NVIDIA GPU が必要です。"
+                description="GPU モードの利用には dGPU 搭載の PC が必要です。"
                 :options="engineUseGpuOptions"
                 :disable="!gpuSwitchEnabled(selectedEngineId)"
               >
