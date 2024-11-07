@@ -71,12 +71,13 @@
                     {{ speaker.styles.map(style => style.name).join(' / ') }}
                   </div>
                 </div>
-                <div class="q-mt-sm" style="font-size: 12.5px; color: #D2D3D4;">
-                  <QIcon name="sym_r_manufacturing" /> Model Architecture : {{ activeAivmInfo.manifest.modelArchitecture }}
-                  <QIcon class="q-ml-sm" name="sym_r_description" /> Model Format : {{ activeAivmInfo.manifest.modelFormat }}
+                <div class="row items-center" style="margin-top: 12px; font-size: 12.5px; color: #D2D3D4;">
+                  <QIcon style="margin-right: 4px;" name="sym_r_manufacturing" /> Model Architecture: {{ activeAivmInfo.manifest.modelArchitecture }}
+                  <QIcon style="margin-right: 4px; margin-left: 12px;" name="sym_r_description" /> Model Format: {{ activeAivmInfo.manifest.modelFormat }}
                 </div>
-                <div style="margin-top: 4px; font-size: 12.5px; color: #D2D3D4;">
-                  <QIcon name="sym_r_person" /> Creators : {{ activeAivmInfo.manifest.creators!.length > 0 ? activeAivmInfo.manifest.creators!.join(' / ') : '不明' }}
+                <div class="row items-center" style="margin-top: 4px; font-size: 12.5px; color: #D2D3D4;">
+                  <QIcon style="margin-right: 4px;" name="sym_r_person" />
+                  Creators: {{ activeAivmInfo.manifest.creators!.length > 0 ? activeAivmInfo.manifest.creators!.join(' / ') : '不明' }}
                 </div>
                 <div class="q-mt-md" style="font-size: 13.5px; color: #D2D3D4;">
                   {{ activeAivmInfo.manifest.description === '' ?
