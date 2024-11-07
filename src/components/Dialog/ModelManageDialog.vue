@@ -63,13 +63,20 @@
                     <span>{{ activeAivmInfo.manifest.speakers.length }} Speakers / Version {{ activeAivmInfo.manifest.version }}</span>
                   </div>
                 </div>
-                <div class="q-mt-sm row items-center">
+                <div class="row items-center" style="margin-top: 12px;">
                   <div class="col-auto q-mr-sm" style="font-size: 15px; font-weight: bold;">
                     {{ activeAivmInfo.manifest.speakers.reduce((acc, speaker) => acc + speaker.styles.length, 0) }}スタイル
                   </div>
                   <div class="col-auto" style="font-size: 13.5px; font-weight: bold; color: #D2D3D4;">
                     {{ speaker.styles.map(style => style.name).join(' / ') }}
                   </div>
+                </div>
+                <div class="q-mt-sm" style="font-size: 12.5px; color: #D2D3D4;">
+                  <QIcon name="sym_r_manufacturing" /> Model Architecture : {{ activeAivmInfo.manifest.modelArchitecture }}
+                  <QIcon class="q-ml-sm" name="sym_r_description" /> Model Format : {{ activeAivmInfo.manifest.modelFormat }}
+                </div>
+                <div style="margin-top: 4px; font-size: 12.5px; color: #D2D3D4;">
+                  <QIcon name="sym_r_person" /> Creators : {{ activeAivmInfo.manifest.creators!.length > 0 ? activeAivmInfo.manifest.creators!.join(' / ') : '不明' }}
                 </div>
                 <div class="q-mt-md" style="font-size: 13.5px; color: #D2D3D4;">
                   {{ activeAivmInfo.manifest.description === '' ?
@@ -88,7 +95,7 @@
                         </div>
                         <div class="voice-samples-container">
                           <div v-if="style.voiceSamples!.length === 0" class="sample-transcript">
-                            （このスタイルの音声サンプルは提供されていません）
+                            （このスタイルのボイスサンプルは提供されていません）
                           </div>
                           <div v-for="(sample, voiceSampleIndex) in style.voiceSamples" :key="voiceSampleIndex" class="voice-sample">
                             <div
@@ -135,10 +142,10 @@
             </div>
             <div v-if="installMethod === 'file'">
               <div class="q-mt-lg">
-                PC 内の AIVM ファイル (.aivm) を選択して、音声合成モデルをインストール / 更新します。
+                PC 内の AIVMX ファイル (.aivmx) を選択して、音声合成モデルをインストール / 更新します。
               </div>
               <div class="q-mt-md">
-                <QFile v-model="selectedFile" label="AIVM ファイル (.aivm) を選択" accept=".aivm" dense
+                <QFile v-model="selectedFile" label="AIVMX ファイル (.aivmx) を選択" accept=".aivmx" dense
                   @click.stop="selectedFile = null" @update:modelValue="(file: File) => selectedFile = file">
                   <template #prepend>
                     <QIcon name="sym_r_attach_file" />
@@ -151,10 +158,10 @@
             </div>
             <div v-else>
               <div class="q-mt-lg">
-                AIVM ファイルのダウンロード URL を指定して、音声合成モデルをインストール / 更新します。
+                AIVMX ファイルのダウンロード URL を指定して、音声合成モデルをインストール / 更新します。
               </div>
               <div class="q-mt-sm q-mt-md">
-                <QInput v-model="installUrl" label="AIVM ファイルのダウンロード URL を指定" dense :rules="[
+                <QInput v-model="installUrl" label="AIVMX ファイルのダウンロード URL を指定" dense :rules="[
                   (url) => /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/i.test(url) || 'URL が不正です。',
                 ]" />
               </div>
