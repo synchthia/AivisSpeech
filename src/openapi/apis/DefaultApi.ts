@@ -469,7 +469,7 @@ export interface DefaultApiInterface {
     /**
      * 指定された音声合成モデルの情報を取得します。
      * @summary Get Aivm Info
-     * @param {string} aivmUuid AIVM ファイルの UUID
+     * @param {string} aivmUuid AIVMX ファイルの UUID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
@@ -906,7 +906,7 @@ export interface DefaultApiInterface {
     /**
      * 指定された音声合成モデルをアンインストールします。
      * @summary Uninstall Aivm
-     * @param {string} aivmUuid AIVM ファイルの UUID
+     * @param {string} aivmUuid AIVMX ファイルの UUID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApiInterface
