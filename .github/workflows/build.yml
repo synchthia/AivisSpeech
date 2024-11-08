@@ -76,7 +76,7 @@ jobs:
             os: macos-13
           # macOS arm64 (Apple Silicon Mac)
           - artifact_name: macos-arm64-prepackage
-            artifact_path: dist_electron/mac
+            artifact_path: dist_electron/mac-arm64
             aivisspeech_engine_asset_name: macos-arm64
             package_name: AivisSpeech
             compressed_artifact_name: aivisspeech-macos-arm64
