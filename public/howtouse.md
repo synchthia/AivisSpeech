@@ -246,7 +246,7 @@ Anneli​（上機嫌）,さようなら
 
 - **Windows**: GPU モードの利用には dGPU 搭載の PC が必要です。
   - デフォルトでは DirectML を利用します。
-  - 別途 [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64) をインストールすると、NVIDIA GPU 搭載 PC にてより高速に音声を生成できます。
+  - 別途 [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64) と [cuDNN](https://developer.nvidia.com/cudnn-downloads?target_os=Windows&target_arch=x86_64) をインストールすると、NVIDIA GPU 搭載 PC にてより高速に音声を生成できます。
   - GPU モードは CPU 内蔵 GPU でも利用できますが、CPU モードよりも著しく遅くなるため推奨しません。
 - **Mac**: GPU モードはサポートされていませんが、CPU モードでも十分高速に動作します。
 - **Linux**: GPU モードの利用には CUDA がインストールされた、NVIDIA GPU 搭載の PC が必要です。
