@@ -88,10 +88,6 @@ jobs:
   e2e-test:
     runs-on: ${{ matrix.os }}
     needs: [config]
-    # secrets.GITHUB_TOKEN の権限を拡張
-    permissions:
-      contents: read
-      packages: read
     strategy:
       fail-fast: false
       matrix:
@@ -129,7 +125,7 @@ jobs:
           version: ${{ env.AIVISSPEECH_ENGINE_VERSION }}
           dest: ${{ github.workspace }}/AivisSpeech-Engine
           target: ${{ matrix.aivisspeech_engine_asset_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ENGINE_DOWNLOADER_TOKEN }}
 
       - name: Setup
         run: |
