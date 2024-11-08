@@ -44,6 +44,7 @@ runs:
         curl -s https://api.github.com/repos/${{ inputs.repo }}/releases \
             -H 'authorization: Bearer ${{ github.token }}' \
             -H 'content-type: application/json' > $TEMPDIR/releases.json
+        cat $TEMPDIR/releases.json
 
         if [ "${{ inputs.version }}" = "latest" ]; then
           cat $TEMPDIR/releases.json | jq -er '[.[] | select(.prerelease == false)][0]' > $TEMPDIR/target.json
