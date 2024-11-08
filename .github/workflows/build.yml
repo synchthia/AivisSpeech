@@ -44,6 +44,10 @@ jobs:
       cache-version: v2
       # GNUコマンド
       sed: ${{ startsWith(matrix.os, 'macos-') && 'gsed' || 'sed' }}
+    # github.token の権限を拡張
+    permissions:
+      contents: read
+      packages: read
     strategy:
       fail-fast: false
       matrix:

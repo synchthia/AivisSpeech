@@ -88,6 +88,10 @@ jobs:
   e2e-test:
     runs-on: ${{ matrix.os }}
     needs: [config]
+    # github.token の権限を拡張
+    permissions:
+      contents: read
+      packages: read
     strategy:
       fail-fast: false
       matrix:
