@@ -9,16 +9,16 @@ dotenv.config({ path: dotenvPath });
 const AIVISSPEECH_ENGINE_DIR =
   process.env.AIVISSPEECH_ENGINE_DIR ?? "../AivisSpeech-Engine/dist/run/";
 
-// ${productName} Web Setup ${version}.${ext}
+// ${productName}-Windows-x64-${version}.${ext}
 const NSIS_WEB_ARTIFACT_NAME = process.env.NSIS_WEB_ARTIFACT_NAME;
 
-// ${productName}-${version}.${ext}
+// ${productName}.${ext}
 const LINUX_ARTIFACT_NAME = process.env.LINUX_ARTIFACT_NAME;
 
 // ${packageName}
 const LINUX_EXECUTABLE_NAME = process.env.LINUX_EXECUTABLE_NAME;
 
-// ${productName}-${version}.${ext}
+// ${productName}-macOS-{x64|arm64}-${version}.${ext}
 const MACOS_ARTIFACT_NAME = process.env.MACOS_ARTIFACT_NAME;
 
 // コード署名証明書
