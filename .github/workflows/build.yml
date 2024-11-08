@@ -73,7 +73,7 @@ jobs:
             app_asar_dir: prepackage/AivisSpeech.app/Contents/Resources
             installer_artifact_name: macos-x64-dmg
             macos_artifact_name: "AivisSpeech.${version}.${ext}"
-            os: macos-12
+            os: macos-13
           # macOS arm64 (Apple Silicon Mac)
           - artifact_name: macos-arm64-prepackage
             artifact_path: dist_electron/mac
