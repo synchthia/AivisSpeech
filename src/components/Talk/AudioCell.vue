@@ -710,6 +710,7 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
     opacity: 0.6;
     text-align: right;
     color: colors.$display;
+    font-family: "Open Sans", sans-serif;
     &.active {
       opacity: 1;
       font-weight: bold;

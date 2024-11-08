@@ -11,6 +11,18 @@
   src: url('../fonts/LINESeedJP-Bold.woff2') format('woff2');
 }
 @font-face {
+  font-family: 'Open Sans';
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/OpenSans-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/OpenSans-Bold.woff2') format('woff2');
+}
+@font-face {
   font-family: 'Twemoji';
   font-weight: normal;
   font-display: swap;
