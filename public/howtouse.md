@@ -245,8 +245,7 @@ Anneli​（上機嫌）,さようなら
 #### エンジンモード
 
 - **Windows**: GPU モードの利用には dGPU 搭載の PC が必要です。
-  - デフォルトでは [DirectML](https://github.com/microsoft/DirectML) を利用します。
-  - 別途 [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64) と [cuDNN](https://developer.nvidia.com/cudnn-downloads?target_os=Windows&target_arch=x86_64) をインストールすると、NVIDIA GPU 搭載 PC にてより高速に音声を生成できます。
+  - 推論処理には [DirectML](https://github.com/microsoft/DirectML) を利用しています。
   - **CPU 内蔵の GPU (iGPU) のみの PC でも GPU モードは使えますが、ほとんどの場合 CPU モードよりかなり遅くなってしまうため、おすすめできません。**
 - **Mac**: GPU モードはサポートされていませんが、CPU モードでも十分高速に動作します。
 - **Linux**: GPU モードの利用には CUDA がインストールされた、NVIDIA GPU 搭載の PC が必要です。
