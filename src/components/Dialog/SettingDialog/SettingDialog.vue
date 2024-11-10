@@ -47,12 +47,18 @@
                 :options="engineUseGpuOptions"
                 :disable="!gpuSwitchEnabled(selectedEngineId)"
               >
-                <QTooltip
+                <!-- <QTooltip
                   :delay="150"
                   :target="!gpuSwitchEnabled(selectedEngineId)"
                 >
                   {{ engineInfos[selectedEngineId].name }}
                   は CPU 版のため、GPU モードは利用できません。
+                </QTooltip> -->
+                <QTooltip
+                  :delay="150"
+                  :target="!gpuSwitchEnabled(selectedEngineId)"
+                >
+                  対応する GPU が搭載されていないため、GPU モードは利用できません。
                 </QTooltip>
               </ButtonToggleCell>
               <QCardActions class="q-px-md bg-surface-darken">
