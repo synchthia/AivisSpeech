@@ -64,7 +64,7 @@ AIVM 仕様や AIVM / AIVMX ファイルについての詳細は、Aivis Project
 
 > [!IMPORTANT]  
 > **AivisSpeech Engine は AIVM 仕様のリファレンス実装でもありますが、敢えて AIVMX ファイルのみをサポートする設計としています。**  
-> これにより、PyTorch への依存を排除してインストールサイズを削減し、ONNXRuntime による高速な CPU 推論を実現しています。
+> これにより、PyTorch への依存を排除してインストールサイズを削減し、ONNX Runtime による高速な CPU 推論を実現しています。
 
 > [!TIP]  
 > **[AIVM Generator](https://aivm-generator.aivis-project.com/) を使うと、既存の音声合成モデルから AIVM / AIVMX ファイルを生成したり、既存の AIVM / AIVMX ファイルのメタデータを編集したりできます！**

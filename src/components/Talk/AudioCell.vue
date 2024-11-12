@@ -68,7 +68,7 @@
       class="full-width"
       color="primary"
       :disable="uiLocked"
-      :error="audioTextBuffer.length >= 80"
+      :error="audioTextBuffer.length >= 250"
       :modelValue="audioTextBuffer"
       :aria-label="`${textLineNumberIndex}行目`"
       @update:modelValue="setAudioTextBuffer"
@@ -81,8 +81,8 @@
       @keydown.prevent.enter.exact="pushAudioTextIfNeeded"
     >
       <template #error>
-        文章が長いと正常に動作しない可能性があります。
-        句読点の位置で文章を分割してください。
+        文章が長いとうまく音声合成できないことがあります。
+        句読点の位置で文章を分割することをおすすめします。
       </template>
       <template v-if="enableDeleteButton" #after>
         <QBtn
