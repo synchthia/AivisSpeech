@@ -65,7 +65,7 @@
       outlined
       dense
       hideBottomSpace
-      class="full-width"
+      class="audio-cell-text-field full-width"
       color="primary"
       :disable="uiLocked"
       :error="audioTextBuffer.length >= 250"
@@ -81,8 +81,7 @@
       @keydown.prevent.enter.exact="pushAudioTextIfNeeded"
     >
       <template #error>
-        文章が長いとうまく音声合成できないことがあります。
-        句読点の位置で文章を分割することをおすすめします。
+        長い文章はうまく音声合成できないことがあります。句読点の位置で文章を分割することをおすすめします。
       </template>
       <template v-if="enableDeleteButton" #after>
         <QBtn
@@ -746,6 +745,16 @@ const isMultipleEngine = computed(() => store.state.engineIds.length > 1);
   :deep(input) {
     caret-color: colors.$display;
     color: colors.$display;
+  }
+}
+
+.audio-cell-text-field.q-field--error {
+  // デフォルトの警告色だとエラーだと勘違いされそうなので、みかん色に変更
+  :deep(.text-negative) {
+    color: #f2be74 !important;
+  }
+  :deep(.q-field__bottom) {
+    color: #f2be74 !important;
   }
 }
 
