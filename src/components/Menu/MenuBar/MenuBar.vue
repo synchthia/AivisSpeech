@@ -287,6 +287,16 @@ const engineSubMenuData = computed<MenuItemData[]>(() => {
       disablreloadingLocked: true,
     });
   }
+  subMenu.push( {
+    type: "button",
+    label: "話者リストを更新",
+    async onClick() {
+      await store.dispatch("LOAD_CHARACTER", { engineId: store.getters.DEFAULT_ENGINE_ID });
+      await store.dispatch("LOAD_DEFAULT_STYLE_IDS");
+      await store.dispatch("CREATE_ALL_DEFAULT_PRESET");
+    },
+    disableWhenUiLocked: false,
+  });
 
   return subMenu;
 });
