@@ -8,7 +8,7 @@
             <!-- close button -->
             <QBtn round flat icon="sym_r_close" color="display" @click="toDialogClosedState" />
             <QToolbarTitle class="text-display">
-              音声合成モデルの管理
+              音声合成モデルの管理 <span class="q-ml-sm text-caption">合計 {{ aivmCount }} モデル</span>
             </QToolbarTitle>
             <QBtn outline icon="sym_r_search" label="音声合成モデルを探す" textColor="display"
               class="text-bold q-mr-sm" @click="openExternalLink" />
@@ -216,6 +216,9 @@ const getApiInstance = async () => {
 // インストール済み AIVM 音声合成モデルの情報
 const aivmInfoDict = ref<{ [key: string]: AivmInfo }>({});
 
+// インストール済み AIVM 音声合成モデルの個数
+const aivmCount = computed(() => Object.keys(aivmInfoDict.value).length);
+
 // インストール済み AIVM 音声合成モデルの情報を取得する関数
 const getAivmInfos = async () => {
   // 初回のみ読み込み中のローディングを表示する
@@ -328,6 +331,11 @@ const installModel = async () => {
       await apiInstance.invoke("installAivmAivmModelsInstallPost")({ url: installUrl.value });
     }
     // インストール成功時の処理
+    // 話者・スタイル一覧を再読み込み
+    await store.dispatch("LOAD_CHARACTER", { engineId: store.getters.DEFAULT_ENGINE_ID });
+    await store.dispatch("LOAD_DEFAULT_STYLE_IDS");
+    // プリセットを再作成
+    await store.dispatch("CREATE_ALL_DEFAULT_PRESET");
     store.dispatch("SHOW_ALERT_DIALOG", {
       title: "インストール完了",
       message: "音声合成モデルが正常にインストールされました。",
@@ -372,6 +380,12 @@ const unInstallAivmModel = async () => {
     try {
       await getApiInstance().then((instance) =>
         instance.invoke("uninstallAivmAivmModelsAivmUuidUninstallDelete")({ aivmUuid: activeAivmUuid.value! }))
+      // アンインストール成功時の処理
+      // 話者・スタイル一覧を再読み込み
+      await store.dispatch("LOAD_CHARACTER", { engineId: store.getters.DEFAULT_ENGINE_ID });
+      await store.dispatch("LOAD_DEFAULT_STYLE_IDS");
+      // プリセットを再作成
+      await store.dispatch("CREATE_ALL_DEFAULT_PRESET");
     } catch (error) {
       console.error(error);
       if (error instanceof ResponseError) {
