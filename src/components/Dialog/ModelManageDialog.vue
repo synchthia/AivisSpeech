@@ -77,7 +77,8 @@
                 </div>
                 <div class="row items-center" style="margin-top: 4px; font-size: 12.5px; color: #D2D3D4;">
                   <QIcon style="margin-right: 4px;" name="sym_r_person" />
-                  Creators: {{ activeAivmInfo.manifest.creators!.length > 0 ? activeAivmInfo.manifest.creators!.join(' / ') : '不明' }}
+                  {{ activeAivmInfo.manifest.creators!.length >= 2 ? 'Creators: ' : 'Creator: ' }}
+                  {{ activeAivmInfo.manifest.creators!.length >= 1 ? activeAivmInfo.manifest.creators!.join(' / ') : '不明' }}
                 </div>
                 <div class="q-mt-md" style="font-size: 13.5px; color: #D2D3D4;">
                   {{ activeAivmInfo.manifest.description === '' ?
