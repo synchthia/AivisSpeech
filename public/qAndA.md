@@ -168,8 +168,8 @@ Intel 第 12 世代以降の CPU では、上記の Windows 11 の設定画面�
 
 ### Q. 問い合わせ先を教えてください
 
-ご感想・ご要望は、ぜひ X（旧 Twitter）にてハッシュタグ `#AivisSpeech` を付けてポストしてください。開発の励みになります。
+ご感想・ご要望は、ぜひ X（旧 Twitter）にてハッシュタグ `#AivisSpeech` を付けてツイートください。開発の励みになります。
 
-うまく動かない場合や不具合を見つけられた方は、X にて不具合をハッシュタグ `#AivisSpeech` を付けてポストしていただくか、Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) までご報告ください。
+うまく動かない場合や不具合を見つけられた方は、X にて不具合をハッシュタグ `#AivisSpeech` を付けてツイートいただくか、Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) までご報告ください。
 
 その他、 Q&A に掲載されていないご質問があれば Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) にお問い合わせください。
