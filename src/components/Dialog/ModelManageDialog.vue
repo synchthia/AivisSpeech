@@ -355,10 +355,18 @@ const installModel = async () => {
           (HTTP Error ${error.response.status} / ${await error.response.text()})`,
       });
     } else {
-      store.dispatch("SHOW_ALERT_DIALOG", {
-        title: "インストール失敗",
-        message: `音声合成モデルのインストールに失敗しました。(${error})`,
-      });
+      // assert characterInfo !== undefined エラーを無視
+      if (error.message === 'assert characterInfo !== undefined') {
+        // インストール成功時の処理を実行
+        await store.dispatch("LOAD_CHARACTER", { engineId: store.getters.DEFAULT_ENGINE_ID });
+        await store.dispatch("LOAD_DEFAULT_STYLE_IDS");
+        await store.dispatch("CREATE_ALL_DEFAULT_PRESET");
+      } else {
+        store.dispatch("SHOW_ALERT_DIALOG", {
+          title: "インストール失敗",
+          message: `音声合成モデルのインストールに失敗しました。(${error})`,
+        });
+      }
     }
   } finally {
     store.dispatch("HIDE_ALL_LOADING_SCREEN");
@@ -400,10 +408,18 @@ const unInstallAivmModel = async () => {
             (HTTP Error ${error.response.status} / ${await error.response.text()})`,
         });
       } else {
-        store.dispatch("SHOW_ALERT_DIALOG", {
-          title: "アンインストール失敗",
-          message: `音声合成モデル「${activeAivmInfo.value?.manifest.name}」のアンインストールに失敗しました。(${error})`,
-        });
+        // assert characterInfo !== undefined エラーを無視
+        if (error.message === 'assert characterInfo !== undefined') {
+          // アンインストール成功時の処理を実行
+          await store.dispatch("LOAD_CHARACTER", { engineId: store.getters.DEFAULT_ENGINE_ID });
+          await store.dispatch("LOAD_DEFAULT_STYLE_IDS");
+          await store.dispatch("CREATE_ALL_DEFAULT_PRESET");
+        } else {
+          store.dispatch("SHOW_ALERT_DIALOG", {
+            title: "アンインストール失敗",
+            message: `音声合成モデル「${activeAivmInfo.value?.manifest.name}」のアンインストールに失敗しました。(${error})`,
+          });
+        }
       }
     } finally {
       store.dispatch("HIDE_ALL_LOADING_SCREEN");
