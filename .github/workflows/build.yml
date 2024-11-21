@@ -156,12 +156,6 @@ jobs:
         run: |
           $sed -i 's|AivisSpeech-Engine/run.exe|../Resources/AivisSpeech-Engine/run|g' .env.production
 
-      - name: Replace .env.production infomations
-        run: |
-          # GTM ID
-          gtm_id="GTM-PNHDPBZ4"
-          $sed -i 's/VITE_GTM_CONTAINER_ID=.*/VITE_GTM_CONTAINER_ID='"$gtm_id"'/' .env.production
-
       - name: Generate public/licenses.json
         run: npm run license:generate
 
