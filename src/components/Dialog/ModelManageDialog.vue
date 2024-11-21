@@ -80,7 +80,7 @@
                   {{ activeAivmInfo.manifest.creators!.length >= 2 ? 'Creators: ' : 'Creator: ' }}
                   {{ activeAivmInfo.manifest.creators!.length >= 1 ? activeAivmInfo.manifest.creators!.join(' / ') : '不明' }}
                 </div>
-                <div class="q-mt-md" style="font-size: 13.5px; color: #D2D3D4;">
+                <div class="q-mt-md" style="font-size: 13.5px; color: #D2D3D4; white-space: pre-wrap; word-wrap: break-word;">
                   {{ activeAivmInfo.manifest.description === '' ?
                     '（この音声合成モデルの説明は提供されていません）' :
                     activeAivmInfo.manifest.description
