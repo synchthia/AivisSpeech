@@ -16,7 +16,7 @@
           </QToolbar>
         </QHeader>
         <QPage class="row no-wrap">
-          <div style="position: relative; width: 260px; flex-shrink: 0; border-right: solid 1px var(--color-surface);">
+          <div class="col-4" style="position: relative; min-width: 260px; flex-shrink: 0; border-right: solid 1px var(--color-surface);">
             <div
               v-if="isInstalling"
               class="model-list-disable-overlay"
