@@ -24,7 +24,8 @@
 
       <template v-if="isEngineWaitingLong">
         <QSeparator spaced />
-        音声合成エンジン起動に時間がかかっています。<br />
+        音声合成エンジンの起動に時間がかかっています...<br />
+        （初回のみ、セットアップのため起動に数分ほどかかります）<br />
         <QBtn
           v-if="isMultipleEngine"
           class="q-mt-sm"
@@ -34,7 +35,7 @@
         >
           マルチエンジンをオフにして再読み込みする</QBtn
         >
-        <QBtn v-else class="q-mt-sm" outline @click="openQa">Q&Aを見る</QBtn>
+        <QBtn v-else class="q-mt-sm" outline @click="openQa">Q&A を見る</QBtn>
       </template>
     </div>
   </div>
@@ -101,7 +102,7 @@ const reloadAppWithMultiEngineOffMode = () => {
 };
 
 const openQa = () => {
-  window.open("https://github.com/Aivis-Project/AivisSpeech", "_blank");
+  window.open("https://github.com/Aivis-Project/AivisSpeech/blob/master/public/qAndA.md", "_blank");
 };
 </script>
 

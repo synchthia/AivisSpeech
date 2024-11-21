@@ -6,7 +6,9 @@
 
 ## 不具合・バグ報告
 
-以下の内容を添えてハッシュタグ `#AivisSpeech` を付けてツイートしていただくか、Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) までご報告ください。
+以下の内容を添えてハッシュタグ `#AivisSpeech` を付けてツイートしていただくか、Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) までご報告ください。  
+
+[Aivis Project お問い合わせフォーム](https://docs.google.com/forms/d/e/1FAIpQLSd1gi8lMW1mpdrkCHbM090pWmWhKgz4tR1Obc9G9hOuWpZPsA/viewform) からご報告いただくことも可能です。
 
 - 不具合の内容
 - 再現手順（動画や写真があれば添付してください）

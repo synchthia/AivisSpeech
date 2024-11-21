@@ -393,8 +393,9 @@ VOICEVOX API 準拠音声合成エンジンを AivisSpeech 内で利用できる
 
 ## ご感想・ご要望・バグ報告など
 
-ご感想・ご要望は、ぜひ Twitter にてハッシュタグ `#AivisSpeech` を付けてツイートしてください。開発の励みになります。
+ご感想・ご要望は、ぜひ Twitter (X) にてハッシュタグ `#AivisSpeech` を付けてツイートしてください。開発の励みになります。
 
-うまく動かない場合や不具合を見つけられた方は、Twitter にて不具合をハッシュタグ `#AivisSpeech` を付けてツイートしていただくか、Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) までご報告ください。
+うまく動かない場合や不具合を見つけられた方は、Twitter (X) にて不具合をハッシュタグ `#AivisSpeech` を付けてツイートしていただくか、Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) までご報告ください。  
+[Aivis Project お問い合わせフォーム](https://docs.google.com/forms/d/e/1FAIpQLSd1gi8lMW1mpdrkCHbM090pWmWhKgz4tR1Obc9G9hOuWpZPsA/viewform) からご報告いただくことも可能です。
 
-その他、 Q&A に掲載されていないご質問があれば Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) にお問い合わせください。
+その他、 Q&A に掲載されていないご質問があれば Aivis Project 公式 ([@aivis_project](https://twitter.com/aivis_project)) または上記のお問い合わせフォームからご連絡ください。
