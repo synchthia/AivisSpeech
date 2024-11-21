@@ -42,7 +42,7 @@
           <div v-if="activeAivmInfo && !isInstalling" class="model-detail" style="width: 100%;">
             <!-- タブは複数の話者がモデルに含まれる場合のみ表示する -->
             <QTabs v-if="activeAivmInfo && activeAivmInfo.manifest.speakers.length > 1" v-model="activeSpeakerIndex"
-              dense activeColor="primary">
+              dense activeColor="primary" @update:modelValue="stopAllAudio">
               <QTab v-for="(speaker, index) of activeAivmInfo.manifest.speakers" :key="speaker.uuid" :name="index"
                 style="text-transform: none !important;">
                 話者{{ index + 1 }} ({{ speaker.name }})
@@ -270,6 +270,17 @@ const audioPlaying = ref<{ [key: string]: boolean }>({});
 // 音声再生用の Audio 要素
 const audioElements: { [key: string]: HTMLAudioElement } = {};
 
+// すべての音声を停止する
+const stopAllAudio = () => {
+  Object.keys(audioPlaying.value).forEach(key => {
+    if (audioPlaying.value[key]) {
+      audioElements[key].pause();
+      audioElements[key].currentTime = 0;
+      audioPlaying.value[key] = false;
+    }
+  });
+};
+
 // 音声再生を切り替える
 const toggleAudio = (styleId: number, sampleIndex: number, audioDataUrl: string) => {
   const key = `${styleId}-${sampleIndex}`;
@@ -285,13 +296,7 @@ const toggleAudio = (styleId: number, sampleIndex: number, audioDataUrl: string)
     audioElements[key].currentTime = 0;
     audioPlaying.value[key] = false;
   } else {
-    Object.keys(audioPlaying.value).forEach(k => {
-      if (audioPlaying.value[k]) {
-        audioElements[k].pause();
-        audioElements[k].currentTime = 0;
-        audioPlaying.value[k] = false;
-      }
-    });
+    stopAllAudio();
     audioElements[key].play();
     audioPlaying.value[key] = true;
   }
