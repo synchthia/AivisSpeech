@@ -102,8 +102,8 @@
                           <div v-for="(sample, voiceSampleIndex) in style.voiceSamples" :key="voiceSampleIndex" class="voice-sample">
                             <div
                               class="play-button"
-                              :class="{ 'playing': audioPlaying[`${style.localId}-${voiceSampleIndex}`] }"
-                              @click="toggleAudio(style.localId, voiceSampleIndex, sample.audio)"
+                              :class="{ 'playing': audioPlaying[`${speaker.uuid}-${style.localId}-${voiceSampleIndex}`] }"
+                              @click="toggleAudio(speaker.uuid, style.localId, voiceSampleIndex, sample.audio)"
                             >
                               <QIcon
                                 :name="audioPlaying[`${style.localId}-${voiceSampleIndex}`] ? 'sym_r_stop' : 'sym_r_volume_up'"
@@ -282,8 +282,8 @@ const stopAllAudio = () => {
 };
 
 // 音声再生を切り替える
-const toggleAudio = (styleId: number, sampleIndex: number, audioDataUrl: string) => {
-  const key = `${styleId}-${sampleIndex}`;
+const toggleAudio = (speakerUuid: string, styleLocalId: number, sampleIndex: number, audioDataUrl: string) => {
+  const key = `${speakerUuid}-${styleLocalId}-${sampleIndex}`;
   if (!audioElements[key]) {
     audioElements[key] = new Audio(audioDataUrl);
     audioElements[key].addEventListener('ended', () => {
